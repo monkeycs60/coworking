@@ -1,3 +1,4 @@
+import { Providers } from '@/redux/provider';
 import './globals.css';
 
 export const metadata = {
@@ -12,7 +13,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='fr'>
-			<body className='w-screen overflow-x-hidden'>{children}</body>
+			<body className='w-screen overflow-x-hidden'>
+				<Providers>{children}</Providers>
+			</body>
 		</html>
 	);
 }
