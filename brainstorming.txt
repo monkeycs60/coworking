@@ -57,3 +57,4 @@ Section FAQ : Répondre aux questions fréquemment posées pour rassurer les uti
 Pied de page (Footer) : Liens vers les politiques de confidentialité, conditions d'utilisation, page de contact, et les icônes des réseaux sociaux.
 
 Un élément visuel interactif, comme une animation ou une courte vidéo dans la section d'accueil, pourrait également être une bonne idée pour attirer et retenir l'attention des utilisateurs. De plus, une galerie de photos des lieux référencés pourrait apporter une valeur ajoutée visuelle intéressante.
+hello world
