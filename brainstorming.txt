@@ -1,0 +1,59 @@
+Ko-Labor
+
+Transformez la ville en votre bureau.
+La ville devient votre bureau.
+Faites de la ville votre bureau
+
+
+Nom de l'application : FreeworkMap
+
+Positionnement : FreeworkMap s'adresse aux freelances, entrepreneurs, étudiants et toutes les personnes cherchant un espace de travail confortable et gratuit. Notre plateforme favorise le partage, la convivialité et la découverte de nouveaux espaces inspirants.
+
+Slogans :
+
+"FreeworkMap : Trouvez votre espace, sans laisser votre portefeuille."
+"FreeworkMap : Ouvrez la porte à un monde de travail gratuit."
+"FreeworkMap : Travaillez partout, sans dépenser un centime."
+"FreeworkMap : Libre de travailler, libéré des frais."
+"FreeworkMap : Transformez la ville en votre bureau."
+Couleurs :
+Pour le choix des couleurs, je vous propose une palette dynamique et moderne, qui inspire la convivialité et l'esprit jeune. Un bleu électrique (#007BFF) comme couleur principale pour évoquer la fiabilité et le sérieux. Un jaune éclatant (#FFC107) pour souligner l'aspect chaleureux et convivial. Un gris clair (#F5F5F5) pour donner une touche de sobriété et d'élégance, particulièrement utile pour les textes et les arrière-plans.
+
+N'hésitez pas à me donner vos retours sur ces suggestions pour que je puisse affiner mes propositions en fonction de vos attentes.
+
+CityWorkHub
+OpenDeskMap
+FreeCoWork
+WorkNShare
+UrbanWorkSpot
+CoFreeSpace
+CityDeskFinder
+GratWorkLocales
+Pour la Feature Section, voici un texte qui pourrait bien décrire votre application :
+
+"Freelance, entrepreneur, salarié full remote, étudiant ? Peu importe votre profil, vous avez un même besoin : voir de nouvelles têtes, sortir de votre cadre de travail, de votre domicile, découvrir le coworking. Mais vous n'avez pas forcément les moyens de vous offrir un abonnement dans un espace de coworking. C'est là que FreeworkMap intervient !
++ nomadisme : possibilité de changer de lieu de travail chaque jour - ce que ne permettent pas les coworkings payants. Changer de collègues chaque jour...
+
+"CityWorkHub vous permet de découvrir et de partager des espaces de travail gratuits dans votre ville. Vous venez d'arriver à Bordeaux ou à Lyon ? Trouvez des coins sympas pour travailler, recommandés par d'autres coworkers. Un café tranquille avec une bonne connexion wifi ? Un lobby d'hôtel confortable et calme ? C'est vous qui choisissez !
+
+Vous avez un endroit préféré pour travailler ? Partagez-le sur CityWorkHub et laissez d'autres profiter de votre bon plan. Ajoutez des photos, partagez vos expériences et échangez avec une communauté dynamique de travailleurs mobiles.
+
+Noter un endroit, c'est simple et rapide. Ainsi, vous aidez la communauté à faire le bon choix. Avec CityWorkHub, transformez la ville en votre espace de travail."
+
+En ce qui concerne l'architecture de la landing page, votre idée est déjà bien structurée. Je vous propose d'ajouter les éléments suivants :
+
+Section d'accueil (100vw 100vh) : Barre de recherche, image de fond dynamique et accroche forte. L'accroche pourrait être quelque chose comme "Votre bureau est partout avec CityWorkHub."
+
+Section de présentation : Introduction de l'application avec une brève description et éventuellement une vidéo explicative.
+
+Section des fonctionnalités : Décrire les principales fonctionnalités de l'application (recherche, partage, notation, etc.) avec des icônes et du texte.
+
+Témoignages des utilisateurs : Des avis et des commentaires des utilisateurs de l'application pour renforcer la confiance et la crédibilité.
+
+Call To Action : Une incitation forte à télécharger l'application, avec des liens vers les magasins d'applications iOS et Android.
+
+Section FAQ : Répondre aux questions fréquemment posées pour rassurer les utilisateurs et lever les objections potentielles.
+
+Pied de page (Footer) : Liens vers les politiques de confidentialité, conditions d'utilisation, page de contact, et les icônes des réseaux sociaux.
+
+Un élément visuel interactif, comme une animation ou une courte vidéo dans la section d'accueil, pourrait également être une bonne idée pour attirer et retenir l'attention des utilisateurs. De plus, une galerie de photos des lieux référencés pourrait apporter une valeur ajoutée visuelle intéressante.

@@ -1,5 +1,7 @@
 import { Providers } from '@/redux/provider';
 import './globals.css';
+import AuthProvider from './AuthProvider';
+import NavBar from './NavBar';
 
 export const metadata = {
 	title: 'Coworking Pro',
@@ -12,10 +14,17 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang='fr'>
-			<body className='w-screen overflow-x-hidden'>
-				<Providers>{children}</Providers>
-			</body>
-		</html>
+		<AuthProvider>
+			<html lang='fr'>
+				<body className='w-screen overflow-x-hidden'>
+					<Providers>
+						<div className='container'>
+							<NavBar />
+							{children}
+						</div>
+					</Providers>
+				</body>
+			</html>
+		</AuthProvider>
 	);
 }
