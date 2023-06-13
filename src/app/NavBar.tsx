@@ -3,8 +3,12 @@ import AuthCheck from '@/components/AuthCheck';
 import Image from 'next/image';
 import Link from 'next/link';
 import SignupPage from '@/components/SignUp';
-import { signUpUser } from '@/serverActions/signUpUser';
-const NavBar = () => {
+import { getServerSession } from 'next-auth';
+
+async function NavBar() {
+	const session = await getServerSession();
+	const userMail = session?.user?.email;
+
 	return (
 		<div className='flex justify-between'>
 			<div>
@@ -31,9 +35,10 @@ const NavBar = () => {
 						<SignOutButton />
 					</AuthCheck>
 				</li>
+				<li>{userMail}</li>
 			</ul>
 		</div>
 	);
-};
+}
 
 export default NavBar;
