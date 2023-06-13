@@ -71,12 +71,20 @@ const authOptions: NextAuthOptions = {
 				}
 
 				console.log('user ça marche', user);
-				
+
 				// If the passwords do match, return the user object to indicate that authorization was successful
 				return user;
 			},
 		}),
 	],
+	session: {
+		// Use JSON Web Tokens for session instead of database sessions.
+		// This option can be used with or without a database for users/accounts.
+		// Note: `jwt` is automatically set to `true` if no database is specified.
+		strategy: 'jwt',
+		// Seconds - How long until an idle session expires and is no longer valid.
+		maxAge: 30 * 24 * 60 * 60, // 30 days
+	},
 	adapter: PrismaAdapter(prisma), // Ajoutez l'adaptateur ici
 };
 
