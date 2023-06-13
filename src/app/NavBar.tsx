@@ -2,6 +2,8 @@ import { SignInButton, SignOutButton } from '@/components/AuthButtons';
 import AuthCheck from '@/components/AuthCheck';
 import Image from 'next/image';
 import Link from 'next/link';
+import SignupPage from '@/components/SignUp';
+import { signUpUser } from '@/serverActions/signUpUser';
 const NavBar = () => {
 	return (
 		<div className='flex justify-between'>
@@ -20,6 +22,9 @@ const NavBar = () => {
 				</li>
 				<li>
 					<SignInButton />
+				</li>
+				<li>
+					<SignupPage />
 				</li>
 				<li>
 					<AuthCheck>

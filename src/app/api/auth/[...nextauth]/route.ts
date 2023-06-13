@@ -30,7 +30,7 @@ const authOptions: NextAuthOptions = {
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
 		}),
 		CredentialsProvider({
-			name: 'Inscrivez-vous',
+			name: 'Connectez-vous',
 			// `credentials` is used to generate a form on the sign in page.
 			// You can specify which fields should be submitted, by adding keys to the `credentials` object.
 			// e.g. domain, username, password, 2FA token, etc.
@@ -57,7 +57,7 @@ const authOptions: NextAuthOptions = {
 					return null;
 				}
 
-				if (user && user.password && credentials) {
+				if (user && user.password) {
 					// If the user was found, compare the provided password with the one in our database
 					const isValid = await bcrypt.compare(
 						credentials.password,
@@ -70,6 +70,8 @@ const authOptions: NextAuthOptions = {
 					}
 				}
 
+				console.log('user ça marche', user);
+				
 				// If the passwords do match, return the user object to indicate that authorization was successful
 				return user;
 			},
