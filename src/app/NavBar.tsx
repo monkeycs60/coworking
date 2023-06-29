@@ -1,14 +1,7 @@
-import { SignInButton, SignOutButton } from '@/components/AuthButtons';
-import AuthCheck from '@/components/AuthCheck';
 import Image from 'next/image';
 import Link from 'next/link';
-import SignupPage from '@/components/SignUp';
-import { getServerSession } from 'next-auth';
 
 async function NavBar() {
-	const session = await getServerSession();
-	const userMail = session?.user?.email;
-
 	return (
 		<div className='flex justify-between'>
 			<div>
@@ -24,18 +17,10 @@ async function NavBar() {
 				<li>
 					<Link href={'/explore'}>Explorer</Link>
 				</li>
-				<li>
-					<SignInButton />
-				</li>
-				<li>
-					<SignupPage />
-				</li>
-				<li>
-					<AuthCheck>
-						<SignOutButton />
-					</AuthCheck>
-				</li>
-				<li>{userMail}</li>
+				<li>sign in</li>
+				<li>sign up</li>
+				<li>signout button</li>
+				<li>affiche mail user</li>
 			</ul>
 		</div>
 	);

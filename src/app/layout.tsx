@@ -1,10 +1,10 @@
 import { Providers } from '@/redux/provider';
 import './globals.css';
-import AuthProvider from './AuthProvider';
+import { ClerkProvider } from '@clerk/nextjs';
 import NavBar from './NavBar';
 
 export const metadata = {
-	title: 'Coworking Pro',
+	title: 'Coworkez Malin',
 	description: 'Trouve ton coworking gratuit',
 };
 
@@ -14,7 +14,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<AuthProvider>
+		<ClerkProvider>
 			<html lang='fr'>
 				<body className='w-screen overflow-x-hidden'>
 					<Providers>
@@ -25,6 +25,6 @@ export default function RootLayout({
 					</Providers>
 				</body>
 			</html>
-		</AuthProvider>
+		</ClerkProvider>
 	);
 }
