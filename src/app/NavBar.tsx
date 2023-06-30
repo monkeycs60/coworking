@@ -1,3 +1,5 @@
+import SignInButtonLogic from '@/components/auth/SignInButtonLogic';
+import { SignInButton, SignOutButton, UserButton } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -17,10 +19,10 @@ async function NavBar() {
 				<li>
 					<Link href={'/explore'}>Explorer</Link>
 				</li>
-				<li>sign in</li>
+				<SignInButtonLogic />
 				<li>sign up</li>
-				<li>signout button</li>
-				<li>affiche mail user</li>
+				<SignOutButton />
+				<UserButton />
 			</ul>
 		</div>
 	);

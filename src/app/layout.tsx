@@ -1,6 +1,7 @@
 import { Providers } from '@/redux/provider';
 import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
+import { frFR } from '@clerk/localizations';
 import NavBar from './NavBar';
 
 export const metadata = {
@@ -14,7 +15,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<ClerkProvider>
+		<ClerkProvider localization={frFR}>
 			<html lang='fr'>
 				<body className='w-screen overflow-x-hidden'>
 					<Providers>
