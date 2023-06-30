@@ -30,6 +30,7 @@ const PlacesAutocomplete = () => {
 					onChange: (newValue: Option | null) => setValue(newValue),
 				}}
 				debounce={2000}
+				minLengthAutocomplete={3}
 			/>
 		</div>
 	);
