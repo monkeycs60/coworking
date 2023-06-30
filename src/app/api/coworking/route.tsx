@@ -1,19 +1,15 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 
-
-
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-	const placeId = req.query.placeId as string;
+export async function GET(req: NextRequest, res: NextResponse) {
+    const placeId = new URL(req.url).searchParams.get('placeId');
 	const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 	const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=geometry&key=${googleMapsApiKey}`;
 
-	try {
-		const response = await fetch(url);
-		const data = await response.json();
+	const response = await fetch(url);
+	const data = await response.json();
+	console.log('data du details', data);
+	
 
-		res.status(200).json(data);
-	} catch (error) {
-		res.status(500).json({ error: 'An error occurred.' });
-	}
+	return new Response('ok ça marche le fetch détaillé');
 }
