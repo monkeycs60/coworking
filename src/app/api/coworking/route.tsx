@@ -10,5 +10,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
 	const data = await response.json();
 	console.log('data du details', data);
 
-	return NextResponse.json({ message: 'ok ça marche le fetch détaillé' });
+	return NextResponse.json({
+		message: 'ok ça marche le fetch détaillé',
+		data: data,
+	});
 }
