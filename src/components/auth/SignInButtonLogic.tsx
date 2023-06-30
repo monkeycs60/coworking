@@ -1,17 +1,18 @@
 'use client';
 
 import { SignInButton } from '@clerk/nextjs';
+import { Button } from '../ui/button';
 
 const SignInButtonLogic = () => {
 	return (
-		<div>
-			<SignInButton
-				mode='modal'
-				afterSignInUrl={window.location.href}
-				afterSignUpUrl={window.location.href}
-                redirectUrl={window.location.href}
-			/>
-		</div>
+		<SignInButton
+			mode='modal'
+			// afterSignInUrl={window.location.href}
+			// afterSignUpUrl={window.location.href}
+			// redirectUrl={window.location.href}
+		>
+			<Button>Sign in</Button>
+		</SignInButton>
 	);
 };
 

@@ -5,8 +5,9 @@ import {
 	LoadScript,
 	Marker,
 	MarkerClusterer,
-  InfoWindow
+	InfoWindow,
 } from '@react-google-maps/api';
+import { GoogleMapsProps } from '@/types/googleMaps';
 
 type Location = {
 	lat: number;
@@ -35,7 +36,12 @@ const centerOfFrance: Location = {
 	lng: 1.888334,
 };
 
-const GoogleMapElement = () => {
+const GoogleMapElement = ({
+	height,
+	width,
+	centerMap,
+	zoom,
+}: GoogleMapsProps) => {
 	const googleMapsApiKey: string | undefined =
 		process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -46,9 +52,9 @@ const GoogleMapElement = () => {
 		<div>
 			<LoadScript googleMapsApiKey={googleMapsApiKey}>
 				<GoogleMap
-					mapContainerStyle={{ height: '400px', width: '500px' }}
-					center={centerOfFrance}
-					zoom={5}
+					mapContainerStyle={{ height: height, width: width }}
+					center={centerMap}
+					zoom={zoom}
 					options={{
 						// Ajouter cette propriété
 						disableDefaultUI: true, // Désactive l'UI par défaut
@@ -91,11 +97,11 @@ const GoogleMapElement = () => {
 							</>
 						)}
 					</MarkerClusterer>
-					<InfoWindow position={
-            {
-              lat: 44.8378, lng: -0.5792
-            }
-          }>
+					<InfoWindow
+						position={{
+							lat: 44.8378,
+							lng: -0.5792,
+						}}>
 						<div>
 							<h1>Le titre</h1>
 							<p>Votre texte ici</p>
