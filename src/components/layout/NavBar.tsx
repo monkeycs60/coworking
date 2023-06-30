@@ -1,4 +1,4 @@
-import SignInButtonLogic from '@/components/auth/SignInButtonLogic';
+import SignInButtonLogic from '../auth/SignInButtonLogic';
 import { SignOutButton, UserButton } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
