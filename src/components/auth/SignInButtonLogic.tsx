@@ -1,15 +1,11 @@
 'use client';
 
 import { SignInButton } from '@clerk/nextjs';
-import { useParams } from 'next/navigation';
 
 const SignInButtonLogic = () => {
-	const params = useParams();
-	console.log(params);
-
 	return (
 		<div>
-			<SignInButton mode='modal' />
+			<SignInButton mode='modal' afterSignInUrl={window.location.href} />
 		</div>
 	);
 };
