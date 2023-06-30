@@ -9,7 +9,7 @@ type Option = {
 };
 
 const PlacesAutocomplete = () => {
-  const [value, setValue] = useState<Option | null>(null);
+	const [value, setValue] = useState<Option | null>(null);
 
 	const googleMapsApiKey: string | undefined =
 		process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -19,7 +19,14 @@ const PlacesAutocomplete = () => {
 	}
 
 	console.log(value);
-	
+
+	if (value) {
+		fetch(
+			`https://maps.googleapis.com/maps/api/place/details/json?place_id=${value.value}&fields=geometry&key=${googleMapsApiKey}`
+		)
+			.then((response) => response.json())
+			.then((data) => console.log('data du details', data));
+	}
 
 	return (
 		<div>
