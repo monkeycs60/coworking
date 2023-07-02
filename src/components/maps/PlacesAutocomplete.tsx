@@ -15,12 +15,14 @@ const PlacesAutocomplete = () => {
 	const [value, setValue] = useState<Option | null>(null);
 
 	console.log(value);
+	console.log(value?.value.place_id);
+	
 
 	useEffect(() => {
 		const fetchPlaceDetails = async () => {
 			if (value) {
 				const res = await fetch(
-					`/api/coworking`
+					`/api/coworking?placeId=${value.value.place_id}`
 				);
 				const data = await res.json();
 				console.log('data du details', data);
