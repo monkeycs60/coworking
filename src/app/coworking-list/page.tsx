@@ -1,7 +1,6 @@
 import React from 'react';
 import GoogleMapElement from '@/components/maps/GoogleMapElement';
 import PlacesAutocomplete from '@/components/maps/PlacesAutocomplete';
-import SearchBarPlace from '@/components/maps/SearchBarPlace';
 
 const page = () => {
 	return (
@@ -29,7 +28,6 @@ const page = () => {
 						magni atque. Asperiores.
 					</p>
 					<PlacesAutocomplete />
-					{/* <SearchBarPlace /> */}
 				</div>
 			</div>
 		</div>

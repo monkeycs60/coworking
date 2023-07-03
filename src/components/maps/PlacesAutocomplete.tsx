@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import React from 'react';
 
 type Option = {
 	value: {
@@ -13,6 +14,11 @@ type Option = {
 
 const PlacesAutocomplete = () => {
 	const [value, setValue] = useState<Option | null>(null);
+	// const [value, setValue] = useState<Option | null>({
+	// 	value: { place_id: '' },
+	// 	label: '',
+	// });
+
 
 	console.log(value);
 	console.log(value?.value.place_id);
@@ -20,13 +26,14 @@ const PlacesAutocomplete = () => {
 
 	useEffect(() => {
 		const fetchPlaceDetails = async () => {
-			if (value) {
+			if (value && value.value.place_id) {
 				const res = await fetch(
 					`/api/coworking?placeId=${value.value.place_id}`
 				);
 				const data = await res.json();
 				console.log('data du details', data);
 			}
+			
 		};
 
 		fetchPlaceDetails();
@@ -46,7 +53,9 @@ const PlacesAutocomplete = () => {
 					value,
 					onChange: (newValue: Option | null) => setValue(newValue),
 				}}
-				debounce={2000}
+				onLoadFailed={(error) =>
+					console.error('Could not inject Google script MERRRRDE', error)
+				}
 				minLengthAutocomplete={3}
 			/>
 		</div>
