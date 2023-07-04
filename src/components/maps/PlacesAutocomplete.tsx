@@ -14,49 +14,57 @@ type Option = {
 
 const PlacesAutocomplete = () => {
 	const [value, setValue] = useState<Option | null>(null);
-	// const [value, setValue] = useState<Option | null>({
-	// 	value: { place_id: '' },
-	// 	label: '',
-	// });
-
+	
 
 	console.log(value);
 	console.log(value?.value.place_id);
-	
 
 	useEffect(() => {
-		const fetchPlaceDetails = async () => {
-			if (value && value.value.place_id) {
-				const res = await fetch(
-					`/api/coworking?placeId=${value.value.place_id}`
-				);
+		const fetchAutocomplete = async () => {
+			if (value?.label?.length) {
+				console.log('value existe bien étape 1', value);
+				const url = `/api/autocomplete?input=${value?.label}`;
+				console.log('url', url);
+				const res = await fetch(url);
 				const data = await res.json();
-				console.log('data du details', data);
+				console.log('data de autocomplete', data);
 			}
-			
 		};
-
-		fetchPlaceDetails();
+		fetchAutocomplete();
 	}, [value]);
 
-	const googleMapsApiKey: string | undefined =
-		process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+	// useEffect(() => {
+	// 	const fetchPlaceDetails = async () => {
+	// 		if (value && value.value.place_id) {
+	// 			const res = await fetch(
+	// 				`/api/coworking?placeId=${value.value.place_id}`
+	// 			);
+	// 			const data = await res.json();
+	// 			console.log('data du details', data);
+	// 		}
 
-	if (!googleMapsApiKey) {
-		return <div>Missing Google Maps API Key</div>;
-	}
+	// 	};
+
+	// 	fetchPlaceDetails();
+	// }, [value]);
+
+	// const googleMapsApiKey: string | undefined =
+	// 	process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+	// if (!googleMapsApiKey) {
+	// 	return <div>Missing Google Maps API Key</div>;
+	// }
 	return (
 		<div>
-			<GooglePlacesAutocomplete
-				apiKey={googleMapsApiKey}
-				selectProps={{
-					value,
-					onChange: (newValue: Option | null) => setValue(newValue),
+			<input
+				type='text'
+				onChange={(e) => {
+					console.log('ceci est le input change', e.target.value);
+					setValue({
+						value: { place_id: e.target.value },
+						label: e.target.value,
+					});
 				}}
-				onLoadFailed={(error) =>
-					console.error('Could not inject Google script MERRRRDE', error)
-				}
-				minLengthAutocomplete={3}
 			/>
 		</div>
 	);
