@@ -1,23 +1,8 @@
 'use client';
 
-import * as React from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useFetchAutocomplete } from '@/hooks/useFetchAutocomplete';
 import { useFetchPlaceDetails } from '@/hooks/useFetchPlaceDetails';
-import { Check, ChevronsUpDown } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import {
-	Command,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-} from '@/components/ui/command';
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from '@/components/ui/popover';
 import { Place } from '@/types/placePredictions';
 
 interface ComboBoxProps {
@@ -25,67 +10,63 @@ interface ComboBoxProps {
 }
 
 export function ComboBox({ onSelect }: ComboBoxProps) {
-	const [open, setOpen] = React.useState(false);
-	const [selectedPlace, setSelectedPlace] = React.useState<string | null>(
-		null
-	);
+	const [isOpen, setIsOpen] = useState(false);
+	const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
+	const inputRef = useRef();
 
 	const { inputField, predictions, setInput } = useFetchAutocomplete();
 	const placeDetails = useFetchPlaceDetails(selectedPlace);
 
 	const handleSelect = (place: Place) => {
-		setOpen(false);
+		setIsOpen(false);
 		setSelectedPlace(place.value);
 		onSelect(place);
 	};
 
 	return (
-		<Popover open={open} onOpenChange={setOpen}>
-			<PopoverTrigger asChild>
-				<Button
-					variant='outline'
-					role='combobox'
-					aria-expanded={open}
-					className='w-[200px] justify-between'>
-					{inputField
-						? predictions.find((place) => place.value === inputField)
-								?.label
-						: 'Rechercher'}
-					<ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
-				</Button>
-			</PopoverTrigger>
-			<PopoverContent className='w-[200px] p-0'>
-				<Command>
-					<CommandInput
-						placeholder='Recherchez un lieu...'
-						onValueChange={(value) => setInput(value)}
-						value={inputField}
-					/>
-					<CommandEmpty>
-						Aucun lieu ne correspond à votre recherche
-					</CommandEmpty>
-					<CommandGroup>
-						{predictions.map((place) => (
-							<CommandItem
-								key={place.value}
-								style={{ cursor: 'pointer' }}
-								onSelect={() => {
-									handleSelect(place);
-								}}>
-								<Check
-									className={cn(
-										'mr-2 h-4 w-4',
-										inputField === place.value
-											? 'opacity-100'
-											: 'opacity-0'
-									)}
-								/>
-								{place.label}
-							</CommandItem>
-						))}
-					</CommandGroup>
-				</Command>
-			</PopoverContent>
-		</Popover>
+		<div style={{ position: 'relative', width: '200px' }}>
+			<input
+				type='text'
+				value={inputField}
+				onChange={(e) => setInput(e.target.value)}
+				onFocus={() => setIsOpen(true)}
+				placeholder='Rechercher un lieu...'
+				className='h-10 w-72 rounded-md border border-gray-300 bg-white pl-3 pr-10 shadow-sm placeholder:text-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500'
+			/>
+			{isOpen && (
+				<ul
+					style={{
+						position: 'absolute',
+						width: '288px',
+						maxHeight: '260px',
+						overflowY: 'scroll',
+						marginTop: '1px',
+						listStyle: 'none',
+						padding: 0,
+						border: '1px solid #ccc',
+						borderRadius: '4px',
+						boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.1)',
+					}}>
+					{predictions.map((place, index) => (
+						<li
+							key={index}
+							onClick={() => handleSelect(place)}
+							style={{
+								padding: '10px',
+								cursor: 'pointer',
+								backgroundColor:
+									inputField === place.label ? '#f0f0f0' : 'white',
+							}}>
+							{place.label}
+						</li>
+					))}
+					{predictions.length === 0 && (
+						<li style={{ padding: '10px' }}>
+							Aucun lieu ne correspond à votre recherche
+						</li>
+					)}
+				</ul>
+			)}
+		</div>
 	);
 }

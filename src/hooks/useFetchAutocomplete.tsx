@@ -13,7 +13,7 @@ export const useFetchAutocomplete = () => {
 		(state) => state.autoComplete.predictions
 	);
 
-	const [debouncedInput] = useDebounce(inputField, 2000);
+	const [debouncedInput] = useDebounce(inputField, 500);
 
 	console.log('REDUXSTOREEEE', reduxStore);
 
