@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import React from 'react';
+import { ComboBox } from '../ui/combobox';
 
 type Option = {
 	value: {
@@ -14,7 +13,6 @@ type Option = {
 
 const PlacesAutocomplete = () => {
 	const [value, setValue] = useState<Option | null>(null);
-	
 
 	console.log(value);
 	console.log(value?.value.place_id);
@@ -27,7 +25,8 @@ const PlacesAutocomplete = () => {
 				console.log('url', url);
 				const res = await fetch(url);
 				const data = await res.json();
-				console.log('data de autocomplete', data);
+				const { predictions } = data.data;
+				console.log('data de autocomplete clientfront', predictions);
 			}
 		};
 		fetchAutocomplete();
@@ -37,7 +36,7 @@ const PlacesAutocomplete = () => {
 	// 	const fetchPlaceDetails = async () => {
 	// 		if (value && value.value.place_id) {
 	// 			const res = await fetch(
-	// 				`/api/coworking?placeId=${value.value.place_id}`
+	// 				`/api/details?placeId=${value.value.place_id}`
 	// 			);
 	// 			const data = await res.json();
 	// 			console.log('data du details', data);
@@ -48,12 +47,6 @@ const PlacesAutocomplete = () => {
 	// 	fetchPlaceDetails();
 	// }, [value]);
 
-	// const googleMapsApiKey: string | undefined =
-	// 	process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-
-	// if (!googleMapsApiKey) {
-	// 	return <div>Missing Google Maps API Key</div>;
-	// }
 	return (
 		<div>
 			<input
@@ -66,6 +59,7 @@ const PlacesAutocomplete = () => {
 					});
 				}}
 			/>
+			<ComboBox />
 		</div>
 	);
 };
