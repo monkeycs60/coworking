@@ -6,26 +6,26 @@ interface Photo {
 }
 
 interface FullPlaceDatas {
-    result: {
-        geometry: {
-            location: {
-                lat: number;
-                lng: number;
-            };
-        };
-        name: string;
-        rating: number;
-        editorial_summary: {
-            overview: string;
-        };
-        icon: string;
-        adr_address: string;
-        photos: Photo[];
-    }
+	result: {
+		geometry: {
+			location: {
+				lat: number;
+				lng: number;
+			};
+		};
+		name: string;
+		rating: number;
+		editorial_summary: {
+			overview: string;
+		};
+		icon: string;
+		adr_address: string;
+		photos: Photo[];
+	};
 }
 
 export interface PlaceDetail {
-data: FullPlaceDatas;
+	data: FullPlaceDatas;
 }
 
 export const useFetchPlaceDetails = (placeId: string | null) => {
