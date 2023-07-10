@@ -1,4 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from './useRedux';
+import {
+	setPlaceDetails,
+	resetPlaceDetails,
+} from '@/redux/features/placeDetails-slice';
 
 interface Photo {
 	height: number;
@@ -29,23 +34,24 @@ export interface PlaceDetail {
 }
 
 export const useFetchPlaceDetails = (placeId: string | null) => {
-	const [placeDetail, setPlaceDetail] = useState<any | null>(null);
+	const dispatch = useAppDispatch();
+	const details = useAppSelector((state) => state);
 
 	useEffect(() => {
 		const fetchPlaceDetails = async () => {
 			if (!placeId) {
+				dispatch(resetPlaceDetails());
 				return;
 			}
 
 			const res = await fetch(`/api/details?placeId=${placeId}`);
 			const data = await res.json();
 
-			setPlaceDetail(data);
+			dispatch(setPlaceDetails(data.data.result));
 			console.log('data detailed google place', data);
+			console.log('redux selector', details);
 		};
 
 		fetchPlaceDetails();
-	}, [placeId]);
-
-	return placeDetail;
+	}, [placeId, dispatch]);
 };

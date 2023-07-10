@@ -2,6 +2,8 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './features/auth-slice';
+import placeDetailsReducer from './features/placeDetails-slice'; 
+import autoCompleteReducer from './features/autoComplete-slice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
@@ -16,8 +18,10 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
 	reducer: {
 		auth: persistedReducer,
+		placeDetails: placeDetailsReducer,
+		autoComplete: autoCompleteReducer,
 	},
-    middleware: [thunk],
+	middleware: [thunk],
 });
 
 export const persistor = persistStore(store);

@@ -1,10 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { Prediction, Place } from '@/types/placePredictions';
+import { useAppDispatch, useAppSelector } from './useRedux';
+import { setInput, setPredictions } from '@/redux/features/autoComplete-slice';
 
-export const useFetchAutocomplete = (input: string) => {
-	const [debouncedInput] = useDebounce(input, 2000);
-	const [predictions, setPredictions] = useState<Place[]>([]);
+export const useFetchAutocomplete = () => {
+	const dispatch = useAppDispatch();
+	const reduxStore = useAppSelector((state) => state);
+
+	const inputField = useAppSelector((state) => state.autoComplete.input);
+	const predictions = useAppSelector(
+		(state) => state.autoComplete.predictions
+	);
+
+	const [debouncedInput] = useDebounce(inputField, 2000);
+
+	console.log('REDUXSTOREEEE', reduxStore);
 
 	useEffect(() => {
 		const fetchAutocomplete = async () => {
@@ -20,11 +31,15 @@ export const useFetchAutocomplete = (input: string) => {
 				label: pred.description,
 			}));
 
-			setPredictions(places);
+			dispatch(setPredictions(places));
 		};
 
 		fetchAutocomplete();
-	}, [debouncedInput]);
+	}, [debouncedInput, dispatch]);
 
-	return predictions;
+	return {
+		inputField,
+		predictions,
+		setInput: (input: string) => dispatch(setInput(input)).payload,
+	};
 };
