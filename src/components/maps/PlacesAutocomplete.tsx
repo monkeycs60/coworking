@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ComboBox } from '../ui/combobox';
+import { Place, Prediction } from '@/types/placePredictions';
 
 type Option = {
 	value: {
@@ -13,6 +14,7 @@ type Option = {
 
 const PlacesAutocomplete = () => {
 	const [value, setValue] = useState<Option | null>(null);
+	const [predictions, setPredictions] = useState<Place[]>([]);
 
 	console.log(value);
 	console.log(value?.value.place_id);
@@ -26,7 +28,15 @@ const PlacesAutocomplete = () => {
 				const res = await fetch(url);
 				const data = await res.json();
 				const { predictions } = data.data;
-				console.log('data de autocomplete clientfront', predictions);
+				// log it
+				console.log('data du autocomplete', predictions);
+				const places = data.data.predictions.map((pred: Prediction) => ({
+					value: pred.place_id,
+					label: pred.description,
+				}));
+				setPredictions(places);
+				console.warn('places', places);
+				
 			}
 		};
 		fetchAutocomplete();
