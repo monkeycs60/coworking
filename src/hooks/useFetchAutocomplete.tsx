@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { Prediction, Place } from '@/types/placePredictions';
