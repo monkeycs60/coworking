@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './useRedux';
 import {
@@ -11,27 +13,26 @@ interface Photo {
 }
 
 export interface PlaceDetail {
-		geometry: {
-			location: {
-				lat: number;
-				lng: number;
-			};
+	geometry: {
+		location: {
+			lat: number;
+			lng: number;
 		};
-		name: string;
-		rating: number;
-		editorial_summary: {
-			overview: string;
-		};
-		icon: string;
-		adr_address: string;
-		photos: Photo[];
+	};
+	name: string;
+	rating: number;
+	editorial_summary: {
+		overview: string;
+	};
+	icon: string;
+	adr_address: string;
+	photos: Photo[];
 }
 
 export const useFetchPlaceDetails = (placeId: string | null) => {
 	const dispatch = useAppDispatch();
 	const details = useAppSelector((state) => state);
 	console.log(details);
-	
 
 	useEffect(() => {
 		const fetchPlaceDetails = async () => {
