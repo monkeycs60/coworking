@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useFetchAutocomplete } from '@/hooks/useFetchAutocomplete';
 import { useFetchPlaceDetails } from '@/hooks/useFetchPlaceDetails';
 import { Place } from '@/types/placePredictions';
@@ -12,7 +12,7 @@ interface ComboBoxProps {
 export function ComboBox({ onSelect }: ComboBoxProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
-	const inputRef = useRef();
+	const inputRef = useRef<HTMLDivElement>(null);
 
 	const { inputField, predictions, setInput } = useFetchAutocomplete();
 	const placeDetails = useFetchPlaceDetails(selectedPlace);
@@ -23,8 +23,26 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
 		onSelect(place);
 	};
 
+	// when you click outside the input
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				inputRef.current &&
+				!inputRef.current.contains(event.target as Node)
+			) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener('click', handleClickOutside);
+
+		return () => {
+			document.removeEventListener('click', handleClickOutside);
+		};
+	}, [inputRef]);
+
 	return (
-		<div style={{ position: 'relative', width: '200px' }}>
+		<div ref={inputRef} style={{ position: 'relative', width: '200px' }}>
 			<input
 				type='text'
 				value={inputField}
@@ -50,7 +68,10 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
 					{predictions.map((place, index) => (
 						<li
 							key={index}
-							onClick={() => handleSelect(place)}
+							onClick={() => {
+								handleSelect(place);
+								setInput(place.label);
+							}}
 							style={{
 								padding: '10px',
 								cursor: 'pointer',

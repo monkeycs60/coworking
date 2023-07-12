@@ -15,8 +15,6 @@ export const useFetchAutocomplete = () => {
 
 	const [debouncedInput] = useDebounce(inputField, 500);
 
-	console.log('REDUXSTOREEEE', reduxStore);
-
 	useEffect(() => {
 		const fetchAutocomplete = async () => {
 			if (!debouncedInput?.length) {

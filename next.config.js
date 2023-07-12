@@ -14,6 +14,12 @@ const nextConfig = {
 				port: '',
 				pathname: '/**',
 			},
+			{
+				protocol: 'https',
+				hostname: 'maps.gstatic.com', // Ajout du nouveau modèle distant ici
+				port: '',
+				pathname: '/**',
+			},
 		],
 	},
 };

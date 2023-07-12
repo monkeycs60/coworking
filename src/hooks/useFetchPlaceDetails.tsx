@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './useRedux';
 import {
 	setPlaceDetails,
@@ -10,8 +10,7 @@ interface Photo {
 	html_attributions: string[];
 }
 
-interface FullPlaceDatas {
-	result: {
+export interface PlaceDetail {
 		geometry: {
 			location: {
 				lat: number;
@@ -26,16 +25,13 @@ interface FullPlaceDatas {
 		icon: string;
 		adr_address: string;
 		photos: Photo[];
-	};
-}
-
-export interface PlaceDetail {
-	data: FullPlaceDatas;
 }
 
 export const useFetchPlaceDetails = (placeId: string | null) => {
 	const dispatch = useAppDispatch();
 	const details = useAppSelector((state) => state);
+	console.log(details);
+	
 
 	useEffect(() => {
 		const fetchPlaceDetails = async () => {
@@ -48,8 +44,6 @@ export const useFetchPlaceDetails = (placeId: string | null) => {
 			const data = await res.json();
 
 			dispatch(setPlaceDetails(data.data.result));
-			console.log('data detailed google place', data);
-			console.log('redux selector', details);
 		};
 
 		fetchPlaceDetails();
