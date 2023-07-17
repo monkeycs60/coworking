@@ -11,7 +11,7 @@ const SignInButtonLogic = () => {
 			// afterSignUpUrl={window.location.href}
 			// redirectUrl={window.location.href}
 		>
-			<Button>Sign in</Button>
+			<Button variant={'outline'}>Connexion</Button>
 		</SignInButton>
 	);
 };

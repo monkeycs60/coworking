@@ -15,6 +15,10 @@ module.exports = {
 				'2xl': '1400px',
 			},
 		},
+		fontFamily: {
+			inter: ['Inter', 'sans-serif'],
+			telma: ['Telma', 'cursive']
+		},
 		extend: {
 			colors: {
 				border: 'hsl(var(--border))',
@@ -27,8 +31,11 @@ module.exports = {
 					foreground: '#F0EFF4',
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
+					DEFAULT: '#FFC107',
 					foreground: 'hsl(var(--secondary-foreground))',
+				},
+				defaultWhite: {
+					DEFAULT: '#F0EFF4',
 				},
 				destructive: {
 					DEFAULT: '#291528',

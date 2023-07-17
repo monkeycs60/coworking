@@ -17,9 +17,9 @@ export default function RootLayout({
 	return (
 		<ClerkProvider localization={frFR}>
 			<html lang='fr'>
-				<body className='w-screen overflow-x-hidden'>
+				<body className='m-auto flex max-w-[1400px] justify-center overflow-x-hidden font-inter'>
 					<Providers>
-						<div className='container'>
+						<div className=''>
 							<NavBar />
 							{children}
 						</div>
