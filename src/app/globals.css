@@ -13,14 +13,24 @@ hmtl {
 }
 
 .overall-bg {
-	background: 
-		linear-gradient(rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 1)),
-    linear-gradient(0deg, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 1)),
-		linear-gradient(90deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1)),
-		linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 1)),
-		linear-gradient(270deg, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 1)),
+	background: linear-gradient(
+			rgba(255, 255, 255, 0) 80%,
+			rgba(255, 255, 255, 1)
+		),
+		linear-gradient(0deg, rgba(255, 255, 255, 0) 90%, rgba(255, 255, 255, 1)),
+		linear-gradient(90deg, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1)),
+		linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0) 100%,
+			rgba(255, 255, 255, 1)
+		),
+		linear-gradient(
+			270deg,
+			rgba(255, 255, 255, 0) 80%,
+			rgba(255, 255, 255, 1)
+		),
 		url('/circle.svg');
 	background-blend-mode: screen;
 	background-repeat: repeat;
-  z-index: 20;
+	z-index: 20;
 }

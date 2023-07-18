@@ -1,29 +1,74 @@
-import GoogleMapElement from '@/components/maps/GoogleMapElement';
+import Image from 'next/image';
+import { MapPin } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
 	return (
-		<section className='overall-bg mt-20 flex flex-col h-[1500px] '>
-			<h1 className='font-telma text-3xl'>Coworkez Malin</h1>
-			<GoogleMapElement
-				height='400px'
-				width='500px'
-				centerMap={{ lat: 46.603354, lng: 1.888334 }}
-				zoom={5}
-			/>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-				ullam vero blanditiis, amet soluta itaque iure magni expedita quos
-				excepturi laudantium, optio ea, molestias dignissimos voluptatum.
-				Possimus enim nihil neque consectetur libero distinctio mollitia hic
-				quia, ab provident iure eum vitae magni quis repellendus.
-				Exercitationem blanditiis autem nesciunt atque praesentium
-				architecto ea culpa ipsum quis numquam dicta repudiandae vel beatae
-				deserunt veritatis ex, aspernatur nam consequuntur nisi eius officia
-				quia vitae esse quod? Fuga praesentium placeat quos asperiores
-				laboriosam aspernatur enim adipisci quasi sunt voluptas soluta
-				maxime, corrupti, nemo expedita ab minima impedit voluptatibus
-				laudantium, voluptatum excepturi ratione. Maxime, beatae?
-			</p>
+		<section className='overall-bg flex h-screen w-full flex-col justify-center'>
+			<div className='mt-[27vh] flex h-full gap-4 '>
+				<div className='flex w-[55%] flex-col '>
+					<div className='flex flex-col gap-4'>
+						<h2 className=' text-4xl font-bold leading-normal'>
+							Découvrez des lieux conviviaux où coworker gratuitement !
+						</h2>
+						<h3 className='w-[75%] text-gray-700'>
+							Grâce à notre communauté, trouvez les bons plans pour
+							travailler malin dans la ville de votre choix.
+						</h3>
+					</div>
+					<div className='flex flex-col gap-3 pt-14'>
+						<form action=''>
+							<div className='relative flex items-center gap-2'>
+								<MapPin
+									size={20}
+									className='absolute left-4 text-gray-600'
+								/>
+								<input
+									type='text'
+									placeholder='Entrez une ville'
+									className='rounded-xl border-2 border-gray-500 px-20 py-2 indent-0'
+								/>
+								<Button variant={'default'} size={'sm'}>
+									<Image
+										src={'/search-refraction.svg'}
+										alt='search'
+										width={20}
+										height={20}
+									/>
+								</Button>
+							</div>
+						</form>
+						<p className='text-xs text-gray-600'>
+							Rencontrez de nouvelles personnes, découvrez des endroits
+							inédits
+						</p>
+					</div>
+				</div>
+				<div className='flex w-[45%] justify-end '>
+					<div className='relative flex h-[80%] w-[90%] justify-end '>
+						<Image
+							src='/landing-laptop-friends.webp'
+							alt='Coworkers autour d un laptop'
+							className='z-20'
+							fill={true}
+						/>
+						<Image
+							width={360}
+							height={360}
+							src='/Hand-drawn-arrow.svg'
+							alt='Coworkers autour d un laptop'
+							className='absolute -bottom-20 -left-64 z-20'
+						/>
+						<Image
+							width={160}
+							height={160}
+							src='/Ellipse-yellow.svg'
+							alt='Coworkers autour d un laptop'
+							className='absolute -bottom-16 right-0'
+						/>
+					</div>
+				</div>
+			</div>
 		</section>
 	);
 }

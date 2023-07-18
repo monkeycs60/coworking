@@ -1,5 +1,5 @@
 import SignInButtonLogic from '../auth/SignInButtonLogic';
-import { SignOutButton, SignUpButton, UserButton, auth } from '@clerk/nextjs';
+import { SignOutButton, UserButton, auth } from '@clerk/nextjs';
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,14 +8,14 @@ import SignUpButtonLogic from '../auth/SignUpButtonLogic';
 async function NavBar() {
 	const { userId } = await auth();
 	return (
-		<div className='fixed z-10 mt-4 flex w-[1400px] justify-between gap-10 px-6 py-2'>
-			<div className='flex items-center justify-center gap-10'>
+		<div className='fixed z-10 mt-4 flex w-[1200px] justify-between gap-10  py-2'>
+			<div className='flex items-center justify-center gap-14'>
 				<div className='flex items-center justify-center gap-4'>
 					<Image
 						src={'/logo-cowork-v1-nobg.png'}
 						alt='logo'
-						width={50}
-						height={60}
+						width={40}
+						height={40}
 					/>
 					<h1 className='font-telma text-xl font-semibold first-letter:text-primary'>
 						Coworkez{' '}
@@ -39,7 +39,7 @@ async function NavBar() {
 					</li>
 				</ul>
 			</div>
-			<div className='flex items-center justify-center gap-4'>
+			<div className='flex items-center justify-center gap-2'>
 				{userId ? (
 					<>
 						<SignOutButton>
