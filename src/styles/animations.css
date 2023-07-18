@@ -1,0 +1,21 @@
+.linkHoverEffect {
+    position: relative;
+}
+
+.linkHoverEffect::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #007BFF;
+    transition: width 0.5s;
+}
+
+.linkHoverEffect:hover::after {
+    width: 100%;
+}
+
+
+

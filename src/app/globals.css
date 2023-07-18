@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 /* @import '../styles/telma.css'; */
 @import url('https://api.fontshare.com/v2/css?f[]=telma@900,300,1,700,500,400&display=swap');
+@import '../styles/animations.css';
 
 @tailwind base;
 @tailwind components;

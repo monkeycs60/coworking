@@ -11,7 +11,9 @@ const SignInButtonLogic = () => {
 			// afterSignUpUrl={window.location.href}
 			// redirectUrl={window.location.href}
 		>
-			<Button variant={'ghost'}>Connexion</Button>
+			<div className='linkHoverEffect'>
+				<Button variant={'ghost'} size={'special'}>Connexion</Button>
+			</div>
 		</SignInButton>
 	);
 };

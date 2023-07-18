@@ -11,7 +11,7 @@ const SignUpButtonLogic = () => {
 			// afterSignUpUrl={window.location.href}
 			// redirectUrl={window.location.href}
 		>
-			<Button>S&apos;inscrire</Button>
+				<Button>S&apos;inscrire</Button>
 		</SignUpButton>
   );
 }
