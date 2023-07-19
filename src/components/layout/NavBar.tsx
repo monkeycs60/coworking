@@ -1,15 +1,22 @@
+'use client';
+
 import SignInButtonLogic from '../auth/SignInButtonLogic';
-import { SignOutButton, UserButton, auth } from '@clerk/nextjs';
+import { SignOutButton, UserButton, useAuth } from '@clerk/nextjs';
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import SignUpButtonLogic from '../auth/SignUpButtonLogic';
 import { Menu } from 'lucide-react';
+import useScrollPosition from '@/hooks/useScrollPosition';
 
-async function NavBar() {
-	const { userId } = await auth();
+function NavBar() {
+	const { userId } = useAuth();
+	const scrollPosition = useScrollPosition();
+
 	return (
-		<div className='fixed z-10 mt-4 flex w-full justify-between  gap-10 py-2 lg:w-[1200px]'>
+		<div
+			className={`fixed z-10 mt-4 flex w-full justify-between  gap-10 py-2 lg:w-[1200px]
+			${scrollPosition > 50 ? 'bg-white' : ''}`}>
 			<div className='flex w-full items-center justify-between px-4 lg:w-auto lg:justify-center lg:gap-14 lg:px-0'>
 				<Link href={'/'} className='flex items-center justify-center gap-4'>
 					<Image
@@ -20,7 +27,7 @@ async function NavBar() {
 					/>
 					<h1 className='font-telma text-xl font-semibold first-letter:text-primary'>
 						Coworkez{' '}
-						<span className='block first-letter:text-secondary'>
+						<span className='first-letter:text-secondary lg:block'>
 							Malin
 						</span>{' '}
 					</h1>

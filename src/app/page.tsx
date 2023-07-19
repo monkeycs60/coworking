@@ -5,8 +5,8 @@ import clsx from 'clsx';
 
 export default function Home() {
 	return (
-		<section className='overall-bg flex h-screen w-full flex-col justify-center'>
-			<div className='mt-[16vh] flex h-full flex-col gap-4 lg:mt-[27vh] lg:flex-row '>
+		<section className='overall-bg flex h-[100dvh] w-full flex-col justify-center lg:h-screen'>
+			<div className='mt-32 flex h-full flex-col gap-4 lg:mt-[27vh] lg:flex-row '>
 				<div className='flex flex-col px-4 lg:w-[55%] lg:px-0'>
 					<div className='flex flex-col gap-4'>
 						<h2 className='text-3xl font-bold leading-normal lg:text-4xl 3xl:text-5xl 3xl:leading-relaxed'>
@@ -52,7 +52,7 @@ export default function Home() {
 				<div className='mt-[5vh] flex justify-center lg:mt-0 lg:w-[45%] lg:justify-end '>
 					<div
 						className={clsx(
-							'relative flex h-[200px] w-[300px]',
+							'relative flex h-[240px] w-[300px]',
 							'lg:h-[80%] lg:w-[90%] lg:justify-end',
 							'3xl:h-[55%] 3xl:w-[100%] '
 						)}>
