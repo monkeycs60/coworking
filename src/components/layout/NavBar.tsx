@@ -15,7 +15,7 @@ function NavBar() {
 
 	return (
 		<div
-			className={`fixed z-10 mt-4 flex w-full justify-between  gap-10 py-2 lg:w-[1200px]
+			className={`fixed z-30 mt-4 flex w-full justify-between  gap-10 py-2 lg:w-[1200px]
 			${scrollPosition > 50 ? 'bg-white' : ''}`}>
 			<div className='flex w-full items-center justify-between px-4 lg:w-auto lg:justify-center lg:gap-14 lg:px-0'>
 				<Link href={'/'} className='flex items-center justify-center gap-4'>

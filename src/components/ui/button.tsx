@@ -19,6 +19,7 @@ const buttonVariants = cva(
 					'bg-secondary text-secondary-foreground hover:bg-secondary/80',
 				ghost: 'buttonGhost transition-border rounded-xl border-2 border-transparent font-semibold',
 				link: 'text-primary underline-offset-4 hover:underline',
+				round: 'rounded-[28px]',
 			},
 			size: {
 				default: 'h-10 px-4 py-2',
