@@ -1,16 +1,4 @@
-interface highlightedCoworkingsProps {
-    id: number;
-    name: string;
-    slug: string;
-    location: string;
-	city: string;
-	zipCode: number;
-    illustration: string;
-    url: string;
-    comfortScore: number;
-    calmScore: number;
-    wifiScore: number;
-}
+import { highlightedCoworkingsProps } from "@/types/highlightedCoworking";
 
 export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 	{
@@ -22,9 +10,9 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 33000,
 		illustration: '/coworking-photos/moxy.jpg',
 		url: `/coworking/moxy`,
-		comfortScore: 4,
+		equipmentScore: 4,
 		calmScore: 4,
-		wifiScore: 4,
+		foodScore: 4,
 	},
 	{
 		id: 2,
@@ -35,9 +23,9 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 33008,
 		illustration: '/coworking-photos/novotel.webp',
 		url: '/coworking/novotel-centre',
-		comfortScore: 5,
+		equipmentScore: 5,
 		calmScore: 2,
-		wifiScore: 5,
+		foodScore: 5,
 	},
 	{
 		id: 3,
@@ -48,9 +36,9 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 37000,
 		illustration: '/coworking-photos/cowork1.jpg',
 		url: '/coworking/ibis-styles',
-		comfortScore: 4,
+		equipmentScore: 4,
 		calmScore: 3,
-		wifiScore: 4,
+		foodScore: 4,
 	},
 	{
 		id: 4,
@@ -61,9 +49,9 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 75002,
 		illustration: '/coworking-photos/cowork2.jpg',
 		url: '/coworking/urban-station',
-		comfortScore: 5,
+		equipmentScore: 5,
 		calmScore: 4,
-		wifiScore: 5,
+		foodScore: 5,
 	},
 	{
 		id: 5,
@@ -74,9 +62,9 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 75016,
 		illustration: '/coworking-photos/cowork3.jpg',
 		url: '/coworking/the-hoxton',
-		comfortScore: 5,
+		equipmentScore: 5,
 		calmScore: 5,
-		wifiScore: 4,
+		foodScore: 4,
 	},
 	{
 		id: 6,
@@ -87,9 +75,9 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 75015,
 		illustration: '/coworking-photos/cowork4.jpg',
 		url: '/coworking/we-work',
-		comfortScore: 4,
+		equipmentScore: 4,
 		calmScore: 3,
-		wifiScore: 5,
+		foodScore: 5,
 	},
 	{
 		id: 7,
@@ -100,9 +88,9 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 31000,
 		illustration: '/coworking-photos/cowork5.jpg',
 		url: '/coworking/spaces',
-		comfortScore: 4,
+		equipmentScore: 4,
 		calmScore: 4,
-		wifiScore: 5,
+		foodScore: 5,
 	},
 	{
 		id: 8,
@@ -113,9 +101,9 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 44000,
 		illustration: '/coworking-photos/cowork6.webp',
 		url: '/coworking/regus',
-		comfortScore: 5,
+		equipmentScore: 5,
 		calmScore: 4,
-		wifiScore: 5,
+		foodScore: 5,
 	},
 	{
 		id: 9,
@@ -126,9 +114,9 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 75013,
 		illustration: '/coworking-photos/cowork8.jpg',
 		url: '/coworking/techloft',
-		comfortScore: 4,
+		equipmentScore: 4,
 		calmScore: 5,
-		wifiScore: 5,
+		foodScore: 5,
 	},
 	{
 		id: 10,
@@ -139,8 +127,8 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		zipCode: 35135,
 		illustration: '/coworking-photos/cowork9.jpg',
 		url: '/coworking/buro-club',
-		comfortScore: 5,
+		equipmentScore: 5,
 		calmScore: 5,
-		wifiScore: 5,
+		foodScore: 5,
 	},
 ];
