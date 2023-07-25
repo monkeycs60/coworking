@@ -7,7 +7,7 @@ import Carousel from '@/material/Carousel';
 import CoworkingCard from '@/material/CoworkingCard';
 
 const HighlightedCoworkings = () => {
-	const { nextSlide, prevSlide, currentIndex } = useCarousel(
+	const {  currentIndex } = useCarousel(
 		highlightedCoworkings.length
 	);
 
@@ -27,7 +27,7 @@ const HighlightedCoworkings = () => {
 				className='w-full lg:w-auto 3xl:px-6 3xl:py-3'>
 				<span>Explorer tous les coworkings</span>
 			</Button>
-			<div className='flex w-[4000px] gap-4'>
+			<div className='flex w-[400px] gap-4'>
 				<Carousel>
 					{highlightedCoworkings.map((coworking, currentIndex) => (
 						<CoworkingCard

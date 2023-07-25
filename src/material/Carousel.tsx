@@ -8,7 +8,7 @@ interface CarouselProps {
 }
 
 const Carousel = ({ children }: CarouselProps) => {
-	const { nextSlide, prevSlide, currentIndex } = useCarousel(
+	const { nextSlide, prevSlide } = useCarousel(
 		React.Children.count(children)
 	);
 	return (
