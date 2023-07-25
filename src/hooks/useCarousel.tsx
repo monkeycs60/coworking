@@ -1,5 +1,6 @@
+'use client';
+
 import { useState } from 'react';
-import { highlightedCoworkingsProps } from '@/types/highlightedCoworking';
 
 const useCarousel = (length: number) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,9 +10,7 @@ const useCarousel = (length: number) => {
 	};
 
 	const prevSlide = () => {
-		setCurrentIndex(
-			(prevIndex) => (prevIndex - 1 + length) % length
-		);
+		setCurrentIndex((prevIndex) => (prevIndex - 1 + length) % length);
 	};
 	return {
 		nextSlide,

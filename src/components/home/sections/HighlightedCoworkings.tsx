@@ -2,16 +2,14 @@
 
 import { Button } from '@/components/ui/button';
 import { highlightedCoworkings } from '@/data/highlightedCoworkings';
-import { ArrowRight, ArrowLeft, MapPin } from 'lucide-react';
-import { useState } from 'react';
-import Image from 'next/image';
-import { Progress } from '@/components/ui/progress';
 import useCarousel from '@/hooks/useCarousel';
 import Carousel from '@/material/Carousel';
+import CoworkingCard from '@/material/CoworkingCard';
 
 const HighlightedCoworkings = () => {
-	
-	const { nextSlide, prevSlide, currentIndex } = useCarousel(highlightedCoworkings);
+	const { nextSlide, prevSlide, currentIndex } = useCarousel(
+		highlightedCoworkings.length
+	);
 
 	return (
 		<section className='mt-8 flex h-[100dvh] flex-col gap-8 overflow-x-hidden px-4'>
@@ -30,9 +28,16 @@ const HighlightedCoworkings = () => {
 				<span>Explorer tous les coworkings</span>
 			</Button>
 			<div className='flex w-[4000px] gap-4'>
-				<Carousel />
+				<Carousel>
+					{highlightedCoworkings.map((coworking, currentIndex) => (
+						<CoworkingCard
+							key={coworking.id}
+							highlightedCoworking={coworking}
+							currentIndex={currentIndex}
+						/>
+					))}
+				</Carousel>
 			</div>
-			
 		</section>
 	);
 };

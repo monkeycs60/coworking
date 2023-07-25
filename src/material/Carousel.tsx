@@ -1,26 +1,19 @@
 import useCarousel from '@/hooks/useCarousel';
-import { highlightedCoworkings } from '@/data/highlightedCoworkings';
-import { highlightedCoworkingsProps } from '@/types/highlightedCoworking';
-import { Progress } from '@/components/ui/progress';
-import { ArrowRight, ArrowLeft, MapPin } from 'lucide-react';
-import Image from 'next/image';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import CoworkingCard from './CoworkingCard';
+import React from 'react';
 
+interface CarouselProps {
+	children?: React.ReactNode;
+}
 
-const Carousel = (
-    medias: highlightedCoworkingsProps[],
-) => {
-    const { nextSlide, prevSlide, currentIndex } = useCarousel(highlightedCoworkings.length);
+const Carousel = ({ children }: CarouselProps) => {
+	const { nextSlide, prevSlide, currentIndex } = useCarousel(
+		React.Children.count(children)
+	);
 	return (
 		<>
-			{highlightedCoworkings.map((coworking, currentIndex) => (
-				<CoworkingCard
-					key={coworking.id}
-					highlightedCoworking={coworking}
-					currentIndex={currentIndex}
-				/>
-			))}
+			{children}
 			<div className='flex gap-4'>
 				<Button
 					variant={'round'}

@@ -1,14 +1,16 @@
 import { Progress } from '@/components/ui/progress';
-import useCarousel from '@/hooks/useCarousel';
-import { highlightedCoworkings } from '@/data/highlightedCoworkings';
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
-
-
-
 import { highlightedCoworkingsProps } from '@/types/highlightedCoworking';
 
-const CoworkingCard = ({highlightedCoworking: highlightedCoworkingsProps, currentIndex: number}) => {
+interface CoworkingCardProps {
+	highlightedCoworking: highlightedCoworkingsProps;
+	currentIndex: number;
+}
+
+const CoworkingCard = (
+	{ highlightedCoworking, currentIndex }: CoworkingCardProps,
+) => {
 	return (
 		<div
 			key={highlightedCoworking.id}
