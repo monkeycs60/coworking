@@ -8,12 +8,16 @@ interface CarouselProps {
 }
 
 const Carousel = ({ children }: CarouselProps) => {
-	const { nextSlide, prevSlide } = useCarousel(
-		React.Children.count(children)
-	);
+	const { nextSlide, prevSlide, currentIndex } = useCarousel(React.Children.count(children));
+
 	return (
-		<>
-			{children}
+		<div className='flex flex-col gap-4'>
+			<div className='flex gap-4'
+				style={{
+					transform: `translateX(-${currentIndex * 9.8}%)`,
+					transition: 'transform 0.5s ease-in-out',
+				}}
+			>{children}</div>
 			<div className='flex gap-4'>
 				<Button
 					variant={'round'}
@@ -30,7 +34,7 @@ const Carousel = ({ children }: CarouselProps) => {
 					<ArrowRight />
 				</Button>
 			</div>
-		</>
+		</div>
 	);
 };
 

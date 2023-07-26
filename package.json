@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@clerk/localizations": "^1.22.0",
-		"@clerk/nextjs": "^4.21.12",
+		"@clerk/nextjs": "^4.23.1",
 		"@prisma/client": "^4.15.0",
 		"@radix-ui/react-dialog": "^1.0.4",
 		"@radix-ui/react-popover": "^1.0.6",

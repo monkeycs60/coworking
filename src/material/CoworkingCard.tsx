@@ -8,14 +8,14 @@ interface CoworkingCardProps {
 	currentIndex: number;
 }
 
-const CoworkingCard = (
-	{ highlightedCoworking, currentIndex }: CoworkingCardProps,
-) => {
+const CoworkingCard = ({
+	highlightedCoworking,
+	currentIndex,
+}: CoworkingCardProps) => {
 	return (
 		<div
 			key={highlightedCoworking.id}
-			className={`flex h-[420px] w-[300px] flex-col rounded-xl bg-red-300 transition-transform duration-500 ease-in-out`}
-			style={{ transform: `translateX(${-currentIndex * 104}%)` }}>
+			className={`flex h-[420px] w-[300px] flex-col rounded-xl bg-red-300 transition-transform duration-500 ease-in-out`}>
 			<div
 				className='h-1/2 w-full rounded-xl'
 				style={{

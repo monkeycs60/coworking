@@ -7,9 +7,7 @@ import Carousel from '@/material/Carousel';
 import CoworkingCard from '@/material/CoworkingCard';
 
 const HighlightedCoworkings = () => {
-	const {  currentIndex } = useCarousel(
-		highlightedCoworkings.length
-	);
+	const { currentIndex } = useCarousel(highlightedCoworkings.length);
 
 	return (
 		<section className='mt-8 flex h-[100dvh] flex-col gap-8 overflow-x-hidden px-4'>
