@@ -5,16 +5,18 @@ import { highlightedCoworkingsProps } from '@/types/highlightedCoworking';
 import { useAppSelector } from '@/hooks/useRedux';
 
 interface CoworkingCardProps {
+	carouselId: string;
 	highlightedCoworking: highlightedCoworkingsProps;
 	currentIndex: number;
 }
 
 const CoworkingCard = ({
+	carouselId,
 	highlightedCoworking,
 	currentIndex,
 }: CoworkingCardProps) => {
 	const activeIndex = useAppSelector(
-		(state) => state.carouselState.activeIndex
+		(state) => state.carouselState.activeIndices[carouselId]
 	);
 
 	const borderClass =

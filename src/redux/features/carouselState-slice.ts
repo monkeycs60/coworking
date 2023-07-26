@@ -3,19 +3,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CarouselState {
-	activeIndex: number;
+	activeIndices: { [carouselId: string]: number };
 }
 
 const initialState: CarouselState = {
-	activeIndex: 0,
+	activeIndices: {},
 };
 
 export const carouselSlice = createSlice({
 	name: 'carousel',
 	initialState,
 	reducers: {
-		setActiveIndex: (state, action: PayloadAction<number>) => {
-			state.activeIndex = action.payload;
+		setActiveIndex: (
+			state,
+			action: PayloadAction<{ carouselId: string; index: number }>
+		) => {
+			const { carouselId, index } = action.payload;
+			state.activeIndices[carouselId] = index;
 		},
 	},
 });

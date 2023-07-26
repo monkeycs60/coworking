@@ -8,18 +8,19 @@ import { useAppDispatch } from '@/hooks/useRedux';
 import { setActiveIndex } from '@/redux/features/carouselState-slice';
 
 interface CarouselProps {
+	id: string;
 	children?: React.ReactNode;
 }
 
-const Carousel = ({ children }: CarouselProps) => {
+const Carousel = ({ id, children }: CarouselProps) => {
 	const dispatch = useAppDispatch();
 	const { nextSlide, prevSlide, currentIndex } = useCarousel(
 		React.Children.count(children)
 	);
 
-	useEffect(() => {
-		dispatch(setActiveIndex(currentIndex));
-	}, [currentIndex, dispatch]);
+		useEffect(() => {
+			dispatch(setActiveIndex({ carouselId: id, index: currentIndex }));
+		}, [currentIndex, dispatch, id]);
 
 	return (
 		<div className='flex flex-col gap-4'>
