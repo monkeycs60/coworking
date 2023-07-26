@@ -1,23 +1,36 @@
+'use client';
+
 import useCarousel from '@/hooks/useCarousel';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppDispatch } from '@/hooks/useRedux';
+import { setActiveIndex } from '@/redux/features/carouselState-slice';
 
 interface CarouselProps {
 	children?: React.ReactNode;
 }
 
 const Carousel = ({ children }: CarouselProps) => {
-	const { nextSlide, prevSlide, currentIndex } = useCarousel(React.Children.count(children));
+	const dispatch = useAppDispatch();
+	const { nextSlide, prevSlide, currentIndex } = useCarousel(
+		React.Children.count(children)
+	);
+
+	useEffect(() => {
+		dispatch(setActiveIndex(currentIndex));
+	}, [currentIndex, dispatch]);
 
 	return (
 		<div className='flex flex-col gap-4'>
-			<div className='flex gap-4'
+			<div
+				className='flex gap-4'
 				style={{
 					transform: `translateX(-${currentIndex * 9.8}%)`,
 					transition: 'transform 0.5s ease-in-out',
-				}}
-			>{children}</div>
+				}}>
+				{children}
+			</div>
 			<div className='flex gap-4'>
 				<Button
 					variant={'round'}

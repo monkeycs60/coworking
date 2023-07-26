@@ -2,8 +2,9 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './features/auth-slice';
-import placeDetailsReducer from './features/placeDetails-slice'; 
+import placeDetailsReducer from './features/placeDetails-slice';
 import autoCompleteReducer from './features/autoComplete-slice';
+import carouselReducer from './features/carouselState-slice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
@@ -20,6 +21,7 @@ export const store = configureStore({
 		auth: persistedReducer,
 		placeDetails: placeDetailsReducer,
 		autoComplete: autoCompleteReducer,
+		carouselState: carouselReducer,
 	},
 	middleware: [thunk],
 });

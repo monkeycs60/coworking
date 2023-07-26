@@ -2,6 +2,7 @@ import { Progress } from '@/components/ui/progress';
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
 import { highlightedCoworkingsProps } from '@/types/highlightedCoworking';
+import { useAppSelector } from '@/hooks/useRedux';
 
 interface CoworkingCardProps {
 	highlightedCoworking: highlightedCoworkingsProps;
@@ -12,10 +13,21 @@ const CoworkingCard = ({
 	highlightedCoworking,
 	currentIndex,
 }: CoworkingCardProps) => {
+	const activeIndex = useAppSelector(
+		(state) => state.carouselState.activeIndex
+	);
+
+	const borderClass =
+		activeIndex === currentIndex
+			? 'border-yellow-500 border-2'
+			: 'border-gray-300 border-2';
+
 	return (
 		<div
 			key={highlightedCoworking.id}
-			className={`flex h-[420px] w-[300px] flex-col rounded-xl bg-red-300 transition-transform duration-500 ease-in-out`}>
+			className={`flex h-[420px] w-[300px] flex-col rounded-xl  transition-transform duration-500 ease-in-out  
+			${borderClass}
+			`}>
 			<div
 				className='h-1/2 w-full rounded-xl'
 				style={{
