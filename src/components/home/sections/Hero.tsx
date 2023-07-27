@@ -3,10 +3,9 @@ import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import clsx from 'clsx';
 
-
 const Hero = () => {
-  return (
-		<section className='overall-bg flex h-[100dvh] w-full flex-col justify-center lg:h-screen'>
+	return (
+		<section className='overall-bg mb-[10vh] flex w-full flex-col justify-center lg:mb-0 lg:h-screen '>
 			<div className='mt-32 flex h-full flex-col gap-4 lg:mt-[27vh] lg:flex-row '>
 				<div className='flex flex-col px-4 lg:w-[55%] lg:px-0'>
 					<div className='flex flex-col gap-4'>
@@ -88,7 +87,7 @@ const Hero = () => {
 				</div>
 			</div>
 		</section>
-  );
-}
+	);
+};
 
-export default Hero
+export default Hero;
