@@ -2,12 +2,12 @@
 
 import { Button } from '@/components/ui/button';
 import { highlightedCoworkings } from '@/data/highlightedCoworkings';
-import Carousel from '@/material/Carousel';
-import CoworkingCard from '@/material/CoworkingCard';
+import Carousel from '@/components/ui/Carousel';
+import CoworkingCard from '@/components/ui/CoworkingCard';
 
 const HighlightedCoworkings = () => {
 	return (
-		<section className='mt-8 flex flex-col gap-8 overflow-x-hidden px-4 lg:h-[100vh]'>
+		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:h-[100vh]'>
 			<div>
 				<h2 className='text-2xl font-bold'>
 					Récemment dénichés par la communauté
