@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { highlightedCoworkings } from '@/data/highlightedCoworkings';
 import Carousel from '@/components/ui/Carousel';
-import CoworkingCard from '@/components/ui/CoworkingCard';
+import CoworkingCard from '@/components/home/cards/CoworkingCard';
 
 const HighlightedCoworkings = () => {
 	return (

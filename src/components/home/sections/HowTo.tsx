@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import React from 'react';
+import HowWhoCard from '@/components/home/cards/HowWhoCard';
 
 const HowTo = () => {
 	return (
@@ -11,7 +10,45 @@ const HowTo = () => {
 					votre ville et de nouvelles façons de travailler
 				</h3>
 			</div>
-			
+			<HowWhoCard
+				lineColorUrl={'/howtoLINE.svg'}
+				responsiveBehavior={'flex-row'}
+				subtitle={
+					'freelance, entrepreneur, salarié en télétravail ou étudiant ?'
+				}
+				content={
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. '
+				}
+				image={'/howto1.svg'}
+			/>
+			<HowWhoCard
+				lineColorUrl={'/howtoLINE-blue.svg'}
+				responsiveBehavior={'flex-row-reverse'}
+				subtitle={'Vous venez d’arriver dans une nouvelle ville ?'}
+				content={
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. '
+				}
+				image={'/howto2.svg'}
+			/>
+			<HowWhoCard
+				lineColorUrl={'/howtoLINE.svg'}
+                customStyle='gap-6'
+				responsiveBehavior={'flex-row'}
+				subtitle={'C’est là qu’intervient Coworkez Malin !'}
+				content={
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. '
+				}
+				image={'/howto3.png'}
+			/>
+			<HowWhoCard
+				lineColorUrl={'/howtoLINE-blue.svg'}
+				responsiveBehavior={'flex-row-reverse'}
+				subtitle={'Etablissements coworking-friendly'}
+				content={
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. '
+				}
+				image={'/howto4.svg'}
+			/>
 		</section>
 	);
 };
