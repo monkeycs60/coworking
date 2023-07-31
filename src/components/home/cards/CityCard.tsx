@@ -1,3 +1,5 @@
+'use client';
+
 import { highlightedCitiesProps } from '@/types/highlightedCities';
 import { useAppSelector } from '@/hooks/useRedux';
 import Image from 'next/image';

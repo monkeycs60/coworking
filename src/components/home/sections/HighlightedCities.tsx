@@ -1,9 +1,15 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import Carousel from '@/components/ui/Carousel';
 import { highlightedCities } from '@/data/highlightedCities';
-import CityCard from '../cards/cityCard';
+import CityCard from '../cards/CityCard';
+import useCarousel from '@/hooks/useCarousel';
 
 const HighlightedCities = () => {
+	const { nextSlide, prevSlide, currentIndex } = useCarousel(
+		highlightedCities.length
+	);
 	return (
 		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:h-[100vh]'>
 			<div>
@@ -22,7 +28,11 @@ const HighlightedCities = () => {
 				<span>Découvrez une nouvelle ville</span>
 			</Button>
 			<div className='flex gap-4'>
-				<Carousel id={'highlightedCities'}>
+				<Carousel
+					id={'highlightedCities'}
+					nextSlide={nextSlide}
+					prevSlide={prevSlide}
+					currentIndex={currentIndex}>
 					{highlightedCities.map((city, index) => (
 						<CityCard
 							carouselId={'highlightedCities'}

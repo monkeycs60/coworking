@@ -1,3 +1,5 @@
+'use client';
+
 import { Progress } from '@/components/ui/progress';
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';

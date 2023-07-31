@@ -4,8 +4,12 @@ import { Button } from '@/components/ui/button';
 import { highlightedCoworkings } from '@/data/highlightedCoworkings';
 import Carousel from '@/components/ui/Carousel';
 import CoworkingCard from '@/components/home/cards/CoworkingCard';
+import useCarousel from '@/hooks/useCarousel';
 
 const HighlightedCoworkings = () => {
+	const { nextSlide, prevSlide, currentIndex } = useCarousel(
+		highlightedCoworkings.length
+	);
 	return (
 		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:h-[100vh]'>
 			<div>
@@ -23,7 +27,11 @@ const HighlightedCoworkings = () => {
 				<span>Explorer tous les coworkings</span>
 			</Button>
 			<div className='flex gap-4'>
-				<Carousel id={'highlightedCoworkings'}>
+				<Carousel
+					id={'highlightedCoworkings'}
+					nextSlide={nextSlide}
+					prevSlide={prevSlide}
+					currentIndex={currentIndex}>
 					{highlightedCoworkings.map((coworking, index) => (
 						<CoworkingCard
 							carouselId={'highlightedCoworkings'}

@@ -10,17 +10,23 @@ import { setActiveIndex } from '@/redux/features/carouselState-slice';
 interface CarouselProps {
 	id: string;
 	children?: React.ReactNode;
+	nextSlide: () => void;
+	prevSlide: () => void;
+	currentIndex: number;
 }
 
-const Carousel = ({ id, children }: CarouselProps) => {
+const Carousel = ({
+	id,
+	children,
+	nextSlide,
+	prevSlide,
+	currentIndex,
+}: CarouselProps) => {
 	const dispatch = useAppDispatch();
-	const { nextSlide, prevSlide, currentIndex } = useCarousel(
-		React.Children.count(children)
-	);
 
-		useEffect(() => {
-			dispatch(setActiveIndex({ carouselId: id, index: currentIndex }));
-		}, [currentIndex, dispatch, id]);
+	useEffect(() => {
+		dispatch(setActiveIndex({ carouselId: id, index: currentIndex }));
+	}, [currentIndex, dispatch, id]);
 
 	return (
 		<div className='flex flex-col gap-4'>
