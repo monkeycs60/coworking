@@ -34,10 +34,10 @@ const CityCard = ({
 			className={`flex h-[420px] w-[300px] flex-col rounded-xl  transition-transform duration-500 ease-in-out  
 			${borderClass}
 			`}>
-			<div className='flex flex-col items-center justify-center gap-6 p-6 blur-xl'>
+			<div className='flex flex-col items-center justify-center gap-6 bg-white p-6'>
 				<h3 className='text-xl font-bold'>{highlightedCity.cityName}</h3>
-				<div className='flex justify-between'>
-					<div className='flex gap-2'>
+				<div className='flex justify-between gap-4'>
+					<div className='flex items-center justify-center gap-2'>
 						<Image
 							src={'/members.svg'}
 							alt='members'
@@ -46,7 +46,7 @@ const CityCard = ({
 						/>
 						<p>{highlightedCity.members}</p>
 					</div>
-					<div>
+					<div className='flex items-center justify-center gap-2'>
 						<Image
 							src={'/buildings.svg'}
 							alt='coworkings'

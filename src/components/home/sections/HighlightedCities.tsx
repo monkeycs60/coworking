@@ -32,7 +32,8 @@ const HighlightedCities = () => {
 					id={'highlightedCities'}
 					nextSlide={nextSlide}
 					prevSlide={prevSlide}
-					currentIndex={currentIndex}>
+					currentIndex={currentIndex}
+					translateRate={12.3}>
 					{highlightedCities.map((city, index) => (
 						<CityCard
 							carouselId={'highlightedCities'}

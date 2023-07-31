@@ -31,7 +31,8 @@ const HighlightedCoworkings = () => {
 					id={'highlightedCoworkings'}
 					nextSlide={nextSlide}
 					prevSlide={prevSlide}
-					currentIndex={currentIndex}>
+					currentIndex={currentIndex}
+					translateRate={9.8}>
 					{highlightedCoworkings.map((coworking, index) => (
 						<CoworkingCard
 							carouselId={'highlightedCoworkings'}

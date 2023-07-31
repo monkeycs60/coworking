@@ -1,6 +1,5 @@
 'use client';
 
-import useCarousel from '@/hooks/useCarousel';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import React, { useEffect } from 'react';
@@ -13,6 +12,7 @@ interface CarouselProps {
 	nextSlide: () => void;
 	prevSlide: () => void;
 	currentIndex: number;
+	translateRate: number;
 }
 
 const Carousel = ({
@@ -21,6 +21,7 @@ const Carousel = ({
 	nextSlide,
 	prevSlide,
 	currentIndex,
+	translateRate
 }: CarouselProps) => {
 	const dispatch = useAppDispatch();
 
@@ -33,7 +34,7 @@ const Carousel = ({
 			<div
 				className='flex gap-4'
 				style={{
-					transform: `translateX(-${currentIndex * 9.8}%)`,
+					transform: `translateX(-${currentIndex * translateRate}%)`,
 					transition: 'transform 0.5s ease-in-out',
 				}}>
 				{children}
