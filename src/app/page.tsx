@@ -3,6 +3,7 @@ import Hero from '@/components/home/sections/Hero';
 import HighlightedCoworkings from '@/components/home/sections/HighlightedCoworkings';
 import HowTo from '@/components/home/sections/HowTo';
 import HighlightedCities from '@/components/home/sections/HighlightedCities';
+import Faq from '@/components/home/sections/Faq';
 
 export default function Home() {
 	return (
@@ -12,6 +13,7 @@ export default function Home() {
 			<Assets />
 			<HowTo />
 			<HighlightedCities />
+			<Faq />
 		</>
 	);
 }

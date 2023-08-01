@@ -12,7 +12,7 @@ const HighlightedCities = () => {
 	);
 	return (
 		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:h-[100vh]'>
-			<div>
+			<div className='flex flex-col gap-4'>
 				<h2 className='text-2xl font-bold'>
 					Déjà 40 lieux référencés dans 5 villes
 				</h2>
