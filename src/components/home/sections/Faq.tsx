@@ -8,15 +8,15 @@ import {
 const Faq = () => {
 	return (
 		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:h-[100vh]'>
-			<div className='flex flex-col items-center justify-center gap-4 text-center'>
+			<div className='mb-8 flex flex-col items-center justify-center gap-4 text-center'>
 				<h2 className='text-2xl font-bold'>Foire aux questions</h2>
-				<h3 className='text-sm text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
+				<h3 className='text-base text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
 					Vous vous demandez comment ça marche ? Vous avez une question sur
 					notre fonctionnement ? Vous êtes au bon endroit !
 				</h3>
 			</div>
-			<Accordion type='single' collapsible>
-				<AccordionItem value='item-1'>
+			<Accordion>
+				<AccordionItem>
 					<AccordionTrigger>Qu’est-ce que le coworking ?</AccordionTrigger>
 					<AccordionContent>
 						Le coworking, c&apos;est un peu comme une grande colocation
@@ -29,7 +29,7 @@ const Faq = () => {
 						l&apos;occasion.
 					</AccordionContent>
 				</AccordionItem>
-				<AccordionItem value='item-2'>
+				<AccordionItem>
 					<AccordionTrigger>
 						Quels types d’établissements sont référencés ?
 					</AccordionTrigger>
@@ -43,7 +43,7 @@ const Faq = () => {
 						commerciaux etc.
 					</AccordionContent>
 				</AccordionItem>
-				<AccordionItem value='item-3'>
+				<AccordionItem>
 					<AccordionTrigger>
 						Quelles villes sont disponibles ?
 					</AccordionTrigger>
@@ -54,16 +54,19 @@ const Faq = () => {
 						mois à venir.
 					</AccordionContent>
 				</AccordionItem>
-				<AccordionItem value='item-4'>
+				<AccordionItem>
 					<AccordionTrigger>
 						Comment ajouter un nouvel endroit ?
 					</AccordionTrigger>
 					<AccordionContent>
 						Pour ajouter un nouvel endroit, il vous suffit de vous créer
 						un compte, puis de vous rendre sur la page{' '}
-						<a href='/add-coworking'>Ajouter un spot</a>. Vous n&apos;avez
-						plus qu&apos;à remplir le formulaire, et nous nous chargerons
-						de vérifier les informations et de publier votre spot.
+						<a href='/add-coworking' className='font-semibold underline'>
+							Ajouter un spot
+						</a>
+						. Vous n&apos;avez plus qu&apos;à remplir le formulaire, et
+						nous nous chargerons de vérifier les informations et de
+						publier votre spot.
 					</AccordionContent>
 				</AccordionItem>
 			</Accordion>

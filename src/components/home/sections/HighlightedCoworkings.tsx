@@ -12,11 +12,11 @@ const HighlightedCoworkings = () => {
 	);
 	return (
 		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:h-[100vh]'>
-			<div>
+			<div className='flex flex-col gap-2'>
 				<h2 className='text-2xl font-bold'>
 					Récemment dénichés par la communauté
 				</h2>
-				<h3 className='text-sm text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
+				<h3 className='text-base text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
 					Découvrez les derniers lieux ajoutés par nos membres
 				</h3>
 			</div>

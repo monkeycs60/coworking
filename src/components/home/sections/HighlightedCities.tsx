@@ -16,7 +16,7 @@ const HighlightedCities = () => {
 				<h2 className='text-2xl font-bold'>
 					Déjà 40 lieux référencés dans 5 villes
 				</h2>
-				<h3 className='text-sm text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
+				<h3 className='text-base text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
 					Tous les jours, nous partons à la conquête de de nouveaux lieux
 					pour vous proposer une nouvelle manière de travailler.
 				</h3>

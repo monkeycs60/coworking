@@ -12,7 +12,7 @@ const Hero = () => {
 						<h2 className='text-3xl font-bold leading-normal lg:text-4xl 3xl:text-5xl 3xl:leading-relaxed'>
 							Découvrez des lieux conviviaux où coworker gratuitement !
 						</h2>
-						<h3 className='text-sm text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
+						<h3 className='text-base text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
 							Grâce à notre communauté, trouvez les bons plans pour
 							travailler malin dans la ville de votre choix.
 						</h3>
