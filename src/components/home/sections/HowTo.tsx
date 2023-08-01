@@ -2,7 +2,7 @@ import HowWhoCard from '@/components/home/cards/HowWhoCard';
 
 const HowTo = () => {
 	return (
-		<section className='my-[10vh] flex flex-col gap-8 overflow-x-hidden px-8 lg:h-[100vh]'>
+		<section className='my-[10vh] flex flex-col gap-8 overflow-x-hidden px-8'>
 			<div className='flex flex-col items-center justify-center gap-2  text-center'>
 				<h2 className='text-2xl font-bold'>Comment ça marche ?</h2>
 				<h3 className='text-sm text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
@@ -32,7 +32,7 @@ const HowTo = () => {
 			/>
 			<HowWhoCard
 				lineColorUrl={'/howtoLINE.svg'}
-                customStyle='gap-6'
+				customStyle='gap-6'
 				responsiveBehavior={'flex-row'}
 				subtitle={'C’est là qu’intervient Coworkez Malin !'}
 				content={
