@@ -12,6 +12,7 @@ const HowTo = () => {
 			</div>
 			<HowWhoCard
 				lineColorUrl={'/howtoLINE.svg'}
+				imageSize='h-[300px]'
 				responsiveBehavior={'flex-row'}
 				subtitle={
 					'freelance, entrepreneur, salarié en télétravail ou étudiant ?'
@@ -23,6 +24,7 @@ const HowTo = () => {
 			/>
 			<HowWhoCard
 				lineColorUrl={'/howtoLINE-blue.svg'}
+				imageSize='h-[300px]'
 				responsiveBehavior={'flex-row-reverse'}
 				subtitle={'Vous venez d’arriver dans une nouvelle ville ?'}
 				content={
@@ -32,7 +34,8 @@ const HowTo = () => {
 			/>
 			<HowWhoCard
 				lineColorUrl={'/howtoLINE.svg'}
-				customStyle='gap-6'
+				customStyle='gap-8'
+				imageSize='h-[200px]'
 				responsiveBehavior={'flex-row'}
 				subtitle={'C’est là qu’intervient Coworkez Malin !'}
 				content={
@@ -42,6 +45,7 @@ const HowTo = () => {
 			/>
 			<HowWhoCard
 				lineColorUrl={'/howtoLINE-blue.svg'}
+				imageSize='h-[300px]'
 				responsiveBehavior={'flex-row-reverse'}
 				subtitle={'Etablissements coworking-friendly'}
 				content={
