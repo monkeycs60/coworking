@@ -4,6 +4,7 @@ import HighlightedCoworkings from '@/components/home/sections/HighlightedCoworki
 import HowTo from '@/components/home/sections/HowTo';
 import HighlightedCities from '@/components/home/sections/HighlightedCities';
 import Faq from '@/components/home/sections/Faq';
+import Contact from '@/components/home/sections/Contact';
 
 export default function Home() {
 	return (
@@ -14,6 +15,7 @@ export default function Home() {
 			<HowTo />
 			<HighlightedCities />
 			<Faq />
+			<Contact />
 		</>
 	);
 }
