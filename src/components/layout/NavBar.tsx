@@ -8,14 +8,25 @@ import Link from 'next/link';
 import SignUpButtonLogic from '../auth/SignUpButtonLogic';
 import { Menu } from 'lucide-react';
 import useScrollPosition from '@/hooks/useScrollPosition';
+import useHamburgerMenu from '@/hooks/useHamburgerMenu';
+import Hamburger from './Hamburger';
+import { AnimatePresence } from 'framer-motion';
 
 function NavBar() {
+	const { isHamburgerOpen, toggleHamburgerMenu } = useHamburgerMenu();
 	const { userId } = useAuth();
 	const scrollPosition = useScrollPosition();
 
-	return (
+	return isHamburgerOpen ? (
+		<AnimatePresence mode='wait'>
+			<Hamburger
+				isHamburgerOpen={isHamburgerOpen}
+				toggleHamburgerMenu={toggleHamburgerMenu}
+			/>
+		</AnimatePresence>
+	) : (
 		<div
-			className={`fixed z-30 mt-4 flex w-full justify-between  gap-10 py-2 lg:w-[1200px]
+			className={`z-30 mt-4 flex w-full justify-between gap-10  py-2 lg:fixed lg:w-[1200px]
 			${scrollPosition > 50 ? 'bg-white' : ''}`}>
 			<div className='flex w-full items-center justify-between px-4 lg:w-auto lg:justify-center lg:gap-14 lg:px-0'>
 				<Link href={'/'} className='flex items-center justify-center gap-4'>
@@ -47,7 +58,10 @@ function NavBar() {
 					</li>
 				</ul>
 				<div className='block lg:hidden'>
-					<Menu className='text-primary' />
+					<Menu
+						className='fixed right-6 top-8 z-50 text-primary'
+						onClick={toggleHamburgerMenu}
+					/>
 				</div>
 			</div>
 			<div className='hidden items-center justify-center gap-4 lg:flex'>
