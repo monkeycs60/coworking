@@ -6,7 +6,7 @@ import clsx from 'clsx';
 const Hero = () => {
 	return (
 		<section className='overall-bg mb-[10vh] flex w-full flex-col justify-center lg:mb-0 lg:h-screen '>
-			<div className='mt-32 flex h-full flex-col gap-4 lg:mt-[27vh] lg:flex-row '>
+			<div className='mt-12 flex h-full flex-col gap-4 lg:mt-[27vh] lg:flex-row '>
 				<div className='flex flex-col px-4 lg:w-[55%] lg:px-0'>
 					<div className='flex flex-col gap-4'>
 						<h2 className='text-3xl font-bold leading-normal lg:text-4xl 3xl:text-5xl 3xl:leading-relaxed'>
