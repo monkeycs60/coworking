@@ -1,13 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState } from 'react';
-import { set } from 'zod';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Assets = () => {
 	const [selected, setSelected] = useState('flexibility');
 	const [imgSource, setImgSource] = useState('/man-phonecall.jpg');
 	const [imgAlt, setImgAlt] = useState('homme au téléphone');
+
+	const [key, setKey] = useState(0);
+
+	useEffect(() => {
+		setKey((prevKey) => prevKey + 1);
+	}, [imgSource]);
 
 	return (
 		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden lg:h-[100vh]'>
@@ -88,7 +94,21 @@ const Assets = () => {
 				</div>
 			</div>
 			<div className='relative h-[250px] w-screen'>
-				<Image src={imgSource} alt={imgAlt} fill={true} priority={true} />
+				<AnimatePresence>
+					<motion.div
+						key={key}
+						initial={{ opacity: 0.3 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0.3 }}
+						transition={{ duration: 0.5 }}>
+						<Image
+							src={imgSource}
+							alt={imgAlt}
+							fill={true}
+							priority={true}
+						/>
+					</motion.div>
+				</AnimatePresence>
 			</div>
 		</section>
 	);
