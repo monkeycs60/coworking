@@ -9,7 +9,7 @@ const Hero = () => {
 			<div className='mt-12 flex h-full flex-col gap-4 lg:mt-[27vh] lg:flex-row '>
 				<div className='flex flex-col px-4 lg:w-[55%] lg:px-0'>
 					<div className='flex flex-col gap-4'>
-						<h2 className='text-3xl font-bold leading-normal lg:text-4xl 3xl:text-5xl 3xl:leading-relaxed'>
+						<h2 className='text-2xl font-bold leading-normal lg:text-4xl 3xl:text-5xl 3xl:leading-relaxed'>
 							Découvrez des lieux conviviaux où coworker gratuitement !
 						</h2>
 						<h3 className='text-base text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
