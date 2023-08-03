@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
+import SignInButtonLogic from '../auth/SignInButtonLogic';
+import SignUpButtonLogic from '../auth/SignUpButtonLogic';
 
 interface HamburgerProps {
 	isHamburgerOpen: boolean;
@@ -30,11 +32,13 @@ const Hamburger = ({
 						ipsa quod neque adipisci.
 					</p>
 				</div>
+				<SignInButtonLogic />
+				<SignUpButtonLogic />
 				<div className='line'></div>
 			</div>
 			<X
 				size={44}
-				className='absolute bottom-16 left-1/2 -translate-x-1/2'
+				className='absolute bottom-32 left-1/2 -translate-x-1/2'
 				onClick={toggleHamburgerMenu}
 			/>
 		</motion.section>
