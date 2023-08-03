@@ -32,7 +32,8 @@ const Hero = () => {
 								<Button
 									variant={'default'}
 									size={'sm'}
-									className='w-full lg:w-auto 3xl:px-6 3xl:py-3'>
+									className='flex w-full gap-2 lg:block lg:w-auto 3xl:px-6 3xl:py-3'>
+									<span className='lg:hidden'>Recherchez</span>
 									<Image
 										src={'/search-refraction.svg'}
 										alt='search'
