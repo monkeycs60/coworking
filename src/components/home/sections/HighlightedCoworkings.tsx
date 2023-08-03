@@ -11,7 +11,7 @@ const HighlightedCoworkings = () => {
 		highlightedCoworkings.length
 	);
 	return (
-		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:h-[100vh]'>
+		<section className='my-[12vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:h-[100vh]'>
 			<div className='flex flex-col gap-2'>
 				<h2 className='text-2xl font-bold'>
 					Récemment dénichés par la communauté

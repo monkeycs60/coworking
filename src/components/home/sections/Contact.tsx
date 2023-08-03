@@ -26,7 +26,7 @@ const Contact = () => {
 	};
 
 	return (
-		<section className='relative my-[8vh] flex h-[105vh] flex-col overflow-x-hidden  lg:h-[100vh]'>
+		<section className='relative mt-[12vh] flex h-[750px] flex-col overflow-x-hidden  lg:h-[100vh]'>
 			<div
 				className='relative h-[400px] px-4 py-2'
 				style={{
