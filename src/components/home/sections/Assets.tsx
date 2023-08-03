@@ -2,9 +2,12 @@
 
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { set } from 'zod';
 
 const Assets = () => {
 	const [selected, setSelected] = useState('flexibility');
+	const [imgSource, setImgSource] = useState('/man-phonecall.jpg');
+	const [imgAlt, setImgAlt] = useState('homme au téléphone');
 
 	return (
 		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden lg:h-[100vh]'>
@@ -21,22 +24,32 @@ const Assets = () => {
 						className={`grow transition-all duration-300 ${
 							selected === 'flexibility' ? 'bg-primary' : 'bg-gray-300'
 						}`}
-						onMouseEnter={() => setSelected('flexibility')}></div>
+						onMouseEnter={() => {
+							setSelected('flexibility');
+						}}></div>
 					<div
 						className={`grow transition-all duration-300 ${
 							selected === 'share' ? 'bg-primary' : 'bg-gray-300'
 						}`}
-						onMouseEnter={() => setSelected('share')}></div>
+						onMouseEnter={() => {
+							setSelected('share');
+						}}></div>
 					<div
 						className={`grow transition-all duration-300 ${
 							selected === 'free' ? 'bg-primary' : 'bg-gray-300'
 						}`}
-						onMouseEnter={() => setSelected('free')}></div>
+						onMouseEnter={() => {
+							setSelected('free');
+						}}></div>
 				</div>
 				<div className='flex flex-1 flex-col gap-4 px-4 py-2'>
 					<div
 						className='group relative hover:border-primary'
-						onMouseEnter={() => setSelected('flexibility')}>
+						onMouseEnter={() => {
+							setSelected('flexibility');
+							setImgSource('/man-phonecall.jpg');
+							setImgAlt('homme au téléphone');
+						}}>
 						<h4 className='font-bold'>Flexibilité</h4>
 						<p>
 							Venez profiter sans prise de tête de nos d’établissements
@@ -46,7 +59,11 @@ const Assets = () => {
 					</div>
 					<div
 						className='group relative hover:border-primary'
-						onMouseEnter={() => setSelected('share')}>
+						onMouseEnter={() => {
+							setSelected('share');
+							setImgSource('/share.jpg');
+							setImgAlt('deux personnes en entretien');
+						}}>
 						<h4 className='font-bold'>Partage</h4>
 						<p>
 							Partagez vos meilleures adresses et commentez celles des
@@ -56,7 +73,11 @@ const Assets = () => {
 					</div>
 					<div
 						className='group relative hover:border-primary'
-						onMouseEnter={() => setSelected('free')}>
+						onMouseEnter={() => {
+							setSelected('free');
+							setImgSource('/free.jpg');
+							setImgAlt('porte-monnaie vide');
+						}}>
 						<h4 className='font-bold'>Gratuité</h4>
 						<p>
 							Pas de frais d’abonnement, pas de coûts de mise en
@@ -66,13 +87,8 @@ const Assets = () => {
 					</div>
 				</div>
 			</div>
-			<div className='relative h-[200px] w-screen'>
-				<Image
-					src='/man-phonecall.jpg'
-					alt='homme assis devant laptop'
-					fill={true}
-					priority={true}
-				/>
+			<div className='relative h-[250px] w-screen'>
+				<Image src={imgSource} alt={imgAlt} fill={true} priority={true} />
 			</div>
 		</section>
 	);

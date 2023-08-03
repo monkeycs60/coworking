@@ -63,8 +63,8 @@ const Hero = () => {
 							fill={true}
 						/>
 						<Image
-							width={360}
-							height={360}
+							width={1154}
+							height={1026}
 							src='/Hand-drawn-arrow.svg'
 							alt='Coworkers autour d un laptop'
 							className='absolute -bottom-20 -left-64 z-20 hidden lg:block 3xl:pointer-events-none 3xl:-bottom-32'
