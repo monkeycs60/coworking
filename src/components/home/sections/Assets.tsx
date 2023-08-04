@@ -1,19 +1,20 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Assets = () => {
-	const [selected, setSelected] = useState('flexibility');
-	const [imgSource, setImgSource] = useState('/man-phonecall.jpg');
-	const [imgAlt, setImgAlt] = useState('homme au téléphone');
+	const [asset, setAsset] = useState({
+		selected: 'flexibility',
+		imgSource: '/man-phonecall.jpg',
+		imgAlt: 'homme au téléphone',
+	});
 
-	const [key, setKey] = useState(0);
+	const keyRef = useRef(0);
 
 	useEffect(() => {
-		setKey((prevKey) => prevKey + 1);
-	}, [imgSource]);
+		keyRef.current += 1;
+	}, [asset.imgSource]);
 
 	return (
 		<section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden lg:h-[100vh]'>
@@ -28,33 +29,52 @@ const Assets = () => {
 				<div className='flex w-1 flex-col'>
 					<div
 						className={`grow transition-all duration-300 ${
-							selected === 'flexibility' ? 'bg-primary' : 'bg-gray-300'
+							asset.selected === 'flexibility'
+								? 'bg-primary'
+								: 'bg-gray-300'
 						}`}
 						onMouseEnter={() => {
-							setSelected('flexibility');
-						}}></div>
+							setAsset({
+								selected: 'flexibility',
+								imgSource: '/man-phonecall.jpg',
+								imgAlt: 'homme au téléphone',
+							});
+						}}
+					/>
 					<div
 						className={`grow transition-all duration-300 ${
-							selected === 'share' ? 'bg-primary' : 'bg-gray-300'
+							asset.selected === 'share' ? 'bg-primary' : 'bg-gray-300'
 						}`}
 						onMouseEnter={() => {
-							setSelected('share');
-						}}></div>
+							setAsset({
+								selected: 'share',
+								imgSource: '/share.jpg',
+								imgAlt: 'deux personnes en entretien',
+							});
+						}}
+					/>
 					<div
 						className={`grow transition-all duration-300 ${
-							selected === 'free' ? 'bg-primary' : 'bg-gray-300'
+							asset.selected === 'free' ? 'bg-primary' : 'bg-gray-300'
 						}`}
 						onMouseEnter={() => {
-							setSelected('free');
-						}}></div>
+							setAsset({
+								selected: 'free',
+								imgSource: '/free.jpg',
+								imgAlt: 'porte-monnaie vide',
+							});
+						}}
+					/>
 				</div>
 				<div className='flex flex-1 flex-col gap-4 px-4 py-2'>
 					<div
 						className='group relative hover:border-primary'
 						onMouseEnter={() => {
-							setSelected('flexibility');
-							setImgSource('/man-phonecall.jpg');
-							setImgAlt('homme au téléphone');
+							setAsset({
+								selected: 'flexibility',
+								imgSource: '/man-phonecall.jpg',
+								imgAlt: 'homme au téléphone',
+							});
 						}}>
 						<h4 className='font-bold'>Flexibilité</h4>
 						<p>
@@ -66,9 +86,11 @@ const Assets = () => {
 					<div
 						className='group relative hover:border-primary'
 						onMouseEnter={() => {
-							setSelected('share');
-							setImgSource('/share.jpg');
-							setImgAlt('deux personnes en entretien');
+							setAsset({
+								selected: 'share',
+								imgSource: '/share.jpg',
+								imgAlt: 'deux personnes en entretien',
+							});
 						}}>
 						<h4 className='font-bold'>Partage</h4>
 						<p>
@@ -80,9 +102,11 @@ const Assets = () => {
 					<div
 						className='group relative hover:border-primary'
 						onMouseEnter={() => {
-							setSelected('free');
-							setImgSource('/free.jpg');
-							setImgAlt('porte-monnaie vide');
+							setAsset({
+								selected: 'free',
+								imgSource: '/free.jpg',
+								imgAlt: 'porte-monnaie vide',
+							});
 						}}>
 						<h4 className='font-bold'>Gratuité</h4>
 						<p>
@@ -94,21 +118,12 @@ const Assets = () => {
 				</div>
 			</div>
 			<div className='relative h-[250px] w-screen'>
-				<AnimatePresence>
-					<motion.div
-						key={key}
-						initial={{ opacity: 0.3 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0.3 }}
-						transition={{ duration: 0.5 }}>
-						<Image
-							src={imgSource}
-							alt={imgAlt}
-							fill={true}
-							priority={true}
-						/>
-					</motion.div>
-				</AnimatePresence>
+				<Image
+					src={asset.imgSource}
+					alt={asset.imgAlt}
+					fill={true}
+					priority={true}
+				/>
 			</div>
 		</section>
 	);
