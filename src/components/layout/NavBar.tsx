@@ -34,14 +34,14 @@ function NavBar() {
 				<div className='flex w-full items-center justify-between px-4 lg:w-auto lg:justify-center lg:gap-14 lg:px-0'>
 					<Link
 						href={'/'}
-						className='flex items-center justify-center gap-4'>
+						className='flex items-center justify-center gap-4 sm:gap-10'>
 						<Image
 							src={'/logo-cowork-v1-nobg.png'}
 							alt='logo'
 							width={40}
 							height={40}
 						/>
-						<h1 className='font-telma text-xl font-semibold first-letter:text-primary'>
+						<h1 className='font-telma text-xl font-semibold first-letter:text-primary sm:text-3xl'>
 							Coworkez{' '}
 							<span className='first-letter:text-secondary lg:block'>
 								Malin
@@ -64,7 +64,7 @@ function NavBar() {
 					</ul>
 					<div className='block lg:hidden'>
 						<Menu
-							className='fixed right-6 top-8 z-50 text-primary'
+							className='fixed right-6 top-8 z-50 text-primary sm:h-8 sm:w-8'
 							onClick={toggleHamburgerMenu}
 						/>
 					</div>

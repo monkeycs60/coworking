@@ -34,7 +34,7 @@ const Hamburger = ({
 			variants={variants}
 			transition={{ duration: 0.5 }}
 			className='fixed left-0 top-0 z-[100] h-screen w-screen overflow-hidden bg-white font-inter'>
-			<div className=' flex h-full flex-col  justify-center p-12 text-center text-lg font-semibold '>
+			<div className=' flex h-full flex-col  justify-center p-12 text-center text-lg sm:text-xl font-semibold '>
 				<div className='flex flex-col gap-6'>
 					<Link
 						href={'/about'}
