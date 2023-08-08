@@ -7,7 +7,7 @@ const Hero = () => {
 	return (
 		<section className='overall-bg mb-[10vh] flex w-full flex-col justify-center lg:mb-0 lg:h-screen'>
 			<div className='mt-12 flex h-full flex-col gap-4 sm:mt-20  sm:gap-10 lg:mt-[27vh] lg:flex-row 2xl:mt-[30vh] '>
-				<div className='flex flex-col px-4 lg:w-[55%] lg:px-0 2xl:w-[50%]'>
+				<div className='flex flex-col px-4 lg:w-[55%] lg:px-0 3xl:w-[50%]'>
 					<div className='flex flex-col gap-4'>
 						<h2 className='text-2xl font-bold leading-normal sm:text-4xl lg:text-4xl 3xl:text-5xl 3xl:leading-relaxed'>
 							Découvrez des lieux conviviaux où coworker gratuitement !
@@ -50,13 +50,13 @@ const Hero = () => {
 						</p>
 					</div>
 				</div>
-				<div className='mt-[5vh] flex justify-center lg:mt-0 lg:w-[45%] lg:justify-end 2xl:w-1/2 '>
+				<div className='mt-[5vh] flex justify-center lg:mt-0 lg:w-[45%] lg:justify-end 2xl:items-center 3xl:w-1/2 3xl:items-start '>
 					<div
 						className={clsx(
 							'relative flex h-[240px] w-[300px]',
 							'sm:h-[320px] sm:w-[400px]',
 							'lg:h-[80%] lg:w-[90%] lg:justify-end',
-							'2xl:h-[100%] 2xl:w-[100%] ',
+							'2xl:h-[600px] 2xl:w-[640px] 2xl:justify-end',
 							'3xl:h-[50%] 3xl:w-[85%] '
 						)}>
 						<Image
@@ -70,7 +70,7 @@ const Hero = () => {
 							height={1026}
 							src='/Hand-drawn-arrow.svg'
 							alt='Coworkers autour d un laptop'
-							className='absolute -bottom-20 -left-64 z-20 hidden lg:block 2xl:h-[300px] 2xl:w-[300px] 3xl:pointer-events-none 3xl:-bottom-32 3xl:-left-32'
+							className='absolute -bottom-20 -left-64 z-20 hidden lg:block 2xl:-left-48 2xl:h-[300px] 2xl:w-[300px] 3xl:pointer-events-none 3xl:-bottom-32 3xl:-left-32'
 						/>
 						<Image
 							width={160}
