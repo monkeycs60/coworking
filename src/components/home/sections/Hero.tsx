@@ -56,21 +56,21 @@ const Hero = () => {
 							'relative flex h-[240px] w-[300px]',
 							'sm:h-[320px] sm:w-[400px]',
 							'lg:h-[80%] lg:w-[90%] lg:justify-end',
-							'2xl:h-[600px] 2xl:w-[640px] 2xl:justify-end',
-							'3xl:h-[50%] 3xl:w-[85%] '
+							'2xl:h-full 2xl:w-full '
 						)}>
 						<Image
 							src='/landing-laptop-friends.webp'
 							alt='Coworkers autour d un laptop'
-							className='z-20'
-							fill={true}
-						/>
-						<Image
+							className={clsx('z-20', '2xl:h-[500px] 2xl:w-[560px]')}
 							width={1154}
 							height={1026}
+						/>
+						<Image
+							width={304}
+							height={297}
 							src='/Hand-drawn-arrow.svg'
 							alt='Coworkers autour d un laptop'
-							className='absolute -bottom-20 -left-64 z-20 hidden lg:block 2xl:-left-48 2xl:h-[300px] 2xl:w-[300px] 3xl:pointer-events-none 3xl:-bottom-32 3xl:-left-32'
+							className='absolute -left-64 bottom-4 z-20 hidden lg:block 2xl:-left-24 2xl:bottom-12 2xl:h-[300px] 2xl:w-[300px] 3xl:pointer-events-none 3xl:-left-12 3xl:bottom-80'
 						/>
 						<Image
 							width={160}

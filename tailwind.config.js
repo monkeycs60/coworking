@@ -78,7 +78,7 @@ module.exports = {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
 			screens: {
-				'3xl': '1800px',
+				'3xl': '1980px',
 			}
 		},
 	},
