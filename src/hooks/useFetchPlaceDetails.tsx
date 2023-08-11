@@ -10,6 +10,8 @@ import {
 interface Photo {
 	height: number;
 	html_attributions: string[];
+	photo_reference: string;
+	width: number;
 }
 
 export interface PlaceDetail {
@@ -27,6 +29,7 @@ export interface PlaceDetail {
 	icon: string;
 	adr_address: string;
 	photos: Photo[];
+	place_id: string;
 }
 
 export const useFetchPlaceDetails = (placeId: string | null) => {
