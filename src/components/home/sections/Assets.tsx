@@ -17,7 +17,7 @@ const Assets = () => {
 	}, [asset.imgSource]);
 
 	return (
-		<section className='my-[5vh] flex flex-col gap-8 overflow-hidden'>
+		<section className='my-[5vh] flex flex-col gap-8 overflow-hidden lg:my-12 '>
 			<div className='flex flex-col gap-2 px-4'>
 				<h2 className='text-2xl font-bold'>Les atouts Coworkez Malin</h2>
 				<h3 className='text-base text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
@@ -25,8 +25,8 @@ const Assets = () => {
 					votre ville et de nouvelles façons de travailler
 				</h3>
 			</div>
-			<div className='flex flex-col gap-8 lg:flex-row xl:gap-20 items-center'>
-				<div className='flex gap-4 px-4 lg:h-[370px]'>
+			<div className='flex flex-col items-center gap-8 lg:flex-row xl:gap-20'>
+				<div className='flex gap-4 px-4 lg:h-[370px] 2xl:h-[450px] '>
 					<div className='flex w-1 flex-col'>
 						<div
 							className={`grow transition-all duration-300 ${
@@ -69,7 +69,7 @@ const Assets = () => {
 							}}
 						/>
 					</div>
-					<div className='flex flex-1 flex-col gap-4 px-4 py-2 lg:h-[370px] lg:justify-between'>
+					<div className='flex flex-1 flex-col gap-4 px-4 py-2 lg:h-[370px] lg:justify-between 2xl:h-[450px] '>
 						<div
 							className='group relative hover:border-primary'
 							onMouseEnter={() => {

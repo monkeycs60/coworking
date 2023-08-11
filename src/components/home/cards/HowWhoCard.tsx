@@ -11,17 +11,17 @@ const HowWhoCard = ({
 	image,
 }: HowWho) => {
 	return (
-		<div className={`flex flex-col ${customStyle}`}>
-			<div className={`lg:${responsiveBehavior} flex flex-col gap-4 px-2`}>
-				<div className='relative'>
-					<div className=' absolute -left-4 top-0 h-full w-2'>
+		<div className={`flex flex-col lg:items-center lg:justify-around ${customStyle}`}>
+			<div className={`lg:${responsiveBehavior} flex flex-col gap-4 px-2 lg:w-[40%] `}>
+				<div className='relative lg:space-x-4'>
+					<div className=' absolute -left-4 top-0 h-full w-2 lg:w-[10px] '>
 						<Image src={lineColorUrl} alt='flèche' fill className='' />
 					</div>
 					<h4 className='text-xl font-bold'>{subtitle}</h4>
 				</div>
 				<p>{content}</p>
 			</div>
-			<div className={`relative ${imageSize} w-full px-4`}>
+			<div className={`relative ${imageSize} px-4`}>
 				<Image src={image} alt='flèche' fill />
 			</div>
 		</div>

@@ -33,7 +33,7 @@ const Hero = () => {
 									variant={'default'}
 									size={'sm'}
 									className='flex w-full gap-2 sm:gap-6 sm:py-4 lg:block lg:w-auto lg:py-3 2xl:px-6 2xl:py-3'>
-									<span className='text-xl lg:hidden'>Recherchez</span>
+									<span className='sm:text-xl lg:hidden'>Recherchez</span>
 									<Image
 										src={'/search-refraction.svg'}
 										alt='search'

@@ -2,8 +2,8 @@ import HowWhoCard from '@/components/home/cards/HowWhoCard';
 
 const HowTo = () => {
 	return (
-		<section className='my-[10vh] flex flex-col gap-8 overflow-x-hidden px-8'>
-			<div className='flex flex-col items-center justify-center gap-2  text-center'>
+		<section className='my-[10vh] flex flex-col gap-8 overflow-x-hidden px-8 lg:my-36 3xl:gap-4'>
+			<div className='flex flex-col items-center justify-center gap-2 text-center lg:mb-2 '>
 				<h2 className='text-2xl font-bold'>Comment ça marche ?</h2>
 				<h3 className='text-base text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
 					Ce qui nous motive, c’est cette envie de vous faire redécouvrir
@@ -12,8 +12,9 @@ const HowTo = () => {
 			</div>
 			<HowWhoCard
 				lineColorUrl={'/howtoLINE.svg'}
-				imageSize='h-[300px]'
-				responsiveBehavior={'flex-row'}
+				customStyle='lg:flex-row'
+				imageSize='h-[300px] lg:h-[600px] lg:w-[600px]'
+				responsiveBehavior={'flex-row lg:flex-col'}
 				subtitle={
 					'freelance, entrepreneur, salarié en télétravail ou étudiant ?'
 				}
@@ -24,8 +25,9 @@ const HowTo = () => {
 			/>
 			<HowWhoCard
 				lineColorUrl={'/howtoLINE-blue.svg'}
-				imageSize='h-[300px]'
-				responsiveBehavior={'flex-row-reverse'}
+				customStyle='lg:flex-row-reverse'
+				imageSize='h-[300px] lg:h-[600px] lg:w-[600px]'
+				responsiveBehavior={'flex-col'}
 				subtitle={'Vous venez d’arriver dans une nouvelle ville ?'}
 				content={
 					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. '
@@ -34,9 +36,9 @@ const HowTo = () => {
 			/>
 			<HowWhoCard
 				lineColorUrl={'/howtoLINE.svg'}
-				customStyle='gap-8'
-				imageSize='h-[200px]'
-				responsiveBehavior={'flex-row'}
+				customStyle='gap-8 lg:flex-row'
+				imageSize='h-[200px] border-[1px] border-black rounded-[10px] lg:h-[310px] lg:w-[500px] '
+				responsiveBehavior={'flex-col'}
 				subtitle={'C’est là qu’intervient Coworkez Malin !'}
 				content={
 					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. '
@@ -45,8 +47,9 @@ const HowTo = () => {
 			/>
 			<HowWhoCard
 				lineColorUrl={'/howtoLINE-blue.svg'}
-				imageSize='h-[300px]'
-				responsiveBehavior={'flex-row-reverse'}
+				customStyle='lg:flex-row-reverse'
+				imageSize='h-[300px] lg:h-[600px] lg:w-[600px]'
+				responsiveBehavior={'flex-col'}
 				subtitle={'Etablissements coworking-friendly'}
 				content={
 					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. '
