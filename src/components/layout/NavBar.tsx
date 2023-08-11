@@ -48,7 +48,7 @@ function NavBar() {
 							</span>{' '}
 						</h1>
 					</Link>
-					<ul className='hidden items-center justify-center gap-6 font-semibold lg:flex'>
+					<ul className='hidden items-center justify-center gap-6 font-semibold lg:flex 2xl:text-lg'>
 						<li className='linkHoverEffect'>
 							<Link href={'/about'}>A propos</Link>
 						</li>
