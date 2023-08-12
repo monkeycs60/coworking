@@ -26,27 +26,27 @@ const Contact = () => {
 	};
 
 	return (
-		<section className='relative mt-[12vh] flex h-[750px] flex-col overflow-x-hidden  lg:h-[100vh]'>
+		<section className='relative mt-[12vh] flex h-[750px] flex-col overflow-x-hidden rounded-xl lg:m-auto lg:w-[80%]'>
 			<div
-				className='relative h-[400px] px-4 py-2'
+				className='relative h-[400px] rounded-xl px-4 py-2'
 				style={{
 					backgroundImage: "url('/contact.jpg')",
 					backgroundSize: '100%',
 					backgroundPosition: '50% 90%',
 					backgroundRepeat: 'no-repeat',
 				}}>
-				<div className='mb-8 flex flex-col items-center justify-center gap-4 text-center'>
-					<h2 className='p-1 text-2xl font-bold text-black'>
+				<div className='mb-8 flex flex-col items-center justify-center gap-4 text-center lg:gap-8'>
+					<h2 className='p-1 text-2xl font-bold text-black lg:text-3xl lg:text-white lg:drop-shadow-2xl'>
 						Contactez-nous !
 					</h2>
-					<h3 className='rounded-lg bg-white/50 p-2 text-base text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
+					<h3 className='rounded-lg bg-white/50 p-2 text-base text-gray-700 lg:w-[75%] lg:rounded-xl lg:bg-white/80 lg:text-base lg:text-gray-900 3xl:text-lg'>
 						Vous souhaitez nous faire part d&apos;une remarque ? Vous avez
 						des suggestions d&apos;amélioration ? N&apos;hésitez pas à
 						nous contacter !
 					</h3>
 				</div>
 				<form
-					className='absolute left-1/2 z-20 m-auto flex w-[85%]  -translate-x-1/2 flex-col justify-center gap-4 rounded-xl border-black bg-white  p-6 shadow-xl'
+					className='absolute left-1/2 z-20 m-auto flex w-[85%] -translate-x-1/2 flex-col justify-center gap-4 rounded-xl border-black bg-white p-6  shadow-xl lg:w-[55%] lg:p-10 '
 					onSubmit={handleSubmit(onSubmit)}>
 					<div className='flex flex-col gap-2'>
 						<label htmlFor='email'>Email</label>

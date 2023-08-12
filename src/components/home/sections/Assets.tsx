@@ -126,6 +126,7 @@ const Assets = () => {
 						alt={asset.imgAlt}
 						fill={true}
 						priority={true}
+						className='rounded-xl'
 					/>
 				</div>
 			</div>
