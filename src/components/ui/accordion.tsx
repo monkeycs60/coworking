@@ -29,6 +29,14 @@ interface AccordionContentProps {
 	isActive?: boolean;
 }
 
+const getAccordionHeight = () => {
+	const width = window.innerWidth;
+	if (width >= 1024) {
+		return '100px';
+	}
+	return 'auto';
+};
+
 const Accordion: FunctionComponent<AccordionProps> = ({ children }) => {
 	const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -67,7 +75,7 @@ const AccordionTrigger: FunctionComponent<AccordionTriggerProps> = ({
 	isActive,
 }) => {
 	return (
-		<div className='flex items-center justify-between gap-8 font-inter'>
+		<div className='flex cursor-pointer items-center justify-between gap-8 font-inter'>
 			<p className='text-lg font-semibold'>{children}</p>
 			{isActive ? (
 				<Image src='/minus.svg' alt='minus' width={24} height={24} />
@@ -82,8 +90,9 @@ const AccordionContent: FunctionComponent<AccordionContentProps> = ({
 	children,
 	isActive,
 }) => {
+	const height = getAccordionHeight();
 	const variants = {
-		open: { opacity: 1, height: 'auto' },
+		open: { opacity: 1, height: height },
 		collapsed: { opacity: 0, height: 0 },
 	};
 	return isActive ? (
