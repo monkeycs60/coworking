@@ -49,7 +49,7 @@ const Hamburger = ({
 						FAQ
 					</Link>
 					<Link
-						href={'/coworking-list'}
+						href={'/ajouter-spot'}
 						className='linkHoverEffect'
 						onClick={toggleHamburgerMenu}>
 						Explorer

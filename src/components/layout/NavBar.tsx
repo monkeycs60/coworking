@@ -56,7 +56,7 @@ function NavBar() {
 							<Link href={'/faq'}>FAQ</Link>
 						</li>
 						<li className='linkHoverEffect'>
-							<Link href={'/coworking-list'}>Explorer</Link>
+							<Link href={'/ajouter-spot'}>Explorer</Link>
 						</li>
 						<li className='linkHoverEffect'>
 							<Link href={'/add-coworking'}>Ajouter un spot</Link>

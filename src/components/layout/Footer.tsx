@@ -20,7 +20,7 @@ const Footer = () => {
 					<p>Coworking</p>
 				</div>
 				<div className='flex flex-col text-[10px] lg:text-[14px] '>
-					<Link href='/coworking-list' className='hover:underline'>
+					<Link href='/ajouter-spot' className='hover:underline'>
 						Explorer
 					</Link>
 					<Link href='/add-coworking' className='hover:underline'>
