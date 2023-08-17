@@ -21,15 +21,16 @@ export interface PlaceDetail {
 			lng: number;
 		};
 	};
+	formatted_phone_number: string;
 	name: string;
-	rating: number;
-	editorial_summary: {
-		overview: string;
-	};
-	icon: string;
-	adr_address: string;
+	current_opening_hours: {
+		open_now: boolean;
+		weekday_text: string[];
+	}
 	photos: Photo[];
 	place_id: string;
+	vicinity: string;
+	website: string;
 }
 
 export const useFetchPlaceDetails = (placeId: string | null) => {

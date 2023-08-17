@@ -12,7 +12,7 @@ const page = () => {
 						gratuitement et vous souhaitez le partager à la communauté.
 						Vous êtes sur la bonne page. Café, hôtel, bibliothèque ou
 						tiers-lieu, rentrez le nom de votre nouveau spot préféré dans
-						la barre de recherche ci-dessous.
+						la barre de recherche ci-dessous et complétez le formulaire.
 					</p>
 				</div>
 				<PlacesAutocomplete />

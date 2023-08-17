@@ -6,7 +6,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 	const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
-	const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${googleMapsApiKey}`;
+	const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${googleMapsApiKey}&language=fr`;
 
 	const response = await fetch(url);
 	const data = await response.json();
