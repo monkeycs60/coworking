@@ -55,7 +55,7 @@ const Hamburger = ({
 						Explorer
 					</Link>
 					<Link
-						href={'/add-coworking'}
+						href={'/ajouter-spot'}
 						className='linkHoverEffect'
 						onClick={toggleHamburgerMenu}>
 						Ajouter un spot

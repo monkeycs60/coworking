@@ -12,7 +12,6 @@ const AddPlace = () => {
 
 	return placeDetails ? (
 		<div>
-			<p>Hello</p>
 			<div className='flex flex-col items-center justify-center gap-8 bg-zinc-200 p-12'>
 				<input
 					className='w-full bg-teal-400 p-4'

@@ -59,7 +59,7 @@ function NavBar() {
 							<Link href={'/ajouter-spot'}>Explorer</Link>
 						</li>
 						<li className='linkHoverEffect'>
-							<Link href={'/add-coworking'}>Ajouter un spot</Link>
+							<Link href={'/ajouter-spot'}>Ajouter un spot</Link>
 						</li>
 					</ul>
 					<div className='block lg:hidden'>
