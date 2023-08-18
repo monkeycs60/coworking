@@ -22,6 +22,16 @@ const AddPlace = () => {
 	// const baseUrlImage = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${googleMapsApiKey}&`;
 	const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
 
+	const daysOfWeek = [
+		'Monday',
+		'Tuesday',
+		'Wednesday',
+		'Thursday',
+		'Friday',
+		'Saturday',
+		'Sunday',
+	];
+
 	return placeDetails ? (
 		<div>
 			<div className='flex flex-col items-center justify-center gap-8 bg-zinc-200 p-12'>
@@ -32,7 +42,7 @@ const AddPlace = () => {
 						name='placeName'
 						className='w-full bg-teal-400 p-4'
 						type='text'
-						value={placeDetails.name}
+						value={placeDetails.name ? placeDetails.name : ''}
 					/>
 				</div>
 				<div>
@@ -42,7 +52,7 @@ const AddPlace = () => {
 						name='placeAddress'
 						className='w-full bg-teal-400 p-4'
 						type='text'
-						value={placeDetails.vicinity}
+						value={placeDetails.vicinity ? placeDetails.vicinity : ''}
 					/>
 				</div>
 				<div>
@@ -52,7 +62,11 @@ const AddPlace = () => {
 						name='placePhone'
 						className='w-full bg-teal-400 p-4'
 						type='text'
-						value={placeDetails.formatted_phone_number}
+						value={
+							placeDetails.formatted_phone_number
+								? placeDetails.formatted_phone_number
+								: ''
+						}
 					/>
 				</div>
 				<div>
@@ -68,24 +82,43 @@ const AddPlace = () => {
 				<div>
 					<label htmlFor='placeHours'>Horaires d&apos;ouverture</label>
 
-					{placeDetails.current_opening_hours.weekday_text.map(
-						(day, index) => (
-							<div key={index} className='mt-2'>
-								<label
-									htmlFor={`day${index}`}
-									className='block text-sm font-medium text-gray-700'>
-									{day.split(':')[0]}
-								</label>
-								<input
-									id={`day${index}`}
-									name={`day${index}`}
-									className='mt-1 w-full bg-teal-400 p-4'
-									type='text'
-									value={day.split(':')[1].trim()}
-								/>
-							</div>
-						)
-					)}
+					{placeDetails.current_opening_hours &&
+					placeDetails.current_opening_hours.weekday_text
+						? placeDetails.current_opening_hours.weekday_text.map(
+								(day, index) => (
+									<div key={index} className='mt-2'>
+										<label
+											htmlFor={`day${index}`}
+											className='block text-sm font-medium text-gray-700'>
+											{day.split(':')[0]}
+										</label>
+										<input
+											id={`day${index}`}
+											name={`day${index}`}
+											className='mt-1 w-full bg-teal-400 p-4'
+											type='text'
+											value={day.split(':')[1].trim()}
+										/>
+									</div>
+								)
+						  )
+						: // Map through daysOfWeek to generate a blank input for each day
+						  daysOfWeek.map((day, index) => (
+								<div key={index} className='mt-2'>
+									<label
+										htmlFor={`day${index}`}
+										className='block text-sm font-medium text-gray-700'>
+										{day}
+									</label>
+									<input
+										id={`day${index}`}
+										name={`day${index}`}
+										className='mt-1 w-full bg-teal-400 p-4'
+										type='text'
+										value=''
+									/>
+								</div>
+						  ))}
 				</div>
 
 				{placeDetails.photos
