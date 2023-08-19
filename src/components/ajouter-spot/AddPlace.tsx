@@ -1,12 +1,23 @@
 'use client';
 
-import { useAppSelector } from '@/hooks/useRedux';
+import { useAppSelector, useAppDispatch } from '@/hooks/useRedux';
+import {
+	setImageUrls,
+	resetImageUrls,
+} from '@/redux/features/placeDetails-slice';
 import { AddPlaceSchemaType, AddPlaceSchema } from '@/types/addPlace';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
+import { daysOfWeek } from '@/lib/const/daysOfWeek';
+import { extractCityFromAdrAddress } from '@/lib/functions/extractCityFromAddress';
+import { useEffect } from 'react';
+import { Star } from '@phosphor-icons/react';
+import StarRating from '../ui/StarRating';
 
 const AddPlace = () => {
+	const dispatch = useAppDispatch();
+
 	const {
 		register,
 		handleSubmit,
@@ -17,49 +28,70 @@ const AddPlace = () => {
 	});
 
 	const placeDetails = useAppSelector((state) => state.placeDetails.details);
+	const imageUrls = useAppSelector((state) => state.placeDetails.imageUrls); // fetch image URLs from redux
+
 	const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 	const placeId = placeDetails?.place_id;
 	// const baseUrlImage = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${googleMapsApiKey}&`;
 	const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
 
-	const daysOfWeek = [
-		'Monday',
-		'Tuesday',
-		'Wednesday',
-		'Thursday',
-		'Friday',
-		'Saturday',
-		'Sunday',
-	];
+	useEffect(() => {
+		if (placeDetails?.photos) {
+			dispatch(resetImageUrls());
+
+			const urls = placeDetails.photos
+				.slice(0, Math.ceil(placeDetails.photos.length / 2))
+				.map((photo) => {
+					return `${baseUrlImage}maxwidth=400&photoreference=${photo.photo_reference}`;
+				});
+			dispatch(setImageUrls(urls)); // update redux state
+		}
+	}, [placeDetails, dispatch]);
 
 	return placeDetails ? (
 		<div>
 			<div className='flex flex-col items-center justify-center gap-8 bg-zinc-200 p-12'>
 				<div>
-					<label htmlFor='placeName'>Nom de l&apos;établissement</label>
+					<label htmlFor='name'>Nom de l&apos;établissement</label>
 					<input
-						id='placeName'
-						name='placeName'
+						{...register('name')}
+						id='name'
+						name='name'
 						className='w-full bg-teal-400 p-4'
 						type='text'
 						value={placeDetails.name ? placeDetails.name : ''}
 					/>
 				</div>
 				<div>
-					<label htmlFor='placeAddress'>Adresse</label>
+					<label htmlFor='address'>Adresse</label>
 					<input
-						id='placeAddress'
-						name='placeAddress'
+						{...register('address')}
+						id='address'
+						name='address'
 						className='w-full bg-teal-400 p-4'
 						type='text'
 						value={placeDetails.vicinity ? placeDetails.vicinity : ''}
 					/>
 				</div>
 				<div>
-					<label htmlFor='placePhone'>Numéro de téléphone</label>
+					<label htmlFor='city'>Ville</label>
 					<input
-						id='placePhone'
-						name='placePhone'
+						{...register('city')}
+						id='city'
+						name='city'
+						className='w-full bg-teal-400 p-4'
+						type='text'
+						value={
+							extractCityFromAdrAddress(placeDetails.adr_address) ?? ''
+						}
+					/>
+				</div>
+				<div>
+					<label htmlFor='phoneNumber'>Numéro de téléphone</label>
+					<input
+						{...register('phoneNumber')}
+						id='phoneNumber'
+						name='phoneNumber'
 						className='w-full bg-teal-400 p-4'
 						type='text'
 						value={
@@ -70,13 +102,29 @@ const AddPlace = () => {
 					/>
 				</div>
 				<div>
-					<label htmlFor='placeWebsite'>Site web</label>
+					<label htmlFor='website'>Site web</label>
 					<input
-						id='placeWebsite'
-						name='placeWebsite'
+						{...register('website')}
+						id='website'
+						name='website'
 						className='w-full bg-teal-400 p-4'
 						type='text'
-						value={placeDetails.website}
+						value={placeDetails.website ? placeDetails.website : ''}
+					/>
+				</div>
+				<div>
+					<label htmlFor='description'>Description</label>
+					<input
+						{...register('description')}
+						id='description'
+						name='description'
+						className='w-full bg-teal-400 p-4'
+						type='text'
+						value={
+							placeDetails.editorial_summary.overview
+								? placeDetails.editorial_summary.overview
+								: ''
+						}
 					/>
 				</div>
 				<div>
@@ -85,16 +133,17 @@ const AddPlace = () => {
 					{placeDetails.current_opening_hours &&
 					placeDetails.current_opening_hours.weekday_text
 						? placeDetails.current_opening_hours.weekday_text.map(
-								(day, index) => (
+								(day: string, index: number) => (
 									<div key={index} className='mt-2'>
 										<label
-											htmlFor={`day${index}`}
+											htmlFor={`openingHours.${index}`}
 											className='block text-sm font-medium text-gray-700'>
 											{day.split(':')[0]}
 										</label>
 										<input
-											id={`day${index}`}
-											name={`day${index}`}
+											{...register(`openingHours.${index}`)}
+											id={`openingHours.${index}`}
+											name={`openingHours.${index}`}
 											className='mt-1 w-full bg-teal-400 p-4'
 											type='text'
 											value={day.split(':')[1].trim()}
@@ -102,17 +151,17 @@ const AddPlace = () => {
 									</div>
 								)
 						  )
-						: // Map through daysOfWeek to generate a blank input for each day
-						  daysOfWeek.map((day, index) => (
+						: daysOfWeek.map((day, index) => (
 								<div key={index} className='mt-2'>
 									<label
-										htmlFor={`day${index}`}
+										htmlFor={`openingHours.${index}`}
 										className='block text-sm font-medium text-gray-700'>
 										{day}
 									</label>
 									<input
-										id={`day${index}`}
-										name={`day${index}`}
+										{...register(`openingHours.${index}`)}
+										id={`openingHours.${index}`}
+										name={`openingHours.${index}`}
 										className='mt-1 w-full bg-teal-400 p-4'
 										type='text'
 										value=''
@@ -121,20 +170,29 @@ const AddPlace = () => {
 						  ))}
 				</div>
 
-				{placeDetails.photos
-					.slice(0, Math.ceil(placeDetails.photos.length / 2))
-					.map((photo) => (
+				<div>
+					{imageUrls.map((url, index) => (
 						<Image
-							key={photo.photo_reference}
+							key={index}
 							width={200}
 							height={200}
-							src={
-								baseUrlImage +
-								`maxwidth=400&photoreference=${photo.photo_reference}`
-							}
+							src={url}
 							alt='image de l&pos;établissement'
 						/>
 					))}
+				</div>
+				<div className='flex items-center justify-between gap-3'>
+					<p className='mr-4'>Calme</p>
+					<StarRating type='calm' />
+				</div>
+				<div className='flex items-center justify-between gap-3'>
+					<p className='mr-4'>Equipement</p>
+					<StarRating type='equipment' />
+				</div>
+				<div className='flex items-center justify-between gap-3'>
+					<p className='mr-4'>Food & Drinks</p>
+					<StarRating type='foodAndDrinks' />
+				</div>
 			</div>
 		</div>
 	) : (

@@ -52,6 +52,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  comments      Comment[]
+  votes         Vote[]
 }
 
 model VerificationToken {
@@ -61,3 +63,56 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Coworking {
+  id            String    @id @default(cuid())
+  name          String
+  address       String
+  city          String
+  phoneNumber   String?
+  website       String?
+  description   String
+  openingHours  OpeningHour[]
+  imageUrls     String[]
+  comments      Comment[]
+  votes         Vote[]     // Si vous souhaitez également relier les votes directement au Coworking
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model OpeningHour {
+  id            String      @id @default(cuid())
+  coworkingId   String      @map("coworking_id")
+  coworking     Coworking   @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
+  weekdayText   String[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+
+model Comment {
+  id       String @id @default(cuid())
+  content  String @db.Text
+  placeId  String // This can be a relation to a Place model if you have one.
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  votes    Vote[]
+  place    Coworking   @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Vote {
+  id          String    @id @default(cuid())
+  commentId   String?   // Retaining this as you might want to attach votes to comments.
+  comment     Comment?  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coworkingId String
+  coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
+  calmRating  Int?         // Rating for calm out of 5
+  equipRating Int?         // Rating for equipment out of 5
+  foodRating  Int?         // Rating for food and drink out of 5
+  createdAt   DateTime  @default(now())
+}
+

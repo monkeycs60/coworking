@@ -7,32 +7,6 @@ import {
 	resetPlaceDetails,
 } from '@/redux/features/placeDetails-slice';
 
-interface Photo {
-	height: number;
-	html_attributions: string[];
-	photo_reference: string;
-	width: number;
-}
-
-export interface PlaceDetail {
-	geometry: {
-		location: {
-			lat: number;
-			lng: number;
-		};
-	};
-	formatted_phone_number: string;
-	name: string;
-	current_opening_hours: {
-		open_now: boolean;
-		weekday_text: string[];
-	}
-	photos: Photo[];
-	place_id: string;
-	vicinity: string;
-	website: string;
-}
-
 export const useFetchPlaceDetails = (placeId: string | null) => {
 	const dispatch = useAppDispatch();
 	const details = useAppSelector((state) => state);
