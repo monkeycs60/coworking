@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
 import { extractCityFromAdrAddress } from '@/lib/functions/extractCityFromAddress';
 import { useEffect } from 'react';
-import { Star } from '@phosphor-icons/react';
+import { sendPlaceDetails } from '@/services/sendPlaceDetails';
 import StarRating from '../ui/StarRating';
 
 const AddPlace = () => {
@@ -48,8 +48,21 @@ const AddPlace = () => {
 		}
 	}, [placeDetails, dispatch]);
 
+	const onSubmit = async (data: AddPlaceSchemaType) => {
+		try {
+			console.log('data de sendplace form', data);
+
+			const response = await sendPlaceDetails(data);
+			console.log('response', response);
+
+			if (response) reset();
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	return placeDetails ? (
-		<div>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className='flex flex-col items-center justify-center gap-8 bg-zinc-200 p-12'>
 				<div>
 					<label htmlFor='name'>Nom de l&apos;établissement</label>
@@ -61,6 +74,11 @@ const AddPlace = () => {
 						type='text'
 						value={placeDetails.name ? placeDetails.name : ''}
 					/>
+					{errors.name && (
+						<p className='text-xs italic text-red-600'>
+							Veuillez entrer un nom valide.
+						</p>
+					)}
 				</div>
 				<div>
 					<label htmlFor='address'>Adresse</label>
@@ -72,6 +90,11 @@ const AddPlace = () => {
 						type='text'
 						value={placeDetails.vicinity ? placeDetails.vicinity : ''}
 					/>
+					{errors.address && (
+						<p className='text-xs italic text-red-600'>
+							Veuillez entrer une adresse valide.
+						</p>
+					)}
 				</div>
 				<div>
 					<label htmlFor='city'>Ville</label>
@@ -85,6 +108,11 @@ const AddPlace = () => {
 							extractCityFromAdrAddress(placeDetails.adr_address) ?? ''
 						}
 					/>
+					{errors.city && (
+						<p className='text-xs italic text-red-600'>
+							Veuillez entrer une ville valide.
+						</p>
+					)}
 				</div>
 				<div>
 					<label htmlFor='phoneNumber'>Numéro de téléphone</label>
@@ -100,6 +128,11 @@ const AddPlace = () => {
 								: ''
 						}
 					/>
+					{placeDetails.formatted_phone_number && (
+						<p className='text-xs italic text-red-600'>
+							Veuillez entrer un numéro de téléphone valide.
+						</p>
+					)}
 				</div>
 				<div>
 					<label htmlFor='website'>Site web</label>
@@ -111,6 +144,11 @@ const AddPlace = () => {
 						type='text'
 						value={placeDetails.website ? placeDetails.website : ''}
 					/>
+					{errors.website && (
+						<p className='text-xs italic text-red-600'>
+							Veuillez entrer un site web valide.
+						</p>
+					)}
 				</div>
 				<div>
 					<label htmlFor='description'>Description</label>
@@ -126,6 +164,11 @@ const AddPlace = () => {
 								: ''
 						}
 					/>
+					{errors.description && (
+						<p className='text-xs italic text-red-600'>
+							Veuillez entrer une description valide.
+						</p>
+					)}
 				</div>
 				<div>
 					<label htmlFor='placeHours'>Horaires d&apos;ouverture</label>
@@ -194,7 +237,10 @@ const AddPlace = () => {
 					<StarRating type='foodAndDrinks' />
 				</div>
 			</div>
-		</div>
+			<button type='submit' onClick={handleSubmit(onSubmit)}>
+				Add Place
+			</button>
+		</form>
 	) : (
 		<p>Loading...</p>
 	);

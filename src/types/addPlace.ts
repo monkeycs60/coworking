@@ -10,6 +10,7 @@ export const AddPlaceSchema = z.object({
 	description: z.string(),
 	openingHours: z.array(z.string()),
 	photos: z.array(z.string()),
+	votes: z.array(z.string()),
 });
 
 export type AddPlaceSchemaType = z.infer<typeof AddPlaceSchema>;
