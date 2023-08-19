@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 
 const prisma = new PrismaClient();
+const cs = 'test';
 
 export default async function POST(req: NextRequest) {
     const placeData = (await req.json()) as AddPlaceSchemaType;
