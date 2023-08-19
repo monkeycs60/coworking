@@ -34,18 +34,18 @@ const AddPlace = () => {
   
     const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
 
-    // useEffect(() => {
-    //     if (placeDetails?.photos) {
-    //         dispatch(resetImageUrls());
+    useEffect(() => {
+        if (placeDetails?.photos) {
+            dispatch(resetImageUrls());
 
-    //         const urls = placeDetails.photos
-    //             .slice(0, Math.ceil(placeDetails.photos.length / 2))
-    //             .map((photo) => {
-    //                 return `${baseUrlImage}maxwidth=400&photoreference=${photo.photo_reference}`;
-    //             });
-    //         dispatch(setImageUrls(urls)); // update redux state
-    //     }
-    // }, [placeDetails, dispatch, baseUrlImage]);
+            const urls = placeDetails.photos
+                .slice(0, Math.ceil(placeDetails.photos.length / 2))
+                .map((photo) => {
+                    return `${baseUrlImage}maxwidth=400&photoreference=${photo.photo_reference}`;
+                });
+            dispatch(setImageUrls(urls)); // update redux state
+        }
+    }, [placeDetails, dispatch, baseUrlImage]);
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
         try {
