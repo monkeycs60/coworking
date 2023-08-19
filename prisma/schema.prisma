@@ -77,7 +77,10 @@ model Coworking {
   openingHours  OpeningHour[]
   imageUrls     String[]
   comments      Comment[]
-  votes         Vote[]     // Si vous souhaitez également relier les votes directement au Coworking
+  votes         Vote[]     
+  calmRating    Int?         
+  equipmentRating  Int?       
+  foodAndDrinksRating  Int?
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }

@@ -7,7 +7,7 @@ import {
 } from '@/redux/features/placeDetails-slice';
 import { AddPlaceSchemaType, AddPlaceSchema } from '@/types/addPlace';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import Image from 'next/image';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
 import { extractCityFromAdrAddress } from '@/lib/functions/extractCityFromAddress';
@@ -20,6 +20,7 @@ const AddPlace = () => {
 
     const {
         register,
+        control,
         handleSubmit,
         formState: { errors },
         reset,
@@ -31,7 +32,7 @@ const AddPlace = () => {
     const imageUrls = useAppSelector((state) => state.placeDetails.imageUrls); // fetch image URLs from redux
 
     const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-  
+
     const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
 
     useEffect(() => {
@@ -71,7 +72,7 @@ const AddPlace = () => {
                         name='name'
                         className='w-full bg-teal-400 p-4'
                         type='text'
-                        value={placeDetails.name ? placeDetails.name : ''}
+                        defaultValue={placeDetails.name ? placeDetails.name : ''}
                     />
                     {errors.name && (
                         <p className='text-xs italic text-red-600'>
@@ -87,7 +88,7 @@ const AddPlace = () => {
                         name='address'
                         className='w-full bg-teal-400 p-4'
                         type='text'
-                        value={
+                        defaultValue={
                             placeDetails.vicinity ? placeDetails.vicinity : ''
                         }
                     />
@@ -105,7 +106,7 @@ const AddPlace = () => {
                         name='city'
                         className='w-full bg-teal-400 p-4'
                         type='text'
-                        value={
+                        defaultValue={
                             extractCityFromAdrAddress(
                                 placeDetails.adr_address,
                             ) ?? ''
@@ -125,13 +126,13 @@ const AddPlace = () => {
                         name='phoneNumber'
                         className='w-full bg-teal-400 p-4'
                         type='text'
-                        value={
+                        defaultValue={
                             placeDetails.formatted_phone_number
                                 ? placeDetails.formatted_phone_number
                                 : ''
                         }
                     />
-                    {placeDetails.formatted_phone_number && (
+                    {errors.phoneNumber && (
                         <p className='text-xs italic text-red-600'>
                             Veuillez entrer un numéro de téléphone valide.
                         </p>
@@ -145,7 +146,9 @@ const AddPlace = () => {
                         name='website'
                         className='w-full bg-teal-400 p-4'
                         type='text'
-                        value={placeDetails.website ? placeDetails.website : ''}
+                        defaultValue={
+                            placeDetails.website ? placeDetails.website : ''
+                        }
                     />
                     {errors.website && (
                         <p className='text-xs italic text-red-600'>
@@ -161,7 +164,7 @@ const AddPlace = () => {
                         name='description'
                         className='w-full bg-teal-400 p-4'
                         type='text'
-                        value={
+                        defaultValue={
                             placeDetails.editorial_summary.overview
                                 ? placeDetails.editorial_summary.overview
                                 : ''
@@ -195,8 +198,17 @@ const AddPlace = () => {
                                           name={`openingHours.${index}`}
                                           className='mt-1 w-full bg-teal-400 p-4'
                                           type='text'
-                                          value={day.split(':')[1].trim()}
+                                          defaultValue={day.split(':')[1].trim()}
                                       />
+                                      {(
+                                          errors as unknown as {
+                                              [key: string]: any;
+                                          }
+                                      )[`openingHours.${index}`] && (
+                                          <p className='text-xs italic text-red-600'>
+                                              Veuillez entrer un horaire valide
+                                          </p>
+                                      )}
                                   </div>
                               ),
                           )
@@ -214,39 +226,89 @@ const AddPlace = () => {
                                       name={`openingHours.${index}`}
                                       className='mt-1 w-full bg-teal-400 p-4'
                                       type='text'
-                                      value=''
+                                      defaultValue=''
                                   />
+                                  {(
+                                      errors as unknown as {
+                                          [key: string]: any;
+                                      }
+                                  )[`openingHours.${index}`] && (
+                                      <p className='text-xs italic text-red-600'>
+                                          Veuillez entrer un horaire valide
+                                      </p>
+                                  )}
                               </div>
                           ))}
                 </div>
 
                 <div>
                     {imageUrls.map((url, index) => (
-                        <Image
-                            key={index}
-                            width={200}
-                            height={200}
-                            src={url}
-                            alt='image de l&pos;établissement'
-                        />
+                        <div key={index}>
+                            <Image
+                                width={200}
+                                height={200}
+                                src={url}
+                                alt={`image de l'établissement ${index}`}
+                            />
+                            <Controller
+                                render={({ field }) => (
+                                    <input
+                                        type='hidden'
+                                        {...field}
+                                        value={url}
+                                    />
+                                )}
+                                name={`photos.${index}`}
+                                control={control}
+                                defaultValue={url}
+                            />
+                        </div>
                     ))}
                 </div>
                 <div className='flex items-center justify-between gap-3'>
                     <p className='mr-4'>Calme</p>
-                    <StarRating type='calm' />
+                    <StarRating
+                        type='calm'
+                        register={register('calmRating', {
+                            required: true,
+                        })}
+                    />
+                    {errors.calmRating && (
+                        <p className='text-xs italic text-red-600'>
+                            Veuillez évaluer le calme.
+                        </p>
+                    )}
                 </div>
                 <div className='flex items-center justify-between gap-3'>
                     <p className='mr-4'>Equipement</p>
-                    <StarRating type='equipment' />
+                    <StarRating
+                        type='equipment'
+                        register={register('equipmentRating', {
+                            required: true,
+                        })}
+                    />
+                    {errors.equipmentRating && (
+                        <p className='text-xs italic text-red-600'>
+                            Veuillez évaluer l&pos;équipement.
+                        </p>
+                    )}
                 </div>
                 <div className='flex items-center justify-between gap-3'>
                     <p className='mr-4'>Food & Drinks</p>
-                    <StarRating type='foodAndDrinks' />
+                    <StarRating
+                        type='foodAndDrinks'
+                        register={register('foodAndDrinksRating', {
+                            required: true,
+                        })}
+                    />
+                    {errors.foodAndDrinksRating && (
+                        <p className='text-xs italic text-red-600'>
+                            Veuillez évaluer la nourriture et les boissons.
+                        </p>
+                    )}
                 </div>
             </div>
-            <button type='submit' onClick={handleSubmit(onSubmit)}>
-                Add Place
-            </button>
+            <button type='submit'>Add Place</button>
         </form>
     ) : (
         <p>Loading...</p>
