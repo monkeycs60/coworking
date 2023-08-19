@@ -2,7 +2,7 @@ import { AddPlaceSchemaType } from '@/types/addPlace';
 
 export const sendPlaceDetails = async (data: AddPlaceSchemaType) => {
     // Posting data to our API route
-    const response = await fetch('/api/addPlace', {
+    const response = await fetch('/api/add-place', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
