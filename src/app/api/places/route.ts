@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
     try {
         const savedPlace = await prisma.coworking.create({
             data: {
+                placeId: placeData.placeId,
                 name: placeData.name,
                 address: placeData.address,
                 city: placeData.city,
@@ -18,9 +19,15 @@ export async function POST(req: NextRequest) {
                 website: placeData.website,
                 description: placeData.description,
                 imageUrls: placeData.photos,
+                openingHours: placeData.openingHours,
+                calmRating: placeData.calmRating,
+                equipmentRating: placeData.equipmentRating,
+                foodAndDrinksRating: placeData.foodAndDrinksRating,
                 // add more fields as necessary
             },
         });
+
+        console.log('depuis la route on log', savedPlace);
 
         return NextResponse.json({
             message: 'ok coworking ajouté à la bdd',

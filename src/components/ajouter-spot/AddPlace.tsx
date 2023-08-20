@@ -29,6 +29,9 @@ const AddPlace = () => {
     });
 
     const placeDetails = useAppSelector((state) => state.placeDetails.details);
+    const placeId = useAppSelector(
+        (state) => state.placeDetails.details?.place_id,
+    );
     const imageUrls = useAppSelector((state) => state.placeDetails.imageUrls); // fetch image URLs from redux
 
     const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -49,10 +52,20 @@ const AddPlace = () => {
     }, [placeDetails, dispatch, baseUrlImage]);
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
-        try {
-            console.log('data de sendplace form', data);
+        if (!placeId) {
+            alert('PlaceId is missing!');
+            return;
+        }
 
-            const response = await sendPlaceDetails(data);
+        const finalData = {
+            ...data,
+            placeId: placeId,
+        };
+
+        try {
+            console.log('data de sendplace form', finalData);
+
+            const response = await sendPlaceDetails(finalData);
             console.log('response', response);
 
             if (response) reset();
@@ -72,7 +85,9 @@ const AddPlace = () => {
                         name='name'
                         className='w-full bg-teal-400 p-4'
                         type='text'
-                        defaultValue={placeDetails.name ? placeDetails.name : ''}
+                        defaultValue={
+                            placeDetails.name ? placeDetails.name : ''
+                        }
                     />
                     {errors.name && (
                         <p className='text-xs italic text-red-600'>
@@ -165,7 +180,7 @@ const AddPlace = () => {
                         className='w-full bg-teal-400 p-4'
                         type='text'
                         defaultValue={
-                            placeDetails.editorial_summary.overview
+                            placeDetails.editorial_summary?.overview
                                 ? placeDetails.editorial_summary.overview
                                 : ''
                         }
@@ -198,7 +213,9 @@ const AddPlace = () => {
                                           name={`openingHours.${index}`}
                                           className='mt-1 w-full bg-teal-400 p-4'
                                           type='text'
-                                          defaultValue={day.split(':')[1].trim()}
+                                          defaultValue={day
+                                              .split(':')[1]
+                                              .trim()}
                                       />
                                       {(
                                           errors as unknown as {
@@ -267,11 +284,17 @@ const AddPlace = () => {
                 </div>
                 <div className='flex items-center justify-between gap-3'>
                     <p className='mr-4'>Calme</p>
-                    <StarRating
-                        type='calm'
-                        register={register('calmRating', {
-                            required: true,
-                        })}
+                    <Controller
+                        name='calmRating'
+                        control={control}
+                        defaultValue={0}
+                        render={({ field }) => (
+                            <StarRating
+                                type='calm'
+                                onChange={field.onChange}
+                                value={field.value}
+                            />
+                        )}
                     />
                     {errors.calmRating && (
                         <p className='text-xs italic text-red-600'>
@@ -281,11 +304,17 @@ const AddPlace = () => {
                 </div>
                 <div className='flex items-center justify-between gap-3'>
                     <p className='mr-4'>Equipement</p>
-                    <StarRating
-                        type='equipment'
-                        register={register('equipmentRating', {
-                            required: true,
-                        })}
+                    <Controller
+                        name='equipmentRating'
+                        control={control}
+                        defaultValue={0}
+                        render={({ field }) => (
+                            <StarRating
+                                type='equipment'
+                                onChange={field.onChange}
+                                value={field.value}
+                            />
+                        )}
                     />
                     {errors.equipmentRating && (
                         <p className='text-xs italic text-red-600'>
@@ -295,11 +324,17 @@ const AddPlace = () => {
                 </div>
                 <div className='flex items-center justify-between gap-3'>
                     <p className='mr-4'>Food & Drinks</p>
-                    <StarRating
-                        type='foodAndDrinks'
-                        register={register('foodAndDrinksRating', {
-                            required: true,
-                        })}
+                    <Controller
+                        name='foodAndDrinksRating'
+                        control={control}
+                        defaultValue={0}
+                        render={({ field }) => (
+                            <StarRating
+                                type='foodAndDrinks'
+                                onChange={field.onChange}
+                                value={field.value}
+                            />
+                        )}
                     />
                     {errors.foodAndDrinksRating && (
                         <p className='text-xs italic text-red-600'>

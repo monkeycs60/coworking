@@ -13,8 +13,9 @@ interface StarRatingProps {
 
 const StarRating = ({
     type,
-    register,
-}: StarRatingProps & { register: any }) => {
+    onChange,
+    value,
+}: StarRatingProps & { onChange: (value: number) => void; value: number }) => {
     const dispatch = useAppDispatch();
     const ratings = useAppSelector((state) => state.placeDetails.ratings);
 
@@ -33,6 +34,7 @@ const StarRating = ({
                 dispatch(setFoodAndDrinksRating(rating));
                 break;
         }
+        onChange(rating);
     };
 
     return (
