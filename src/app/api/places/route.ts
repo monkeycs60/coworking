@@ -8,7 +8,17 @@ const cs = 'test';
 export async function POST(req: NextRequest) {
     const placeData = (await req.json()) as AddPlaceSchemaType;
 
+    const formattedOpeningHours = placeData.openingHours
+        ? {
+              create: {
+                  weekdayText: placeData.openingHours,
+              },
+          }
+        : undefined;
+
     try {
+             
+
         const savedPlace = await prisma.coworking.create({
             data: {
                 placeId: placeData.placeId,
@@ -19,15 +29,13 @@ export async function POST(req: NextRequest) {
                 website: placeData.website,
                 description: placeData.description,
                 imageUrls: placeData.photos,
-                openingHours: placeData.openingHours,
+                openingHours: formattedOpeningHours,
                 calmRating: placeData.calmRating,
                 equipmentRating: placeData.equipmentRating,
                 foodAndDrinksRating: placeData.foodAndDrinksRating,
                 // add more fields as necessary
             },
         });
-
-        console.log('depuis la route on log', savedPlace);
 
         return NextResponse.json({
             message: 'ok coworking ajouté à la bdd',

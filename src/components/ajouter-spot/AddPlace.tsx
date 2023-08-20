@@ -14,6 +14,7 @@ import { extractCityFromAdrAddress } from '@/lib/functions/extractCityFromAddres
 import { useEffect } from 'react';
 import { sendPlaceDetails } from '@/services/sendPlaceDetails';
 import StarRating from '../ui/StarRating';
+import { getTimeFromDay } from '@/lib/functions/getTimeFromDay';
 
 const AddPlace = () => {
     const dispatch = useAppDispatch();
@@ -64,6 +65,7 @@ const AddPlace = () => {
 
         try {
             console.log('data de sendplace form', finalData);
+            
 
             const response = await sendPlaceDetails(finalData);
             console.log('response', response);
@@ -213,9 +215,7 @@ const AddPlace = () => {
                                           name={`openingHours.${index}`}
                                           className='mt-1 w-full bg-teal-400 p-4'
                                           type='text'
-                                          defaultValue={day
-                                              .split(':')[1]
-                                              .trim()}
+                                          defaultValue={getTimeFromDay(day)}
                                       />
                                       {(
                                           errors as unknown as {
