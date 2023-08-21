@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { AddPlaceSchemaType } from '@/types/addPlace';
+import axios from 'axios';
+import { S3 } from 'aws-sdk';
+import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
 
 const prisma = new PrismaClient();
-const cs = 'test';
 
 export async function POST(req: NextRequest) {
     const placeData = (await req.json()) as AddPlaceSchemaType;
@@ -16,9 +18,16 @@ export async function POST(req: NextRequest) {
           }
         : undefined;
 
-    try {
-             
+    const imageUrlsS3 = await Promise.all(
+        placeData.photos.map(async (url, index) => {
+            return await downloadImageAndUploadToS3(
+                url,
+                `photocoworking${index}.jpg`,
+            );
+        }),
+    );
 
+    try {
         const savedPlace = await prisma.coworking.create({
             data: {
                 placeId: placeData.placeId,
@@ -33,6 +42,11 @@ export async function POST(req: NextRequest) {
                 calmRating: placeData.calmRating,
                 equipmentRating: placeData.equipmentRating,
                 foodAndDrinksRating: placeData.foodAndDrinksRating,
+                photos: {
+                    create: imageUrlsS3.map((url) => ({
+                        url: url,
+                    })),
+                },
                 // add more fields as necessary
             },
         });
