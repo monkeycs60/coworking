@@ -2,9 +2,9 @@ import { S3 } from 'aws-sdk';
 import axios from 'axios';
 
 const s3 = new S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION,
+    accessKeyId: process.env.ACCESS_KEY_ID_AWS,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY_AWS,
+    region: process.env.REGION_AWS,
 });
 
 export async function uploadToS3(

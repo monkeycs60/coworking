@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { AddPlaceSchemaType } from '@/types/addPlace';
-import axios from 'axios';
-import { S3 } from 'aws-sdk';
+import { v4 as uuidv4 } from 'uuid';
+
 import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
 
 const prisma = new PrismaClient();
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
         placeData.photos.map(async (url, index) => {
             return await downloadImageAndUploadToS3(
                 url,
-                `photocoworking${index}.jpg`,
+                `photocoworking-${uuidv4()}.jpg`,
             );
         }),
     );
