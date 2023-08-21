@@ -18,15 +18,8 @@ export async function POST(req: NextRequest) {
           }
         : undefined;
 
+
     const imageUrlsS3 = await Promise.all(
-        placeData.photos.map(async (url) => {
-            return await downloadImageAndUploadToS3(
-                url,
-                `photocoworking-${uuidv4()}.jpg`,
-            );
-        }),
-    );
-    const imageUrlsS3V2 = await Promise.all(
         (placeData.imagesSelected || []).map(async (url) => {
             return await downloadImageAndUploadToS3(
                 url,
@@ -47,18 +40,12 @@ export async function POST(req: NextRequest) {
                 phoneNumber: placeData.phoneNumber,
                 website: placeData.website,
                 description: placeData.description,
-                imageUrls: placeData.photos,
                 openingHours: formattedOpeningHours,
                 calmRating: placeData.calmRating,
                 equipmentRating: placeData.equipmentRating,
                 foodAndDrinksRating: placeData.foodAndDrinksRating,
-                photos: {
-                    create: imageUrlsS3.map((url) => ({
-                        url: url,
-                    })),
-                },
                 imagesSelected: {
-                    create: imageUrlsS3V2.map((url) => ({
+                    create: imageUrlsS3.map((url) => ({
                         url: url,
                     })),
                 },

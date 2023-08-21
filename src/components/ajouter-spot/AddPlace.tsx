@@ -280,43 +280,31 @@ const AddPlace = () => {
                                 src={url}
                                 alt={`image de l'établissement ${index}`}
                             />
-                            <Controller
-                                render={({ field }) => (
-                                    <>
-                                        <input
-                                            type='checkbox'
-                                            onChange={
-                                                photoSelected?.includes(url)
-                                                    ? () =>
-                                                          setPhotoSelected([
-                                                              ...photoSelected.filter(
-                                                                  (photo) =>
-                                                                      photo !==
-                                                                      url,
-                                                              ),
-                                                          ])
-                                                    : () =>
-                                                          setPhotoSelected(
-                                                              (prev) => [
-                                                                  ...prev,
-                                                                  url,
-                                                              ],
-                                                          )
-                                            }
-                                        />
-                                        <input
-                                            type='hidden'
-                                            {...field}
-                                            value={url}
-                                        />
-                                    </>
-                                )}
-                                name={`photos.${index}`}
-                                control={control}
-                                defaultValue={url}
+
+                            <input
+                                type='checkbox'
+                                onChange={
+                                    photoSelected?.includes(url)
+                                        ? () =>
+                                              setPhotoSelected([
+                                                  ...photoSelected.filter(
+                                                      (photo) => photo !== url,
+                                                  ),
+                                              ])
+                                        : () =>
+                                              setPhotoSelected((prev) => [
+                                                  ...prev,
+                                                  url,
+                                              ])
+                                }
                             />
                         </div>
                     ))}
+                    {photoSelected?.length === 0 && (
+                        <p className='text-xs italic text-red-600'>
+                            Veuillez sélectionner au moins une photo.
+                        </p>
+                    )}
                 </div>
                 <div className='flex items-center justify-between gap-3'>
                     <p className='mr-4'>Calme</p>

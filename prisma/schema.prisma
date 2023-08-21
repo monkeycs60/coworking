@@ -78,9 +78,7 @@ model Coworking {
   website       String?
   description   String
   openingHours  OpeningHour[]
-  photos        Photo[]
   imagesSelected imageSelected[]
-  imageUrls     String[]
   comments      Comment[]
   votes         Vote[]     
   calmRating    Int?         
@@ -135,15 +133,6 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model Photo {
-  id          String    @id @default(cuid())
-  url         String
-  coworkingId String
-  coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
 }
 
 model imageSelected {
