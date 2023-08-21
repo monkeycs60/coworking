@@ -11,12 +11,10 @@ import { useForm, Controller } from 'react-hook-form';
 import Image from 'next/image';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
 import { extractCityFromAdrAddress } from '@/lib/functions/extractCityFromAddress';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { sendPlaceDetails } from '@/services/sendPlaceDetails';
 import StarRating from '../ui/StarRating';
 import { getTimeFromDay } from '@/lib/functions/getTimeFromDay';
-
-const cs = 'hello';
 
 const AddPlace = () => {
     const dispatch = useAppDispatch();
@@ -48,6 +46,9 @@ const AddPlace = () => {
 
     const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
 
+    const [photoSelected, setPhotoSelected] = useState<string[]>([]);
+    console.log('state test', photoSelected);
+
     useEffect(() => {
         if (placeDetails?.photos) {
             dispatch(resetImageUrls());
@@ -57,6 +58,7 @@ const AddPlace = () => {
                 .map((photo) => {
                     return `${baseUrlImage}maxwidth=400&photoreference=${photo.photo_reference}`;
                 });
+            // setPhotoSelected(urls);
             dispatch(setImageUrls(urls)); // update redux state
         }
     }, [placeDetails, dispatch, baseUrlImage]);
@@ -72,6 +74,7 @@ const AddPlace = () => {
             placeId: placeId,
             longitude: placeLongitude,
             latitude: placeLatitude,
+            imagesSelected: photoSelected,
         };
 
         try {
@@ -279,11 +282,34 @@ const AddPlace = () => {
                             />
                             <Controller
                                 render={({ field }) => (
-                                    <input
-                                        type='hidden'
-                                        {...field}
-                                        value={url}
-                                    />
+                                    <>
+                                        <input
+                                            type='checkbox'
+                                            onChange={
+                                                photoSelected?.includes(url)
+                                                    ? () =>
+                                                          setPhotoSelected([
+                                                              ...photoSelected.filter(
+                                                                  (photo) =>
+                                                                      photo !==
+                                                                      url,
+                                                              ),
+                                                          ])
+                                                    : () =>
+                                                          setPhotoSelected(
+                                                              (prev) => [
+                                                                  ...prev,
+                                                                  url,
+                                                              ],
+                                                          )
+                                            }
+                                        />
+                                        <input
+                                            type='hidden'
+                                            {...field}
+                                            value={url}
+                                        />
+                                    </>
                                 )}
                                 name={`photos.${index}`}
                                 control={control}
