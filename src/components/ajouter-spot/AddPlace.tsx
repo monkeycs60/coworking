@@ -35,6 +35,13 @@ const AddPlace = () => {
     const placeId = useAppSelector(
         (state) => state.placeDetails.details?.place_id,
     );
+    const placeLongitude = useAppSelector(
+        (state) => state.placeDetails.details?.geometry.location.lng,
+    );
+    const placeLatitude = useAppSelector(
+        (state) => state.placeDetails.details?.geometry.location.lat,
+    );
+
     const imageUrls = useAppSelector((state) => state.placeDetails.imageUrls); // fetch image URLs from redux
 
     const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -63,6 +70,8 @@ const AddPlace = () => {
         const finalData = {
             ...data,
             placeId: placeId,
+            longitude: placeLongitude,
+            latitude: placeLatitude,
         };
 
         try {

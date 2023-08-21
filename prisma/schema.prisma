@@ -69,6 +69,8 @@ model VerificationToken {
 model Coworking {
   id            String    @id @default(cuid())
   placeId       String?  @unique    
+  longitude     Float?
+  latitude      Float?
   name          String
   address       String
   city          String
