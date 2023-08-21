@@ -16,6 +16,8 @@ import { sendPlaceDetails } from '@/services/sendPlaceDetails';
 import StarRating from '../ui/StarRating';
 import { getTimeFromDay } from '@/lib/functions/getTimeFromDay';
 
+const cs = 'hello';
+
 const AddPlace = () => {
     const dispatch = useAppDispatch();
 
@@ -65,7 +67,6 @@ const AddPlace = () => {
 
         try {
             console.log('data de sendplace form', finalData);
-            
 
             const response = await sendPlaceDetails(finalData);
             console.log('response', response);
