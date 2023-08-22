@@ -3,7 +3,10 @@ import { PrismaClient } from '@prisma/client';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { v4 as uuidv4 } from 'uuid';
 
-import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
+import {
+    downloadImageAndUploadToS3,
+    getPresignedUrl,
+} from '@/lib/functions/uploadToS3';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +20,6 @@ export async function POST(req: NextRequest) {
               },
           }
         : undefined;
-
 
     const imageUrlsS3 = await Promise.all(
         (placeData.imagesSelected || []).map(async (url) => {
@@ -52,9 +54,24 @@ export async function POST(req: NextRequest) {
             },
         });
 
+        // let presignedUrls: string[] = [];
+
+        // Get presigned URLs for client uploads
+        // if (placeData.userImages) {
+        //     presignedUrls = await Promise.all(
+        //         placeData.userImages.map(async (_) => {
+        //             return await getPresignedUrl(
+        //                 `photocoworking-${uuidv4()}.jpg`,
+        //                 'image/jpeg',
+        //             );
+        //         }),
+        //     );
+        // }
+
         return NextResponse.json({
             message: 'ok coworking ajouté à la bdd',
             data: savedPlace,
+            // presignedUrls: presignedUrls,
         });
     } catch (error) {
         console.error(error);

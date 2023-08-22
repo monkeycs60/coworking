@@ -24,34 +24,34 @@ const initialState: PlaceDetailsState = {
 };
 
 export const placeDetailsSlice = createSlice({
-	name: 'placeDetails',
-	initialState,
-	reducers: {
-		setPlaceDetails: (state, action: PayloadAction<PlaceDetail>) => {
-			state.details = action.payload;
-		},
-		resetPlaceDetails: (state) => {
-			state.details = null;
-		},
-		setImageUrls: (state, action: PayloadAction<string[]>) => {
-			state.imageUrls = action.payload;
-		},
+    name: 'placeDetails',
+    initialState,
+    reducers: {
+        setPlaceDetails: (state, action: PayloadAction<PlaceDetail>) => {
+            state.details = action.payload;
+        },
+        resetPlaceDetails: (state) => {
+            state.details = null;
+        },
+        setImageUrls: (state, action: PayloadAction<string[]>) => {
+            state.imageUrls = action.payload;
+        },
 
-		resetImageUrls: (state) => {
-			state.imageUrls = [];
-		},
-		setCalmRating: (state, action: PayloadAction<number>) => {
-			state.ratings.calm = action.payload;
-		},
-		setEquipmentRating: (state, action: PayloadAction<number>) => {
-			state.ratings.equipment = action.payload;
-		},
-		setFoodAndDrinksRating: (state, action: PayloadAction<number>) => {
-			state.ratings.foodAndDrinks = action.payload;
-		},
-	},
+        resetImageUrls: (state) => {
+            state.imageUrls = [];
+        },
+        setRating: (
+            state,
+            action: PayloadAction<{
+                type: 'calm' | 'equipment' | 'foodAndDrinks';
+                value: number;
+            }>,
+        ) => {
+            state.ratings[action.payload.type] = action.payload.value;
+        },
+    },
 });
 
-export const { setPlaceDetails, resetPlaceDetails, setImageUrls, resetImageUrls, setCalmRating, setEquipmentRating, setFoodAndDrinksRating } = placeDetailsSlice.actions;
+export const { setPlaceDetails, resetPlaceDetails, setImageUrls, resetImageUrls, setRating } = placeDetailsSlice.actions;
 
 export default placeDetailsSlice.reducer;

@@ -34,3 +34,23 @@ export async function downloadImageAndUploadToS3(
 
     return uploadToS3(imageBuffer, filename);
 }
+
+export function getPresignedUrl(
+    fileName: string,
+    fileType: string,
+): Promise<string> {
+    const params = {
+        Bucket: 'coworking-malin-bucket',
+        Key: fileName,
+        Expires: 60, // Duration until the URL expires, in seconds
+        ContentType: fileType,
+    };
+
+    return new Promise((resolve, reject) => {
+        s3.getSignedUrl('putObject', params, (error, url) => {
+            if (error) reject(error);
+            else resolve(url);
+        });
+    });
+}
+

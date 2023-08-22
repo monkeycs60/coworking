@@ -1,9 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { Star } from '@phosphor-icons/react';
 import {
-    setCalmRating,
-    setEquipmentRating,
-    setFoodAndDrinksRating,
+    setRating
 } from '@/redux/features/placeDetails-slice';
 import { useState } from 'react';
 
@@ -21,21 +19,11 @@ const StarRating = ({
 
     const [hoveredStar, setHoveredStar] = useState<number | null>(null);
 
-    const handleStarClick = (rating: number) => {
-        setHoveredStar(null); // Reset the hovered star when clicked
-        switch (type) {
-            case 'calm':
-                dispatch(setCalmRating(rating));
-                break;
-            case 'equipment':
-                dispatch(setEquipmentRating(rating));
-                break;
-            case 'foodAndDrinks':
-                dispatch(setFoodAndDrinksRating(rating));
-                break;
-        }
-        onChange(rating);
-    };
+     const handleStarClick = (rating: number) => {
+         setHoveredStar(null); // Reset the hovered star when clicked
+         dispatch(setRating({ type, value: rating }));
+         onChange(rating);
+     };
 
     return (
         <div className='flex'>
