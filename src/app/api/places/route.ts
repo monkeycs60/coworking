@@ -9,13 +9,19 @@ import {
     getPresignedUrl,
     uploadToS3,
 } from '@/lib/functions/uploadToS3';
-import { any } from 'zod';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
     const { userId } = getAuth(req);
     console.log('Retrieved User ID:', userId);
+
+    if (!userId) {
+        // Gérer l'erreur ou renvoyer une réponse d'erreur
+        return NextResponse.json({
+            error: "L'utilisateur n'est pas authentifié.",
+        });
+    }
 
     const placeData = (await req.json()) as AddPlaceSchemaType;
     console.log('upload image user', placeData.userImages);
@@ -63,7 +69,7 @@ export async function POST(req: NextRequest) {
                 userImages: {
                     create: placeData.userImages.urls.map((imgUrl: string) => ({
                         url: imgUrl,
-                        // userId: userId,
+                        userId: userId,
                     })),
                 },
             },
