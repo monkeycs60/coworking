@@ -48,7 +48,10 @@ const AddPlace = () => {
     const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
 
     const [photoSelected, setPhotoSelected] = useState<string[]>([]);
-    const [userFiles, setUserFiles] = useState<File[]>([]);
+    // const [userFiles, setUserFiles] = useState<File[]>([]);
+    const [file, setFile] = useState(null);
+    const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
+    console.log('upload image corps fonction', uploadedImageUrls);
 
     useEffect(() => {
         if (placeDetails?.photos) {
@@ -63,10 +66,35 @@ const AddPlace = () => {
         }
     }, [placeDetails, dispatch, baseUrlImage]);
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files ? Array.from(event.target.files) : [];
-        setUserFiles(files); // mettre à jour l'état pour d'autres utilisations
-        console.log('files', files);
+    const handleFileChange = async (
+        event: React.ChangeEvent<HTMLInputElement>,
+    ) => {
+        const formData = new FormData();
+        if (!event.target.files) return;
+        console.log('files targeted', event.target.files);
+        
+        // formData.append('file', event.target.files[0]);
+        for (let i = 0; i < event.target.files.length; i++) {
+            formData.append('file', event.target.files[i]);
+        }
+        console.log('fdata', formData);
+
+        try {
+            const response = await fetch('/api/uploaded', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await response.json();
+            console.log(data);
+            if (data.success) {
+                setUploadedImageUrls(data);
+            } else {
+                console.error(data.error);
+            }
+        } catch (error) {
+            console.error('Error uploading the file:', error);
+        }
     };
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
@@ -74,7 +102,7 @@ const AddPlace = () => {
             alert('PlaceId is missing!');
             return;
         }
-        console.log('upload data', data.userImages);
+        console.log('upload data', uploadedImageUrls);
 
         const finalData = {
             ...data,
@@ -82,7 +110,7 @@ const AddPlace = () => {
             longitude: geometry?.location.lng,
             latitude: geometry?.location.lat,
             imagesSelected: photoSelected,
-            userImages: userFiles,
+            userImages: uploadedImageUrls || [],
         };
 
         try {

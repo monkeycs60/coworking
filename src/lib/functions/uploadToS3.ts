@@ -18,11 +18,15 @@ export async function uploadToS3(
         Body: data,
         ACL: 'public-read', // pour que l'image soit publiquement accessible
     };
+    try {
+        await s3.putObject(params).promise();
 
-    await s3.putObject(params).promise();
-
-    // Retournez l'URL de l'image stockée sur S3
-    return `https://${bucketName}.s3.amazonaws.com/${filename}`;
+        // Retournez l'URL de l'image stockée sur S3
+        return `https://${bucketName}.s3.amazonaws.com/${filename}`;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Error uploading to S3');
+    }
 }
 
 export async function downloadImageAndUploadToS3(
@@ -53,4 +57,3 @@ export function getPresignedUrl(
         });
     });
 }
-

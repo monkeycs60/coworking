@@ -2,15 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { v4 as uuidv4 } from 'uuid';
+import { getAuth } from '@clerk/nextjs/server';
 
 import {
     downloadImageAndUploadToS3,
     getPresignedUrl,
+    uploadToS3,
 } from '@/lib/functions/uploadToS3';
+import { any } from 'zod';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
+    const { userId } = getAuth(req);
+    console.log('Retrieved User ID:', userId);
+
     const placeData = (await req.json()) as AddPlaceSchemaType;
     console.log('upload image user', placeData.userImages);
 
@@ -30,6 +36,8 @@ export async function POST(req: NextRequest) {
             );
         }),
     );
+
+    console.warn('DONNEES', placeData.userImages);
 
     try {
         const savedPlace = await prisma.coworking.create({
@@ -53,34 +61,41 @@ export async function POST(req: NextRequest) {
                     })),
                 },
                 userImages: {
-                    create: placeData.userImages,
+                    create: placeData.userImages.urls.map((imgUrl: string) => ({
+                        url: imgUrl,
+                        // userId: userId,
+                    })),
                 },
             },
         });
 
-        let presignedUrls: string[] = [];
+        // let presignedUrls: string[] = [];
 
-        // Get presigned URLs for client uploads
-        if (placeData.userImages) {
-            presignedUrls = await Promise.all(
-                placeData.userImages.map(async () => {
-                    return await getPresignedUrl(
-                        `photocoworking-${uuidv4()}.jpg`,
-                        'image/jpeg',
-                    );
-                }),
-            );
-        }
+        // // Get presigned URLs for client uploads
+        // if (placeData.userImages) {
+        //     presignedUrls = await Promise.all(
+        //         placeData.userImages.map(async () => {
+        //             return await getPresignedUrl(
+        //                 `photocoworking-${uuidv4()}.jpg`,
+        //                 'image/jpeg',
+        //             );
+        //         }),
+        //     );
+        // }
 
         return NextResponse.json({
             message: 'ok coworking ajouté à la bdd',
             data: savedPlace,
-            presignedUrls: presignedUrls,
+            // presignedUrls: presignedUrls,
         });
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
         return NextResponse.json({
-            error: error,
+            error: {
+                name: error.name,
+                message: error.message,
+                stack: error.stack,
+            },
             message: 'error lors de l ajout du coworking a la bdd',
         });
     }

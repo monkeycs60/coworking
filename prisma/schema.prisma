@@ -55,7 +55,8 @@ model User {
   comments      Comment[]
   posts        Post[] 
   votes         Vote[]
-
+  places        Coworking[]
+  createdAt     DateTime  @default(now())
 }
 
 model VerificationToken {
@@ -68,6 +69,8 @@ model VerificationToken {
 
 model Coworking {
   id            String    @id @default(cuid())
+  userId       String?
+  user         User?      @relation(fields: [userId], references: [id])
   placeId       String?  @unique    
   longitude     Float?
   latitude      Float?
@@ -146,10 +149,11 @@ model imageSelected {
 }
 
 model UserImage {
-  id          String    @id @default(cuid())
-  url         String    // This will store the URL to the actual image on the storage service.
-  coworkingId String
-  coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+    id          String    @id @default(cuid())
+    url         String    // This will store the URL to the actual image on the storage service.
+    coworkingId String
+    coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
+    userId      String
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
 }
