@@ -15,6 +15,8 @@ import InputField from './form/InputField';
 import OpeningHours from './form/OpeningHours';
 import ChooseGoogleImages from './form/ChooseGoogleImages';
 import { StarRatingCalmEquipFood } from './form/StarRatingCalmEquipFood';
+import { Button } from '../ui/button';
+import { Loader2 } from 'lucide-react';
 
 const AddPlace = () => {
     const dispatch = useAppDispatch();
@@ -48,10 +50,8 @@ const AddPlace = () => {
     const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
 
     const [photoSelected, setPhotoSelected] = useState<string[]>([]);
-    // const [userFiles, setUserFiles] = useState<File[]>([]);
-    const [file, setFile] = useState(null);
     const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
-    console.log('upload image corps fonction', uploadedImageUrls);
+    const [fileWaitingToUpload, setFileWaitingToUpload] = useState(false);
 
     useEffect(() => {
         if (placeDetails?.photos) {
@@ -69,15 +69,13 @@ const AddPlace = () => {
     const handleFileChange = async (
         event: React.ChangeEvent<HTMLInputElement>,
     ) => {
+        setFileWaitingToUpload(true);
         const formData = new FormData();
         if (!event.target.files) return;
-        console.log('files targeted', event.target.files);
-        
-        // formData.append('file', event.target.files[0]);
+
         for (let i = 0; i < event.target.files.length; i++) {
             formData.append('file', event.target.files[i]);
         }
-        console.log('fdata', formData);
 
         try {
             const response = await fetch('/api/uploaded', {
@@ -89,8 +87,10 @@ const AddPlace = () => {
             console.log(data);
             if (data.success) {
                 setUploadedImageUrls(data);
+                setFileWaitingToUpload(false);
             } else {
                 console.error(data.error);
+                setFileWaitingToUpload(false);
             }
         } catch (error) {
             console.error('Error uploading the file:', error);
@@ -204,7 +204,18 @@ const AddPlace = () => {
                 </div>
                 <StarRatingCalmEquipFood control={control} errors={errors} />
             </div>
-            <button type='submit'>Add Place</button>
+            <Button
+                variant={'default'}
+                size={'sm'}
+                className='w-full lg:h-12 lg:w-[320px] lg:px-4 '
+                disabled={fileWaitingToUpload}
+            >
+                {fileWaitingToUpload ? (
+                    <Loader2 className='animate-spin' />
+                ) : (
+                    <span>Ajouter un cowork</span>
+                )}
+            </Button>
         </form>
     ) : (
         <p>Loading...</p>
