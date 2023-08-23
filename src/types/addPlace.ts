@@ -12,7 +12,7 @@ export const AddPlaceSchema = z.object({
     description: z.string().nonempty(),
     openingHours: z.array(z.string()).optional(),
     imagesSelected: z.array(z.string()).optional(),
-    // userImages: z.array(z.string()).optional(),
+    userImages: z.any().optional(),
     calmRating: z.number().min(1).max(5),
     equipmentRating: z.number().min(1).max(5),
     foodAndDrinksRating: z.number().min(1).max(5),

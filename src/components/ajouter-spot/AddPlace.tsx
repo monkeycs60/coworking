@@ -11,7 +11,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { extractCityFromAdrAddress } from '@/lib/functions/extractCityFromAddress';
 import { useEffect, useState } from 'react';
 import { sendPlaceDetails } from '@/services/sendPlaceDetails';
-import StarRating from '../ui/StarRating';
 import InputField from './form/InputField';
 import OpeningHours from './form/OpeningHours';
 import ChooseGoogleImages from './form/ChooseGoogleImages';
@@ -64,18 +63,18 @@ const AddPlace = () => {
         }
     }, [placeDetails, dispatch, baseUrlImage]);
 
-    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (event.target.files) {
-    //         setUserFiles(Array.from(event.target.files));
-    //     }
-    // };
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files ? Array.from(event.target.files) : [];
+        setUserFiles(files); // mettre à jour l'état pour d'autres utilisations
+        console.log('files', files);
+    };
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
         if (!place_id) {
             alert('PlaceId is missing!');
             return;
         }
-        // console.log('upload data', data.userImages);
+        console.log('upload data', data.userImages);
 
         const finalData = {
             ...data,
@@ -83,6 +82,7 @@ const AddPlace = () => {
             longitude: geometry?.location.lng,
             latitude: geometry?.location.lat,
             imagesSelected: photoSelected,
+            userImages: userFiles,
         };
 
         try {
@@ -164,17 +164,16 @@ const AddPlace = () => {
                     photoSelected={photoSelected}
                 />
 
-                {/* <div>
+                <div>
                     <label htmlFor='userImages'>Upload Images:</label>
                     <input
-                        {...register('userImages')}
                         type='file'
                         id='userImages'
                         name='userImages'
                         multiple
                         onChange={handleFileChange}
                     />
-                </div> */}
+                </div>
                 <StarRatingCalmEquipFood control={control} errors={errors} />
             </div>
             <button type='submit'>Add Place</button>

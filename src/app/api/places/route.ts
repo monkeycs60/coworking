@@ -12,6 +12,7 @@ const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
     const placeData = (await req.json()) as AddPlaceSchemaType;
+    console.log('upload image user', placeData.userImages);
 
     const formattedOpeningHours = placeData.openingHours
         ? {
@@ -51,27 +52,30 @@ export async function POST(req: NextRequest) {
                         url: url,
                     })),
                 },
+                userImages: {
+                    create: placeData.userImages,
+                },
             },
         });
 
-        // let presignedUrls: string[] = [];
+        let presignedUrls: string[] = [];
 
         // Get presigned URLs for client uploads
-        // if (placeData.userImages) {
-        //     presignedUrls = await Promise.all(
-        //         placeData.userImages.map(async (_) => {
-        //             return await getPresignedUrl(
-        //                 `photocoworking-${uuidv4()}.jpg`,
-        //                 'image/jpeg',
-        //             );
-        //         }),
-        //     );
-        // }
+        if (placeData.userImages) {
+            presignedUrls = await Promise.all(
+                placeData.userImages.map(async () => {
+                    return await getPresignedUrl(
+                        `photocoworking-${uuidv4()}.jpg`,
+                        'image/jpeg',
+                    );
+                }),
+            );
+        }
 
         return NextResponse.json({
             message: 'ok coworking ajouté à la bdd',
             data: savedPlace,
-            // presignedUrls: presignedUrls,
+            presignedUrls: presignedUrls,
         });
     } catch (error) {
         console.error(error);
