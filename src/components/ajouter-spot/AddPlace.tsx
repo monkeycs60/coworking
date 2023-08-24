@@ -22,6 +22,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import { resetAllDetails } from '@/redux/features/placeDetails-slice';
 
+const cs = '';
+
 const AddPlace = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
