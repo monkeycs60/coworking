@@ -4,23 +4,23 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PlaceDetail } from '@/types/placeDetails';
 
 interface PlaceDetailsState {
-	details: PlaceDetail | null;
-	imageUrls: string[];
-	ratings: {
-		calm: number | null;
-		equipment: number | null;
-		foodAndDrinks: number | null;
-	};
+    details: PlaceDetail | null;
+    imageUrls: string[];
+    ratings: {
+        calm: number | null;
+        equipment: number | null;
+        foodAndDrinks: number | null;
+    };
 }
 
 const initialState: PlaceDetailsState = {
-	details: null,
-	imageUrls: [],
-	ratings: {
-		calm: null,
-		equipment: null,
-		foodAndDrinks: null,
-	}
+    details: null,
+    imageUrls: [],
+    ratings: {
+        calm: null,
+        equipment: null,
+        foodAndDrinks: null,
+    },
 };
 
 export const placeDetailsSlice = createSlice({
@@ -40,6 +40,15 @@ export const placeDetailsSlice = createSlice({
         resetImageUrls: (state) => {
             state.imageUrls = [];
         },
+        resetAllDetails: (state) => {
+            state.details = null;
+            state.imageUrls = [];
+            state.ratings = {
+                calm: null,
+                equipment: null,
+                foodAndDrinks: null,
+            };
+        },
         setRating: (
             state,
             action: PayloadAction<{
@@ -52,6 +61,13 @@ export const placeDetailsSlice = createSlice({
     },
 });
 
-export const { setPlaceDetails, resetPlaceDetails, setImageUrls, resetImageUrls, setRating } = placeDetailsSlice.actions;
+export const {
+    setPlaceDetails,
+    resetPlaceDetails,
+    setImageUrls,
+    resetImageUrls,
+    resetAllDetails,
+    setRating,
+} = placeDetailsSlice.actions;
 
 export default placeDetailsSlice.reducer;

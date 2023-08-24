@@ -7,7 +7,7 @@ import {
 } from '@/redux/features/placeDetails-slice';
 import { AddPlaceSchemaType, AddPlaceSchema } from '@/types/addPlace';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, set } from 'react-hook-form';
 import { extractCityFromAdrAddress } from '@/lib/functions/extractCityFromAddress';
 import { useEffect, useState } from 'react';
 import { sendPlaceDetails } from '@/services/sendPlaceDetails';
@@ -17,9 +17,14 @@ import ChooseGoogleImages from './form/ChooseGoogleImages';
 import { StarRatingCalmEquipFood } from './form/StarRatingCalmEquipFood';
 import { Button } from '../ui/button';
 import { Loader2 } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
+import { resetAllDetails } from '@/redux/features/placeDetails-slice';
 
 const AddPlace = () => {
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const {
         register,
@@ -51,7 +56,7 @@ const AddPlace = () => {
 
     const [photoSelected, setPhotoSelected] = useState<string[]>([]);
     const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
-    const [fileWaitingToUpload, setFileWaitingToUpload] = useState(false);
+    const [waitingToSubmit, setWaitingToSubmit] = useState(false);
 
     useEffect(() => {
         if (placeDetails?.photos) {
@@ -69,7 +74,7 @@ const AddPlace = () => {
     const handleFileChange = async (
         event: React.ChangeEvent<HTMLInputElement>,
     ) => {
-        setFileWaitingToUpload(true);
+        setWaitingToSubmit(true);
         const formData = new FormData();
         if (!event.target.files) return;
 
@@ -87,10 +92,10 @@ const AddPlace = () => {
             console.log(data);
             if (data.success) {
                 setUploadedImageUrls(data);
-                setFileWaitingToUpload(false);
+                setWaitingToSubmit(false);
             } else {
                 console.error(data.error);
-                setFileWaitingToUpload(false);
+                setWaitingToSubmit(false);
             }
         } catch (error) {
             console.error('Error uploading the file:', error);
@@ -98,6 +103,7 @@ const AddPlace = () => {
     };
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
+        setWaitingToSubmit(true);
         if (!place_id) {
             alert('PlaceId is missing!');
             return;
@@ -114,14 +120,44 @@ const AddPlace = () => {
         };
 
         try {
-            console.log('data de sendplace form', finalData);
-
             const response = await sendPlaceDetails(finalData);
             console.log('response', response);
 
-            if (response) reset();
+            if (response.error) {
+                setWaitingToSubmit(false);
+                toast.error(
+                    "Une erreur est survenue ! le coworking n'a pas pu être ajouté.",
+                    {
+                        position: 'top-center',
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    },
+                );
+            } else {
+                reset();
+                toast.success('Merci à vous ! un nouveau cowork a été ajouté', {
+                    position: 'top-center',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setWaitingToSubmit(false);
+                //set time out to let the user see the success toast
+                setTimeout(() => {
+                    dispatch(resetAllDetails());
+                }, 4000);
+                // router.push('/');
+            }
         } catch (error) {
             console.error(error);
+            setWaitingToSubmit(false);
         }
     };
 
@@ -208,14 +244,15 @@ const AddPlace = () => {
                 variant={'default'}
                 size={'sm'}
                 className='w-full lg:h-12 lg:w-[320px] lg:px-4 '
-                disabled={fileWaitingToUpload}
+                disabled={waitingToSubmit}
             >
-                {fileWaitingToUpload ? (
+                {waitingToSubmit ? (
                     <Loader2 className='animate-spin' />
                 ) : (
                     <span>Ajouter un cowork</span>
                 )}
             </Button>
+            <ToastContainer />
         </form>
     ) : (
         <p>Loading...</p>
