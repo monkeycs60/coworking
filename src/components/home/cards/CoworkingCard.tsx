@@ -40,8 +40,8 @@ const CoworkingCard = ({
 					{(
 						(highlightedCoworking.calmScore +
 							highlightedCoworking.equipmentScore +
-							highlightedCoworking.foodScore) /
-						3
+							highlightedCoworking.foodScore + highlightedCoworking.feelingScore ) /
+						4
 					).toFixed(2)}
 				</p>
 			</div>

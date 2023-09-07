@@ -13,6 +13,7 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 4,
 		calmScore: 4,
 		foodScore: 4,
+		feelingScore: 2,
 	},
 	{
 		id: 2,
@@ -26,6 +27,7 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 5,
 		calmScore: 2,
 		foodScore: 5,
+		feelingScore: 3,
 	},
 	{
 		id: 3,
@@ -39,6 +41,7 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 4,
 		calmScore: 3,
 		foodScore: 4,
+		feelingScore: 4,
 	},
 	{
 		id: 4,
@@ -52,6 +55,7 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 5,
 		calmScore: 4,
 		foodScore: 5,
+		feelingScore: 4,
 	},
 	{
 		id: 5,
@@ -65,6 +69,7 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 5,
 		calmScore: 5,
 		foodScore: 4,
+		feelingScore: 4,
 	},
 	{
 		id: 6,
@@ -78,6 +83,7 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 4,
 		calmScore: 3,
 		foodScore: 5,
+		feelingScore: 4,
 	},
 	{
 		id: 7,
@@ -91,6 +97,7 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 4,
 		calmScore: 4,
 		foodScore: 5,
+		feelingScore: 4,
 	},
 	{
 		id: 8,
@@ -104,6 +111,7 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 5,
 		calmScore: 4,
 		foodScore: 5,
+		feelingScore: 4,
 	},
 	{
 		id: 9,
@@ -117,6 +125,7 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 4,
 		calmScore: 5,
 		foodScore: 5,
+		feelingScore: 4,
 	},
 	{
 		id: 10,
@@ -130,5 +139,6 @@ export const highlightedCoworkings: highlightedCoworkingsProps[] = [
 		equipmentScore: 5,
 		calmScore: 5,
 		foodScore: 5,
+		feelingScore: 4,
 	},
 ];

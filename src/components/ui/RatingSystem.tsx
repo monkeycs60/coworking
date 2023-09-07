@@ -3,7 +3,7 @@ import StarRating from "./StarRating";
 
 export interface RatingConfig {
     label: string;
-    type: 'calm' | 'equipment' | 'foodAndDrinks';
+    type: 'calm' | 'equipment' | 'foodAndDrinks' | 'feeling';
     errorText: string;
 }
 

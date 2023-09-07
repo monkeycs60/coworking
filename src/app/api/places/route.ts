@@ -55,6 +55,7 @@ export async function POST(req: NextRequest) {
                 calmRating: placeData.calmRating,
                 equipmentRating: placeData.equipmentRating,
                 foodAndDrinksRating: placeData.foodAndDrinksRating,
+                feelingRating: placeData.feelingRating,
                 imagesSelected: {
                     create: imageUrlsS3.map((url) => ({
                         url: url,

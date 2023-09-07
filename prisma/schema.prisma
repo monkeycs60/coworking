@@ -88,6 +88,7 @@ model Coworking {
   calmRating    Int?         
   equipmentRating  Int?       
   foodAndDrinksRating  Int?
+  feelingRating Int?
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
@@ -125,6 +126,7 @@ model Vote {
   calmRating  Int?         // Rating for calm out of 5
   equipRating Int?         // Rating for equipment out of 5
   foodRating  Int?         // Rating for food and drink out of 5
+  feelingRating Int?
   createdAt   DateTime  @default(now())
 }
 

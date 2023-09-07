@@ -10,6 +10,7 @@ interface PlaceDetailsState {
         calm: number | null;
         equipment: number | null;
         foodAndDrinks: number | null;
+        feeling: number | null;
     };
 }
 
@@ -20,6 +21,7 @@ const initialState: PlaceDetailsState = {
         calm: null,
         equipment: null,
         foodAndDrinks: null,
+        feeling: null,
     },
 };
 
@@ -47,12 +49,13 @@ export const placeDetailsSlice = createSlice({
                 calm: null,
                 equipment: null,
                 foodAndDrinks: null,
+                feeling: null,
             };
         },
         setRating: (
             state,
             action: PayloadAction<{
-                type: 'calm' | 'equipment' | 'foodAndDrinks';
+                type: 'calm' | 'equipment' | 'foodAndDrinks' | 'feeling';
                 value: number;
             }>,
         ) => {

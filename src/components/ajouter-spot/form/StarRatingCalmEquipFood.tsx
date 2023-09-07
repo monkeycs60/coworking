@@ -18,6 +18,11 @@ export const StarRatingCalmEquipFood = ({ control, errors }: any) => {
             type: 'foodAndDrinks',
             errorText: 'Veuillez évaluer la nourriture et les boissons.',
         },
+        {
+            label: 'Ressenti personnel',
+            type: 'feeling',
+            errorText: 'Veuillez évaluer votre ressenti.',
+        }
     ] as RatingConfig[];
 
     return (

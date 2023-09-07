@@ -16,6 +16,7 @@ export const AddPlaceSchema = z.object({
     calmRating: z.number().min(1).max(5),
     equipmentRating: z.number().min(1).max(5),
     foodAndDrinksRating: z.number().min(1).max(5),
+    feelingRating: z.number().min(1).max(5),
 });
 
 export type AddPlaceSchemaType = z.infer<typeof AddPlaceSchema>;

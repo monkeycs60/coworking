@@ -10,4 +10,5 @@ export interface highlightedCoworkingsProps {
 	equipmentScore: number;
 	calmScore: number;
 	foodScore: number;
+	feelingScore: number;
 }
