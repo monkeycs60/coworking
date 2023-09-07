@@ -7,7 +7,7 @@ import {
 
 const Faq = () => {
 	return (
-		<section className='my-[10vh] flex flex-col gap-8 overflow-x-hidden px-4 '>
+		<section id='faq' className='my-[10vh] flex flex-col gap-8 overflow-x-hidden px-4 '>
 			<div className='mb-8 flex flex-col items-center justify-center gap-4 text-center'>
 				<h2 className='text-2xl font-bold'>Foire aux questions</h2>
 				<h3 className='text-base text-gray-700 lg:w-[75%] lg:text-base 3xl:text-lg'>
