@@ -21,7 +21,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import { resetAllDetails } from '@/redux/features/placeDetails-slice';
-
+import TextAreaField from './form/TextAreaField';
 
 const AddPlace = () => {
     const dispatch = useAppDispatch();
@@ -206,7 +206,7 @@ const AddPlace = () => {
                     name='website'
                     error={errors.website}
                 />
-                <InputField
+                <TextAreaField
                     register={register}
                     defaultValue={
                         editorial_summary?.overview
@@ -223,6 +223,39 @@ const AddPlace = () => {
                     placeDetails={placeDetails}
                     errors={errors}
                 />
+                <InputField
+                    register={register}
+                    defaultValue=''
+                    label='Prix d&pos;un expresso (€)'
+                    name='espressoPrice'
+                    error={errors.espressoPrice}
+                />
+                <div>
+                    <label htmlFor='hasPrivacy'>
+                        Endroit isolé pour les calls :
+                    </label>
+                    <input
+                        type='checkbox'
+                        id='hasPrivacy'
+                        {...register('hasPrivacy')}
+                    />
+                </div>
+                <div>
+                    <label htmlFor='hasParking'>Parking :</label>
+                    <input
+                        type='checkbox'
+                        id='hasParking'
+                        {...register('hasParking')}
+                    />
+                </div>
+                <div>
+                    <label htmlFor='hasExterior'>Terasse :</label>
+                    <input
+                        type='checkbox'
+                        id='exterior'
+                        {...register('hasExterior')}
+                    />
+                </div>
                 <ChooseGoogleImages
                     imageUrls={imageUrls}
                     setPhotoSelected={setPhotoSelected}
@@ -239,6 +272,12 @@ const AddPlace = () => {
                         onChange={handleFileChange}
                     />
                 </div>
+                <TextAreaField
+                    register={register}
+                    label='Ecrivez votre avis ici'
+                    name='userReview'
+                    error={errors.reviews}
+                />
                 <StarRatingCalmEquipFood control={control} errors={errors} />
             </div>
             <Button

@@ -52,25 +52,43 @@ export async function POST(req: NextRequest) {
                 website: placeData.website,
                 description: placeData.description,
                 openingHours: formattedOpeningHours,
-                calmRating: placeData.calmRating,
-                equipmentRating: placeData.equipmentRating,
-                foodAndDrinksRating: placeData.foodAndDrinksRating,
-                feelingRating: placeData.feelingRating,
+                expressoPrice: placeData.espressoPrice,
+                hasParking: placeData.hasParking,
+                hasPrivacy: placeData.hasPrivacy,
+                hasExterior: placeData.hasExterior,
+                reviews: placeData.reviews
+                    ? {
+                          create: [
+                              {
+                                  content: placeData.reviews.content,
+                                  calmRating: placeData.reviews.calmRating,
+                                  equipRating:
+                                      placeData.reviews.equipmentRating, // <-- Change here
+                                  foodAndDrinksRating:
+                                      placeData.reviews.foodAndDrinksRating,
+                                  feelingRating:
+                                      placeData.reviews.feelingRating,
+                                  userId: userId,
+                              },
+                          ],
+                      }
+                    : undefined,
                 imagesSelected: {
                     create: imageUrlsS3.map((url) => ({
                         url: url,
                     })),
                 },
-                userImages: placeData.userImages && placeData.userImages.urls
-                    ? {
-                          create: placeData.userImages.urls.map(
-                              (imgUrl: string) => ({
-                                  url: imgUrl,
-                                  userId: userId,
-                              }),
-                          ),
-                      }
-                    : undefined,
+                userImages:
+                    placeData.userImages && placeData.userImages.urls
+                        ? {
+                              create: placeData.userImages.urls.map(
+                                  (imgUrl: string) => ({
+                                      url: imgUrl,
+                                      userId: userId,
+                                  }),
+                              ),
+                          }
+                        : undefined,
             },
         });
 

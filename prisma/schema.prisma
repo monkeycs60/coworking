@@ -54,7 +54,7 @@ model User {
   sessions      Session[]
   comments      Comment[]
   posts        Post[] 
-  votes         Vote[]
+  reviews       Review[]
   places        Coworking[]
   createdAt     DateTime  @default(now())
 }
@@ -84,11 +84,11 @@ model Coworking {
   imagesSelected imageSelected[]
   userImages   UserImage[] 
   comments      Comment[]
-  votes         Vote[]     
-  calmRating    Int?         
-  equipmentRating  Int?       
-  foodAndDrinksRating  Int?
-  feelingRating Int?
+  expressoPrice   String? 
+  hasPrivacy      Boolean @default(false)
+  hasParking      Boolean @default(false)
+  hasExterior     Boolean @default(false)
+  reviews       Review[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
@@ -109,25 +109,9 @@ model Comment {
   placeId  String // This can be a relation to a Place model if you have one.
   userId   String
   user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  votes    Vote[]
   place    Coworking   @relation(fields: [placeId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model Vote {
-  id          String    @id @default(cuid())
-  commentId   String?   // Retaining this as you might want to attach votes to comments.
-  comment     Comment?  @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  userId      String
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  coworkingId String
-  coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
-  calmRating  Int?         // Rating for calm out of 5
-  equipRating Int?         // Rating for equipment out of 5
-  foodRating  Int?         // Rating for food and drink out of 5
-  feelingRating Int?
-  createdAt   DateTime  @default(now())
 }
 
 model Post {
@@ -158,4 +142,19 @@ model UserImage {
     userId      String
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
+}
+
+model Review {
+  id          String    @id @default(cuid())
+  content     String?    @db.Text
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coworkingId String
+  coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
+  calmRating  Int       // Note pour le calme
+  equipRating Int       // Note pour les équipements
+  foodRating  Int       // Note pour la nourriture et les boissons
+  feelingRating Int     // Note générale sur le sentiment/ambiance
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
