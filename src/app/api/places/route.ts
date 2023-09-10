@@ -3,6 +3,8 @@ import { PrismaClient } from '@prisma/client';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { v4 as uuidv4 } from 'uuid';
 import { getAuth } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs';
+import type { User } from '@clerk/nextjs/api';
 
 import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
 
@@ -10,7 +12,9 @@ const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
     const { userId } = getAuth(req);
-    console.log('Retrieved User ID:', userId);
+    const user: User | null = await currentUser();
+
+    console.log('clerk user from backend', user);
 
     if (!userId) {
         return NextResponse.json({
@@ -28,6 +32,13 @@ export async function POST(req: NextRequest) {
         await prisma.user.create({
             data: {
                 id: userId,
+                username: user?.username,
+                name: `${user?.firstName} ${user?.lastName}`,
+                email: user?.emailAddresses[0].emailAddress,
+                image: user?.imageUrl,
+                createdAt: user?.createdAt
+                    ? new Date(user.createdAt)
+                    : new Date(),
                 // Add any other default or necessary fields here.
                 // For instance, you might want to fetch user details from Clerk and save them.
             },
