@@ -88,9 +88,26 @@ export const useAddPlaceForm = () => {
             if (response.error) {
                 toast.error(
                     "Une erreur est survenue ! le coworking n'a pas pu être ajouté.",
+                    {
+                        position: 'top-center',
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    },
                 );
             } else {
-                toast.success('Merci à vous ! un nouveau cowork a été ajouté');
+                toast.success('Merci à vous ! un nouveau cowork a été ajouté', {
+                    position: 'top-center',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
                 setTimeout(() => {
                     dispatch(resetAllDetails());
                 }, 4000);

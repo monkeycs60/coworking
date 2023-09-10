@@ -40,7 +40,6 @@ const AddPlace = () => {
         control,
         handleSubmit,
         formState: { errors },
-        reset,
     } = useForm<AddPlaceSchemaType>({
         resolver: zodResolver(AddPlaceSchema),
     });
