@@ -1,4 +1,4 @@
-export interface GoogleMapsProps {
+interface GoogleMapsProps {
     height: string;
     width: string;
     centerMap: {
@@ -6,4 +6,17 @@ export interface GoogleMapsProps {
         lng: number;
     };
     zoom: number;
+}
+
+export type Location = {
+    lat: number;
+    lng: number;
+    name: string; // Add more properties if needed for InfoWindow
+};
+
+export interface GoogleMapsPropsWithLocations extends GoogleMapsProps {
+    locations: Location[];
+    onMarkerClick?: (location: Location) => void;
+    onCloseClick?: () => void;
+    selectedCowork?: Location | null;
 }
