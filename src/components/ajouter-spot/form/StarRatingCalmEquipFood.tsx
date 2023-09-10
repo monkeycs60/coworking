@@ -15,7 +15,7 @@ export const StarRatingCalmEquipFood = ({ control, errors }: any) => {
         },
         {
             label: 'Food & Drinks',
-            type: 'foodAndDrinks',
+            type: 'food',
             errorText: 'Veuillez évaluer la nourriture et les boissons.',
         },
         {

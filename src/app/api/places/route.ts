@@ -4,9 +4,7 @@ import { AddPlaceSchemaType } from '@/types/addPlace';
 import { v4 as uuidv4 } from 'uuid';
 import { getAuth } from '@clerk/nextjs/server';
 
-import {
-    downloadImageAndUploadToS3,
-} from '@/lib/functions/uploadToS3';
+import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
 
 const prisma = new PrismaClient();
 
@@ -17,6 +15,22 @@ export async function POST(req: NextRequest) {
     if (!userId) {
         return NextResponse.json({
             error: "L'utilisateur n'est pas authentifié.",
+        });
+    }
+
+    // Step 1: Check if User Exists in the local User table.
+    const existingUser = await prisma.user.findUnique({
+        where: { id: userId },
+    });
+
+    // Step 2: If the user doesn't exist, insert a basic record into the User table.
+    if (!existingUser) {
+        await prisma.user.create({
+            data: {
+                id: userId,
+                // Add any other default or necessary fields here.
+                // For instance, you might want to fetch user details from Clerk and save them.
+            },
         });
     }
 
@@ -52,27 +66,22 @@ export async function POST(req: NextRequest) {
                 website: placeData.website,
                 description: placeData.description,
                 openingHours: formattedOpeningHours,
-                expressoPrice: placeData.espressoPrice,
+                espressoPrice: placeData.espressoPrice,
                 hasParking: placeData.hasParking,
                 hasPrivacy: placeData.hasPrivacy,
                 hasExterior: placeData.hasExterior,
-                reviews: placeData.reviews
-                    ? {
-                          create: [
-                              {
-                                  content: placeData.reviews.content,
-                                  calmRating: placeData.reviews.calmRating,
-                                  equipRating:
-                                      placeData.reviews.equipmentRating, // <-- Change here
-                                  foodAndDrinksRating:
-                                      placeData.reviews.foodAndDrinksRating,
-                                  feelingRating:
-                                      placeData.reviews.feelingRating,
-                                  userId: userId,
-                              },
-                          ],
-                      }
-                    : undefined,
+                reviews: {
+                    create: [
+                        {
+                            content: placeData.reviewContent,
+                            calmRating: placeData.calmRating,
+                            equipRating: placeData.equipmentRating,
+                            foodRating: placeData.foodRating,
+                            feelingRating: placeData.feelingRating,
+                            userId: userId,
+                        },
+                    ],
+                },
                 imagesSelected: {
                     create: imageUrlsS3.map((url) => ({
                         url: url,

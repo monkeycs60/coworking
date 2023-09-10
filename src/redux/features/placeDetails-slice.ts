@@ -6,10 +6,11 @@ import { PlaceDetail } from '@/types/placeDetails';
 interface PlaceDetailsState {
     details: PlaceDetail | null;
     imageUrls: string[];
+    reviewContent: string;
     ratings: {
         calm: number | null;
         equipment: number | null;
-        foodAndDrinks: number | null;
+        food: number | null;
         feeling: number | null;
     };
 }
@@ -17,10 +18,11 @@ interface PlaceDetailsState {
 const initialState: PlaceDetailsState = {
     details: null,
     imageUrls: [],
+    reviewContent: '',
     ratings: {
         calm: null,
         equipment: null,
-        foodAndDrinks: null,
+        food: null,
         feeling: null,
     },
 };
@@ -45,17 +47,21 @@ export const placeDetailsSlice = createSlice({
         resetAllDetails: (state) => {
             state.details = null;
             state.imageUrls = [];
+            state.reviewContent = '';
             state.ratings = {
                 calm: null,
                 equipment: null,
-                foodAndDrinks: null,
+                food: null,
                 feeling: null,
             };
+        },
+        setReviewContent: (state, action: PayloadAction<string>) => {
+            state.reviewContent = action.payload;
         },
         setRating: (
             state,
             action: PayloadAction<{
-                type: 'calm' | 'equipment' | 'foodAndDrinks' | 'feeling';
+                type: 'calm' | 'equipment' | 'food' | 'feeling';
                 value: number;
             }>,
         ) => {
@@ -70,6 +76,7 @@ export const {
     setImageUrls,
     resetImageUrls,
     resetAllDetails,
+    setReviewContent,
     setRating,
 } = placeDetailsSlice.actions;
 

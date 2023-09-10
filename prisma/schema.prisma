@@ -84,7 +84,7 @@ model Coworking {
   imagesSelected imageSelected[]
   userImages   UserImage[] 
   comments      Comment[]
-  expressoPrice   String? 
+  espressoPrice   String? 
   hasPrivacy      Boolean @default(false)
   hasParking      Boolean @default(false)
   hasExterior     Boolean @default(false)
@@ -147,8 +147,8 @@ model UserImage {
 model Review {
   id          String    @id @default(cuid())
   content     String?    @db.Text
-  userId      String
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
   coworkingId String
   coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
   calmRating  Int       // Note pour le calme

@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useRedux';
 import {
     setImageUrls,
     resetImageUrls,
+    setReviewContent,
 } from '@/redux/features/placeDetails-slice';
 import { AddPlaceSchemaType, AddPlaceSchema } from '@/types/addPlace';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -39,6 +40,9 @@ const AddPlace = () => {
 
     const imageUrls = useAppSelector((state) => state.placeDetails.imageUrls); // fetch image URLs from redux
     const placeDetails = useAppSelector((state) => state.placeDetails.details);
+    const reviewContent = useAppSelector(
+        (state) => state.placeDetails.reviewContent,
+    );
 
     const {
         place_id,
@@ -118,6 +122,11 @@ const AddPlace = () => {
             latitude: geometry?.location.lat,
             imagesSelected: photoSelected,
             userImages: uploadedImageUrls || [],
+            content: data.reviewContent,
+            calmRating: data.calmRating,
+            equipmentRating: data.equipmentRating,
+            foodRating: data.foodRating,
+            feelingRating: data.feelingRating,
         };
 
         try {
@@ -226,7 +235,7 @@ const AddPlace = () => {
                 <InputField
                     register={register}
                     defaultValue=''
-                    label='Prix d&pos;un expresso (€)'
+                    label="Prix d'un expresso (€)"
                     name='espressoPrice'
                     error={errors.espressoPrice}
                 />
@@ -275,8 +284,8 @@ const AddPlace = () => {
                 <TextAreaField
                     register={register}
                     label='Ecrivez votre avis ici'
-                    name='userReview'
-                    error={errors.reviews}
+                    name='reviewContent'
+                    error={errors.reviewContent}
                 />
                 <StarRatingCalmEquipFood control={control} errors={errors} />
             </div>

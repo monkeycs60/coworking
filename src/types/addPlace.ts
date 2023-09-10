@@ -17,15 +17,11 @@ export const AddPlaceSchema = z.object({
     hasPrivacy: z.boolean().optional(),
     hasParking: z.boolean().optional(),
     hasExterior: z.boolean().optional(),
-    reviews: z
-        .object({
-            content: z.string(),
-            calmRating: z.number().min(1).max(5),
-            equipmentRating: z.number().min(1).max(5),
-            foodAndDrinksRating: z.number().min(1).max(5),
-            feelingRating: z.number().min(1).max(5),
-        })
-        .optional(),
+    reviewContent: z.string(),
+    calmRating: z.number().min(1).max(5),
+    equipmentRating: z.number().min(1).max(5),
+    foodRating: z.number().min(1).max(5),
+    feelingRating: z.number().min(1).max(5),
 });
 
 export type AddPlaceSchemaType = z.infer<typeof AddPlaceSchema>;

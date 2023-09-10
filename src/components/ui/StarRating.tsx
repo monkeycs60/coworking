@@ -6,7 +6,7 @@ import {
 import { useState } from 'react';
 
 interface StarRatingProps {
-    type: 'calm' | 'equipment' | 'foodAndDrinks' | 'feeling';
+    type: 'calm' | 'equipment' | 'food' | 'feeling';
 }
 
 const StarRating = ({
