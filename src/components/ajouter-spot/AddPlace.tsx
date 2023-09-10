@@ -1,32 +1,39 @@
 'use client';
 
-import { useAppSelector, useAppDispatch } from '@/hooks/useRedux';
-import {
-    setImageUrls,
-    resetImageUrls,
-    setReviewContent,
-} from '@/redux/features/placeDetails-slice';
 import { AddPlaceSchemaType, AddPlaceSchema } from '@/types/addPlace';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, Controller, set } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { extractCityFromAdrAddress } from '@/lib/functions/extractCityFromAddress';
-import { useEffect, useState } from 'react';
-import { sendPlaceDetails } from '@/services/sendPlaceDetails';
 import InputField from './form/InputField';
 import OpeningHours from './form/OpeningHours';
 import ChooseGoogleImages from './form/ChooseGoogleImages';
 import { StarRatingCalmEquipFood } from './form/StarRatingCalmEquipFood';
 import { Button } from '../ui/button';
 import { Loader2 } from 'lucide-react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from 'next/navigation';
-import { resetAllDetails } from '@/redux/features/placeDetails-slice';
 import TextAreaField from './form/TextAreaField';
+import { useAddPlaceForm } from '@/hooks/useAddPlaceForm';
 
 const AddPlace = () => {
-    const dispatch = useAppDispatch();
-    const router = useRouter();
+    const {
+        handleFileChange,
+        onSubmit,
+        setPhotoSelected,
+        waitingToSubmit,
+        imageUrls,
+        photoSelected,
+        placeDetails,
+    } = useAddPlaceForm();
+
+    const {
+        vicinity,
+        name,
+        adr_address,
+        formatted_phone_number,
+        website,
+        editorial_summary,
+    } = placeDetails || {};
 
     const {
         register,
@@ -37,139 +44,6 @@ const AddPlace = () => {
     } = useForm<AddPlaceSchemaType>({
         resolver: zodResolver(AddPlaceSchema),
     });
-
-    const imageUrls = useAppSelector((state) => state.placeDetails.imageUrls); // fetch image URLs from redux
-    const placeDetails = useAppSelector((state) => state.placeDetails.details);
-    const reviewContent = useAppSelector(
-        (state) => state.placeDetails.reviewContent,
-    );
-
-    const {
-        place_id,
-        geometry,
-        vicinity,
-        name,
-        adr_address,
-        formatted_phone_number,
-        website,
-        editorial_summary,
-        current_opening_hours,
-    } = placeDetails || {};
-
-    const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-    const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
-
-    const [photoSelected, setPhotoSelected] = useState<string[]>([]);
-    const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
-    const [waitingToSubmit, setWaitingToSubmit] = useState(false);
-
-    useEffect(() => {
-        if (placeDetails?.photos) {
-            dispatch(resetImageUrls());
-
-            const urls = placeDetails.photos
-                .slice(0, Math.ceil(placeDetails.photos.length / 2))
-                .map((photo) => {
-                    return `${baseUrlImage}maxwidth=400&photoreference=${photo.photo_reference}`;
-                });
-            dispatch(setImageUrls(urls)); // update redux state
-        }
-    }, [placeDetails, dispatch, baseUrlImage]);
-
-    const handleFileChange = async (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-        setWaitingToSubmit(true);
-        const formData = new FormData();
-        if (!event.target.files) return;
-
-        for (let i = 0; i < event.target.files.length; i++) {
-            formData.append('file', event.target.files[i]);
-        }
-
-        try {
-            const response = await fetch('/api/uploaded', {
-                method: 'POST',
-                body: formData,
-            });
-
-            const data = await response.json();
-            console.log(data);
-            if (data.success) {
-                setUploadedImageUrls(data);
-                setWaitingToSubmit(false);
-            } else {
-                console.error(data.error);
-                setWaitingToSubmit(false);
-            }
-        } catch (error) {
-            console.error('Error uploading the file:', error);
-        }
-    };
-
-    const onSubmit = async (data: AddPlaceSchemaType) => {
-        setWaitingToSubmit(true);
-        if (!place_id) {
-            alert('PlaceId is missing!');
-            return;
-        }
-        console.log('upload data', uploadedImageUrls);
-
-        const finalData = {
-            ...data,
-            placeId: place_id,
-            longitude: geometry?.location.lng,
-            latitude: geometry?.location.lat,
-            imagesSelected: photoSelected,
-            userImages: uploadedImageUrls || [],
-            content: data.reviewContent,
-            calmRating: data.calmRating,
-            equipmentRating: data.equipmentRating,
-            foodRating: data.foodRating,
-            feelingRating: data.feelingRating,
-        };
-
-        try {
-            const response = await sendPlaceDetails(finalData);
-            console.log('response', response);
-
-            if (response.error) {
-                setWaitingToSubmit(false);
-                toast.error(
-                    "Une erreur est survenue ! le coworking n'a pas pu être ajouté.",
-                    {
-                        position: 'top-center',
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    },
-                );
-            } else {
-                reset();
-                toast.success('Merci à vous ! un nouveau cowork a été ajouté', {
-                    position: 'top-center',
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-                setWaitingToSubmit(false);
-                //set time out to let the user see the success toast
-                setTimeout(() => {
-                    dispatch(resetAllDetails());
-                }, 4000);
-                // router.push('/');
-            }
-        } catch (error) {
-            console.error(error);
-            setWaitingToSubmit(false);
-        }
-    };
 
     return placeDetails ? (
         <form onSubmit={handleSubmit(onSubmit)}>
