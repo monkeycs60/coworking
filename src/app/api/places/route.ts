@@ -39,8 +39,6 @@ export async function POST(req: NextRequest) {
                 createdAt: user?.createdAt
                     ? new Date(user.createdAt)
                     : new Date(),
-                // Add any other default or necessary fields here.
-                // For instance, you might want to fetch user details from Clerk and save them.
             },
         });
     }
