@@ -23,6 +23,8 @@ const page = async () => {
                     Pariatur, esse.
                 </p>
                 <Map
+                    height='700px'
+                    width='100%'
                     centerOfMap={centerOfFrance}
                     coworkingLocations={coworkingLocations}
                     zoom={5}

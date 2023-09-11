@@ -10,6 +10,8 @@ interface CoworkingLocation {
 }
 
 interface MapProps {
+    height: string;
+    width: string;
     centerOfMap: {
         lat: number;
         lng: number;
@@ -18,9 +20,13 @@ interface MapProps {
     zoom: number;
 }
 
-const Map = ({ centerOfMap, coworkingLocations, zoom }: MapProps) => {
-    console.log('localisation cowork', coworkingLocations);
-
+const Map = ({
+    height,
+    width,
+    centerOfMap,
+    coworkingLocations,
+    zoom,
+}: MapProps) => {
     const [selectedCowork, setSelectedCowork] =
         useState<CoworkingLocation | null>(null);
 
@@ -32,12 +38,10 @@ const Map = ({ centerOfMap, coworkingLocations, zoom }: MapProps) => {
         setSelectedCowork(null);
     };
 
-    console.log(selectedCowork);
-
     return (
         <GoogleMapElement
-            height='700px'
-            width='100%'
+            height={height}
+            width={width}
             centerMap={centerOfMap}
             zoom={zoom}
             locations={coworkingLocations}
