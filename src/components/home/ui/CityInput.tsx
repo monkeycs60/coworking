@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
+import useSearchCity from '@/hooks/useSearchCity';
 import {
     setSelectedCity,
     setInputSearch,
@@ -16,48 +15,17 @@ interface CityInputProps {
 }
 
 const CityInput = ({ cities }: CityInputProps) => {
-    const dispatch = useAppDispatch();
-    const inputValue = useAppSelector((state) => state.citySearch.inputSearch);
-    const [showDropdown, setShowDropdown] = useState(false);
-    const inputRef = useRef<HTMLInputElement>(null);
-    const dropdownRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                inputRef.current &&
-                !inputRef.current.contains(event.target as Node) &&
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target as Node)
-            ) {
-                setShowDropdown(false);
-            }
-        };
-
-        document.addEventListener('click', handleClickOutside);
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, []);
-
-    const sortedCities = () => {
-        const frequency: Record<string, number> = {};
-        for (const cityObj of cities) {
-            const city = cityObj.city;
-            if (!frequency[city]) {
-                frequency[city] = 1;
-            } else {
-                frequency[city]++;
-            }
-        }
-
-        return Object.keys(frequency)
-            .sort((a, b) => frequency[b] - frequency[a])
-            .map((city) => ({ city, count: frequency[city] }))
-            .filter((cityObj) =>
-                cityObj.city.toLowerCase().includes(inputValue.toLowerCase()),
-            );
-    };
+    const {
+        sortedCities,
+        showDropdown,
+        setShowDropdown,
+        inputRef,
+        dropdownRef,
+        inputValue,
+        dispatch,
+        setInputSearch,
+        setSelectedCity,
+    } = useSearchCity();
 
     return (
         <div className='w-[100%]'>
@@ -75,7 +43,7 @@ const CityInput = ({ cities }: CityInputProps) => {
                     className='absolute z-40 mt-[1px] max-h-[22vh] w-full overflow-y-auto rounded-xl border bg-gray-300 pl-2 lg:top-auto lg:h-80 lg:w-[83%]'
                     ref={dropdownRef}
                 >
-                    {sortedCities().map((cityObj) => (
+                    {sortedCities({ cities }).map((cityObj) => (
                         <div
                             key={cityObj.city}
                             className='p-2 hover:bg-gray-200'
