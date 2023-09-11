@@ -54,7 +54,7 @@ const CityInput = ({ cities }: CityInputProps) => {
     };
 
     return (
-        <div>
+        <div className='w-[100%]'>
             <input
                 type='text'
                 placeholder='Entrez une ville'
@@ -62,16 +62,21 @@ const CityInput = ({ cities }: CityInputProps) => {
                 onClick={() => setShowDropdown(!showDropdown)}
                 onChange={(e) => setInputValue(e.target.value)}
                 ref={inputRef}
+                value={inputValue}
             />
             {showDropdown && (
                 <div
-                    className='absolute mt-1 max-h-80 w-full overflow-y-auto rounded-xl border bg-gray-300'
+                    className='absolute top-[-165px] mt-[1px] h-[18vh] w-full overflow-y-auto rounded-xl border bg-gray-300 pl-2 lg:top-auto lg:h-80 lg:w-[83%]'
                     ref={dropdownRef}
                 >
                     {sortedCities().map((cityObj) => (
                         <div
                             key={cityObj.city}
                             className='p-2 hover:bg-gray-200'
+                            onClick={() => {
+                                setInputValue(cityObj.city);
+                                setShowDropdown(false);
+                            }}
                         >
                             {cityObj.city} ({cityObj.count})
                         </div>

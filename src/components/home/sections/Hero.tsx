@@ -2,18 +2,11 @@ import Image from 'next/image';
 import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import clsx from 'clsx';
-import { PrismaClient } from '@prisma/client';
+import { cityList } from '@/services/cityList';
 import CityInput from '../ui/CityInput';
 
 const Hero = async () => {
-    const prisma = new PrismaClient();
-
-    const cities = await prisma.coworking.findMany({
-        select: {
-            city: true,
-        },
-    });
-    console.log(cities);
+    const cities = await cityList();
 
     return (
         <section className='overall-bg mb-[10vh] flex w-full flex-col justify-center lg:mb-0 lg:h-screen'>
@@ -37,11 +30,6 @@ const Hero = async () => {
                                     className='absolute left-4 top-3 text-gray-600 sm:top-4 sm:h-[26px] sm:w-[26px] lg:top-3 lg:h-[20px]  lg:w-[20px] 3xl:top-4 '
                                 />
                                 <CityInput cities={cities} />
-                                {/* <input
-                                    type='text'
-                                    placeholder='Entrez une ville'
-                                    className='w-full rounded-xl border-2 border-gray-500 px-4 py-2 indent-8 sm:py-4 sm:indent-12 sm:text-xl lg:w-auto lg:px-20 lg:py-2 lg:indent-0 lg:text-lg 2xl:px-28 2xl:py-3'
-                                /> */}
                                 <Button
                                     variant={'default'}
                                     size={'sm'}
