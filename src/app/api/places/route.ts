@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
         const savedPlace = await prisma.coworking.create({
             data: {
                 placeId: placeData.placeId,
+                userId: userId,
                 longitude: placeData.longitude,
                 latitude: placeData.latitude,
                 name: placeData.name,
