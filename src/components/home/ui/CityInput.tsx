@@ -1,6 +1,11 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
+import {
+    setSelectedCity,
+    setInputSearch,
+} from '@/redux/features/citySearch-slice';
 
 interface City {
     city: string;
@@ -11,8 +16,9 @@ interface CityInputProps {
 }
 
 const CityInput = ({ cities }: CityInputProps) => {
+    const dispatch = useAppDispatch();
+    const inputValue = useAppSelector((state) => state.citySearch.inputSearch);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [inputValue, setInputValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -60,13 +66,13 @@ const CityInput = ({ cities }: CityInputProps) => {
                 placeholder='Entrez une ville'
                 className='w-full rounded-xl border-2 border-gray-500 px-4 py-2 indent-8 sm:py-4 sm:indent-12 sm:text-xl lg:w-auto lg:px-20 lg:py-2 lg:indent-0 lg:text-lg 2xl:px-28 2xl:py-3'
                 onClick={() => setShowDropdown(!showDropdown)}
-                onChange={(e) => setInputValue(e.target.value)}
+                onChange={(e) => dispatch(setInputSearch(e.target.value))}
                 ref={inputRef}
                 value={inputValue}
             />
             {showDropdown && (
                 <div
-                    className='absolute top-[-165px] mt-[1px] h-[18vh] w-full overflow-y-auto rounded-xl border bg-gray-300 pl-2 lg:top-auto lg:h-80 lg:w-[83%]'
+                    className='absolute z-40 mt-[1px] max-h-[22vh] w-full overflow-y-auto rounded-xl border bg-gray-300 pl-2 lg:top-auto lg:h-80 lg:w-[83%]'
                     ref={dropdownRef}
                 >
                     {sortedCities().map((cityObj) => (
@@ -74,7 +80,9 @@ const CityInput = ({ cities }: CityInputProps) => {
                             key={cityObj.city}
                             className='p-2 hover:bg-gray-200'
                             onClick={() => {
-                                setInputValue(cityObj.city);
+                                dispatch(setSelectedCity(cityObj.city));
+                                dispatch(setInputSearch(cityObj.city));
+                                inputRef.current?.blur();
                                 setShowDropdown(false);
                             }}
                         >

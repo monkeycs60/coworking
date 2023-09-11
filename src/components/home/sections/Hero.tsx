@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import clsx from 'clsx';
 import { cityList } from '@/services/cityList';
 import CityInput from '../ui/CityInput';
+import CitySearchButton from '../ui/CitySearchButton';
 
 const Hero = async () => {
     const cities = await cityList();
@@ -30,22 +31,7 @@ const Hero = async () => {
                                     className='absolute left-4 top-3 text-gray-600 sm:top-4 sm:h-[26px] sm:w-[26px] lg:top-3 lg:h-[20px]  lg:w-[20px] 3xl:top-4 '
                                 />
                                 <CityInput cities={cities} />
-                                <Button
-                                    variant={'default'}
-                                    size={'sm'}
-                                    className='flex w-full gap-2 sm:gap-6 sm:py-4 lg:block lg:w-auto lg:py-3 2xl:px-6 2xl:py-3'
-                                >
-                                    <span className='sm:text-xl lg:hidden'>
-                                        Recherchez
-                                    </span>
-                                    <Image
-                                        src={'/search-refraction.svg'}
-                                        alt='search'
-                                        width={20}
-                                        height={20}
-                                        className='pointer-events-none lg:h-[20px] lg:w-[20px] 2xl:h-[26px] 2xl:w-[26px]'
-                                    />
-                                </Button>
+                                <CitySearchButton />
                             </div>
                         </form>
                         <p className='text-xs text-gray-600 sm:text-base lg:text-xs 2xl:text-sm'>
