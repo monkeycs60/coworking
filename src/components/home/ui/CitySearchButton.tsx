@@ -2,13 +2,14 @@
 
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import React from 'react';
 import { useAppSelector } from '@/hooks/useRedux';
+import { useRouter } from 'next/navigation';
 
 const CitySearchButton = () => {
     const citySelected = useAppSelector(
         (state) => state.citySearch.selectedCity,
     );
+    const router = useRouter();
 
     return (
         <>
@@ -16,7 +17,12 @@ const CitySearchButton = () => {
                 variant={'default'}
                 size={'sm'}
                 className='flex w-full gap-2 sm:gap-6 sm:py-4 lg:block lg:w-auto lg:py-3 2xl:px-6 2xl:py-3'
-                onClick={() => alert(citySelected)}
+                onClick={(
+                    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                ) => {
+                    e.preventDefault();
+                    router.push(`/explore/${citySelected}`);
+                }}
             >
                 <span className='sm:text-xl lg:hidden'>Recherchez</span>
                 <Image
