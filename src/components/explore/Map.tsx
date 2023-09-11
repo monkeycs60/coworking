@@ -10,14 +10,15 @@ interface CoworkingLocation {
 }
 
 interface MapProps {
-    centerOfFrance: {
+    centerOfMap: {
         lat: number;
         lng: number;
     };
     coworkingLocations: CoworkingLocation[];
+    zoom: number;
 }
 
-const Map = ({ centerOfFrance, coworkingLocations }: MapProps) => {
+const Map = ({ centerOfMap, coworkingLocations, zoom }: MapProps) => {
     console.log('localisation cowork', coworkingLocations);
 
     const [selectedCowork, setSelectedCowork] =
@@ -29,17 +30,16 @@ const Map = ({ centerOfFrance, coworkingLocations }: MapProps) => {
 
     const handleCloseClick = () => {
         setSelectedCowork(null);
-    }
+    };
 
     console.log(selectedCowork);
-    
 
     return (
         <GoogleMapElement
             height='700px'
             width='100%'
-            centerMap={centerOfFrance}
-            zoom={5}
+            centerMap={centerOfMap}
+            zoom={zoom}
             locations={coworkingLocations}
             onMarkerClick={handleMarkerClick}
             onCloseClick={handleCloseClick}

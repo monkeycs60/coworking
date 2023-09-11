@@ -1,5 +1,7 @@
 import Map from '@/components/explore/Map';
 import { PrismaClient } from '@prisma/client';
+import { centerOfFrance } from '@/lib/const/centerOfFrance';
+import getCoworkingsCoords from '@/lib/functions/getCoworkingsCoords';
 
 const page = async () => {
     const prisma = new PrismaClient();
@@ -11,22 +13,7 @@ const page = async () => {
         },
     });
 
-    const coworkingLocations = coworkings
-        .filter(
-            (cowork) => cowork.latitude !== null && cowork.longitude !== null,
-        )
-        .map((cowork) => ({
-            lat: cowork.latitude as number, // Avec la vérification ci-dessus, vous pouvez utiliser l'assertion de type ici
-            lng: cowork.longitude as number, // De même ici
-            name: cowork.name,
-        }));
-
-    const centerOfFrance = {
-        lat: 46.603354,
-        lng: 1.888334,
-    };
-
-    console.log('localisation cowork', coworkingLocations);
+    const coworkingLocations = getCoworkingsCoords(coworkings);
 
     return (
         <section className='mt-16 min-h-[800px] bg-gray-200 p-10 lg:mt-32 xl:mt-48 3xl:mt-64 '>
@@ -36,8 +23,9 @@ const page = async () => {
                     Pariatur, esse.
                 </p>
                 <Map
-                    centerOfFrance={centerOfFrance}
+                    centerOfMap={centerOfFrance}
                     coworkingLocations={coworkingLocations}
+                    zoom={5}
                 />
             </div>
         </section>
