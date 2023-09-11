@@ -3,7 +3,6 @@ import { getAllCoworkingsByCity } from '@/services/getAllCoworkingsByCity';
 import Map from '@/components/explore/Map';
 import { getCityCenter } from '@/services/getCityCenter';
 import getCoworkingsCoords from '@/lib/functions/getCoworkingsCoords';
-import Image from 'next/image';
 
 const page = async () => {
     const headersList = headers();

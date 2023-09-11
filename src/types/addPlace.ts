@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const AddPlaceSchema = z.object({
+    id: z.string().optional(),
     placeId: z.string().optional(),
     longitude: z.number().optional(),
     latitude: z.number().optional(),
