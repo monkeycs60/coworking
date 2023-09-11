@@ -7,6 +7,7 @@ const SignUpButtonLogic = () => {
   return (
 		<SignUpButton
 			mode='modal'
+			
 			// afterSignInUrl={window.location.href}
 			// afterSignUpUrl={window.location.href}
 			// redirectUrl={window.location.href}

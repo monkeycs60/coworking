@@ -6,6 +6,10 @@ export const getAllCoworkingsByCity = async (city: string) => {
         where: {
             city: city,
         },
+        include: {
+            imagesSelected: true,
+            userImages: true,
+        },
     });
     return coworkings;
 };
