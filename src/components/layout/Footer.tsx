@@ -23,7 +23,7 @@ const Footer = () => {
 					<Link href='/ajouter-spot' className='hover:underline'>
 						Explorer
 					</Link>
-					<Link href='/ajout-spot' className='hover:underline'>
+					<Link href='/ajouter-spot' className='hover:underline'>
 						Ajouter
 					</Link>
 				</div>
