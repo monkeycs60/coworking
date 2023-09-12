@@ -65,7 +65,7 @@ const Faq = () => {
 							Pour ajouter un nouvel endroit, il vous suffit de vous
 							créer un compte, puis de vous rendre sur la page{' '}
 							<a
-								href='/add-coworking'
+								href='/ajouter-spot'
 								className='font-semibold underline'>
 								Ajouter un spot
 							</a>
