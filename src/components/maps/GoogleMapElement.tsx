@@ -9,6 +9,7 @@ import {
 } from '@react-google-maps/api';
 import { GoogleMapsPropsWithLocations } from '@/types/googleMaps';
 import React from 'react';
+import { googleMapsStyle } from '@/lib/const/googleMapsStyle';
 
 const GoogleMapElement = ({
     height,
@@ -39,31 +40,8 @@ const GoogleMapElement = ({
                     zoom={zoom}
                     options={{
                         // Ajouter cette propriété
-                        disableDefaultUI: true, // Désactive l'UI par défaut
-                        styles: [
-                            {
-                                featureType: 'water',
-                                elementType: 'geometry',
-                                stylers: [
-                                    { color: '#007BFF' },
-                                    { lightness: 1 },
-                                ],
-                            },
-                            {
-                                featureType: 'landscape',
-                                elementType: 'geometry',
-                                stylers: [{ color: '#FFFFFF' }],
-                            },
-                            {
-                                featureType: 'road',
-                                elementType: 'geometry',
-                                stylers: [
-                                    { color: '#808080' },
-                                    { visibility: 'simplified' },
-                                ],
-                            },
-                            // Ajoutez plus d'objets de style ici pour styliser d'autres éléments de la carte
-                        ],
+                        disableDefaultUI: false, // Désactive l'UI par défaut
+                        styles: googleMapsStyle,
                     }}
                 >
                     <MarkerClusterer
