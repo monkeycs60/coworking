@@ -4,13 +4,15 @@ import Map from '@/components/explore/Map';
 import { getCityCenter } from '@/services/getCityCenter';
 import getCoworkingsCoords from '@/lib/functions/getCoworkingsCoords';
 
-const page = async ({ searchParams }: { searchParams: { citySelected: string } }) => {
+const page = async ({
+    params: { citySelected },
+}: {
+    params: { citySelected: string };
+}) => {
     const headersList = headers();
     const activePath = headersList.get('x-invoke-path');
     const parts = activePath ? activePath.split('/') : [];
     const city = parts.length > 2 ? decodeURIComponent(parts[2]) : 'unknown';
-
-    const selectedCityParam = searchParams.citySelected;
 
     // const city = "Bordeaux";
 
@@ -22,10 +24,9 @@ const page = async ({ searchParams }: { searchParams: { citySelected: string } }
 
     return (
         <section className='relative mt-16 min-h-[800px] bg-gray-200 p-10 lg:mt-32 xl:mt-48 3xl:mt-64'>
-            <p> {headersList} </p>
             <p> {activePath} </p>
             <p> {parts} </p>
-            <p> via les searchparamas{selectedCityParam} </p>
+            <p> le params next js === {citySelected} !!!!!!!!!!!!!!!!!!!!!</p>
             <h1>Exploration de coworkings dans {city}</h1>
             <p>{city && <>{city}</>}</p>
             <Map
