@@ -113,30 +113,261 @@ const AddPlace = () => {
                     error={errors.espressoPrice}
                 />
                 <div>
-                    <label htmlFor='hasPrivacy'>
-                        Endroit isolé pour les calls :
-                    </label>
-                    <input
-                        type='checkbox'
-                        id='hasPrivacy'
-                        {...register('hasPrivacy')}
-                    />
-                </div>
-                <div>
-                    <label htmlFor='hasParking'>Parking :</label>
-                    <input
-                        type='checkbox'
-                        id='hasParking'
-                        {...register('hasParking')}
-                    />
-                </div>
-                <div>
-                    <label htmlFor='hasExterior'>Terasse :</label>
-                    <input
-                        type='checkbox'
-                        id='exterior'
-                        {...register('hasExterior')}
-                    />
+                    <div>
+                        <div>
+                            <label htmlFor='hasParking'>Parking :</label>
+                            <input
+                                type='checkbox'
+                                id='hasParking'
+                                {...register('hasParking')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='hasPrivacy'>
+                                Endroit isolé pour les calls :
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='hasPrivacy'
+                                {...register('hasPrivacy')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='hasPlugs'>
+                                Prises électriques :
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='hasPlugs'
+                                {...register('hasPlugs')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='hasWiFi'>WiFi :</label>
+                            <input
+                                type='checkbox'
+                                id='hasWiFi'
+                                {...register('hasWiFi')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='hasExterior'>Terasse :</label>
+                            <input
+                                type='checkbox'
+                                id='hasExterior'
+                                {...register('hasExterior')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='hasHandicap'>
+                                Accès handicapé :
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='hasHandicap'
+                                {...register('hasHandicap')}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <span>Espace de travail :</span>
+                        <div>
+                            <label htmlFor='smallTables'>Petites tables</label>
+                            <input
+                                type='checkbox'
+                                id='smallTables'
+                                {...register('smallTables')}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor='largeWorktables'>
+                                Grandes tables de travail
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='largeWorktables'
+                                {...register('largeWorktables')}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor='counterSeats'>
+                                Sièges au comptoir/bar
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='counterSeats'
+                                {...register('counterSeats')}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor='standingTables'>
+                                Tables hautes / mange debout
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='standingTables'
+                                {...register('standingTables')}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor='outdoorSeating'>
+                                Sièges extérieurs
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='outdoorSeating'
+                                {...register('outdoorSeating')}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <span>Adapté pour coworker</span>
+                        <div>
+                            <label htmlFor='soloCoworker'>Solo</label>
+                            <input
+                                type='checkbox'
+                                id='soloCoworker'
+                                {...register('soloCoworker')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='smallGroup'>En petit groupe</label>
+                            <input
+                                type='checkbox'
+                                id='smallGroup'
+                                {...register('smallGroup')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='bigGroup'>Nombreux</label>
+                            <input
+                                type='checkbox'
+                                id='bigGroup'
+                                {...register('bigGroup')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='morningDuration'>Le matin</label>
+                            <input
+                                type='checkbox'
+                                id='morningDuration'
+                                {...register('morningDuration')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='afternoonDuration'>
+                                L&apos;après-midi
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='afternoonDuration'
+                                {...register('afternoonDuration')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='fullDuration'>
+                                La journée entière
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='fullDuration'
+                                {...register('fullDuration')}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <span>Offre bar/restauration</span>
+
+                        <div>
+                            <label htmlFor='snacksPossibility'>
+                                Collations
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='snacksPossibility'
+                                {...register('snacksPossibility')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='lunchPossibility'>Déjeuner</label>
+                            <input
+                                type='checkbox'
+                                id='lunchPossibility'
+                                {...register('lunchPossibility')}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor='souperPossibility'>Dîner</label>
+                            <input
+                                type='checkbox'
+                                id='souperPossibility'
+                                {...register('souperPossibility')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='drinksPossibility'>
+                                Boissons froides & chaudes
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='drinksPossibility'
+                                {...register('drinksPossibility')}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor='alcoolPossibility'>
+                                Boissons alcoolisées
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='alcoolPossibility'
+                                {...register('alcoolPossibility')}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <span>Musique</span>
+
+                        <div>
+                            <label htmlFor='noMusic'>Absente</label>
+                            <input
+                                type='checkbox'
+                                id='noMusic'
+                                {...register('noMusic')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='discreteMusic'>Discrète</label>
+                            <input
+                                type='checkbox'
+                                id='discreteMusic'
+                                {...register('discreteMusic')}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor='randomMusic'>Ca dépend</label>
+                            <input
+                                type='checkbox'
+                                id='randomMusic'
+                                {...register('randomMusic')}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='loudMusic'>Bruyante</label>
+                            <input
+                                type='checkbox'
+                                id='loudMusic'
+                                {...register('loudMusic')}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <ChooseGoogleImages
                     imageUrls={imageUrls}
