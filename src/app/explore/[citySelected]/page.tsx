@@ -9,23 +9,14 @@ const page = async ({
 }: {
     params: { citySelected: string };
 }) => {
-    const headersList = headers();
-    const activePath = headersList.get('x-invoke-path');
-    const parts = activePath ? activePath.split('/') : [];
-    const city = parts.length > 2 ? decodeURIComponent(parts[2]) : 'unknown';
-
-    // const city = "Bordeaux";
+    const city = citySelected ? decodeURIComponent(citySelected) : 'unknown';
 
     const cityCenterCoords = await getCityCenter(city);
-
     const coworkings = await getAllCoworkingsByCity(city);
     const coworkingLocations = getCoworkingsCoords(coworkings);
-    console.log('coworkings', coworkings);
 
     return (
         <section className='relative mt-16 min-h-[800px] bg-gray-200 p-10 lg:mt-32 xl:mt-48 3xl:mt-64'>
-            <p> {activePath} </p>
-            <p> {parts} </p>
             <p> le params next js === {citySelected} !!!!!!!!!!!!!!!!!!!!!</p>
             <h1>Exploration de coworkings dans {city}</h1>
             <p>{city && <>{city}</>}</p>
