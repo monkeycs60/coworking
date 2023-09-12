@@ -5,10 +5,12 @@ import { getCityCenter } from '@/services/getCityCenter';
 import getCoworkingsCoords from '@/lib/functions/getCoworkingsCoords';
 
 const page = async () => {
-    const headersList = headers();
-    const activePath = headersList.get('x-invoke-path');
-    const parts = activePath ? activePath.split('/') : [];
-    const city = parts.length > 2 ? decodeURIComponent(parts[2]) : 'unknown';
+    // const headersList = headers();
+    // const activePath = headersList.get('x-invoke-path');
+    // const parts = activePath ? activePath.split('/') : [];
+    // const city = parts.length > 2 ? decodeURIComponent(parts[2]) : 'unknown';
+
+    const city = "bordeaux";
 
     const cityCenterCoords = await getCityCenter(city);
 
