@@ -11,7 +11,7 @@ const Hero = async () => {
 
     return (
         <section className='overall-bg mb-[10vh] flex w-full flex-col justify-center lg:mb-0 lg:h-screen'>
-            <div className='mt-12 flex h-full flex-col gap-4 sm:mt-20  sm:gap-10 lg:mt-[27vh] lg:flex-row 2xl:mt-[30vh] '>
+            <div className='mt-12 flex h-full flex-col gap-4 sm:mt-20  sm:gap-10 lg:mt-[27vh] lg:flex-row 2xl:mt-[20vh] '>
                 <div className='flex flex-col px-4 lg:w-[55%] lg:px-0 3xl:w-[50%]'>
                     <div className='flex flex-col gap-4'>
                         <h2 className='text-2xl font-bold leading-normal sm:text-4xl lg:text-4xl 2xl:text-5xl 3xl:leading-relaxed'>
@@ -65,7 +65,7 @@ const Hero = async () => {
                             height={297}
                             src='/Hand-drawn-arrow.svg'
                             alt='Coworkers autour d un laptop'
-                            className='absolute -left-64 bottom-4 z-20 hidden lg:block 2xl:-left-20 2xl:bottom-36 2xl:h-[300px] 2xl:w-[300px] 3xl:pointer-events-none 3xl:-left-12 3xl:bottom-80'
+                            className='absolute -left-64 bottom-4 z-20 hidden lg:block 2xl:bottom-[240px] 2xl:left-[-20px] 2xl:h-[300px] 2xl:w-[300px] 3xl:pointer-events-none 3xl:bottom-[440px] 3xl:left-[-20px] '
                         />
                         <Image
                             width={160}

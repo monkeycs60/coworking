@@ -29,7 +29,7 @@ function NavBar() {
             </AnimatePresence>
 
             <div
-                className={`z-30 flex w-full justify-between gap-10  py-5 lg:fixed lg:w-[1200px]
+                className={`top-0 z-30 flex w-full justify-between  gap-10 py-5 lg:sticky lg:w-[1200px]
 			${scrollPosition > 50 ? 'bg-white' : ''}`}
             >
                 <div className='flex w-full items-center justify-between px-4 lg:w-auto lg:justify-center lg:gap-14 lg:px-0'>

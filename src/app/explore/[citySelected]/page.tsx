@@ -1,4 +1,3 @@
-import { headers } from 'next/headers';
 import { getAllCoworkingsByCity } from '@/services/getAllCoworkingsByCity';
 import Map from '@/components/explore/Map';
 import { getCityCenter } from '@/services/getCityCenter';
@@ -30,7 +29,7 @@ const page = async ({
             />
             <div className='flex max-h-[700px] w-full flex-wrap gap-8 overflow-y-auto bg-slate-500 p-4'>
                 {coworkings.map((coworking) => (
-                    <CoworkingCard coworking={coworking} key={coworking.id} />
+                    <CoworkingCard city={city} coworking={coworking} key={coworking.id} />
                 ))}
             </div>
         </section>
