@@ -11,11 +11,13 @@ import useScrollPosition from '@/hooks/useScrollPosition';
 import useHamburgerMenu from '@/hooks/useHamburgerMenu';
 import Hamburger from './Hamburger';
 import { AnimatePresence } from 'framer-motion';
+import useLogoSize from '@/hooks/useLogoSize';
 
 function NavBar() {
     const { isHamburgerOpen, toggleHamburgerMenu } = useHamburgerMenu();
     const { userId } = useAuth();
     const scrollPosition = useScrollPosition();
+    const { logoClass } = useLogoSize(scrollPosition);
 
     return (
         <>
@@ -42,7 +44,7 @@ function NavBar() {
                             alt='logo'
                             width={1281}
                             height={425}
-                            className='2xl:w-[230px] 3xl:w-[260px]'
+                            className={logoClass}
                         />
                     </Link>
                     <ul className='hidden items-center justify-center gap-6 font-semibold lg:flex 2xl:pl-4 2xl:text-base 3xl:pl-4'>

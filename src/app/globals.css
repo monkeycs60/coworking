@@ -3,6 +3,15 @@
 @import url('https://api.fontshare.com/v2/css?f[]=telma@900,300,1,700,500,400&display=swap');
 @import '../styles/animations.css';
 
+@font-face {
+  font-family: 'Signatra';
+  src: url('/fonts/Signatra.otf') format('opentype'),
+       url('/fonts/Signatra.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

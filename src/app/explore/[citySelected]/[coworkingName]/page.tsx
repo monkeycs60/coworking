@@ -26,7 +26,9 @@ const page = async ({
     return (
         <div className='my-16 flex flex-col gap-10'>
             <div className='font flex justify-between'>
-                <p className='text-4xl font-bold'>{coworking?.name}</p>
+                <p className='font-inter text-4xl font-semibold'>
+                    {coworking?.name}
+                </p>
                 <div className='flex flex-col items-end text-lg'>
                     <p>{coworking?.address}</p>
                     <p>{coworking?.phoneNumber}</p>
