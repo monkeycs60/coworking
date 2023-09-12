@@ -45,7 +45,7 @@ function NavBar() {
                             className='2xl:w-[230px] 3xl:w-[260px]'
                         />
                     </Link>
-                    <ul className='hidden items-center justify-center gap-6 font-semibold lg:flex 2xl:pl-4 2xl:text-lg 3xl:pl-4'>
+                    <ul className='hidden items-center justify-center gap-6 font-semibold lg:flex 2xl:pl-4 2xl:text-base 3xl:pl-4'>
                         <li className='linkHoverEffect'>
                             <Link href={'/about'}>A propos</Link>
                         </li>
@@ -66,7 +66,7 @@ function NavBar() {
                         />
                     </div>
                 </div>
-                <div className='hidden items-center justify-center gap-4 lg:flex'>
+                <div className='hidden items-center justify-center gap-4 lg:flex 2xl:gap-8'>
                     {userId ? (
                         <>
                             <SignOutButton>
