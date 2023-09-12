@@ -1,3 +1,4 @@
+import Map from '@/components/explore/Map';
 import { getOneCoworkingInfos } from '@/services/getOneCoworkingInfos';
 import Image from 'next/image';
 
@@ -9,7 +10,15 @@ const page = async ({
     const coworkingId = searchParams.coworkingId;
 
     const coworking = await getOneCoworkingInfos(coworkingId);
-    console.log(coworking);
+    const coworkingCenter = {
+        lat: coworking?.latitude as number,
+        lng: coworking?.longitude as number,
+    };
+    const coworkingLocation = {
+        lat: coworking?.latitude as number,
+        lng: coworking?.longitude as number,
+        name: coworking?.name as string,
+    }
 
     const defaultImage = '/cowork-placeholder.jpg';
 
@@ -23,14 +32,7 @@ const page = async ({
                 </div>
             </div>
             <div>
-                <div>
-                    <Image
-                        src={coworking?.imagesSelected[0]?.url || defaultImage}
-                        width={500}
-                        height={500}
-                        className='rounded-lg object-cover'
-                        alt={'hello'}
-                    />
+                <div className='flex gap-12 bg-black'>
                     <Image
                         src={coworking?.userImages[0].url || defaultImage}
                         width={500}
@@ -38,7 +40,27 @@ const page = async ({
                         className='rounded-lg object-cover'
                         alt={'coucou'}
                     />
+                    <Image
+                        src={coworking?.imagesSelected[0]?.url || defaultImage}
+                        width={500}
+                        height={500}
+                        className='rounded-lg object-cover'
+                        alt={'hello'}
+                    />
                 </div>
+            </div>
+            <div>
+                <p>{coworking?.description}</p>
+            </div>
+            <div>
+                <Map
+                    centerOfMap={coworkingCenter}
+                    coworkingLocations={[coworkingLocation]}
+                    zoom={14}
+                    height='300px'
+                    width='60%'
+                    key={coworkingId}
+                />
             </div>
         </div>
     );
