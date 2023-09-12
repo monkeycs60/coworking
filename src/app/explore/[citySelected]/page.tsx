@@ -10,7 +10,7 @@ const page = async () => {
     // const parts = activePath ? activePath.split('/') : [];
     // const city = parts.length > 2 ? decodeURIComponent(parts[2]) : 'unknown';
 
-    const city = "bordeaux";
+    const city = "Bordeaux";
 
     const cityCenterCoords = await getCityCenter(city);
 
