@@ -44,7 +44,7 @@ function NavBar() {
                             alt='logo'
                             width={1281}
                             height={425}
-                            className={logoClass}
+                            className={`w-[250px] lg:w-[215px] 2xl:w-[230px] 3xl:w-[275px] ${logoClass} transition-transform duration-500 ease-in-out`}
                         />
                     </Link>
                     <ul className='hidden items-center justify-center gap-6 font-semibold lg:flex 2xl:pl-4 2xl:text-base 3xl:pl-4'>
