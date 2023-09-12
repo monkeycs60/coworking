@@ -29,7 +29,7 @@ function NavBar() {
             </AnimatePresence>
 
             <div
-                className={`top-0 z-30 flex w-full justify-between  gap-10 py-5 lg:sticky lg:w-[1200px]
+                className={`top-0 z-30 flex h-[120px] w-full items-center  justify-between gap-10 lg:sticky lg:w-[1200px]
 			${scrollPosition > 50 ? 'bg-white' : ''}`}
             >
                 <div className='flex w-full items-center justify-between px-4 lg:w-auto lg:justify-center lg:gap-14 lg:px-0'>
@@ -38,19 +38,14 @@ function NavBar() {
                         className='flex items-center justify-center gap-4 sm:gap-10'
                     >
                         <Image
-                            src={'/logo-cowork-v1-nobg.png'}
+                            src={'/logo-finalv2.png'}
                             alt='logo'
-                            width={40}
-                            height={40}
+                            width={1281}
+                            height={425}
+                            className='2xl:w-[230px] 3xl:w-[260px]'
                         />
-                        <h1 className='font-telma text-xl font-semibold first-letter:text-primary sm:text-3xl'>
-                            Coworkez{' '}
-                            <span className='first-letter:text-secondary lg:block'>
-                                Malin
-                            </span>{' '}
-                        </h1>
                     </Link>
-                    <ul className='hidden items-center justify-center gap-6 font-semibold lg:flex 2xl:text-lg'>
+                    <ul className='hidden items-center justify-center gap-6 font-semibold lg:flex 2xl:pl-4 2xl:text-lg 3xl:pl-4'>
                         <li className='linkHoverEffect'>
                             <Link href={'/about'}>A propos</Link>
                         </li>
