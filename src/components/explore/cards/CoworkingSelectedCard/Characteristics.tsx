@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react';
+import { Check, HelpCircle } from 'lucide-react';
 import React from 'react';
 import { Coworking } from '@/types/coworking';
 
@@ -7,15 +7,30 @@ interface CharacteristicSectionProps {
     children: React.ReactNode;
 }
 
+const NoInfoAvailable = () => {
+    return (
+        <div className='flex gap-4'>
+            <HelpCircle />
+            <h3 className='mb-3 text-sm italic'>
+                Aucune information disponible
+            </h3>
+        </div>
+    );
+};
+
 const CharacteristicSection = ({
     title,
     children,
-}: CharacteristicSectionProps) => (
-    <div>
-        <h3 className='mb-3 italic'>{title}</h3>
-        {children}
-    </div>
-);
+}: CharacteristicSectionProps) => {
+    const hasChildren = React.Children.toArray(children).length > 0;
+
+    return (
+        <div className='w-[230px]'>
+            <h3 className='mb-3 italic'>{title}</h3>
+            {hasChildren ? children : <NoInfoAvailable />}
+        </div>
+    );
+};
 
 const CharacteristicItem = ({ label }: { label: string }) => (
     <div className='flex gap-4'>
