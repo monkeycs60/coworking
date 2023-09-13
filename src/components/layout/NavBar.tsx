@@ -39,11 +39,25 @@ function NavBar() {
                         href={'/'}
                         className='flex items-center justify-center gap-4 sm:gap-10'
                     >
-                        <Image
+                        {/* <Image
                             src={'/logo-finalv2.png'}
                             alt='logo'
                             width={1281}
                             height={425}
+                            className={`w-[250px] lg:w-[215px] 2xl:w-[230px] 3xl:w-[275px] ${logoClass} transition-transform duration-500 ease-in-out`}
+                        /> */}
+                        {/* <Image
+                            src={'/logo-finalv3.png'}
+                            alt='logo'
+                            width={1281}
+                            height={425}
+                            className={`w-[250px] lg:w-[215px] 2xl:w-[230px] 3xl:w-[275px] ${logoClass} transition-transform duration-500 ease-in-out`}
+                        /> */}
+                        <Image
+                            src={'/logo-finalv6.png'}
+                            alt='logo'
+                            width={1210}
+                            height={444}
                             className={`w-[250px] lg:w-[215px] 2xl:w-[230px] 3xl:w-[275px] ${logoClass} transition-transform duration-500 ease-in-out`}
                         />
                     </Link>
