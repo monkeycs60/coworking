@@ -192,6 +192,16 @@ const AddPlace = () => {
                         </div>
 
                         <div>
+                            <label htmlFor='standingTables'>
+                                Tables hautes / mange debout
+                            </label>
+                            <input
+                                type='checkbox'
+                                id='standingTables'
+                                {...register('standingTables')}
+                            />
+                        </div>
+                        <div>
                             <label htmlFor='counterSeats'>
                                 Sièges au comptoir/bar
                             </label>
@@ -202,16 +212,6 @@ const AddPlace = () => {
                             />
                         </div>
 
-                        <div>
-                            <label htmlFor='standingTables'>
-                                Tables hautes / mange debout
-                            </label>
-                            <input
-                                type='checkbox'
-                                id='standingTables'
-                                {...register('standingTables')}
-                            />
-                        </div>
 
                         <div>
                             <label htmlFor='outdoorSeating'>
