@@ -27,7 +27,7 @@ const buttonVariants = cva(
                 lg: 'h-11 rounded-md px-8',
                 icon: 'h-10 w-10',
                 special: 'h-auto 2xl:text-base',
-                specialButton: 'h-10 px-6 py-4 2xl:p-6 2xl:text-base',
+                specialButton: 'h-10 px-6 py-4 2xl:py-5 2xl:text-base',
             },
         },
         defaultVariants: {

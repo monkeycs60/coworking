@@ -3,13 +3,8 @@ import Image from 'next/image';
 import { Coworking } from '@/types/coworking';
 import Characteristics from './CoworkingSelectedCard/Characteristics';
 import Review from './CoworkingSelectedCard/Review';
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableRow,
-} from '@/components/ui/table';
+import OpeningSchedule from './CoworkingSelectedCard/OpeningSchedule';
+import { Button } from '@/components/ui/button';
 
 const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
     const defaultImage = '/cowork-placeholder.jpg';
@@ -22,32 +17,23 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
         lng: coworking?.longitude as number,
         name: coworking?.name as string,
     };
-    console.log(coworking.openingHours);
-    const weekdays = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-    ];
-    const hoursToDisplay =
-        coworking.openingHours && coworking.openingHours[0]
-            ? coworking.openingHours[0].weekdayText.map(
-                  (hour) => hour || "Pas d'info",
-              )
-            : new Array(7).fill("Pas d'info"); // Fills array with "Pas d'info" as placeholders
 
     return (
         <div className='my-16 flex flex-col gap-10'>
-            <div className='font flex justify-between'>
-                <p className='font-inter text-4xl font-semibold'>
-                    {coworking?.name}
-                </p>
-                <div className='flex flex-col items-end text-lg'>
-                    <p>{coworking?.address}</p>
-                    <p>{coworking?.phoneNumber}</p>
+            <div className='font flex items-center justify-between'>
+                <div className='flex flex-col gap-4'>
+                    <p className='font-inter text-4xl font-semibold'>
+                        {coworking?.name}
+                    </p>
+                    <div className='flex flex-col text-lg'>
+                        <p>{coworking?.address}</p>
+                        <p>{coworking?.phoneNumber}</p>
+                    </div>
+                </div>
+                <div className=''>
+                    <Button size={'specialButton'}>
+                        <span>Ecrire une review</span>
+                    </Button>
                 </div>
             </div>
             <div>
@@ -102,21 +88,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                 ))}
             </div>
             <div className='flex items-center justify-between'>
-                <div className='my-8'>
-                    <Table className='h-[300px] w-[400px]'>
-                        <TableCaption>Horaires ouverture</TableCaption>
-                        <TableBody>
-                            {weekdays.map((day, idx) => (
-                                <TableRow key={idx}>
-                                    <TableCell className='font-medium'>
-                                        {day}
-                                    </TableCell>
-                                    <TableCell>{hoursToDisplay[idx]}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
+                <OpeningSchedule coworking={coworking} />
                 <Map
                     centerOfMap={coworkingCenter}
                     coworkingLocations={[coworkingLocation]}
