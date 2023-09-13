@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import clsx from 'clsx';
 import { cityList } from '@/services/cityList';
 import CityInput from '../ui/CityInput';
