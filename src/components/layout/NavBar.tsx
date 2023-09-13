@@ -54,12 +54,19 @@ function NavBar() {
                             className={`w-[250px] lg:w-[215px] 2xl:w-[230px] 3xl:w-[275px] ${logoClass} transition-transform duration-500 ease-in-out`}
                         /> */}
                         <Image
+                            src={'/logo-finalv7.png'}
+                            alt='logo'
+                            width={1432}
+                            height={467}
+                            className={`w-[250px] lg:w-[215px] 2xl:w-[230px] 3xl:w-[275px] ${logoClass} transition-transform duration-500 ease-in-out`}
+                        />
+                        {/* <Image
                             src={'/logo-finalv6.png'}
                             alt='logo'
                             width={1210}
                             height={444}
                             className={`w-[250px] lg:w-[215px] 2xl:w-[230px] 3xl:w-[275px] ${logoClass} transition-transform duration-500 ease-in-out`}
-                        />
+                        /> */}
                     </Link>
                     <ul className='hidden items-center justify-center gap-6 font-semibold lg:flex 2xl:pl-4 2xl:text-base 3xl:pl-4'>
                         <li className='linkHoverEffect'>
