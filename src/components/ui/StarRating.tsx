@@ -4,7 +4,7 @@ import { setRating } from '@/redux/features/placeDetails-slice';
 import { useState } from 'react';
 
 interface StarRatingProps {
-    type: 'calm' | 'equipment' | 'food' | 'feeling';
+    type: 'calm' | 'equip' | 'food' | 'feeling';
 }
 
 const StarRating = ({

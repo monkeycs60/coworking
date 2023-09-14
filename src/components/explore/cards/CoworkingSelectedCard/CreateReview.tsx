@@ -36,9 +36,6 @@ const CreateReview = ({
 
         const formattedData = {
             ...data,
-            equipRating: data.equipmentRating,
-            // Remove the original equipmentRating field
-            equipmentRating: undefined,
         };
         const response = await fetch('/api/createReview', {
             method: 'POST',
@@ -58,7 +55,7 @@ const CreateReview = ({
     };
     {
         console.log(errors.calmRating);
-        console.log(errors.equipmentRating);
+        console.log(errors.equipRating);
         console.log(errors.foodRating);
         console.log(errors.feelingRating);
         console.log(errors.content);
@@ -97,8 +94,8 @@ const CreateReview = ({
                     {errors.content && <p>{errors.content.message}</p>}
                     {errors.root && <p>{errors.root.message}</p>}
                     {errors.calmRating && <p>{errors.calmRating.message}</p>}
-                    {errors.equipmentRating && (
-                        <p>{errors.equipmentRating.message}</p>
+                    {errors.equipRating && (
+                        <p>{errors.equipRating.message}</p>
                     )}
                     {errors.foodRating && <p>{errors.foodRating.message}</p>}
                     {errors.feelingRating && (

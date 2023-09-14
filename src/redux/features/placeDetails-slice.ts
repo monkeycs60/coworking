@@ -9,7 +9,7 @@ interface PlaceDetailsState {
     reviewContent: string;
     ratings: {
         calm: number | null;
-        equipment: number | null;
+        equip: number | null;
         food: number | null;
         feeling: number | null;
     };
@@ -21,7 +21,7 @@ const initialState: PlaceDetailsState = {
     reviewContent: '',
     ratings: {
         calm: null,
-        equipment: null,
+        equip: null,
         food: null,
         feeling: null,
     },
@@ -50,7 +50,7 @@ export const placeDetailsSlice = createSlice({
             state.reviewContent = '';
             state.ratings = {
                 calm: null,
-                equipment: null,
+                equip: null,
                 food: null,
                 feeling: null,
             };
@@ -61,7 +61,7 @@ export const placeDetailsSlice = createSlice({
         setRating: (
             state,
             action: PayloadAction<{
-                type: 'calm' | 'equipment' | 'food' | 'feeling';
+                type: 'calm' | 'equip' | 'food' | 'feeling';
                 value: number;
             }>,
         ) => {

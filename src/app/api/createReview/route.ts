@@ -8,6 +8,8 @@ const prisma = new PrismaClient();
 export async function POST(req: NextRequest) {
     const { userId } = getAuth(req);
     console.log('samlut on essaie de faire');
+    console.log(userId);
+    
 
     if (!userId) {
         return NextResponse.json({
@@ -47,7 +49,6 @@ export async function POST(req: NextRequest) {
         const newReview = await prisma.review.create({
             data: {
                 ...requestData,
-                equipRating: requestData.equipmentRating,
                 coworkingId: requestData.coworkingId,
                 userId: userId,
             },

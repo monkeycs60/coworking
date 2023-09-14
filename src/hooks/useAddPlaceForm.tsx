@@ -83,6 +83,8 @@ export const useAddPlaceForm = () => {
             imagesSelected: photoSelected,
             userImages: uploadedImageUrls,
         };
+        console.log(finalData);
+        
 
         try {
             const response = await sendPlaceDetails(finalData);

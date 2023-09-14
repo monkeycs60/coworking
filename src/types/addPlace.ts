@@ -43,7 +43,7 @@ export const AddPlaceSchema = z.object({
     loudMusic: z.boolean().optional(),
     reviewContent: z.string(),
     calmRating: z.number().min(1).max(5),
-    equipmentRating: z.number().min(1).max(5),
+    equipRating: z.number().min(1).max(5),
     foodRating: z.number().min(1).max(5),
     feelingRating: z.number().min(1).max(5),
 });

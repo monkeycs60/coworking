@@ -27,10 +27,22 @@ export async function POST(req: NextRequest) {
         where: { id: userId },
     });
 
+    console.log(existingUser);
+
     // Step 2: If the user doesn't exist, insert a basic record into the User table.
     if (!existingUser) {
-        await prisma.user.create({
-            data: {
+        await prisma.user.upsert({
+            where: { email: user?.emailAddresses[0].emailAddress },
+            update: {
+                username: user?.username,
+                name: `${user?.firstName} ${user?.lastName}`,
+                email: user?.emailAddresses[0].emailAddress,
+                image: user?.imageUrl,
+                createdAt: user?.createdAt
+                    ? new Date(user.createdAt)
+                    : new Date(),
+            },
+            create: {
                 id: userId,
                 username: user?.username,
                 name: `${user?.firstName} ${user?.lastName}`,
@@ -44,6 +56,7 @@ export async function POST(req: NextRequest) {
     }
 
     const placeData = (await req.json()) as AddPlaceSchemaType;
+    console.log(placeData);
 
     const formattedOpeningHours = placeData.openingHours
         ? {
@@ -108,7 +121,7 @@ export async function POST(req: NextRequest) {
                         {
                             content: placeData.reviewContent,
                             calmRating: placeData.calmRating,
-                            equipRating: placeData.equipmentRating,
+                            equipRating: placeData.equipRating,
                             foodRating: placeData.foodRating,
                             feelingRating: placeData.feelingRating,
                             userId: userId,
