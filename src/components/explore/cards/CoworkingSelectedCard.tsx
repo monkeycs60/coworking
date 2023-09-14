@@ -81,7 +81,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
             </div>
             <Characteristics coworking={coworking} />
             <div className='flex flex-wrap gap-8'>
-                {coworking.reviews.map((review) => (
+                {coworking?.reviews?.map((review) => (
                     <Review
                         key={review.id}
                         review={review}

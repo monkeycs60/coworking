@@ -11,10 +11,10 @@ export interface Coworking {
     phoneNumber?: string | null;
     website?: string | null;
     description: string;
-    openingHours: OpeningHour[];
+    openingHours?: OpeningHour[];
     imagesSelected: imageSelected[];
-    userImages: UserImage[];
-    comments: Comment[];
+    userImages?: UserImage[];
+    comments?: Comment[];
     espressoPrice?: string | null;
     hasPrivacy: boolean;
     hasParking: boolean;
@@ -42,7 +42,7 @@ export interface Coworking {
     discreteMusic: boolean;
     randomMusic: boolean;
     loudMusic: boolean;
-    reviews: Review[];
+    reviews?: Review[];
     createdAt: Date;
     updatedAt: Date;
 }
