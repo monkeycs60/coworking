@@ -5,6 +5,8 @@ import Characteristics from './CoworkingSelectedCard/Characteristics';
 import Review from './CoworkingSelectedCard/Review';
 import OpeningSchedule from './CoworkingSelectedCard/OpeningSchedule';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import CreateReview from './CoworkingSelectedCard/CreateReview';
 
 const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
     const defaultImage = '/cowork-placeholder.jpg';
@@ -17,6 +19,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
         lng: coworking?.longitude as number,
         name: coworking?.name as string,
     };
+    console.log(coworking.id);
 
     return (
         <div className='my-16 flex flex-col gap-10'>
@@ -30,11 +33,10 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                         <p>{coworking?.phoneNumber}</p>
                     </div>
                 </div>
-                <div className=''>
-                    <Button size={'specialButton'}>
-                        <span>Ecrire une review</span>
-                    </Button>
-                </div>
+                <CreateReview
+                    placeId={coworking?.placeId || ''}
+                    coworkingId={coworking?.id || ''}
+                />
             </div>
             <div>
                 <div className='flex h-[440px] items-center justify-center gap-12 bg-gray-400'>

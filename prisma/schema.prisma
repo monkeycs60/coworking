@@ -172,13 +172,16 @@ model Review {
   id          String    @id @default(cuid())
   content     String?    @db.Text
   userId      String?
+  placeId       String?
   user        User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
   coworkingId String
   coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
-  calmRating  Int       // Note pour le calme
-  equipRating Int       // Note pour les équipements
-  foodRating  Int       // Note pour la nourriture et les boissons
-  feelingRating Int     // Note générale sur le sentiment/ambiance
+  calmRating  Int       
+  equipRating Int       
+  foodRating  Int       
+  feelingRating Int     
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+
+    @@unique([userId, coworkingId])
 }
