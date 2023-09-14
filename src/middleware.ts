@@ -1,7 +1,14 @@
 import { authMiddleware } from '@clerk/nextjs';
 
 export default authMiddleware({
-    publicRoutes: ['/', '/ajouter-spot', '/api/contact', '/about', '/cities/'],
+    publicRoutes: [
+        '/',
+        '/ajouter-spot',
+        '/api/contact',
+        '/about',
+        '/cities/',
+        '/api/clerkWebhook',
+    ],
 });
 
 export const config = {

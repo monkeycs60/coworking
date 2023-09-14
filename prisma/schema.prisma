@@ -13,51 +13,52 @@ datasource db {
 
 // NextAuth Schema
 
-model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  refresh_token_expires_in Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+// model Account {
+//   id                 String  @id @default(cuid())
+//   userId             String
+//   type               String
+//   provider           String
+//   providerAccountId  String
+//   refresh_token      String?  @db.Text
+//   access_token       String?  @db.Text
+//   expires_at         Int?
+//   refresh_token_expires_in Int?
+//   token_type         String?
+//   scope              String?
+//   id_token           String?  @db.Text
+//   session_state      String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
-}
+//   @@unique([provider, providerAccountId])
+// }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
+// model Session {
+//   id           String   @id @default(cuid())
+//   sessionToken String   @unique
+//   userId       String
+//   expires      DateTime
+//   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+// }
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
-  username      String?
-  bio           String? @db.Text
-  age           Int?
-  email         String?   @unique
-  emailVerified DateTime?
-  password      String?
+  clerkId                    String?       @unique
+  birthday                   String?       // Optional since it's empty in the example
+  email                      String?        @unique
+  externalId                 String?
+  firstName                  String?
+  lastName                   String?
+  createdAt     BigInt?
+  lastSignInAt  BigInt?
+  profileImageUrl            String?
+  username                   String?   
   image         String?
-  accounts      Account[]
-  sessions      Session[]
   comments      Comment[]
   posts        Post[] 
   reviews       Review[]
   places        Coworking[]
-  createdAt     DateTime  @default(now())
+  // createdAt     DateTime  @default(now())
 }
 
 model VerificationToken {
