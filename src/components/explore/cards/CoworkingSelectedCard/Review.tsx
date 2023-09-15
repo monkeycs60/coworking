@@ -20,6 +20,7 @@ const Review = ({
 
     const imageUrl = review.user?.image || defaultImage; // Fallback to a default image
     const username = review.user?.username || 'Anonymous';
+    const name = review.user?.name || 'Anonymous';
     const averageRating =
         (review.calmRating +
             review.equipRating +
@@ -37,12 +38,12 @@ const Review = ({
                     <div className='relative h-[60px] w-[60px] rounded-2xl'>
                         <Image
                             src={imageUrl}
-                            alt={username}
+                            alt={name}
                             fill
                             className='rounded-2xl object-cover'
                         />
                     </div>
-                    <p>{username}</p>
+                    <p>{name}</p>
                 </div>
                 <div className='flex items-center gap-1'>
                     <Star strokeWidth={1.25} fill={'black'} />
