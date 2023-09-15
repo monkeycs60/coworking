@@ -13,6 +13,8 @@ const CoworkingCard = ({ coworking, city }: CoworkingCardProps) => {
             ? coworking.imagesSelected[0].url
             : defaultImage;
 
+    console.log(coworking);
+
     return (
         <Link
             href={{

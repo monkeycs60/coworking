@@ -1,74 +1,49 @@
-export type User = {
-    id: string;
-    birthday: Date | null;
-    email: string;
-    externalId: string | null;
-    firstName: string | null;
-    lastName: string | null;
-    name: string;
-    createdAt: Date;
-    lastSignInAt: Date | null;
-    profileImageUrl: string | null;
-    username: string;
-    image: string;
-};
+type CUID = string; // Assuming you use CUID as strings
+type DateTime = Date;
 
-export type Review = {
-    id: string;
-    content: string;
-    userId: string;
-    placeId: string | null;
-    coworkingId: string;
-    calmRating: number;
-    equipRating: number;
-    foodRating: number;
-    feelingRating: number;
-    createdAt: Date;
-    updatedAt: Date;
-    user: User;
-};
-
-export type ImageSelected = {
-    id: string;
-    url: string;
-    coworkingId: string;
-    coworking?: Coworking;
-    createdAt: Date;
-    updatedAt: Date;
-};
-
-export interface UserImage {
-    id: string;
-    url: string;
-    coworkingId: string;
-    coworking?: Coworking;
-    userId: string;
-    user?: User;
-    createdAt: Date;
-    updatedAt: Date;
+export interface User {
+    id: CUID;
+    birthday?: string;
+    email?: string;
+    externalId?: string;
+    firstName?: string;
+    lastName?: string;
+    name?: string;
+    createdAt?: DateTime;
+    lastSignInAt?: DateTime;
+    profileImageUrl?: string;
+    username?: string;
+    image?: string;
+    comments: Comment[];
+    posts: Post[];
+    reviews: Review[];
+    places: Coworking[];
 }
 
-export type OpeningHour = {
-    id: string;
-    coworkingId: string;
-    weekdayText: string[];
-    createdAt: Date;
-    updatedAt: Date;
-};
+export interface VerificationToken {
+    identifier: string;
+    token: string;
+    expires: DateTime;
+}
 
-export type Coworking = {
-    id: string;
-    userId: string | null;
-    placeId: string;
-    longitude: number;
-    latitude: number;
+export interface Coworking {
+    id: CUID;
+    userId: CUID | null;
+    user?: User;
+    placeId?: string | null;
+    longitude?: number | null;
+    latitude?: number | null;
     name: string;
     address: string;
     city: string;
-    phoneNumber: string;
-    website: string;
+    phoneNumber?: string | null;
+    website?: string | null;
     description: string;
-    espressoPrice: string;
+    openingHours?: OpeningHour[];
+    imagesSelected: imageSelected[];
+    userImages: UserImage[];
+    comments?: Comment[];
+    espressoPrice?: string | null;
     hasPrivacy: boolean;
     hasParking: boolean;
     hasWiFi: boolean;
@@ -95,11 +70,73 @@ export type Coworking = {
     discreteMusic: boolean;
     randomMusic: boolean;
     loudMusic: boolean;
-    createdAt: Date;
-    updatedAt: Date;
-    openingHours: OpeningHour[];
-    imagesSelected: ImageSelected[];
-    userImages: any[]; // Depending on the structure of userImages, you might want to replace any with an appropriate export type
-    comments: any[]; // Depending on the structure of comments, you might want to replace any with an appropriate export type
-    reviews: Review[];
-};
+    reviews?: Review[];
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}
+
+export interface OpeningHour {
+    id: CUID;
+    coworkingId: string;
+    coworking: Coworking;
+    weekdayText: string[];
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}
+
+export interface Comment {
+    id: CUID;
+    content: string;
+    placeId: string;
+    userId: CUID;
+    user: User;
+    place: Coworking;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}
+
+export interface Post {
+    id: CUID;
+    title: string;
+    content: string;
+    published: boolean;
+    authorId: CUID;
+    author: User;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}
+
+export interface imageSelected {
+    id: CUID;
+    url: string;
+    coworkingId: string;
+    coworking?: Coworking;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}
+
+export interface UserImage {
+    id: CUID;
+    url: string;
+    coworkingId: CUID;
+    coworking?: Coworking;
+    userId: CUID;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}
+
+export interface Review {
+    id: CUID;
+    content?: string;
+    userId?: CUID;
+    placeId: string;
+    user: User;
+    coworkingId: CUID;
+    coworking: Coworking;
+    calmRating: number;
+    equipRating: number;
+    foodRating: number;
+    feelingRating: number;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}

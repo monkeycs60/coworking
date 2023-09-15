@@ -29,7 +29,11 @@ const page = async ({
             />
             <div className='flex max-h-[700px] w-full flex-wrap gap-8 overflow-y-auto bg-slate-500 p-4'>
                 {coworkings.map((coworking) => (
-                    <CoworkingCard city={city} coworking={coworking} key={coworking.id} />
+                    <CoworkingCard
+                        city={city}
+                        coworking={coworking}
+                        key={coworking.id}
+                    />
                 ))}
             </div>
         </section>
