@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { v4 as uuidv4 } from 'uuid';
 import { getAuth } from '@clerk/nextjs/server';
 import { currentUser } from '@clerk/nextjs';
 import type { User } from '@clerk/nextjs/api';
-
 import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
-import Review from '@/components/explore/cards/CoworkingSelectedCard/Review';
-
-const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
     const { userId } = getAuth(req);

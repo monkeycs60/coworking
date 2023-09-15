@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import { getAuth } from '@clerk/nextjs/server';
 import { ReviewSchema, CreateReviewType } from '@/types/createReview';
-
-const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
     const { userId } = getAuth(req);

@@ -1,10 +1,9 @@
 import Map from '@/components/explore/Map';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import { centerOfFrance } from '@/lib/const/centerOfFrance';
 import getCoworkingsCoords from '@/lib/functions/getCoworkingsCoords';
 
 const page = async () => {
-    const prisma = new PrismaClient();
     const coworkings = await prisma.coworking.findMany({
         select: {
             latitude: true,

@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 
 export const cityList = async () => {
-    const prisma = new PrismaClient();
     const cities = await prisma.coworking.findMany({
         select: {
             city: true,
