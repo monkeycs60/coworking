@@ -7,6 +7,7 @@ import { currentUser } from '@clerk/nextjs';
 import type { User } from '@clerk/nextjs/api';
 
 import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
+import Review from '@/components/explore/cards/CoworkingSelectedCard/Review';
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,7 @@ export async function POST(req: NextRequest) {
     const user: User | null = await currentUser();
 
     console.log('clerk user from backend', user);
+    console.log(user?.firstName);
 
     // Impeed unlogged user to send request
     if (!userId) {
@@ -146,11 +148,19 @@ export async function POST(req: NextRequest) {
                           }
                         : undefined,
             },
+            include: {
+                reviews: true,
+            },
+        });
+
+        const reviewWithUser = await prisma.review.findUnique({
+            where: { id: savedPlace.reviews[0].id },
+            include: { user: true },
         });
 
         return NextResponse.json({
             message: 'ok coworking ajouté à la bdd',
-            data: savedPlace,
+            data: savedPlace, reviewWithUser,
         });
     } catch (error: any) {
         console.error(error);

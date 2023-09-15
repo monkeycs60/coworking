@@ -19,7 +19,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
         lng: coworking?.longitude as number,
         name: coworking?.name as string,
     };
-    console.log(coworking.id);
+    console.log(coworking.reviews);
 
     return (
         <div className='my-16 flex flex-col gap-10'>

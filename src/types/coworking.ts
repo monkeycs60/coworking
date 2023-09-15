@@ -49,21 +49,22 @@ export interface Coworking {
 
 export interface User {
     id: string;
-    name?: string | null;
-    username?: string | null;
-    bio?: string | null;
-    age?: number | null;
-    email?: string | null;
-    emailVerified?: Date | null;
-    password?: string | null;
-    image?: string | null;
-    accounts: Account[];
-    sessions: Session[];
+    clerkId?: string | null;
+    birthday?: string | Date | null;
+    image: string | null;
+    email?: string;
+    externalId?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    name: string;
+    createdAt: Date;
+    lastSignInAt?: Date | null;
+    profileImageUrl?: string | null;
+    username: string;
     comments: Comment[];
     posts: Post[];
     reviews: Review[];
     places: Coworking[];
-    createdAt: Date;
 }
 
 export interface Account {
@@ -135,7 +136,8 @@ export interface Review {
     id: string;
     content?: string | null;
     userId?: string | null;
-    user?: User;
+    user?: User | null;
+    placeId?: string | null;
     coworkingId: string;
     coworking?: Coworking;
     calmRating: number;

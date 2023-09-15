@@ -11,7 +11,11 @@ export const getOneCoworkingInfos = async (coworkingId: string) => {
             imagesSelected: true,
             userImages: true,
             comments: true,
-            reviews: true,
+            reviews: {
+                include: {
+                    user: true,
+                },
+            },
         },
     });
     return coworking;

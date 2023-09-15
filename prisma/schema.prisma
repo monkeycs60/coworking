@@ -29,7 +29,6 @@ model User {
   posts        Post[] 
   reviews       Review[]
   places        Coworking[]
-  // createdAt     DateTime  @default(now())
 }
 
 model VerificationToken {

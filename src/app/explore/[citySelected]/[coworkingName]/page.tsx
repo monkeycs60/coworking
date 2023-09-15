@@ -8,6 +8,7 @@ const page = async ({
 }) => {
     const coworkingId = searchParams.coworkingId;
     const coworking = await getOneCoworkingInfos(coworkingId);
+    console.log(coworking);
 
     return coworking ? <CoworkingSelectedCard coworking={coworking} /> : null;
 };
