@@ -1,3 +1,4 @@
+import { Coworking } from './coworking';
 interface GoogleMapsProps {
     height: string;
     width: string;
@@ -14,9 +15,12 @@ export type Location = {
     name: string; // Add more properties if needed for InfoWindow
 };
 
+type OmittedCoworking = Omit<Coworking, 'imagesSelected' | 'userImages'>;
+
 export interface GoogleMapsPropsWithLocations extends GoogleMapsProps {
     locations: Location[];
     onMarkerClick?: (location: Location) => void;
     onCloseClick?: () => void;
     selectedCowork?: Location | null;
+    coworking?: OmittedCoworking[];
 }

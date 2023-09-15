@@ -4,13 +4,7 @@ import { centerOfFrance } from '@/lib/const/centerOfFrance';
 import getCoworkingsCoords from '@/lib/functions/getCoworkingsCoords';
 
 const page = async () => {
-    const coworkings = await prisma.coworking.findMany({
-        select: {
-            latitude: true,
-            longitude: true,
-            name: true,
-        },
-    });
+    const coworkings = await prisma.coworking.findMany();
 
     const coworkingLocations = getCoworkingsCoords(coworkings);
 
@@ -27,6 +21,7 @@ const page = async () => {
                     centerOfMap={centerOfFrance}
                     coworkingLocations={coworkingLocations}
                     zoom={5}
+                    coworking={coworkings}
                 />
             </div>
         </section>

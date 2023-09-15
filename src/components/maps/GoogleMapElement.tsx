@@ -20,6 +20,7 @@ const GoogleMapElement = ({
     onMarkerClick,
     onCloseClick,
     selectedCowork,
+    coworking,
 }: GoogleMapsPropsWithLocations) => {
     const googleMapsApiKey: string | undefined =
         process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -27,6 +28,8 @@ const GoogleMapElement = ({
     if (!googleMapsApiKey) {
         return <div>Missing Google Maps API Key</div>;
     }
+
+    console.log(coworking);
     return (
         <div>
             <LoadScript googleMapsApiKey={googleMapsApiKey}>

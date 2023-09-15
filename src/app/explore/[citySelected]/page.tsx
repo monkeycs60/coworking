@@ -26,6 +26,7 @@ const page = async ({
                 centerOfMap={cityCenterCoords}
                 coworkingLocations={coworkingLocations}
                 zoom={12}
+                coworking={coworkings}
             />
             <div className='flex max-h-[700px] w-full flex-wrap gap-8 overflow-y-auto bg-slate-500 p-4'>
                 {coworkings.map((coworking) => (

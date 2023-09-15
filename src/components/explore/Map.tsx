@@ -1,6 +1,7 @@
 'use client';
 
 import GoogleMapElement from '../maps/GoogleMapElement';
+import { Coworking } from '@/types/coworking';
 import { useState } from 'react';
 
 interface CoworkingLocation {
@@ -8,6 +9,8 @@ interface CoworkingLocation {
     lng: number;
     name: string;
 }
+
+type OmittedCoworking = Omit<Coworking, 'imagesSelected' | 'userImages'>;
 
 interface MapProps {
     height: string;
@@ -18,6 +21,7 @@ interface MapProps {
     };
     coworkingLocations: CoworkingLocation[];
     zoom: number;
+    coworking?: OmittedCoworking[];
 }
 
 const Map = ({
@@ -26,6 +30,7 @@ const Map = ({
     centerOfMap,
     coworkingLocations,
     zoom,
+    coworking,
 }: MapProps) => {
     const [selectedCowork, setSelectedCowork] =
         useState<CoworkingLocation | null>(null);
@@ -38,6 +43,8 @@ const Map = ({
         setSelectedCowork(null);
     };
 
+    console.log(coworking);
+
     return (
         <GoogleMapElement
             height={height}
@@ -48,6 +55,7 @@ const Map = ({
             onMarkerClick={handleMarkerClick}
             onCloseClick={handleCloseClick}
             selectedCowork={selectedCowork}
+            coworking={coworking}
         />
     );
 };
