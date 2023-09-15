@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
 
     console.log('clerk user from backend', user);
 
+    // Impeed unlogged user to send request
     if (!userId) {
         return NextResponse.json({
             error: "L'utilisateur n'est pas authentifié.",
@@ -23,37 +24,37 @@ export async function POST(req: NextRequest) {
     }
 
     // Step 1: Check if User Exists in the local User table.
-    // const existingUser = await prisma.user.findUnique({
-    //     where: { id: userId },
-    // });
+    const existingUser = await prisma.user.findUnique({
+        where: { id: userId },
+    });
 
-    // console.log(existingUser);
+    console.log(existingUser);
 
-    // // Step 2: If the user doesn't exist, insert a basic record into the User table.
-    // if (!existingUser) {
-    //     await prisma.user.upsert({
-    //         where: { email: user?.emailAddresses[0].emailAddress },
-    //         update: {
-    //             username: user?.username,
-    //             name: `${user?.firstName} ${user?.lastName}`,
-    //             email: user?.emailAddresses[0].emailAddress,
-    //             image: user?.imageUrl,
-    //             createdAt: user?.createdAt
-    //                 ? new Date(user.createdAt)
-    //                 : new Date(),
-    //         },
-    //         create: {
-    //             id: userId,
-    //             username: user?.username,
-    //             name: `${user?.firstName} ${user?.lastName}`,
-    //             email: user?.emailAddresses[0].emailAddress,
-    //             image: user?.imageUrl,
-    //             createdAt: user?.createdAt
-    //                 ? new Date(user.createdAt)
-    //                 : new Date(),
-    //         },
-    //     });
-    // }
+    // Step 2: If the user doesn't exist, insert a basic record into the User table.
+    if (!existingUser) {
+        await prisma.user.upsert({
+            where: { email: user?.emailAddresses[0].emailAddress },
+            update: {
+                username: user?.username,
+                name: `${user?.firstName} ${user?.lastName}`,
+                email: user?.emailAddresses[0].emailAddress,
+                image: user?.imageUrl,
+                createdAt: user?.createdAt
+                    ? new Date(user.createdAt)
+                    : new Date(),
+            },
+            create: {
+                id: userId,
+                username: user?.username,
+                name: `${user?.firstName} ${user?.lastName}`,
+                email: user?.emailAddresses[0].emailAddress,
+                image: user?.imageUrl,
+                createdAt: user?.createdAt
+                    ? new Date(user.createdAt)
+                    : new Date(),
+            },
+        });
+    }
 
     const placeData = (await req.json()) as AddPlaceSchemaType;
     console.log(placeData);
