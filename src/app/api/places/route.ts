@@ -145,7 +145,11 @@ export async function POST(req: NextRequest) {
                         : undefined,
             },
             include: {
-                reviews: true,
+                reviews: {
+                    include: {
+                        user: true,
+                    },
+                },
             },
         });
 
@@ -156,7 +160,8 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({
             message: 'ok coworking ajouté à la bdd',
-            data: savedPlace, reviewWithUser,
+            data: savedPlace,
+            reviewWithUser,
         });
     } catch (error: any) {
         console.error(error);

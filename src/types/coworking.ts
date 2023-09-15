@@ -1,21 +1,74 @@
-export interface Coworking {
+export type User = {
     id: string;
-    userId?: string | null;
+    birthday: Date | null;
+    email: string;
+    externalId: string | null;
+    firstName: string | null;
+    lastName: string | null;
+    name: string;
+    createdAt: Date;
+    lastSignInAt: Date | null;
+    profileImageUrl: string | null;
+    username: string;
+    image: string;
+};
+
+export type Review = {
+    id: string;
+    content: string;
+    userId: string;
+    placeId: string | null;
+    coworkingId: string;
+    calmRating: number;
+    equipRating: number;
+    foodRating: number;
+    feelingRating: number;
+    createdAt: Date;
+    updatedAt: Date;
+    user: User;
+};
+
+export type ImageSelected = {
+    id: string;
+    url: string;
+    coworkingId: string;
+    coworking?: Coworking;
+    createdAt: Date;
+    updatedAt: Date;
+};
+
+export interface UserImage {
+    id: string;
+    url: string;
+    coworkingId: string;
+    coworking?: Coworking;
+    userId: string;
     user?: User;
-    placeId?: string | null;
-    longitude?: number | null;
-    latitude?: number | null;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export type OpeningHour = {
+    id: string;
+    coworkingId: string;
+    weekdayText: string[];
+    createdAt: Date;
+    updatedAt: Date;
+};
+
+export type Coworking = {
+    id: string;
+    userId: string | null;
+    placeId: string;
+    longitude: number;
+    latitude: number;
     name: string;
     address: string;
     city: string;
-    phoneNumber?: string | null;
-    website?: string | null;
+    phoneNumber: string;
+    website: string;
     description: string;
-    openingHours?: OpeningHour[];
-    imagesSelected: imageSelected[];
-    userImages?: UserImage[];
-    comments?: Comment[];
-    espressoPrice?: string | null;
+    espressoPrice: string;
     hasPrivacy: boolean;
     hasParking: boolean;
     hasWiFi: boolean;
@@ -42,119 +95,11 @@ export interface Coworking {
     discreteMusic: boolean;
     randomMusic: boolean;
     loudMusic: boolean;
-    reviews?: Review[];
     createdAt: Date;
     updatedAt: Date;
-}
-
-export interface User {
-    id: string;
-    clerkId?: string | null;
-    birthday?: string | Date | null;
-    image: string | null;
-    email?: string;
-    externalId?: string | null;
-    firstName?: string | null;
-    lastName?: string | null;
-    name: string;
-    createdAt: Date;
-    lastSignInAt?: Date | null;
-    profileImageUrl?: string | null;
-    username: string;
-    comments: Comment[];
-    posts: Post[];
+    openingHours: OpeningHour[];
+    imagesSelected: ImageSelected[];
+    userImages: any[]; // Depending on the structure of userImages, you might want to replace any with an appropriate export type
+    comments: any[]; // Depending on the structure of comments, you might want to replace any with an appropriate export type
     reviews: Review[];
-    places: Coworking[];
-}
-
-export interface Account {
-    id: string;
-    userId: string;
-    type: string;
-    provider: string;
-    providerAccountId: string;
-    refresh_token?: string | null;
-    access_token?: string | null;
-    expires_at?: number | null;
-    refresh_token_expires_in?: number | null;
-    token_type?: string | null;
-    scope?: string | null;
-    id_token?: string | null;
-    session_state?: string | null;
-    user: User;
-}
-
-export interface Session {
-    id: string;
-    sessionToken: string;
-    userId: string;
-    expires: Date;
-    user: User;
-}
-
-export interface OpeningHour {
-    id: string;
-    coworkingId: string;
-    coworking?: Coworking;
-    weekdayText: string[];
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-export interface imageSelected {
-    id: string;
-    url: string;
-    coworkingId: string;
-    coworking?: Coworking;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-export interface UserImage {
-    id: string;
-    url: string;
-    coworkingId: string;
-    coworking?: Coworking;
-    userId: string;
-    user?: User;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-export interface Comment {
-    id: string;
-    content: string;
-    placeId: string;
-    userId: string;
-    user?: User;
-    place?: Coworking;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-export interface Review {
-    id: string;
-    content?: string | null;
-    userId?: string | null;
-    user?: User | null;
-    placeId?: string | null;
-    coworkingId: string;
-    coworking?: Coworking;
-    calmRating: number;
-    equipRating: number;
-    foodRating: number;
-    feelingRating: number;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-export interface Post {
-    id: string;
-    title: string;
-    content: string;
-    published: boolean;
-    authorId: string;
-    author: User;
-    createdAt: Date;
-    updatedAt: Date;
-}
+};

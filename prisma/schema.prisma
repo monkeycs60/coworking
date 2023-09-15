@@ -13,7 +13,6 @@ datasource db {
 
 model User {
   id            String    @id @default(cuid())
-  clerkId                    String?       @unique
   birthday                   String?       // Optional since it's empty in the example
   email                      String?        @unique
   externalId                 String?

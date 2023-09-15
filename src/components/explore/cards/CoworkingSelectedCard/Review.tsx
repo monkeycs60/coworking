@@ -1,6 +1,6 @@
-import { Review } from '@/types/coworking';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
+import { Review } from '@/types/coworking';
 const Review = ({
     review,
     defaultImage,
