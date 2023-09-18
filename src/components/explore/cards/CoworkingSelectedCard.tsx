@@ -2,9 +2,9 @@ import Map from '@/components/explore/Map';
 import Image from 'next/image';
 import { Coworking } from '@/types/coworking';
 import Characteristics from './CoworkingSelectedCard/Characteristics';
-import Review from './CoworkingSelectedCard/Review';
+import Review from './CoworkingSelectedCard/Review/Review';
 import OpeningSchedule from './CoworkingSelectedCard/OpeningSchedule';
-import CreateReview from './CoworkingSelectedCard/CreateReview';
+import CreateReview from './CoworkingSelectedCard/Review/CreateReview';
 import { averageRatingFromReviews } from '@/lib/functions/averageRatingFromReviews';
 import { Star } from 'lucide-react';
 
