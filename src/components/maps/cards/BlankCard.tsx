@@ -2,6 +2,7 @@ import React from 'react';
 import { Marker, InfoWindow } from '@react-google-maps/api';
 import { BlankCardProps } from '@/types/googleMaps';
 import '../../../styles/googleMapCard.css';
+import { X } from 'lucide-react';
 
 const BlankCard = ({
     clusterer,
@@ -27,9 +28,12 @@ const BlankCard = ({
                         lng: selectedCowork.lng,
                     }}
                 >
-                    <div>
+                    <div className='h-full w-full bg-blue-400 p-8 '>
                         <h1>{selectedCowork.name}</h1>
-                        <p>I luv u Soliine</p>
+                        <X
+                            className='absolute right-2 top-2 cursor-pointer'
+                            onClick={onCloseClick}
+                        />
                     </div>
                 </InfoWindow>
             )}

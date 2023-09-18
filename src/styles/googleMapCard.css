@@ -1,10 +1,13 @@
-/* .gm-style-iw-d::before {
-  content: 'X';
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: red; 
-  color: white;
-  padding: 25px;
-  cursor: pointer;
-} */
+.gm-style-iw,
+.gm-style-iw-c {
+    width: auto;
+    height: auto;
+    background: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gm-ui-hover-effect {
+    display: none !important;
+}

@@ -28,13 +28,7 @@ const PreviewCard = ({
                         lng: coworking?.longitude as number,
                     }}
                 >
-                    <div
-                        style={{
-                            backgroundColor: 'white',
-                            padding: '16px',
-                            borderRadius: '8px',
-                        }}
-                    >
+                    <div className='h-full w-full bg-red-400' style={{}}>
                         <h1>{coworking?.name}</h1>
                         <p>{coworking?.address}</p>
                         <p>{coworking?.city}</p>

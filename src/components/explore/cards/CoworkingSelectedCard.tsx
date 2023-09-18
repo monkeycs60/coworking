@@ -6,11 +6,7 @@ import Review from './CoworkingSelectedCard/Review';
 import OpeningSchedule from './CoworkingSelectedCard/OpeningSchedule';
 import CreateReview from './CoworkingSelectedCard/CreateReview';
 
-const CoworkingSelectedCard = ({
-    coworking,
-}: {
-    coworking: Coworking;
-}) => {
+const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
     const defaultImage = '/cowork-placeholder.jpg';
     const coworkingCenter = {
         lat: coworking?.latitude as number,
@@ -21,7 +17,7 @@ const CoworkingSelectedCard = ({
         lng: coworking?.longitude as number,
         name: coworking?.name as string,
     };
-    console.log(coworking.reviews);
+    console.log(coworking.address);
 
     return (
         <div className='my-16 flex flex-col gap-10'>
