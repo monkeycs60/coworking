@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ReviewSchema, CreateReviewType } from '@/types/createReview';
 import { StarRatingCalmEquipFood } from '@/components/ajouter-spot/form/StarRatingCalmEquipFood';
 import '../../../../../styles/modalReview.css';
+import { redirect } from 'next/navigation';
 
 const CreateReview = ({
     placeId,
@@ -59,6 +60,7 @@ const CreateReview = ({
             console.error(result.error);
         } else {
             console.log('Review submitted successfully!');
+            redirect('/');
             // Handle success, e.g., close the modal or show a success message.
         }
     };
