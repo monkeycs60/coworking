@@ -99,29 +99,32 @@ const CreateReview = ({
                         />
                         {errors.content && <p>salut la famille</p>}
 
-                        <div>
-                            <span className='mb-[20px] text-xs italic text-black/50'>
-                                Aide-nous à affiner à l'aide de quelques
-                                notes
+                        <div className='flex flex-col gap-3'>
+                            <span className='text-xs italic text-black/50'>
+                                Aide-nous à affiner à l aide de quelques notes
                             </span>
-                            <StarRatingCalmEquipFood
-                                control={control}
-                                errors={errors}
-                            />
-                            {errors.content && <p>{errors.content.message}</p>}
-                            {errors.root && <p>{errors.root.message}</p>}
-                            {errors.calmRating && (
-                                <p>{errors.calmRating.message}</p>
-                            )}
-                            {errors.equipRating && (
-                                <p>{errors.equipRating.message}</p>
-                            )}
-                            {errors.foodRating && (
-                                <p>{errors.foodRating.message}</p>
-                            )}
-                            {errors.feelingRating && (
-                                <p>{errors.feelingRating.message}</p>
-                            )}
+                            <div>
+                                <StarRatingCalmEquipFood
+                                    control={control}
+                                    errors={errors}
+                                />
+                                {errors.content && (
+                                    <p>{errors.content.message}</p>
+                                )}
+                                {errors.root && <p>{errors.root.message}</p>}
+                                {errors.calmRating && (
+                                    <p>{errors.calmRating.message}</p>
+                                )}
+                                {errors.equipRating && (
+                                    <p>{errors.equipRating.message}</p>
+                                )}
+                                {errors.foodRating && (
+                                    <p>{errors.foodRating.message}</p>
+                                )}
+                                {errors.feelingRating && (
+                                    <p>{errors.feelingRating.message}</p>
+                                )}
+                            </div>
                         </div>
                         <Button type='submit'>Soumettre</Button>
                     </form>
