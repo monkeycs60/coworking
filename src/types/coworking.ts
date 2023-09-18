@@ -127,12 +127,12 @@ export interface UserImage {
 
 export interface Review {
     id: CUID;
-    content?: string;
-    userId?: CUID;
-    placeId: string;
-    user: User;
-    coworkingId: CUID;
-    coworking: Coworking;
+    content?: string | null;
+    userId?: CUID | null;
+    placeId: string | null;
+    user?: User;
+    coworkingId?: CUID;
+    coworking?: Coworking;
     calmRating: number;
     equipRating: number;
     foodRating: number;

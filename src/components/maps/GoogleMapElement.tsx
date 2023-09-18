@@ -1,10 +1,6 @@
 'use client';
 
-import {
-    GoogleMap,
-    LoadScript,
-    MarkerClusterer,
-} from '@react-google-maps/api';
+import { GoogleMap, LoadScript, MarkerClusterer } from '@react-google-maps/api';
 import { GoogleMapsPropsWithLocations } from '@/types/googleMaps';
 import React from 'react';
 import { googleMapsStyle } from '@/lib/const/googleMapsStyle';
@@ -21,6 +17,7 @@ const GoogleMapElement = ({
     onCloseClick,
     selectedCowork,
     coworkings,
+    coworkAdress,
 }: GoogleMapsPropsWithLocations) => {
     const googleMapsApiKey: string | undefined =
         process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -54,16 +51,25 @@ const GoogleMapElement = ({
                         {(clusterer) => (
                             <>
                                 {coworkings
-                                    ? coworkings.map((coworking, index) => (
-                                          <PreviewCard
-                                              key={index}
-                                              coworking={coworking}
-                                              clusterer={clusterer}
-                                              selectedCowork={selectedCowork}
-                                              onMarkerClick={onMarkerClick}
-                                              onCloseClick={onCloseClick}
-                                          />
-                                      ))
+                                    ? coworkings.map((coworking, index) => {
+                                          const coworkingReviews =
+                                              coworking.reviews;
+                                          return (
+                                              <PreviewCard
+                                                  key={index}
+                                                  coworking={coworking}
+                                                  coworkingReviews={
+                                                      coworkingReviews
+                                                  }
+                                                  clusterer={clusterer}
+                                                  selectedCowork={
+                                                      selectedCowork
+                                                  }
+                                                  onMarkerClick={onMarkerClick}
+                                                  onCloseClick={onCloseClick}
+                                              />
+                                          );
+                                      })
                                     : locations.map((location, index) => (
                                           <BlankCard
                                               key={index}
@@ -72,6 +78,7 @@ const GoogleMapElement = ({
                                               onCloseClick={onCloseClick}
                                               selectedCowork={selectedCowork}
                                               location={location}
+                                              coworkAdress={coworkAdress}
                                           />
                                       ))}
                             </>

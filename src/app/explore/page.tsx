@@ -8,6 +8,7 @@ const page = async () => {
         include: {
             imagesSelected: true,
             userImages: true,
+            reviews: true,
         },
     });
 

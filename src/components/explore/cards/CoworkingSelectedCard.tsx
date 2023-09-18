@@ -96,6 +96,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                     height='300px'
                     width='500px'
                     key={coworking.id}
+                    coworkAdress={coworking.address}
                 />
             </div>
         </div>

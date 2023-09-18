@@ -22,6 +22,7 @@ interface MapProps {
     coworkingLocations: CoworkingLocation[];
     zoom: number;
     coworkings?: Coworking[];
+    coworkAdress?: string;
 }
 
 const Map = ({
@@ -31,6 +32,7 @@ const Map = ({
     coworkingLocations,
     zoom,
     coworkings,
+    coworkAdress,
 }: MapProps) => {
     const [selectedCowork, setSelectedCowork] =
         useState<CoworkingLocation | null>(null);
@@ -54,6 +56,7 @@ const Map = ({
             onCloseClick={handleCloseClick}
             selectedCowork={selectedCowork}
             coworkings={coworkings}
+            coworkAdress={coworkAdress}
         />
     );
 };

@@ -1,0 +1,20 @@
+.gm-style-iw,
+.gm-style-iw-c {
+    width: 310px !important;
+    height: 240px !important;
+    padding: 0 !important;
+    background: blue;
+    display: flex;
+    overflow: visible !important;
+}
+
+/* child of iw (above) */
+.gm-style-iw-d {
+    width: 310px !important;
+    height: 240px !important;
+    background: yellow;
+    overflow: visible !important;
+}
+.gm-ui-hover-effect {
+    display: none !important;
+}

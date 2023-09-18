@@ -21,11 +21,7 @@ const Review = ({
     const imageUrl = review.user?.image || defaultImage; // Fallback to a default image
     const username = review.user?.username || 'Anonymous';
     const name = review.user?.firstName || 'Anonymous';
-    console.log(review);
-
-    console.log(name);
-    console.log(username);
-
+  
     const averageRating =
         (review.calmRating +
             review.equipRating +

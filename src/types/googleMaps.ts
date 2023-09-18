@@ -1,4 +1,4 @@
-import { Coworking } from './coworking';
+import { Coworking, Review } from './coworking';
 interface GoogleMapsProps {
     height: string;
     width: string;
@@ -23,6 +23,7 @@ export interface GoogleMapsPropsWithLocations extends GoogleMapsProps {
     onCloseClick?: () => void;
     selectedCowork?: Location | null;
     coworkings?: Coworking[];
+    coworkAdress?: string;
 }
 
 export interface PreviewCardProps {
@@ -31,6 +32,7 @@ export interface PreviewCardProps {
     onCloseClick?: () => void;
     selectedCowork?: Location | null;
     coworking?: Coworking;
+    coworkingReviews?: Review[];
 }
 
 export interface BlankCardProps {
@@ -40,4 +42,5 @@ export interface BlankCardProps {
     selectedCowork?: Location | null;
     coworking?: Coworking;
     location: Location;
+    coworkAdress?: string;
 }

@@ -11,6 +11,9 @@ const page = async ({
     const coworking = await getOneCoworkingInfos(coworkingId);
     console.log(coworking);
 
+    // const coworkingRatings = await getCoworkingRatings(coworkingId);
+   
+
     return coworking ? (
         <CoworkingSelectedCard coworking={coworking as Coworking} />
     ) : null;

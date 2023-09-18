@@ -10,8 +10,9 @@ const BlankCard = ({
     onCloseClick,
     selectedCowork,
     location,
+    coworkAdress,
 }: BlankCardProps) => {
-    console.log(location);
+    console.log(coworkAdress);
 
     return (
         <React.Fragment>
@@ -28,10 +29,11 @@ const BlankCard = ({
                         lng: selectedCowork.lng,
                     }}
                 >
-                    <div className='h-full w-full bg-blue-400 p-8 '>
-                        <h1>{selectedCowork.name}</h1>
+                    <div className='h-full w-full  p-2 font-inter text-sm'>
+                        <h1 className='font-semibold'>{selectedCowork.name}</h1>
+                        <h1>{coworkAdress}</h1>
                         <X
-                            className='absolute right-2 top-2 cursor-pointer'
+                            className='absolute right-2 top-2 h-4 w-4 cursor-pointer text-primary'
                             onClick={onCloseClick}
                         />
                     </div>
