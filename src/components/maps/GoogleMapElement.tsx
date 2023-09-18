@@ -26,6 +26,8 @@ const GoogleMapElement = ({
         return <div>Missing Google Maps API Key</div>;
     }
 
+    console.log(coworkings);
+
     return (
         <div>
             <LoadScript googleMapsApiKey={googleMapsApiKey}>
@@ -55,19 +57,26 @@ const GoogleMapElement = ({
                                           const coworkingReviews =
                                               coworking.reviews;
                                           return (
-                                              <PreviewCard
-                                                  key={index}
-                                                  coworking={coworking}
-                                                  coworkingReviews={
-                                                      coworkingReviews
-                                                  }
-                                                  clusterer={clusterer}
-                                                  selectedCowork={
-                                                      selectedCowork
-                                                  }
-                                                  onMarkerClick={onMarkerClick}
-                                                  onCloseClick={onCloseClick}
-                                              />
+                                              <div key={index}>
+                                                  <PreviewCard
+                                                      key={index}
+                                                      coworking={coworking}
+                                                      coworkingReviews={
+                                                          coworkingReviews
+                                                      }
+                                                      clusterer={clusterer}
+                                                      selectedCowork={
+                                                          selectedCowork
+                                                      }
+                                                      onMarkerClick={
+                                                          onMarkerClick
+                                                      }
+                                                      onCloseClick={
+                                                          onCloseClick
+                                                      }
+                                                  />
+                                                  <span>{coworkAdress}</span>
+                                              </div>
                                           );
                                       })
                                     : locations.map((location, index) => (

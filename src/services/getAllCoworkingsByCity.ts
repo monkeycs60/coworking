@@ -8,6 +8,7 @@ export const getAllCoworkingsByCity = async (city: string) => {
         include: {
             imagesSelected: true,
             userImages: true,
+            reviews: true,
         },
     });
     return coworkings;

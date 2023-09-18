@@ -41,50 +41,60 @@ const PreviewCard = ({
                     }}
                     options={{}}
                 >
-                    <Link
-                        href={{
-                            pathname: `/explore/${coworking?.city}/${coworking?.name}`,
-                            query: { coworkingId: coworking?.id },
-                        }}
-                        className='h-full w-[200px] space-y-3 bg-red-400 font-inter'
+                    <div
+                        className='flex h-[240px] w-[310px] flex-col gap-4 bg-gray-200 font-inter'
                         style={{}}
                     >
-                        <div className='relative h-[100px] w-full'>
-                            <Image
-                                src={
-                                    coworking?.userImages?.[0]?.url ||
-                                    coworking?.imagesSelected?.[0]?.url ||
-                                    '/cowork-placeholder.jpg'
-                                }
-                                alt='coucou'
-                                fill
-                                className='object-cover'
-                            />
-                        </div>
-                        <div className='flex flex-col gap-1 px-2'>
+                        <Link
+                            href={{
+                                pathname: `/explore/${coworking?.city}/${coworking?.name}`,
+                                query: { coworkingId: coworking?.id },
+                            }}
+                            className='h-[100px] w-[310px] bg-primary'
+                        >
+                            <div className='relative h-full w-full'>
+                                <Image
+                                    src={
+                                        coworking?.userImages?.[0]?.url ||
+                                        coworking?.imagesSelected?.[0]?.url ||
+                                        '/cowork-placeholder.jpg'
+                                    }
+                                    alt='coucou'
+                                    fill
+                                    className='object-cover'
+                                />
+                            </div>
+                        </Link>
+                        <Link
+                            href={{
+                                pathname: `/explore/${coworking?.city}/${coworking?.name}`,
+                                query: { coworkingId: coworking?.id },
+                            }}
+                            className='flex flex-col gap-1 px-2'
+                        >
                             <div className='flex w-full justify-between'>
                                 <h1 className='text-base font-semibold'>
                                     {coworking?.name}
                                 </h1>
                                 <div className='flex items-center gap-1'>
-                                    <Star fill='black' className='h-4 w-4 ' />
+                                    <Star fill='#FFC107' className='h-4 w-4 ' />
                                     <span>{averageRating}</span>
                                     <p>({coworking?.reviews?.length})</p>
                                 </div>
                             </div>
                             <p>{coworking?.city}</p>
-                        </div>
+                        </Link>
                         <div className='flex flex-col gap-1 px-2'>
-                            <p className='line-clamp-3'>
+                            <p className='line-clamp-2'>
                                 {coworking?.description}
                             </p>
                         </div>
                         {/* ... add other relevant details here ... */}
                         <X
-                            className='absolute right-2 top-2 h-4 w-4 cursor-pointer text-primary'
+                            className='absolute right-1 top-1 h-8 w-8 cursor-pointer rounded-2xl border-2 bg-white/60 text-black'
                             onClick={onCloseClick}
                         />
-                    </Link>
+                    </div>
                 </InfoWindow>
             )}
         </React.Fragment>

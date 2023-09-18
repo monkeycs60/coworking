@@ -24,7 +24,7 @@ const OpeningSchedule = ({ coworking }: { coworking: Coworking }) => {
               )
             : new Array(7).fill("Pas d'info"); // Fills array with "Pas d'info" as placeholders
     return (
-        <div className='my-8'>
+        <div className='my-8 font-inter'>
             <Table className='h-[300px] w-[400px]'>
                 <TableCaption>Horaires ouverture</TableCaption>
                 <TableBody>

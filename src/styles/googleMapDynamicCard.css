@@ -1,3 +1,7 @@
+.gm-style {
+    border-radius: 25px !important;
+}
+
 .gm-style-iw,
 .gm-style-iw-c {
     width: 310px !important;
@@ -6,13 +10,17 @@
     background: blue;
     display: flex;
     overflow: visible !important;
+    border-radius: 25px !important;
 }
 
+.gm-style-iw-c {
+    border-radius: 25px !important;
+}
 /* child of iw (above) */
 .gm-style-iw-d {
     width: 310px !important;
     height: 240px !important;
-    background: yellow;
+    background: rgb(148, 148, 146);
     overflow: visible !important;
 }
 .gm-ui-hover-effect {

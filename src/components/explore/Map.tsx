@@ -10,8 +10,6 @@ interface CoworkingLocation {
     name: string;
 }
 
-type OmittedCoworking = Omit<Coworking, 'imagesSelected' | 'userImages'>;
-
 interface MapProps {
     height: string;
     width: string;

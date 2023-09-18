@@ -28,7 +28,7 @@ const CityInput = ({ cities }: CityInputProps) => {
     } = useSearchCity();
 
     return (
-        <div className='2xl:w-[100%]'>
+        <div className='w-full 2xl:w-[100%]'>
             <input
                 type='text'
                 placeholder='Entrez une ville'
