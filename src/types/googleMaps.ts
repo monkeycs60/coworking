@@ -22,5 +22,22 @@ export interface GoogleMapsPropsWithLocations extends GoogleMapsProps {
     onMarkerClick?: (location: Location) => void;
     onCloseClick?: () => void;
     selectedCowork?: Location | null;
-    coworking?: OmittedCoworking[];
+    coworkings?: Coworking[];
+}
+
+export interface PreviewCardProps {
+    clusterer?: any;
+    onMarkerClick?: (location: Location) => void;
+    onCloseClick?: () => void;
+    selectedCowork?: Location | null;
+    coworking?: Coworking;
+}
+
+export interface BlankCardProps {
+    clusterer?: any;
+    onMarkerClick?: (location: Location) => void;
+    onCloseClick?: () => void;
+    selectedCowork?: Location | null;
+    coworking?: Coworking;
+    location: Location;
 }

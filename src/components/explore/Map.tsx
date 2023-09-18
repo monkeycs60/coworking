@@ -21,7 +21,7 @@ interface MapProps {
     };
     coworkingLocations: CoworkingLocation[];
     zoom: number;
-    coworking?: OmittedCoworking[];
+    coworkings?: Coworking[];
 }
 
 const Map = ({
@@ -30,7 +30,7 @@ const Map = ({
     centerOfMap,
     coworkingLocations,
     zoom,
-    coworking,
+    coworkings,
 }: MapProps) => {
     const [selectedCowork, setSelectedCowork] =
         useState<CoworkingLocation | null>(null);
@@ -43,8 +43,6 @@ const Map = ({
         setSelectedCowork(null);
     };
 
-    console.log(coworking);
-
     return (
         <GoogleMapElement
             height={height}
@@ -55,7 +53,7 @@ const Map = ({
             onMarkerClick={handleMarkerClick}
             onCloseClick={handleCloseClick}
             selectedCowork={selectedCowork}
-            coworking={coworking}
+            coworkings={coworkings}
         />
     );
 };

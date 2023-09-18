@@ -3,13 +3,13 @@
 import {
     GoogleMap,
     LoadScript,
-    Marker,
     MarkerClusterer,
-    InfoWindow,
 } from '@react-google-maps/api';
 import { GoogleMapsPropsWithLocations } from '@/types/googleMaps';
 import React from 'react';
 import { googleMapsStyle } from '@/lib/const/googleMapsStyle';
+import PreviewCard from './cards/PreviewCard';
+import BlankCard from './cards/BlankCard';
 
 const GoogleMapElement = ({
     height,
@@ -20,7 +20,7 @@ const GoogleMapElement = ({
     onMarkerClick,
     onCloseClick,
     selectedCowork,
-    coworking,
+    coworkings,
 }: GoogleMapsPropsWithLocations) => {
     const googleMapsApiKey: string | undefined =
         process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -29,7 +29,6 @@ const GoogleMapElement = ({
         return <div>Missing Google Maps API Key</div>;
     }
 
-    console.log(coworking);
     return (
         <div>
             <LoadScript googleMapsApiKey={googleMapsApiKey}>
@@ -42,7 +41,6 @@ const GoogleMapElement = ({
                     center={centerMap}
                     zoom={zoom}
                     options={{
-                        // Ajouter cette propriété
                         disableDefaultUI: false, // Désactive l'UI par défaut
                         styles: googleMapsStyle,
                     }}
@@ -55,36 +53,27 @@ const GoogleMapElement = ({
                     >
                         {(clusterer) => (
                             <>
-                                {locations.map((location, index) => (
-                                    <React.Fragment key={index}>
-                                        <Marker
-                                            key={index}
-                                            position={location}
-                                            clusterer={clusterer}
-                                            onClick={() =>
-                                                onMarkerClick?.(location)
-                                            }
-                                        />
-                                        {selectedCowork && (
-                                            <InfoWindow
-                                                onCloseClick={() =>
-                                                    onCloseClick
-                                                }
-                                                position={{
-                                                    lat: selectedCowork.lat,
-                                                    lng: selectedCowork.lng,
-                                                }}
-                                            >
-                                                <div>
-                                                    <h1>
-                                                        {selectedCowork.name}
-                                                    </h1>
-                                                    <p>I luv u Soliine</p>
-                                                </div>
-                                            </InfoWindow>
-                                        )}
-                                    </React.Fragment>
-                                ))}
+                                {coworkings
+                                    ? coworkings.map((coworking, index) => (
+                                          <PreviewCard
+                                              key={index}
+                                              coworking={coworking}
+                                              clusterer={clusterer}
+                                              selectedCowork={selectedCowork}
+                                              onMarkerClick={onMarkerClick}
+                                              onCloseClick={onCloseClick}
+                                          />
+                                      ))
+                                    : locations.map((location, index) => (
+                                          <BlankCard
+                                              key={index}
+                                              clusterer={clusterer}
+                                              onMarkerClick={onMarkerClick}
+                                              onCloseClick={onCloseClick}
+                                              selectedCowork={selectedCowork}
+                                              location={location}
+                                          />
+                                      ))}
                             </>
                         )}
                     </MarkerClusterer>
