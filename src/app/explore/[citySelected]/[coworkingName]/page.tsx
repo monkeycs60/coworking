@@ -15,7 +15,7 @@ const page = async ({
    
 
     return coworking ? (
-        <CoworkingSelectedCard coworking={coworking as Coworking} />
+        <CoworkingSelectedCard coworking={coworking as unknown as Coworking} />
     ) : null;
 };
 

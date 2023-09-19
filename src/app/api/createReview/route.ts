@@ -2,35 +2,24 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getAuth } from '@clerk/nextjs/server';
 import { ReviewSchema, CreateReviewType } from '@/types/createReview';
+import { currentUser } from '@clerk/nextjs';
+import type { User } from '@clerk/nextjs/api';
+import { authMiddleware } from '../middlewares/authMiddleware';
 
 export async function POST(req: NextRequest) {
-    const { userId } = getAuth(req);
-    console.log('samlut on essaie de faire');
-    console.log(userId);
-    
+   const authResponse = await authMiddleware(req);
+   if (authResponse) return authResponse; // Return if there's any response from the middleware
 
-    if (!userId) {
-        return NextResponse.json({
-            error: "L'utilisateur n'est pas authentifié.",
-        });
-    }
+   const { userId } = getAuth(req);
 
-    // Step 1: Validate the input with ZOD
-    // const parsedData = ReviewSchema.safeParse(req.json());
-    // console.log(parsedData);
-
-    // if (!parsedData.success) {
-    //     return NextResponse.json({ error: 'Invalid data provided' });
-    // }
     // Step 1: Directly get the data from the request
     const requestData: CreateReviewType = await req.json();
-    console.log(requestData);
 
     // Step 2: Check if the user has already left a review for the given place
     const existingReview = await prisma.review.findUnique({
         where: {
             userId_coworkingId: {
-                userId: userId,
+                userId: userId as string,
                 coworkingId: requestData.coworkingId,
             },
         },

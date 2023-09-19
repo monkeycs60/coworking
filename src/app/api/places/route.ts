@@ -3,59 +3,16 @@ import { prisma } from '@/lib/prisma';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { v4 as uuidv4 } from 'uuid';
 import { getAuth } from '@clerk/nextjs/server';
-import { currentUser } from '@clerk/nextjs';
-import type { User } from '@clerk/nextjs/api';
 import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
+import { authMiddleware } from '../middlewares/authMiddleware';
 
 export async function POST(req: NextRequest) {
+    const authResponse = await authMiddleware(req);
+    if (authResponse) return authResponse; // Return if there's any response from the middleware
+
     const { userId } = getAuth(req);
-    const user: User | null = await currentUser();
-
-    console.log('clerk user from backend', user);
-    console.log(user?.firstName);
-
-    // Impeed unlogged user to send request
-    if (!userId) {
-        return NextResponse.json({
-            error: "L'utilisateur n'est pas authentifié.",
-        });
-    }
-
-    // Step 1: Check if User Exists in the local User table.
-    const existingUser = await prisma.user.findUnique({
-        where: { id: userId },
-    });
-
-    console.log(existingUser);
-
-    // Step 2: If the user doesn't exist, insert a basic record into the User table.
-    if (!existingUser) {
-        await prisma.user.upsert({
-            where: { email: user?.emailAddresses[0].emailAddress },
-            update: {
-                username: user?.username,
-                name: `${user?.firstName} ${user?.lastName}`,
-                email: user?.emailAddresses[0].emailAddress,
-                image: user?.imageUrl,
-                createdAt: user?.createdAt
-                    ? new Date(user.createdAt)
-                    : new Date(),
-            },
-            create: {
-                id: userId,
-                username: user?.username,
-                name: `${user?.firstName} ${user?.lastName}`,
-                email: user?.emailAddresses[0].emailAddress,
-                image: user?.imageUrl,
-                createdAt: user?.createdAt
-                    ? new Date(user.createdAt)
-                    : new Date(),
-            },
-        });
-    }
 
     const placeData = (await req.json()) as AddPlaceSchemaType;
-    console.log(placeData);
 
     const formattedOpeningHours = placeData.openingHours
         ? {
