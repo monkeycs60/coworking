@@ -44,7 +44,7 @@ export const AddPlaceSchema = z.object({
     highWifi: z.boolean().optional(),
     mediumWifi: z.boolean().optional(),
     lowWifi: z.boolean().optional(),
-    reviewContent: z.string(),
+    reviewContent: z.string().nonempty(),
     calmRating: z.number().min(1).max(5),
     equipRating: z.number().min(1).max(5),
     foodRating: z.number().min(1).max(5),
