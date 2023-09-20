@@ -9,7 +9,7 @@ import OpeningHours from './form/OpeningHours';
 import ChooseGoogleImages from './form/ChooseGoogleImages';
 import { StarRatingCalmEquipFood } from './form/StarRatingCalmEquipFood';
 import { Button } from '../ui/button';
-import { Loader2 } from 'lucide-react';
+import { Loader2, AlertTriangle } from 'lucide-react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TextAreaField from './form/TextAreaField';
@@ -45,14 +45,15 @@ const AddPlace = () => {
     });
 
     return placeDetails ? (
-        <form onSubmit={handleSubmit(onSubmit)} className=''>
-            <div className='flex flex-col items-center justify-center gap-8 bg-zinc-200'>
+        <form onSubmit={handleSubmit(onSubmit)} className='mt-10'>
+            <div className='flex flex-col items-center justify-center gap-8'>
                 <InputField
                     register={register}
                     defaultValue={name ? name : ''}
                     label="Nom de l'établissement"
                     name='name'
                     error={errors.name}
+                    isMandatory={true}
                 />
                 <InputField
                     register={register}
@@ -60,6 +61,7 @@ const AddPlace = () => {
                     label='Adresse'
                     name='address'
                     error={errors.address}
+                    isMandatory={true}
                 />
                 <InputField
                     register={register}
@@ -71,6 +73,7 @@ const AddPlace = () => {
                     label='Ville'
                     name='city'
                     error={errors.city}
+                    isMandatory={true}
                 />
                 <InputField
                     register={register}
@@ -80,6 +83,7 @@ const AddPlace = () => {
                     label='Numéro de téléphone'
                     name='phoneNumber'
                     error={errors.phoneNumber}
+                    isMandatory={false}
                 />
                 <InputField
                     register={register}
@@ -87,6 +91,7 @@ const AddPlace = () => {
                     label='Site web'
                     name='website'
                     error={errors.website}
+                    isMandatory={false}
                 />
                 <TextAreaField
                     register={register}
@@ -96,8 +101,10 @@ const AddPlace = () => {
                             : ''
                     }
                     label='Description'
+                    subLabel="Décris le lieu, le cadre et comment le coworking s'y insère"
                     name='description'
                     error={errors.description}
+                    isMandatory={true}
                 />
 
                 <OpeningHours

@@ -4,12 +4,17 @@ import { useState, useRef, useEffect } from 'react';
 import { useFetchAutocomplete } from '@/hooks/useFetchAutocomplete';
 import { useFetchPlaceDetails } from '@/hooks/useFetchPlaceDetails';
 import { Place } from '@/types/placePredictions';
+import { X } from 'lucide-react';
+import { resetPredictions } from '@/redux/features/autoComplete-slice';
+import { useAppDispatch } from '@/hooks/useRedux';
 
 interface ComboBoxProps {
     onSelect: (place: Place) => void;
 }
 
 export function ComboBox({ onSelect }: ComboBoxProps) {
+    const dispatch = useAppDispatch();
+
     const [isOpen, setIsOpen] = useState(false);
     const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
     const inputRef = useRef<HTMLDivElement>(null);
@@ -42,7 +47,7 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
     }, [inputRef]);
 
     return (
-        <div ref={inputRef} className='relative z-[60] w-full bg-blue-300'>
+        <div ref={inputRef} className='relative z-[60] w-full'>
             <input
                 type='text'
                 value={inputField}
@@ -51,11 +56,22 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
                 placeholder='Rechercher un lieu...'
                 className='z-[60] h-14 w-full rounded-xl border border-gray-300 bg-white pl-3 pr-10 shadow-sm placeholder:indent-6 placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-indigo-500 '
             />
+            {inputField && (
+                <X
+                    className='absolute right-4 top-1/2 h-6 w-6 -translate-y-6 text-black/50'
+                    onClick={() => {
+                        setIsOpen(false);
+                        setSelectedPlace(null);
+                        setInput('');
+                        dispatch(resetPredictions());
+                    }}
+                />
+            )}
             {isOpen && (
                 <ul
                     style={{
                         position: 'absolute',
-                        width: '288px',
+                        width: 'auto',
                         maxHeight: '260px',
                         overflowY: 'scroll',
                         marginTop: '1px',
@@ -89,7 +105,11 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
                     ))}
                     {predictions.length === 0 && (
                         <li
-                            style={{ padding: '10px', zIndex: 60 }}
+                            style={{
+                                width: '100%',
+                                zIndex: 60,
+                                padding: '10px',
+                            }}
                             className='bg-gray-100'
                         >
                             Aucun lieu ne correspond à ta recherche

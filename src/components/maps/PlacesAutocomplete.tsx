@@ -8,7 +8,7 @@ const PlacesAutocomplete = () => {
     const placeDetails = useAppSelector((state) => state.placeDetails.details);
 
     return (
-        <div className='m-auto'>
+        <div className='m-auto w-full'>
             <ComboBox onSelect={(place) => console.log(place)} />
             {placeDetails && <AddPlace />}
         </div>

@@ -23,6 +23,9 @@ export const autocompleteSlice = createSlice({
 		setPredictions: (state, action: PayloadAction<Place[]>) => {
 			state.predictions = action.payload;
 		},
+		resetPredictions: (state) => {
+			state.predictions = [];
+		},
 		resetAutocomplete: (state) => {
 			state.input = '';
 			state.predictions = [];
@@ -30,7 +33,7 @@ export const autocompleteSlice = createSlice({
 	},
 });
 
-export const { setInput, setPredictions, resetAutocomplete } =
+export const { setInput, setPredictions, resetPredictions, resetAutocomplete } =
 	autocompleteSlice.actions;
 
 export default autocompleteSlice.reducer;

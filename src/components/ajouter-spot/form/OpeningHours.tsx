@@ -1,6 +1,12 @@
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
 import { getTimeFromDay } from '@/lib/functions/getTimeFromDay';
 import { PlaceDetail } from '@/types/placeDetails';
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from '@/components/ui/accordion';
 
 interface OpeningHoursProps {
     register: any;
@@ -33,7 +39,7 @@ const OpeningHours = ({
                 {...register(`openingHours.${index}`)}
                 id={`openingHours.${index}`}
                 name={`openingHours.${index}`}
-                className='mt-1 w-full bg-teal-400 p-4'
+                className='mt-1 w-full bg-gray-100 p-4'
                 type='text'
                 defaultValue={getTimeFromDay(defaultValue)}
             />
@@ -48,8 +54,10 @@ const OpeningHours = ({
     );
 
     return (
-        <div>
-            <label htmlFor='placeHours'>Horaires d&apos;ouverture</label>
+        <div className='w-full'>
+            <label className='font-bold' htmlFor='placeHours'>
+                Horaires d&apos;ouverture
+            </label>
             {placeDetails.current_opening_hours &&
             placeDetails.current_opening_hours.weekday_text
                 ? placeDetails.current_opening_hours.weekday_text.map(
