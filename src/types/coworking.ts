@@ -70,6 +70,9 @@ export interface Coworking {
     discreteMusic: boolean;
     randomMusic: boolean;
     loudMusic: boolean;
+    highWifi: boolean;
+    mediumWifi: boolean;
+    lowWifi: boolean;
     reviews?: Review[];
     createdAt: DateTime;
     updatedAt: DateTime;

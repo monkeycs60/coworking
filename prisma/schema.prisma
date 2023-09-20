@@ -82,6 +82,9 @@ model Coworking {
   discreteMusic     Boolean @default(false)
   randomMusic     Boolean @default(false)
   loudMusic     Boolean @default(false)
+  highWifi     Boolean @default(false)
+  mediumWifi     Boolean @default(false)
+  lowWifi     Boolean @default(false)
   reviews       Review[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt

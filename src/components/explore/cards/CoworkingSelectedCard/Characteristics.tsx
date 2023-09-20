@@ -67,6 +67,17 @@ const Characteristics = ({ coworking }: { coworking: Coworking }) => {
                             <CharacteristicItem label='Prises électriques' />
                         )}
                     </CharacteristicSection>
+                    <CharacteristicSection title='Qualité du Wi-Fi'>
+                        {coworking?.hasExterior && (
+                            <CharacteristicItem label='Elévée' />
+                        )}
+                        {coworking?.hasParking && (
+                            <CharacteristicItem label='Moyenne' />
+                        )}
+                        {coworking?.hasHandicap && (
+                            <CharacteristicItem label='Faible' />
+                        )}
+                    </CharacteristicSection>
                     <CharacteristicSection title='Zone de travail'>
                         {coworking?.smallTables && (
                             <CharacteristicItem label='Petites tables' />
