@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { Prediction, Place } from '@/types/placePredictions';
 import { useAppDispatch, useAppSelector } from './useRedux';
-import { setInput, setPredictions } from '@/redux/features/autoComplete-slice';
+import {
+    setInput,
+    setPredictions,
+    resetAutocomplete,
+} from '@/redux/features/autoComplete-slice';
 
 export const useFetchAutocomplete = () => {
     const dispatch = useAppDispatch();

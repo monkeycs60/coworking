@@ -96,7 +96,7 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
                     )}
                 </ul>
             )}
-            <span className='mt-1 block text-xs'>Ex. Starbucks Bordeaux</span>
+            <span className='mt-2 block text-xs'>Ex. Starbucks Bordeaux (nom + ville)</span>
         </div>
     );
 }
