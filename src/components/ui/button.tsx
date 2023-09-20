@@ -16,7 +16,9 @@ const buttonVariants = cva(
                 outline:
                     'hover:text-accent-primary rounded-xl border border-primary bg-background text-primary hover:bg-accent',
                 secondary:
-                    'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+                    'rounded-xl bg-secondary text-secondary-foreground hover:bg-secondary/80',
+                secondaryReverse:
+                    'hover:bg-gray/100 rounded-xl bg-gray-300 text-secondary-foreground',
                 ghost: 'buttonGhost transition-border rounded-xl border-2 border-transparent font-semibold',
                 link: 'text-primary underline-offset-4 hover:underline',
                 round: 'rounded-[28px]',

@@ -1,9 +1,9 @@
 export const daysOfWeek = [
-	'Monday',
-	'Tuesday',
-	'Wednesday',
-	'Thursday',
-	'Friday',
-	'Saturday',
-	'Sunday',
+	'Lundi',
+	'Mardi',
+	'Mercredi',
+	'Jeudi',
+	'Vendredi',
+	'Samedi',
+	'Dimanche',
 ];

@@ -3,6 +3,7 @@ interface InputFieldProps {
     register: any;
     defaultValue: string;
     label: string;
+    subLabel?: string;
     name: string;
     error: any;
     isMandatory?: boolean;
@@ -12,14 +13,18 @@ const InputField = ({
     register,
     defaultValue,
     label,
+    subLabel,
     name,
     error,
     isMandatory,
 }: InputFieldProps) => (
     <div className='relative flex w-full flex-col gap-2 rounded-xl'>
-        <label className='font-semibold' htmlFor={name}>
-            {label}
-        </label>
+        <div className='flex flex-col'>
+            <label className='font-bold' htmlFor={name}>
+                {label}
+            </label>
+            <span className='text-xs italic'>{subLabel}</span>
+        </div>
         <input
             {...register(name)}
             id={name}

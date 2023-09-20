@@ -115,65 +115,69 @@ const AddPlace = () => {
                 <InputField
                     register={register}
                     defaultValue=''
-                    label="Prix d'un expresso (€)"
+                    label="Prix d'un expresso (en €)"
+                    subLabel='rentre un chiffre... ex: 2.50'
                     name='espressoPrice'
                     error={errors.espressoPrice}
                 />
-                <div>
-                    <div>
-                        <div>
-                            <label htmlFor='hasParking'>Parking :</label>
-                            <input
-                                type='checkbox'
-                                id='hasParking'
-                                {...register('hasParking')}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor='hasPrivacy'>
-                                Endroit isolé pour les calls :
-                            </label>
-                            <input
-                                type='checkbox'
-                                id='hasPrivacy'
-                                {...register('hasPrivacy')}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor='hasPlugs'>
-                                Prises électriques :
-                            </label>
-                            <input
-                                type='checkbox'
-                                id='hasPlugs'
-                                {...register('hasPlugs')}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor='hasWiFi'>WiFi :</label>
-                            <input
-                                type='checkbox'
-                                id='hasWiFi'
-                                {...register('hasWiFi')}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor='hasExterior'>Terasse :</label>
-                            <input
-                                type='checkbox'
-                                id='hasExterior'
-                                {...register('hasExterior')}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor='hasHandicap'>
-                                Accès handicapé :
-                            </label>
-                            <input
-                                type='checkbox'
-                                id='hasHandicap'
-                                {...register('hasHandicap')}
-                            />
+                <div className='flex flex-col gap-6'>
+                    <div className='flex flex-col gap-6'>
+                        <h3 className='font-bold'>Accès et espaces</h3>
+                        <div className='flex w-[100%] flex-col gap-5 text-sm'>
+                            <div className='flex items-center justify-between gap-2'>
+                                <label htmlFor='hasParking'>Parking</label>
+                                <input
+                                    type='checkbox'
+                                    id='hasParking'
+                                    {...register('hasParking')}
+                                />
+                            </div>
+                            <div className='flex items-center justify-between gap-2'>
+                                <label htmlFor='hasPrivacy'>
+                                    Endroit isolé pour les calls
+                                </label>
+                                <input
+                                    type='checkbox'
+                                    id='hasPrivacy'
+                                    {...register('hasPrivacy')}
+                                />
+                            </div>
+                            <div className='flex items-center justify-between gap-2'>
+                                <label htmlFor='hasPlugs'>
+                                    Prises électriques
+                                </label>
+                                <input
+                                    type='checkbox'
+                                    id='hasPlugs'
+                                    {...register('hasPlugs')}
+                                />
+                            </div>
+                            <div className='flex items-center justify-between gap-2'>
+                                <label htmlFor='hasWiFi'>WiFi</label>
+                                <input
+                                    type='checkbox'
+                                    id='hasWiFi'
+                                    {...register('hasWiFi')}
+                                />
+                            </div>
+                            <div className='flex items-center justify-between gap-2'>
+                                <label htmlFor='hasExterior'>Terasse</label>
+                                <input
+                                    type='checkbox'
+                                    id='hasExterior'
+                                    {...register('hasExterior')}
+                                />
+                            </div>
+                            <div className='flex items-center justify-between gap-2'>
+                                <label htmlFor='hasHandicap'>
+                                    Accès handicapé
+                                </label>
+                                <input
+                                    type='checkbox'
+                                    id='hasHandicap'
+                                    {...register('hasHandicap')}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div>

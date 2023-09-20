@@ -1,12 +1,10 @@
+'use client';
+
+import { useState } from 'react';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
 import { getTimeFromDay } from '@/lib/functions/getTimeFromDay';
 import { PlaceDetail } from '@/types/placeDetails';
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
 
 interface OpeningHoursProps {
     register: any;
@@ -19,6 +17,8 @@ const OpeningHours = ({
     placeDetails,
     errors,
 }: OpeningHoursProps) => {
+    const [showDays, setShowDays] = useState(false);
+
     const OpeningHourInput = ({
         day,
         index,
@@ -39,7 +39,7 @@ const OpeningHours = ({
                 {...register(`openingHours.${index}`)}
                 id={`openingHours.${index}`}
                 name={`openingHours.${index}`}
-                className='mt-1 w-full bg-gray-100 p-4'
+                className='mt-1 w-full rounded-xl bg-gray-100 p-4'
                 type='text'
                 defaultValue={getTimeFromDay(defaultValue)}
             />
@@ -54,33 +54,43 @@ const OpeningHours = ({
     );
 
     return (
-        <div className='w-full'>
+        <div className='flex w-full flex-col gap-2'>
             <label className='font-bold' htmlFor='placeHours'>
                 Horaires d&apos;ouverture
             </label>
-            {placeDetails.current_opening_hours &&
-            placeDetails.current_opening_hours.weekday_text
-                ? placeDetails.current_opening_hours.weekday_text.map(
-                      (day: string, index: number) => {
-                          const dayName = day.split(':')[0];
-                          return (
-                              <OpeningHourInput
-                                  key={index}
-                                  day={dayName}
-                                  index={index}
-                                  defaultValue={day.split(':')[1]?.trim()}
-                              />
-                          );
-                      },
-                  )
-                : daysOfWeek.map((day, index) => (
-                      <OpeningHourInput
-                          key={index}
-                          day={day}
-                          index={index}
-                          defaultValue=''
-                      />
-                  ))}
+            <Button
+                size={'specialButton'}
+                variant={showDays ? 'secondaryReverse' : 'secondary'}
+                onClick={() => setShowDays(!showDays)}
+            >
+                {showDays
+                    ? 'Cacher les jours de la semaine'
+                    : 'Afficher les jours de la semaine'}
+            </Button>
+            {showDays && // Seulement afficher si `showDays` est vrai
+                (placeDetails.current_opening_hours &&
+                placeDetails.current_opening_hours.weekday_text
+                    ? placeDetails.current_opening_hours.weekday_text.map(
+                          (day: string, index: number) => {
+                              const dayName = day.split(':')[0];
+                              return (
+                                  <OpeningHourInput
+                                      key={index}
+                                      day={dayName}
+                                      index={index}
+                                      defaultValue={day.split(':')[1]?.trim()}
+                                  />
+                              );
+                          },
+                      )
+                    : daysOfWeek.map((day, index) => (
+                          <OpeningHourInput
+                              key={index}
+                              day={day}
+                              index={index}
+                              defaultValue=''
+                          />
+                      )))}
         </div>
     );
 };
