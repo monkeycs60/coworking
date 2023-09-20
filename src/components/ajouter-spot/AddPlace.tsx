@@ -45,8 +45,8 @@ const AddPlace = () => {
     });
 
     return placeDetails ? (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='flex flex-col items-center justify-center gap-8 bg-zinc-200 p-12'>
+        <form onSubmit={handleSubmit(onSubmit)} className=''>
+            <div className='flex flex-col items-center justify-center gap-8 bg-zinc-200'>
                 <InputField
                     register={register}
                     defaultValue={name ? name : ''}
@@ -211,7 +211,6 @@ const AddPlace = () => {
                                 {...register('counterSeats')}
                             />
                         </div>
-
 
                         <div>
                             <label htmlFor='outdoorSeating'>

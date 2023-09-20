@@ -42,14 +42,14 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
     }, [inputRef]);
 
     return (
-        <div ref={inputRef} className='relative z-[60]'>
+        <div ref={inputRef} className='relative z-[60] w-full bg-blue-300'>
             <input
                 type='text'
                 value={inputField}
                 onChange={(e) => setInput(e.target.value)}
                 onFocus={() => setIsOpen(true)}
                 placeholder='Rechercher un lieu...'
-                className='z-[60] h-14 w-72 rounded-xl border border-gray-300 bg-white pl-3 pr-10 shadow-sm placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-indigo-500 '
+                className='z-[60] h-14 w-full rounded-xl border border-gray-300 bg-white pl-3 pr-10 shadow-sm placeholder:indent-6 placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-indigo-500 '
             />
             {isOpen && (
                 <ul
@@ -65,6 +65,7 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
                         borderRadius: '4px',
                         boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.1)',
                         zIndex: 60,
+                        backgroundColor: 'red',
                     }}
                 >
                     {predictions.map((place, index) => (
@@ -96,7 +97,9 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
                     )}
                 </ul>
             )}
-            <span className='mt-2 block text-xs'>Ex. Starbucks Bordeaux (nom + ville)</span>
+            <span className='mt-2 block text-xs'>
+                Ex. Starbucks Bordeaux (nom + ville)
+            </span>
         </div>
     );
 }
