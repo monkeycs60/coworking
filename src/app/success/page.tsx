@@ -1,12 +1,30 @@
-import Success from '@/components/ui/Success'
-import React from 'react'
+import Success from '@/components/ui/Success';
+import React from 'react';
 
-const page = () => {
-  return (
-    <Success>
-      <h1>Espace de Coworking</h1>
-    </Success>
-  )
-}
+const page = async ({ searchParams }: { searchParams: { type: string } }) => {
+    const type = searchParams.type;
 
-export default page
+    let successMessage;
+
+    switch (type) {
+        case 'review':
+            successMessage = <span>Nouvel avis</span>;
+            break;
+        case 'coworking':
+            successMessage = <span>Nouvel espace de coworking</span>;
+            break;
+        case 'comment':
+            successMessage = <span>Nouveau commentaire</span>;
+            break;
+
+        default:
+            successMessage = <span>Nouvel item</span>;
+    }
+    return (
+        <Success>
+            {successMessage}
+        </Success>
+    );
+};
+
+export default page;

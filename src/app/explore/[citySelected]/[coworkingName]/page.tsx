@@ -9,10 +9,6 @@ const page = async ({
 }) => {
     const coworkingId = searchParams.coworkingId;
     const coworking = await getOneCoworkingInfos(coworkingId);
-    console.log(coworking);
-
-    // const coworkingRatings = await getCoworkingRatings(coworkingId);
-   
 
     return coworking ? (
         <CoworkingSelectedCard coworking={coworking as unknown as Coworking} />

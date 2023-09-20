@@ -10,9 +10,11 @@ import {
 import { sendPlaceDetails } from '@/services/sendPlaceDetails';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 export const useAddPlaceForm = () => {
     const dispatch = useAppDispatch();
+    const router = useRouter();
     const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
     const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
     const placeDetails = useAppSelector((state) => state.placeDetails.details);
@@ -83,8 +85,6 @@ export const useAddPlaceForm = () => {
             imagesSelected: photoSelected,
             userImages: uploadedImageUrls,
         };
-        console.log(finalData);
-        
 
         try {
             const response = await sendPlaceDetails(finalData);
@@ -103,7 +103,7 @@ export const useAddPlaceForm = () => {
                     },
                 );
             } else {
-                toast.success('Merci à vous ! un nouveau cowork a été ajouté', {
+                toast.success('Le coworking a bien été ajouté, patiente, tu vas bientôt être redirigé !', {
                     position: 'top-center',
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -112,14 +112,21 @@ export const useAddPlaceForm = () => {
                     draggable: true,
                     progress: undefined,
                 });
+
                 setTimeout(() => {
+                    const city = finalData.city;
+                    const coworkingName = encodeURIComponent(finalData.name);
+                    const coworkingId = response.data.id;
+                    const coworkURL = `/explore/${city}/${coworkingName}?coworkingId=${coworkingId}`;
+                    router.push(coworkURL);
                     dispatch(resetAllDetails());
-                }, 4000);
+                }, 5000);
             }
         } catch (error) {
             console.error(error);
         } finally {
             setWaitingToSubmit(false);
+            console.log(finalData.id);
         }
     };
 
