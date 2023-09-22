@@ -1,33 +1,9 @@
 import { Button } from '@/components/ui/button';
-import { prisma } from '@/lib/prisma';
 import CarouselWrapper from '../highlightedCoworkings/CarouselWrapper';
+import { getLatestCoworkings } from '@/services/getLatestCoworkings';
 
 const HighlightedCoworkings = async () => {
-    const latestCoworkings = await prisma.coworking.findMany({
-        orderBy: {
-            createdAt: 'desc',
-        },
-        take: 10,
-        select: {
-            id: true,
-            name: true,
-            address: true,
-            city: true,
-            reviews: true,
-            userImages: {
-                select: {
-                    url: true,
-                },
-            },
-            imagesSelected: {
-                select: {
-                    url: true,
-                },
-            },
-            createdAt: true,
-            placeId: true,
-        },
-    });
+    const latestCoworkings = await getLatestCoworkings();
     return (
         <section className='my-[12vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:mb-32 lg:mt-4 '>
             <div className='flex flex-col gap-8 lg:flex-row lg:justify-between '>
