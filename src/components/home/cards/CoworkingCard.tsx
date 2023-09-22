@@ -30,15 +30,11 @@ const CoworkingCard = ({
         (state) => state.carouselState.activeIndices[carouselId],
     );
 
-    console.log(coworking);
-
     const averageRating = averageRatingFromReviews(coworking.reviews);
     const averageRatingCalm = calmAverage(coworking.reviews);
     const averageRatingEquip = equipAverage(coworking.reviews);
     const averageRatingFeeling = feelingAverage(coworking.reviews);
     const averageRatingFood = foodAverage(coworking.reviews);
-
-    console.log(averageRatingFeeling);
 
     const borderClass =
         activeIndex === currentIndex
@@ -57,7 +53,7 @@ const CoworkingCard = ({
                 <p className='font-semibold'>{averageRating}</p>
             </div>
             <div
-                className='h-1/2 w-full rounded-xl'
+                className='h-[200px] w-full rounded-xl'
                 style={{
                     backgroundImage: `url(${coworking.imagesSelected[0].url})`,
                     backgroundPosition: 'center',

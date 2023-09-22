@@ -1,16 +1,12 @@
 'use client';
 
-import { highlightedCoworkings } from '@/data/highlightedCoworkings';
 import Carousel from '@/components/ui/Carousel';
 import CoworkingCard from '@/components/home/cards/CoworkingCard';
 import useCarousel from '@/hooks/useCarousel';
 import { CoworkingListProps } from '@/types/highlightedCoworking';
 
 const CarouselWrapper = ({ coworkings }: CoworkingListProps) => {
-    const { nextSlide, prevSlide, currentIndex } = useCarousel(
-        highlightedCoworkings.length,
-    );
-    console.log(coworkings);
+    const { nextSlide, prevSlide, currentIndex } = useCarousel(10);
 
     return (
         <div className='flex gap-4'>

@@ -4,13 +4,15 @@ import CarouselWrapper from '../highlightedCoworkings/CarouselWrapper';
 
 const HighlightedCoworkings = async () => {
     const latestCoworkings = await prisma.coworking.findMany({
+        orderBy: {
+            createdAt: 'desc',
+        },
+        take: 10,
         select: {
             id: true,
             name: true,
-            // Vous pourriez avoir besoin d'adapter ce qui suit en fonction de vos besoins et du modèle de base de données
             address: true,
             city: true,
-            // Assuming you have a relation to a "reviews" model in your Coworking model
             reviews: true,
             userImages: {
                 select: {
@@ -22,7 +24,8 @@ const HighlightedCoworkings = async () => {
                     url: true,
                 },
             },
-            // Add other fields you need
+            createdAt: true,
+            placeId: true,
         },
     });
     return (
