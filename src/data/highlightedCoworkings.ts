@@ -1,6 +1,5 @@
-import { highlightedCoworkingsProps } from "@/types/highlightedCoworking";
 
-export const highlightedCoworkings: highlightedCoworkingsProps[] = [
+export const highlightedCoworkings = [
 	{
 		id: 1,
 		name: 'Moxy',

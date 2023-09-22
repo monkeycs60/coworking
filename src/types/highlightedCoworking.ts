@@ -1,14 +1,29 @@
-export interface highlightedCoworkingsProps {
-	id: number;
-	name: string;
-	slug: string;
-	location: string;
-	city: string;
-	zipCode: number;
-	illustration: string;
-	url: string;
-	equipmentScore: number;
-	calmScore: number;
-	foodScore: number;
-	feelingScore: number;
+import { Review } from "./coworking";
+
+interface Image {
+    url: string;
+}
+
+interface Coworking {
+    id: string;
+    name: string;
+    address: string;
+    city: string;
+    reviews: Review[];
+    userImages: Image[];
+    imagesSelected: Image[];
+}
+
+export interface CoworkingCardProps {
+    id: string;
+    name: string;
+    address: string;
+    city: string;
+    reviews: Review[];
+    userImages: Image[];
+    imagesSelected: Image[];
+}
+
+export interface CoworkingListProps {
+    coworkings: Coworking[];
 }
