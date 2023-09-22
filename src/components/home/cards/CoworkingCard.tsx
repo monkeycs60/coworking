@@ -7,7 +7,13 @@ import { useAppSelector } from '@/hooks/useRedux';
 import { Star } from 'lucide-react';
 import { Tooltip } from 'react-tooltip';
 import { CoworkingCardProps } from '@/types/highlightedCoworking';
-import { averageRatingFromReviews } from '@/lib/functions/averageRatingFromReviews';
+import {
+    averageRatingFromReviews,
+    calmAverage,
+    equipAverage,
+    feelingAverage,
+    foodAverage,
+} from '@/lib/functions/averageRatingFromReviews';
 
 interface CoworkingCardPropsExtended {
     carouselId: string;
@@ -27,8 +33,12 @@ const CoworkingCard = ({
     console.log(coworking);
 
     const averageRating = averageRatingFromReviews(coworking.reviews);
+    const averageRatingCalm = calmAverage(coworking.reviews);
+    const averageRatingEquip = equipAverage(coworking.reviews);
+    const averageRatingFeeling = feelingAverage(coworking.reviews);
+    const averageRatingFood = foodAverage(coworking.reviews);
 
-    console.log(averageRating);
+    console.log(averageRatingFeeling);
 
     const borderClass =
         activeIndex === currentIndex
@@ -44,15 +54,7 @@ const CoworkingCard = ({
         >
             <div className='absolute right-4 top-4 flex flex-col gap-1 px-4 py-2 backdrop-blur-xl'>
                 <Star size={28} className=' text-secondary' />
-                <p className='font-semibold'>
-                    {/* {(
-                        (coworking.reviews
-                            highlightedCoworking.equipmentScore +
-                            highlightedCoworking.foodScore +
-                            highlightedCoworking.feelingScore) /
-                        4
-                    ).toFixed(2)} */}
-                </p>
+                <p className='font-semibold'>{averageRating}</p>
             </div>
             <div
                 className='h-1/2 w-full rounded-xl'
@@ -81,7 +83,7 @@ const CoworkingCard = ({
                                 height={30}
                             />
                         </div>
-                        {/* <Progress value={highlightedCoworking.calmScore * 20} /> */}
+                        <Progress value={averageRatingCalm * 20} />
                     </div>
                     <div>
                         <span
@@ -104,9 +106,7 @@ const CoworkingCard = ({
                                 height={10}
                             />
                         </div>
-                        {/* <Progress
-                            value={highlightedCoworking.equipmentScore * 20}
-                        /> */}
+                        <Progress value={averageRatingEquip * 20} />
                     </div>
                     <div>
                         <span
@@ -129,7 +129,7 @@ const CoworkingCard = ({
                                 height={30}
                             />
                         </div>
-                        {/* <Progress value={highlightedCoworking.foodScore * 20} /> */}
+                        <Progress value={averageRatingFood * 20} />
                     </div>
                     <div>
                         <span

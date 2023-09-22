@@ -22,3 +22,34 @@ export const averageRatingFromReviews = (reviews: Review[]) => {
 
     return (overallAverage.toFixed(2));
 };
+
+// Calcule la moyenne pour une catégorie spécifique
+const averageForCategory = (
+    reviews: Review[],
+    category: keyof Review,
+): number => {
+    if (!reviews || reviews.length === 0) return 0;
+
+    const total = reviews.reduce(
+        (acc, review) => acc + (review[category] as number),
+        0,
+    );
+    return parseFloat((total / reviews.length).toFixed(2));
+};
+
+// Fonctions pour chaque catégorie
+export const calmAverage = (reviews: Review[]): number => {
+    return averageForCategory(reviews, 'calmRating');
+};
+
+export const equipAverage = (reviews: Review[]): number => {
+    return averageForCategory(reviews, 'equipRating');
+};
+
+export const foodAverage = (reviews: Review[]): number => {
+    return averageForCategory(reviews, 'foodRating');
+};
+
+export const feelingAverage = (reviews: Review[]): number => {
+    return averageForCategory(reviews, 'feelingRating');
+};
