@@ -44,7 +44,7 @@ const CoworkingCard = ({
     return (
         <div
             key={coworking.id}
-            className={`relative flex h-[460px] w-[300px] flex-col rounded-xl  transition-transform duration-500 ease-in-out  
+            className={`relative flex h-[500px] w-[300px] flex-col justify-between rounded-xl  transition-transform duration-500 ease-in-out  
 			${borderClass}
 			`}
         >
@@ -52,20 +52,18 @@ const CoworkingCard = ({
                 <Star size={28} className=' text-secondary' />
                 <p className='font-semibold'>{averageRating}</p>
             </div>
-            <div
-                className='h-[200px] w-full rounded-xl'
-                style={{
-                    backgroundImage: `url(${coworking.imagesSelected[0].url})`,
-                    backgroundPosition: 'center',
-                }}
-            ></div>
+            <div className='relative h-[200px] w-full rounded-xl object-cover'>
+                <Image
+                    src={coworking.imagesSelected[0].url}
+                    alt={coworking.name}
+                    fill
+                />
+            </div>
             <div className='w-full p-2'>
                 <h3 className='text-xl font-bold'>{coworking.name}</h3>
                 <div className='flex gap-3 pt-2 text-gray-600'>
                     <MapPin size={20} />
-                    <p className=''>
-                        {coworking.address}, {coworking.city}
-                    </p>
+                    <p className='line-clamp-1 text-sm'>{coworking.address}</p>
                 </div>
             </div>
             <div className='mb-4'>
