@@ -9,7 +9,7 @@ interface CarouselWrapperProps {
     coworksByCities: CityCount[];
 }
 
-const CarouselWrapper = ({coworksByCities}: CarouselWrapperProps) => {
+const CarouselWrapper = ({ coworksByCities }: CarouselWrapperProps) => {
     const { nextSlide, prevSlide, currentIndex } = useCarousel(10);
     console.log(coworksByCities);
 

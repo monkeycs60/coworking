@@ -28,8 +28,6 @@ const CityCard = ({
 
     let imageUrl = defaultCityImage; // valeur par défaut
 
-    console.log(defaultCityImage);
-
     if (highlightedCity.city in cityImageMap) {
         imageUrl =
             cityImageMap[highlightedCity.city as keyof typeof cityImageMap];
