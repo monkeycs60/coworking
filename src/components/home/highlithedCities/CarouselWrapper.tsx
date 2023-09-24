@@ -1,13 +1,18 @@
-import { Button } from '@/components/ui/button';
+'use client';
+
 import Carousel from '@/components/ui/Carousel';
-import { highlightedCities } from '@/data/highlightedCities';
 import CityCard from '../cards/CityCard';
 import useCarousel from '@/hooks/useCarousel';
+import { CityCount } from '@/types/highlightedCities';
 
-const CarouselWrapper = () => {
-    const { nextSlide, prevSlide, currentIndex } = useCarousel(
-        highlightedCities.length,
-    );
+interface CarouselWrapperProps {
+    coworksByCities: CityCount[];
+}
+
+const CarouselWrapper = ({coworksByCities}: CarouselWrapperProps) => {
+    const { nextSlide, prevSlide, currentIndex } = useCarousel(10);
+    console.log(coworksByCities);
+
     return (
         <div className='flex gap-4'>
             <Carousel
@@ -17,10 +22,10 @@ const CarouselWrapper = () => {
                 currentIndex={currentIndex}
                 translateRate={12.3}
             >
-                {highlightedCities.map((city, index) => (
+                {coworksByCities.map((city, index) => (
                     <CityCard
                         carouselId={'highlightedCities'}
-                        key={city.id}
+                        key={city.city}
                         highlightedCity={city}
                         currentIndex={index}
                     />

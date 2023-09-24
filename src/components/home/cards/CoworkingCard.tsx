@@ -54,7 +54,7 @@ const CoworkingCard = ({
             </div>
             <div className='relative h-[200px] w-full rounded-xl object-cover'>
                 <Image
-                    src={coworking.imagesSelected[0].url}
+                    src={coworking?.imagesSelected[0]?.url}
                     alt={coworking.name}
                     fill
                 />

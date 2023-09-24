@@ -1,20 +1,9 @@
 import { Button } from '@/components/ui/button';
-import Carousel from '@/components/ui/Carousel';
-import { highlightedCities } from '@/data/highlightedCities';
-import CityCard from '../cards/CityCard';
-import useCarousel from '@/hooks/useCarousel';
 import CarouselWrapper from '../highlithedCities/CarouselWrapper';
-import { prisma } from '@/lib/prisma';
+import { getCoworkingsAmountByCity } from '@/services/getCoworkingsAmountByCity';
 
 const HighlightedCities = async () => {
-    const counts = await prisma.coworking.groupBy({
-        by: ['city'],
-        _count: {
-            city: true,
-        },
-    });
-
-    console.log(counts);
+    const { coworksByCities } = await getCoworkingsAmountByCity();
 
     return (
         <section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:my-20'>
@@ -37,7 +26,7 @@ const HighlightedCities = async () => {
                     <span>Découvrez une nouvelle ville</span>
                 </Button>
             </div>
-            <CarouselWrapper />
+            <CarouselWrapper coworksByCities={coworksByCities} />
         </section>
     );
 };

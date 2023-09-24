@@ -1,5 +1,6 @@
 import { S3 } from 'aws-sdk';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const s3 = new S3({
     accessKeyId: process.env.ACCESS_KEY_ID_AWS,
@@ -12,9 +13,11 @@ export async function uploadToS3(
     filename: string,
 ): Promise<string> {
     const bucketName = 'coworking-malin-bucket';
+
+    const uniqueFilename = `${uuidv4()}-${filename}`;
     const params = {
         Bucket: bucketName,
-        Key: filename,
+        Key: uniqueFilename,
         Body: data,
         ACL: 'public-read', // pour que l'image soit publiquement accessible
     };
@@ -22,7 +25,7 @@ export async function uploadToS3(
         await s3.putObject(params).promise();
 
         // Retournez l'URL de l'image stockée sur S3
-        return `https://${bucketName}.s3.amazonaws.com/${filename}`;
+        return `https://${bucketName}.s3.amazonaws.com/${uniqueFilename}`;
     } catch (error) {
         console.error(error);
         throw new Error('Error uploading to S3');
