@@ -4,6 +4,7 @@ import { useAppSelector } from '@/hooks/useRedux';
 import { CityCount } from '@/types/highlightedCities';
 import Image from 'next/image';
 import { cityImageMap, defaultCityImage } from '@/lib/const/cityImageMap';
+import Link from 'next/link';
 
 interface CityCardProps {
     carouselId: string;
@@ -34,21 +35,22 @@ const CityCard = ({
             cityImageMap[highlightedCity.city as keyof typeof cityImageMap];
     }
 
-    console.log(imageUrl);
-
     return (
-        <div
+        <Link
+            href={`/explore/${highlightedCity.city}`}
             key={highlightedCity.city}
             style={{
                 backgroundImage: `url(${imageUrl})`,
                 backgroundPosition: 'center',
             }}
-            className={`flex h-[420px] w-[300px] flex-col justify-end rounded-xl transition-transform duration-500 ease-in-out  
+            className={`flex h-[420px] w-[300px] cursor-pointer flex-col justify-end rounded-xl transition-transform duration-500 ease-in-out  
 			${borderClass}
 			`}
         >
-            <div className='m-6 flex flex-col items-center justify-center gap-6 border-[1px] px-6 py-4 text-black  backdrop-blur-md'>
-                <h3 className='text-2xl font-bold'>{highlightedCity.city}</h3>
+            <div className='m-6 flex flex-col items-center justify-center gap-2 border-[1px] px-6 py-4 text-white  backdrop-blur-md'>
+                <h3 className='text-2xl font-semibold'>
+                    {highlightedCity.city}
+                </h3>
                 <div className='flex justify-between gap-6'>
                     {/* <div className='flex items-end justify-center gap-2'>
 						<Image
@@ -66,11 +68,11 @@ const CityCard = ({
                             width={30}
                             height={30}
                         />
-                        <p className='text-black'>{highlightedCity.count}</p>
+                        <p className=''>{highlightedCity.count}</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

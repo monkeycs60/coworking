@@ -14,6 +14,7 @@ import {
     feelingAverage,
     foodAverage,
 } from '@/lib/functions/averageRatingFromReviews';
+import Link from 'next/link';
 
 interface CoworkingCardPropsExtended {
     carouselId: string;
@@ -42,9 +43,12 @@ const CoworkingCard = ({
             : 'border-gray-300 border-2';
 
     return (
-        <div
+        <Link
+            href={`/explore/${coworking.city}/${encodeURIComponent(
+                coworking.name,
+            )}?coworkingId=${coworking.id}`}
             key={coworking.id}
-            className={`relative flex h-[500px] w-[300px] flex-col justify-between rounded-xl  transition-transform duration-500 ease-in-out  
+            className={`relative flex h-[500px] w-[300px] cursor-pointer flex-col justify-between rounded-xl  transition-transform duration-500 ease-in-out  
 			${borderClass}
 			`}
         >
@@ -140,7 +144,7 @@ const CoworkingCard = ({
             <Tooltip id='calm-tooltip' />
             <Tooltip id='equipement-tooltip' />
             <Tooltip id='food-tooltip' />
-        </div>
+        </Link>
     );
 };
 
