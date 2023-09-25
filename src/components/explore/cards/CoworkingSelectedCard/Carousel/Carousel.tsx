@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import React from 'react';
 import { imageSelected, UserImage } from '@/types/coworking';
@@ -13,7 +15,6 @@ const Carousel = ({
     userImages,
     defaultImage,
 }: CarouselProps) => {
-
     console.log(imagesSelected);
     console.log(userImages);
 
