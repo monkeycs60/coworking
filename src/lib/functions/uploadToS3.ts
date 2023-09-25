@@ -1,6 +1,14 @@
 import { S3 } from 'aws-sdk';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import sharp from 'sharp';
+
+export async function compressImage(buffer: Buffer): Promise<Buffer> {
+    return sharp(buffer)
+        .resize(1024) // Définissez la largeur maximale de l'image, la hauteur sera ajustée proportionnellement
+        .webp({ quality: 70 }) // Convertissez en webp avec 80% de qualité
+        .toBuffer();
+}
 
 const s3 = new S3({
     accessKeyId: process.env.ACCESS_KEY_ID_AWS,
@@ -12,13 +20,15 @@ export async function uploadToS3(
     data: Buffer,
     filename: string,
 ): Promise<string> {
+    const compressedData = await compressImage(data);
+
     const bucketName = 'coworking-malin-bucket';
 
     const uniqueFilename = `${uuidv4()}-${filename}`;
     const params = {
         Bucket: bucketName,
         Key: uniqueFilename,
-        Body: data,
+        Body: compressedData,
         ACL: 'public-read', // pour que l'image soit publiquement accessible
     };
     try {
@@ -38,8 +48,9 @@ export async function downloadImageAndUploadToS3(
 ): Promise<string> {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
     const imageBuffer = Buffer.from(response.data, 'binary');
+    const compressedBuffer = await compressImage(imageBuffer);
 
-    return uploadToS3(imageBuffer, filename);
+    return uploadToS3(compressedBuffer, filename);
 }
 
 export function getPresignedUrl(
