@@ -6,6 +6,7 @@ import { imageSelected, UserImage } from '@/types/coworking';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ModalWindow from '@/components/ui/modalWindow';
 import useCarousel from '@/hooks/useCarousel';
+import { formatDateForFrenchLocale } from '@/lib/functions/formatDateForFrenchLocale';
 
 interface CarouselProps {
     imagesSelected: imageSelected[];
@@ -18,7 +19,8 @@ const Carousel = ({
     userImages,
     defaultImage,
 }: CarouselProps) => {
-    const allImages = [...userImages, ...imagesSelected].map((img) => img.url);
+    const allImages = [...userImages, ...imagesSelected].map((img) => img);
+    console.log(allImages);
 
     const { nextSlide, prevSlide, currentIndex, setCurrentIndex } = useCarousel(
         allImages.length,
@@ -38,7 +40,6 @@ const Carousel = ({
         // if (success) router.refresh();
     };
 
-
     return (
         <div>
             <div className='flex h-[440px] items-center justify-center gap-12 rounded-xl bg-gray-50'>
@@ -51,7 +52,7 @@ const Carousel = ({
                     }}
                 >
                     <Image
-                        src={allImages[0] || defaultImage}
+                        src={allImages[0].url || defaultImage}
                         fill
                         className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                         alt={'coucou'}
@@ -67,7 +68,7 @@ const Carousel = ({
                 >
                     <div className='relative h-[160px] w-[42%] overflow-hidden rounded-xl'>
                         <Image
-                            src={allImages[1] || defaultImage}
+                            src={allImages[1].url || defaultImage}
                             fill
                             className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                             alt={'hello'}
@@ -82,7 +83,7 @@ const Carousel = ({
                         }}
                     >
                         <Image
-                            src={allImages[2] || defaultImage}
+                            src={allImages[2].url || defaultImage}
                             fill
                             className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                             alt={'hello'}
@@ -97,7 +98,7 @@ const Carousel = ({
                         }}
                     >
                         <Image
-                            src={allImages[3] || defaultImage}
+                            src={allImages[3].url || defaultImage}
                             fill
                             className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                             alt={'hello'}
@@ -125,10 +126,10 @@ const Carousel = ({
                 onClose={handleClose}
                 containerClass='w-[1500px]'
             >
-                <div className='flex h-[70vh] w-full flex-col items-center justify-center'>
+                <div className='flex h-[70vh] w-full flex-col items-center justify-center gap-2'>
                     <div className='relative h-[80%] w-[75%] '>
                         <Image
-                            src={allImages[currentIndex] || defaultImage}
+                            src={allImages[currentIndex].url || defaultImage}
                             fill
                             className='select-none rounded-xl object-cover'
                             alt='clicked image'
@@ -142,6 +143,11 @@ const Carousel = ({
                             className='absolute -right-16 top-1/2 z-[100] h-14 w-14 -translate-y-1/2 cursor-pointer'
                         />
                     </div>
+                    <p>
+                        {formatDateForFrenchLocale(
+                            allImages[currentIndex].createdAt.toISOString(),
+                        )}
+                    </p>
                 </div>
             </ModalWindow>
         </div>
