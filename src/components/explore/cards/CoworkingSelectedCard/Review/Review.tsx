@@ -21,7 +21,7 @@ const Review = ({
     const imageUrl = review.user?.image || defaultImage; // Fallback to a default image
     const username = review.user?.username || 'Anonymous';
     const name = review.user?.firstName || 'Anonymous';
-  
+
     const averageRating =
         (review.calmRating +
             review.equipRating +
@@ -31,12 +31,12 @@ const Review = ({
 
     return (
         <div
-            className='flex flex-col gap-8 rounded-xl bg-gray-200 p-6'
+            className='flex flex-col gap-6 rounded-xl bg-gray-200 p-4'
             key={review.id}
         >
-            <div className='flex  items-center justify-between'>
+            <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-4'>
-                    <div className='relative h-[60px] w-[60px] rounded-2xl'>
+                    <div className='relative h-[40px] w-[40px] rounded-2xl'>
                         <Image
                             src={imageUrl}
                             alt={name}
@@ -44,7 +44,7 @@ const Review = ({
                             className='rounded-2xl object-cover'
                         />
                     </div>
-                    <p>{username}</p>
+                    <p className='font-semibold'>{username}</p>
                 </div>
                 <div className='flex items-center gap-1'>
                     <Star strokeWidth={1.25} fill={'black'} />
@@ -67,7 +67,7 @@ const Review = ({
                         Ressenti {review.feelingRating}/5{' '}
                     </span>
                 </div>
-                <div className='flex justify-end'>
+                <div className='flex justify-end text-sm'>
                     <p>
                         {formatDateForFrenchLocale(
                             review.createdAt.toISOString(),

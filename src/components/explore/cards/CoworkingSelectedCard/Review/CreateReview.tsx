@@ -1,13 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { ModalWindow } from 'react-ts-modal-cserizay';
+import ModalWindow from '@/components/ui/modalWindow';
 import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ReviewSchema, CreateReviewType } from '@/types/createReview';
 import { StarRatingCalmEquipFood } from '@/components/ajouter-spot/form/StarRatingCalmEquipFood';
-import '../../../../../styles/modalReview.css';
 import { useRouter } from 'next/navigation';
 import { Loader2, Rocket, PartyPopper } from 'lucide-react';
 
@@ -88,7 +87,11 @@ const CreateReview = ({
         <div>
             <Button onClick={handleOpen}>Donne ton avis</Button>
 
-            <ModalWindow isOpen={isOpen} onClose={handleClose}>
+            <ModalWindow
+                isOpen={isOpen}
+                onClose={handleClose}
+                containerClass='w-[500px]'
+            >
                 <div className='flex w-full flex-col items-center justify-center gap-4 bg-white p-8'>
                     {success ? (
                         <div className='flex flex-col gap-3'>

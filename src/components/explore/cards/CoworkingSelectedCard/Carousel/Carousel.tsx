@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { imageSelected, UserImage } from '@/types/coworking';
-import { ModalWindow } from 'react-ts-modal-cserizay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import ModalWindow from '@/components/ui/modalWindow';
 import useCarousel from '@/hooks/useCarousel';
 
 interface CarouselProps {
@@ -38,83 +38,77 @@ const Carousel = ({
         // if (success) router.refresh();
     };
 
-    console.log(currentIndex);
 
     return (
         <div>
             <div className='flex h-[440px] items-center justify-center gap-12 rounded-xl bg-gray-50'>
                 <div
-                    className='relative h-[400px] w-[45%] cursor-pointer'
+                    className='relative h-[400px] w-[45%] cursor-pointer overflow-hidden rounded-xl'
                     onClick={(event: React.MouseEvent) => {
                         event.stopPropagation();
                         setIsOpen(true);
                         setCurrentIndex(0);
-                        console.log(currentIndex);
                     }}
                 >
                     <Image
                         src={allImages[0] || defaultImage}
                         fill
-                        className='rounded-xl object-cover'
+                        className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                         alt={'coucou'}
                     />
                 </div>
                 <div
-                    className='flex h-[400px] w-[45%] cursor-pointer flex-wrap items-center justify-center gap-4'
+                    className='flex h-[400px] w-[45%] cursor-pointer flex-wrap items-center justify-center gap-4 overflow-hidden rounded-xl'
                     onClick={(event: React.MouseEvent) => {
                         event.stopPropagation();
                         setIsOpen(true);
                         setCurrentIndex(1);
-                        console.log(currentIndex);
                     }}
                 >
-                    <div className='relative h-[160px] w-[42%] '>
+                    <div className='relative h-[160px] w-[42%] overflow-hidden rounded-xl'>
                         <Image
                             src={allImages[1] || defaultImage}
                             fill
-                            className='rounded-xl object-cover'
+                            className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                             alt={'hello'}
                         />
                     </div>
                     <div
-                        className='relative h-[160px] w-[42%] cursor-pointer'
+                        className='relative h-[160px] w-[42%] cursor-pointer overflow-hidden rounded-xl'
                         onClick={(event: React.MouseEvent) => {
                             event.stopPropagation();
                             setIsOpen(true);
                             setCurrentIndex(2);
-                            console.log(currentIndex);
                         }}
                     >
                         <Image
                             src={allImages[2] || defaultImage}
                             fill
-                            className='rounded-xl object-cover'
+                            className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                             alt={'hello'}
                         />
                     </div>
                     <div
-                        className='relative h-[160px] w-[42%] cursor-pointer'
+                        className='relative h-[160px] w-[42%] cursor-pointer overflow-hidden rounded-xl'
                         onClick={(event: React.MouseEvent) => {
                             event.stopPropagation();
                             setIsOpen(true);
                             setCurrentIndex(3);
-                            console.log(currentIndex);
                         }}
                     >
                         <Image
                             src={allImages[3] || defaultImage}
                             fill
-                            className='rounded-xl object-cover'
+                            className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                             alt={'hello'}
                         />
                     </div>
                     <div
-                        className='relative flex h-[160px] w-[42%] cursor-pointer items-center justify-center rounded-xl bg-gray-300'
+                        className='relative flex h-[160px] w-[42%] cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-gray-300'
                         onClick={(event: React.MouseEvent) => {
                             event.stopPropagation();
                             setIsOpen(true);
                             setCurrentIndex(4);
-                            console.log(currentIndex);
                         }}
                     >
                         <p>
@@ -126,7 +120,11 @@ const Carousel = ({
                     </div>
                 </div>
             </div>
-            <ModalWindow isOpen={isOpen} onClose={handleClose}>
+            <ModalWindow
+                isOpen={isOpen}
+                onClose={handleClose}
+                containerClass='w-[1500px]'
+            >
                 <div className='flex h-[70vh] w-full flex-col items-center justify-center'>
                     <div className='relative h-[80%] w-[75%] '>
                         <Image
