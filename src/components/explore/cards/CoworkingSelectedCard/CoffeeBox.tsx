@@ -4,7 +4,7 @@ const CoffeeBox = ({ expressoPrice }: { expressoPrice?: string | number }) => {
     const expressoPriceToNumber = Number(expressoPrice);
 
     return expressoPrice ? (
-        <div className='relative flex h-full w-[25%] flex-col items-center justify-center border-[1px] '>
+        <div className='relative flex h-full w-[25%] flex-col items-center justify-center rounded-xl border-[2px] p-2'>
             <Coffee />
             <p>Prix d'un expresso</p>
             <p>{expressoPrice} €</p>
