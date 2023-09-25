@@ -52,7 +52,7 @@ const Carousel = ({
                     }}
                 >
                     <Image
-                        src={allImages[0].url || defaultImage}
+                        src={allImages[0]?.url || defaultImage}
                         fill
                         className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                         alt={'coucou'}
@@ -68,7 +68,7 @@ const Carousel = ({
                 >
                     <div className='relative h-[160px] w-[42%] overflow-hidden rounded-xl'>
                         <Image
-                            src={allImages[1].url || defaultImage}
+                            src={allImages[1]?.url || defaultImage}
                             fill
                             className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                             alt={'hello'}
@@ -83,7 +83,7 @@ const Carousel = ({
                         }}
                     >
                         <Image
-                            src={allImages[2].url || defaultImage}
+                            src={allImages[2]?.url || defaultImage}
                             fill
                             className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                             alt={'hello'}
@@ -98,7 +98,7 @@ const Carousel = ({
                         }}
                     >
                         <Image
-                            src={allImages[3].url || defaultImage}
+                            src={allImages[3]?.url || defaultImage}
                             fill
                             className='rounded-xl object-cover transition-transform duration-300 hover:scale-105'
                             alt={'hello'}
@@ -112,12 +112,18 @@ const Carousel = ({
                             setCurrentIndex(4);
                         }}
                     >
-                        <p>
-                            <span className='font-bold'>
-                                {allImages.length - 4}+
-                            </span>{' '}
-                            photos
-                        </p>
+                        {allImages.length > 4 ? (
+                            <p>
+                                <span className='font-bold'>
+                                    {allImages.length - 4}+
+                                </span>{' '}
+                                photos
+                            </p>
+                        ) : (
+                            <p className='text-center'>
+                                Aucune autre photo disponible
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>
@@ -126,10 +132,10 @@ const Carousel = ({
                 onClose={handleClose}
                 containerClass='w-[1500px]'
             >
-                <div className='flex h-[70vh] w-full flex-col items-center justify-center gap-2'>
+                <div className='flex h-[70vh] w-full flex-col items-center justify-center gap-6'>
                     <div className='relative h-[80%] w-[75%] '>
                         <Image
-                            src={allImages[currentIndex].url || defaultImage}
+                            src={allImages[currentIndex]?.url || defaultImage}
                             fill
                             className='select-none rounded-xl object-cover'
                             alt='clicked image'
@@ -143,11 +149,38 @@ const Carousel = ({
                             className='absolute -right-16 top-1/2 z-[100] h-14 w-14 -translate-y-1/2 cursor-pointer'
                         />
                     </div>
-                    <p>
+                    <div className='flex flex-col items-center justify-center gap-2'>
+                        Ajouté le{' '}
                         {formatDateForFrenchLocale(
-                            allImages[currentIndex].createdAt.toISOString(),
+                            allImages[currentIndex]?.createdAt.toISOString(),
                         )}
-                    </p>
+                        {allImages[currentIndex]?.user?.username ? (
+                            <div className='flex gap-2'>
+                                <span>Par</span>
+                                <span className='font-semibold'>
+                                    {allImages[currentIndex]?.user?.username}
+                                </span>
+                                {allImages[currentIndex]?.user?.image && (
+                                    <div className='relative h-[25px] w-[25px] items-center justify-center rounded-2xl'>
+                                        <Image
+                                            src={
+                                                allImages[currentIndex]?.user
+                                                    ?.image || defaultImage
+                                            }
+                                            alt={
+                                                allImages[currentIndex]?.user
+                                                    ?.username || 'Anonymous'
+                                            }
+                                            fill
+                                            className='rounded-2xl object-cover'
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <span>via Google Images</span>
+                        )}
+                    </div>
                 </div>
             </ModalWindow>
         </div>

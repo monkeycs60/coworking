@@ -28,6 +28,7 @@ model User {
   posts        Post[] 
   reviews       Review[]
   places        Coworking[]
+  userImages    UserImage[]
 }
 
 model VerificationToken {
@@ -138,7 +139,8 @@ model UserImage {
     url         String    // This will store the URL to the actual image on the storage service.
     coworkingId String
     coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
-    userId      String
+    userId      String?
+    user        User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
 }

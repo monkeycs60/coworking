@@ -112,6 +112,8 @@ export interface Post {
 export interface imageSelected {
     id: CUID;
     url: string;
+    userId?: CUID;
+    user?: User;
     coworkingId: string;
     coworking?: Coworking;
     createdAt: DateTime;
@@ -124,6 +126,7 @@ export interface UserImage {
     coworkingId: CUID;
     coworking?: Coworking;
     userId: CUID;
+    user?: User;
     createdAt: DateTime;
     updatedAt: DateTime;
 }

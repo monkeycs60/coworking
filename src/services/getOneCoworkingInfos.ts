@@ -8,7 +8,11 @@ export const getOneCoworkingInfos = async (coworkingId: string) => {
         include: {
             openingHours: true,
             imagesSelected: true,
-            userImages: true,
+            userImages: {
+                include: {
+                    user: true,
+                },
+            },
             comments: true,
             reviews: {
                 include: {
@@ -17,5 +21,6 @@ export const getOneCoworkingInfos = async (coworkingId: string) => {
             },
         },
     });
+
     return coworking;
 };
