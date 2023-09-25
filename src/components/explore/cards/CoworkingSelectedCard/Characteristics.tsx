@@ -42,7 +42,7 @@ const CharacteristicItem = ({ label }: { label: string }) => (
 const Characteristics = ({ coworking }: { coworking: Coworking }) => {
     return (
         <div className='rounded-xl border-[2px] p-6'>
-            <div className='flex flex-col gap-8'>
+            <div className='flex flex-col items-center gap-8 lg:items-start'>
                 <h3 className='font-semibold'>Caractéristiques</h3>
                 <div className='flex flex-wrap gap-[50px]'>
                     <CharacteristicSection title='Accès et espaces'>

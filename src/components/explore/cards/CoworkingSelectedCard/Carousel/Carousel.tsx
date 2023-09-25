@@ -36,9 +36,9 @@ const Carousel = ({
 
     return (
         <div>
-            <div className='flex h-[440px] items-center justify-center gap-12 rounded-xl bg-gray-50'>
+            <div className='flex h-[300px] flex-col items-center justify-center gap-4 rounded-xl bg-gray-100 lg:h-[440px] lg:flex-row lg:gap-12'>
                 <div
-                    className='relative h-[400px] w-[45%] cursor-pointer overflow-hidden rounded-xl'
+                    className='relative h-[190px] w-[90%] cursor-pointer overflow-hidden rounded-xl lg:h-[400px] lg:w-[45%]'
                     onClick={(event: React.MouseEvent) => {
                         event.stopPropagation();
                         setIsOpen(true);
@@ -53,14 +53,14 @@ const Carousel = ({
                     />
                 </div>
                 <div
-                    className='flex h-[400px] w-[45%] cursor-pointer flex-wrap items-center justify-center gap-4 overflow-hidden rounded-xl'
+                    className='flex h-[70px] w-[100%] cursor-pointer flex-wrap items-center justify-center gap-4 overflow-hidden rounded-xl lg:h-[400px] lg:w-[45%]'
                     onClick={(event: React.MouseEvent) => {
                         event.stopPropagation();
                         setIsOpen(true);
                         setCurrentIndex(1);
                     }}
                 >
-                    <div className='relative h-[160px] w-[42%] overflow-hidden rounded-xl'>
+                    <div className='relative h-full w-[20%] overflow-hidden rounded-xl lg:h-[160px] lg:w-[42%]'>
                         <Image
                             src={allImages[1]?.url || defaultImage}
                             fill
@@ -69,7 +69,7 @@ const Carousel = ({
                         />
                     </div>
                     <div
-                        className='relative h-[160px] w-[42%] cursor-pointer overflow-hidden rounded-xl'
+                        className='relative h-full w-[20%] cursor-pointer overflow-hidden rounded-xl lg:h-[160px] lg:w-[42%]'
                         onClick={(event: React.MouseEvent) => {
                             event.stopPropagation();
                             setIsOpen(true);
@@ -84,7 +84,7 @@ const Carousel = ({
                         />
                     </div>
                     <div
-                        className='relative h-[160px] w-[42%] cursor-pointer overflow-hidden rounded-xl'
+                        className='relative h-full w-[20%] cursor-pointer overflow-hidden rounded-xl lg:h-[160px] lg:w-[42%]'
                         onClick={(event: React.MouseEvent) => {
                             event.stopPropagation();
                             setIsOpen(true);
@@ -99,7 +99,7 @@ const Carousel = ({
                         />
                     </div>
                     <div
-                        className='relative flex h-[160px] w-[42%] cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-gray-300'
+                        className='relative flex h-full w-[20%] cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-gray-300 lg:h-[160px] lg:w-[42%]'
                         onClick={(event: React.MouseEvent) => {
                             event.stopPropagation();
                             setIsOpen(true);
@@ -114,7 +114,7 @@ const Carousel = ({
                                 photos
                             </p>
                         ) : (
-                            <p className='text-center'>
+                            <p className='text-center text-xs lg:text-base'>
                                 Aucune autre photo disponible
                             </p>
                         )}
@@ -143,38 +143,47 @@ const Carousel = ({
                             className='absolute -right-16 top-1/2 z-[100] h-14 w-14 -translate-y-1/2 cursor-pointer'
                         />
                     </div>
-                    <div className='flex flex-col items-center justify-center gap-2'>
-                        Ajouté le{' '}
-                        {formatDateForFrenchLocale(
-                            allImages[currentIndex]?.createdAt.toISOString(),
-                        )}
-                        {allImages[currentIndex]?.user?.username ? (
-                            <div className='flex gap-2'>
-                                <span>Par</span>
-                                <span className='font-semibold'>
-                                    {allImages[currentIndex]?.user?.username}
-                                </span>
-                                {allImages[currentIndex]?.user?.image && (
-                                    <div className='relative h-[25px] w-[25px] items-center justify-center rounded-2xl'>
-                                        <Image
-                                            src={
-                                                allImages[currentIndex]?.user
-                                                    ?.image || defaultImage
-                                            }
-                                            alt={
-                                                allImages[currentIndex]?.user
-                                                    ?.username || 'Anonymous'
-                                            }
-                                            fill
-                                            className='rounded-2xl object-cover'
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        ) : (
-                            <span>via Google Images</span>
-                        )}
-                    </div>
+                    {allImages[currentIndex]?.createdAt && (
+                        <div className='flex flex-col items-center justify-center gap-2'>
+                            Ajouté le{' '}
+                            {formatDateForFrenchLocale(
+                                allImages[
+                                    currentIndex
+                                ]?.createdAt.toISOString(),
+                            )}
+                            {allImages[currentIndex]?.user?.username ? (
+                                <div className='flex gap-2'>
+                                    <span>Par</span>
+                                    <span className='font-semibold'>
+                                        {
+                                            allImages[currentIndex]?.user
+                                                ?.username
+                                        }
+                                    </span>
+                                    {allImages[currentIndex]?.user?.image && (
+                                        <div className='relative h-[25px] w-[25px] items-center justify-center rounded-2xl'>
+                                            <Image
+                                                src={
+                                                    allImages[currentIndex]
+                                                        ?.user?.image ||
+                                                    defaultImage
+                                                }
+                                                alt={
+                                                    allImages[currentIndex]
+                                                        ?.user?.username ||
+                                                    'Anonymous'
+                                                }
+                                                fill
+                                                className='rounded-2xl object-cover'
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <span>via Google Images</span>
+                            )}
+                        </div>
+                    )}
                 </div>
             </ModalWindow>
         </div>

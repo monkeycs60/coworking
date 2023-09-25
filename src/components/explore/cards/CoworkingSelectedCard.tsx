@@ -34,7 +34,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
 
     return (
         <div className='mb-12 mt-2 flex flex-col gap-8 px-6 lg:my-16 lg:gap-16 lg:p-0'>
-            <div className='font flex flex-col-reverse items-center justify-between gap-3 lg:flex-row lg:gap-0'>
+            <div className='font flex flex-col-reverse items-center justify-between gap-4 lg:flex-row lg:gap-0'>
                 <div className='flex flex-col gap-4'>
                     <p className='font-inter text-4xl font-semibold'>
                         {coworking?.name}
