@@ -8,6 +8,7 @@ import CreateReview from './CoworkingSelectedCard/Review/CreateReview';
 import { averageRatingFromReviews } from '@/lib/functions/averageRatingFromReviews';
 import { Star } from 'lucide-react';
 import CoffeeBox from './CoworkingSelectedCard/CoffeeBox';
+import Carousel from './CoworkingSelectedCard/Carousel/Carousel';
 
 const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
     const defaultImage = '/cowork-placeholder.jpg';
@@ -27,6 +28,9 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
         coworkingAverageRating = averageRatingFromReviews(coworkingReviews);
 
     const expressoPrice = coworking?.espressoPrice || 0;
+
+    const imagesSelected = coworking?.imagesSelected || defaultImage;
+    const userImages = coworking?.userImages || defaultImage;
 
     return (
         <div className='my-16 flex flex-col gap-10'>
@@ -54,44 +58,11 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                     />
                 </div>
             </div>
-            <div>
-                <div className='flex h-[440px] items-center justify-center gap-12 rounded-xl bg-gray-400'>
-                    <div className='relative h-[400px] w-[45%] '>
-                        <Image
-                            src={
-                                coworking?.userImages?.[0]?.url || defaultImage
-                            }
-                            fill
-                            className='object-cover'
-                            alt={'coucou'}
-                        />
-                    </div>
-                    <div className='flex h-[400px] w-[45%] flex-col gap-4'>
-                        <div className='relative h-[200px] w-full'>
-                            <Image
-                                src={
-                                    coworking?.imagesSelected?.[0]?.url ||
-                                    defaultImage
-                                }
-                                fill
-                                className='object-cover'
-                                alt={'hello'}
-                            />
-                        </div>
-                        <div className='relative h-[200px] w-full'>
-                            <Image
-                                src={
-                                    coworking?.imagesSelected?.[1]?.url ||
-                                    defaultImage
-                                }
-                                fill
-                                className='object-cover'
-                                alt={'hello'}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Carousel
+                imagesSelected={imagesSelected}
+                userImages={userImages}
+                defaultImage={defaultImage}
+            />
             <div className='flex h-[100px] items-center justify-between'>
                 <div className='h-full w-[75%]'>
                     <p>{coworking?.description}</p>
