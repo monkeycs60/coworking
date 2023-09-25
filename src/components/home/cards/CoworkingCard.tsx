@@ -52,11 +52,11 @@ const CoworkingCard = ({
 			${borderClass}
 			`}
         >
-            <div className='absolute right-4 top-4 flex flex-col gap-1 px-4 py-2 backdrop-blur-xl'>
-                <Star size={28} className=' text-secondary' />
-                <p className='font-semibold'>{averageRating}</p>
+            <div className='absolute right-0 top-0 z-20 flex flex-col gap-1  rounded-xl px-4 py-2 backdrop-blur-xl'>
+                <Star size={28} className=' text-secondary ' />
+                <p className='font-semibold text-white'>{averageRating}</p>
             </div>
-            <div className='relative h-[200px] w-full rounded-xl object-cover'>
+            <div className='relative h-[200px] w-full overflow-hidden rounded-xl object-cover'>
                 <Image
                     src={coworking?.imagesSelected[0]?.url}
                     alt={coworking.name}
