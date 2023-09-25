@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import CarouselWrapper from '../highlightedCoworkings/CarouselWrapper';
 import { getLatestCoworkings } from '@/services/getLatestCoworkings';
+import Link from 'next/link';
 
 const HighlightedCoworkings = async () => {
     const latestCoworkings = await getLatestCoworkings();
@@ -15,13 +16,15 @@ const HighlightedCoworkings = async () => {
                         Découvrez les derniers lieux ajoutés par nos membres
                     </h3>
                 </div>
-                <Button
-                    variant={'default'}
-                    size={'sm'}
-                    className='w-full lg:h-12 lg:w-[320px] lg:px-4 '
-                >
-                    <span>Explorer tous les coworkings</span>
-                </Button>
+                <Link href={'/explore'}>
+                    <Button
+                        variant={'default'}
+                        size={'sm'}
+                        className='w-full lg:h-12 lg:w-[320px] lg:px-4 '
+                    >
+                        <span>Explorer tous les coworkings</span>
+                    </Button>
+                </Link>
             </div>
             <CarouselWrapper coworkings={latestCoworkings} />
         </section>

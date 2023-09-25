@@ -2,11 +2,20 @@ import { Button } from '@/components/ui/button';
 import CarouselWrapper from '../highlithedCities/CarouselWrapper';
 import { getCoworkingsAmountByCity } from '@/services/getCoworkingsAmountByCity';
 import { getTotalCitiesAndCoworkings } from '@/services/getTotalCitiesAndCoworkings';
+import Link from 'next/link';
 
 const HighlightedCities = async () => {
     const { coworksByCities } = await getCoworkingsAmountByCity();
     const { totalCoworkings, totalDistinctCities } =
         await getTotalCitiesAndCoworkings();
+
+    //select randomly a name of a city in coworkByCities
+    const listOfCities: string[] = [];
+    coworksByCities.forEach((city) => {
+        listOfCities.push(city.city);
+    });
+    const randomCity =
+        listOfCities[Math.floor(Math.random() * listOfCities.length)];
 
     return (
         <section className='my-[5vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:my-20'>
@@ -22,13 +31,15 @@ const HighlightedCities = async () => {
                         de travailler.
                     </h3>
                 </div>
-                <Button
-                    variant={'default'}
-                    size={'sm'}
-                    className='w-full lg:h-12 lg:w-[320px] lg:px-4'
-                >
-                    <span>Découvrez une nouvelle ville</span>
-                </Button>
+                <Link href={`/explore/${randomCity}`}>
+                    <Button
+                        variant={'default'}
+                        size={'sm'}
+                        className='w-full lg:h-12 lg:w-[320px] lg:px-4'
+                    >
+                        <span>Découvrez une nouvelle ville</span>
+                    </Button>
+                </Link>
             </div>
             <CarouselWrapper coworksByCities={coworksByCities} />
         </section>
