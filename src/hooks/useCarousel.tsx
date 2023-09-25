@@ -18,13 +18,14 @@ const useCarousel = (length: number) => {
         if (!isAnimating) {
             setIsAnimating(true);
             setCurrentIndex((prevIndex) => (prevIndex - 1 + length) % length);
-            setTimeout(() => setIsAnimating(false), 400); 
+            setTimeout(() => setIsAnimating(false), 400);
         }
     };
     return {
         nextSlide,
         prevSlide,
         currentIndex,
+        setCurrentIndex,
     };
 };
 
