@@ -33,8 +33,8 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
     const userImages = coworking?.userImages || defaultImage;
 
     return (
-        <div className='my-16 flex flex-col gap-16'>
-            <div className='font flex items-center justify-between'>
+        <div className='mb-12 mt-2 flex flex-col gap-8 px-6 lg:my-16 lg:gap-16 lg:p-0'>
+            <div className='font flex flex-col-reverse items-center justify-between gap-3 lg:flex-row lg:gap-0'>
                 <div className='flex flex-col gap-4'>
                     <p className='font-inter text-4xl font-semibold'>
                         {coworking?.name}
@@ -44,7 +44,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                         <p>{coworking?.phoneNumber}</p>
                     </div>
                 </div>
-                <div className='flex flex-col items-center justify-center gap-4'>
+                <div className='flex w-full items-center justify-between gap-4 lg:w-auto lg:flex-col lg:justify-center'>
                     <div className='flex items-center gap-2'>
                         <span className='text-xl font-bold'>
                             {coworkingAverageRating}
@@ -63,24 +63,15 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                 userImages={userImages}
                 defaultImage={defaultImage}
             />
-            <div className='flex h-[100px] items-center justify-between'>
-                <div className='flex h-full w-[75%] flex-col  gap-1'>
+            <div className='flex flex-col items-center justify-between gap-6 lg:h-[100px] lg:flex-row lg:gap-0'>
+                <div className='flex h-full w-full flex-col gap-2 lg:w-[75%] lg:gap-1'>
                     <h3 className='font-semibold'>Description</h3>
                     <p>{coworking?.description}</p>
                 </div>
                 <CoffeeBox expressoPrice={expressoPrice} />
             </div>
             <Characteristics coworking={coworking} />
-            <div className='flex flex-wrap gap-8'>
-                {coworking?.reviews?.map((review) => (
-                    <Review
-                        key={review.id}
-                        review={review}
-                        defaultImage={defaultImage}
-                    />
-                ))}
-            </div>
-            <div className='flex items-center justify-between'>
+            <div className='flex flex-col items-center justify-between lg:flex-row'>
                 <OpeningSchedule coworking={coworking} />
                 <div className='flex flex-col gap-4'>
                     <Map
@@ -96,6 +87,15 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                         {coworking?.address}
                     </span>
                 </div>
+            </div>
+            <div className='flex flex-wrap gap-8'>
+                {coworking?.reviews?.map((review) => (
+                    <Review
+                        key={review.id}
+                        review={review}
+                        defaultImage={defaultImage}
+                    />
+                ))}
             </div>
         </div>
     );

@@ -20,7 +20,6 @@ const Carousel = ({
     defaultImage,
 }: CarouselProps) => {
     const allImages = [...userImages, ...imagesSelected].map((img) => img);
-    console.log(allImages);
 
     const { nextSlide, prevSlide, currentIndex, setCurrentIndex } = useCarousel(
         allImages.length,
@@ -28,11 +27,6 @@ const Carousel = ({
 
     // Modal handler
     const [isOpen, setIsOpen] = useState(false);
-
-    // Create a function to open the modal
-    const handleOpen = () => {
-        setIsOpen(true);
-    };
 
     // Create a function to close the modal
     const handleClose = () => {
