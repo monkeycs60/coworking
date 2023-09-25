@@ -89,15 +89,17 @@ const CreateReview = ({
             <Button onClick={handleOpen}>Donne ton avis</Button>
 
             <ModalWindow isOpen={isOpen} onClose={handleClose}>
-                <div className='flex flex-col items-center justify-center gap-4 bg-white p-8'>
+                <div className='flex w-full flex-col items-center justify-center gap-4 bg-white p-8'>
                     {success ? (
                         <div className='flex flex-col gap-3'>
-                            <div className='flex gap-2'>
+                            <div className='flex justify-center gap-2'>
                                 <PartyPopper />
                                 <PartyPopper />
                                 <PartyPopper />
                             </div>
-                            <h2>Merci d'avoir donné ton avis !</h2>
+                            <h2 className='text-center'>
+                                Merci d'avoir donné ton avis !
+                            </h2>
                             <div className='flex gap-4'>
                                 <Rocket />
                                 <p>N'hésite pas à en donner d'autres </p>
@@ -106,11 +108,11 @@ const CreateReview = ({
                         </div>
                     ) : (
                         <>
-                            <div>
-                                <h2>Soumettez votre avis</h2>
-                                <p>
-                                    Partagez votre expérience avec la
-                                    communauté.
+                            <div className='flex flex-col items-center justify-center'>
+                                <h2>Partage ton expérience !</h2>
+                                <p className='text-sm'>
+                                    Donne-nous des informations sur ta dernière
+                                    visite.
                                 </p>
                             </div>
                             <form
@@ -125,14 +127,14 @@ const CreateReview = ({
 
                                 <textarea
                                     placeholder='Donne ton impression sur ce cowork'
-                                    className='my-4 h-[100px] w-full border-[1px] placeholder:p-2'
+                                    className='my-4 h-[100px] w-full border-[1px] p-2'
                                     {...register('content')}
                                 />
                                 {errors.content && <p>salut la famille</p>}
 
                                 <div className='flex flex-col gap-3'>
                                     <span className='text-xs italic text-black/50'>
-                                        Aide-nous à affiner à l aide de quelques
+                                        Aide-nous à affiner à l'aide de quelques
                                         notes
                                     </span>
                                     <div>

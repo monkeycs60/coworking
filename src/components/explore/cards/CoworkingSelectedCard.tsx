@@ -7,6 +7,7 @@ import OpeningSchedule from './CoworkingSelectedCard/OpeningSchedule';
 import CreateReview from './CoworkingSelectedCard/Review/CreateReview';
 import { averageRatingFromReviews } from '@/lib/functions/averageRatingFromReviews';
 import { Star } from 'lucide-react';
+import CoffeeBox from './CoworkingSelectedCard/CoffeeBox';
 
 const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
     const defaultImage = '/cowork-placeholder.jpg';
@@ -24,6 +25,8 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
     let coworkingAverageRating;
     if (coworkingReviews)
         coworkingAverageRating = averageRatingFromReviews(coworkingReviews);
+
+    const expressoPrice = coworking?.espressoPrice || 0;
 
     return (
         <div className='my-16 flex flex-col gap-10'>
@@ -52,7 +55,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                 </div>
             </div>
             <div>
-                <div className='flex h-[440px] items-center justify-center gap-12 bg-gray-400'>
+                <div className='flex h-[440px] items-center justify-center gap-12 rounded-xl bg-gray-400'>
                     <div className='relative h-[400px] w-[45%] '>
                         <Image
                             src={
@@ -89,8 +92,11 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                     </div>
                 </div>
             </div>
-            <div>
-                <p>{coworking?.description}</p>
+            <div className='flex h-[100px] items-center justify-between'>
+                <div className='h-full w-[75%]'>
+                    <p>{coworking?.description}</p>
+                </div>
+                <CoffeeBox expressoPrice={expressoPrice} />
             </div>
             <Characteristics coworking={coworking} />
             <div className='flex flex-wrap gap-8'>
