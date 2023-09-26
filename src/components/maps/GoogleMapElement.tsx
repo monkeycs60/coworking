@@ -6,6 +6,7 @@ import React from 'react';
 import { googleMapsStyle } from '@/lib/const/googleMapsStyle';
 import PreviewCard from './cards/PreviewCard';
 import BlankCard from './cards/BlankCard';
+import useResponsiveWidth from '@/hooks/useResponsiveWidth';
 
 const GoogleMapElement = ({
     height,
@@ -19,6 +20,9 @@ const GoogleMapElement = ({
     coworkings,
     coworkAdress,
 }: GoogleMapsPropsWithLocations) => {
+    const definitiveWidth = useResponsiveWidth();
+    console.log('definitiveWidth: ', definitiveWidth);
+
     const googleMapsApiKey: string | undefined =
         process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -26,14 +30,13 @@ const GoogleMapElement = ({
         return <div>Missing Google Maps API Key</div>;
     }
 
-    console.log(coworkings);
-
     return (
         <div>
             <LoadScript googleMapsApiKey={googleMapsApiKey}>
                 <GoogleMap
                     mapContainerStyle={{
                         height: height,
+                        // width: definitiveWidth !== "0" ? definitiveWidth : width,
                         width: width,
                         position: 'relative',
                     }}
@@ -41,6 +44,10 @@ const GoogleMapElement = ({
                     zoom={zoom}
                     options={{
                         disableDefaultUI: false, // Désactive l'UI par défaut
+                        mapTypeControl: false, // Désactive le type de carte
+                        streetViewControl: false, // Désactive la vue de rue
+                        fullscreenControl: false, // Désactive le plein écran
+                        gestureHandling: 'greedy',
                         styles: googleMapsStyle,
                     }}
                 >

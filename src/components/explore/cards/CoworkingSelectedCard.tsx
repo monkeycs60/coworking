@@ -72,13 +72,13 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
             <Characteristics coworking={coworking} />
             <div className='flex flex-col items-center justify-between lg:flex-row'>
                 <OpeningSchedule coworking={coworking} />
-                <div className='flex flex-col gap-4'>
+                <div className='flex flex-col gap-4 lg:w-[40%]'>
                     <Map
                         centerOfMap={coworkingCenter}
                         coworkingLocations={[coworkingLocation]}
                         zoom={14}
                         height='300px'
-                        width='500px'
+                        width='100%'
                         key={coworking.id}
                         coworkAdress={coworking.address}
                     />

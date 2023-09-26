@@ -2,6 +2,7 @@ import Map from '@/components/explore/Map';
 import { prisma } from '@/lib/prisma';
 import { centerOfFrance } from '@/lib/const/centerOfFrance';
 import getCoworkingsCoords from '@/lib/functions/getCoworkingsCoords';
+import { Coworking } from '@/types/coworking';
 
 const page = async () => {
     const coworkings = await prisma.coworking.findMany({
@@ -27,7 +28,7 @@ const page = async () => {
                     centerOfMap={centerOfFrance}
                     coworkingLocations={coworkingLocations}
                     zoom={5}
-                    coworkings={coworkings}
+                    coworkings={coworkings as unknown as Coworking[]}
                 />
             </div>
         </section>
