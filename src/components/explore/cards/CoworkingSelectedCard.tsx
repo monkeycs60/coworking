@@ -1,5 +1,4 @@
 import Map from '@/components/explore/Map';
-import Image from 'next/image';
 import { Coworking } from '@/types/coworking';
 import Characteristics from './CoworkingSelectedCard/Characteristics';
 import Review from './CoworkingSelectedCard/Review/Review';
