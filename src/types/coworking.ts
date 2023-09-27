@@ -131,6 +131,17 @@ export interface UserImage {
     updatedAt: DateTime;
 }
 
+export type UnifiedImage = {
+    id: CUID;
+    url: string;
+    coworkingId: string;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    userId?: CUID | null;
+    user?: User;
+    coworking?: Coworking;
+};
+
 export interface Review {
     id: CUID;
     content?: string | null;

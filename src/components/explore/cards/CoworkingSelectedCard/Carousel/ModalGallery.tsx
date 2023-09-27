@@ -1,10 +1,10 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { formatDateForFrenchLocale } from '@/lib/functions/formatDateForFrenchLocale';
-import { imageSelected } from '@/types/coworking';
+import {  UnifiedImage } from '@/types/coworking';
 
 interface ModalGalleryProps {
-    allImages: imageSelected[];
+    allImages: UnifiedImage[];
     defaultImage: string;
     currentIndex: number;
     prevSlide: () => void;
