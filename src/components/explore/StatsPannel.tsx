@@ -21,7 +21,7 @@ const StatsPannel = async () => {
                         {totalUsers}{' '}
                         <span className='hidden lg:inline'> utilisateurs</span>{' '}
                     </span>{' '}
-                    🙋‍♂️ qui ont écrit{' '}
+                    🙋‍♂️🙋‍♀️ qui ont écrit{' '}
                     <span className='font-bold'>
                         {totalReviews}{' '}
                         <span className='hidden lg:inline'> avis</span>

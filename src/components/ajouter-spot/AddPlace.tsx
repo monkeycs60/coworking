@@ -14,7 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TextAreaField from './form/TextAreaField';
 import { useAddPlaceForm } from '@/hooks/useAddPlaceForm';
-import CheckboxGroup from './form/ChecboxGroup';
+import CheckboxGroup from './form/CheckboxGroup';
 import {
     ACCESS_SPACES,
     BAR_RESTAURANT_OFFER,

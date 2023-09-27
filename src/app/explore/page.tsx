@@ -11,7 +11,7 @@ const page = async () => {
     const coworkingLocations = getCoworkingsCoords(coworkings);
 
     return (
-        <section className='mt-4 min-h-[800px] rounded-xl bg-gray-50 p-6 lg:mt-32 lg:p-10 xl:mt-16 3xl:mt-64'>
+        <section className='mt-4 min-h-[800px] rounded-xl bg-gray-50 p-6 lg:mt-16 lg:p-10'>
             <div className='flex flex-col gap-8 lg:gap-12'>
                 <StatsPannel />
                 <div className='flex flex-col gap-2 lg:gap-4'>

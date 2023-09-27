@@ -17,26 +17,31 @@ const page = async ({
     const coworkingLocations = getCoworkingsCoords(coworkings);
 
     return (
-        <section className='relative mt-16 min-h-[800px] bg-gray-200 p-10 lg:mt-32 xl:mt-48 3xl:mt-64'>
-            <p> le params next js === {citySelected} !!!!!!!!!!!!!!!!!!!!!</p>
-            <h1>Exploration de coworkings dans {city}</h1>
-            <p>{city && <>{city}</>}</p>
-            <Map
-                height='700px'
-                width='100%'
-                centerOfMap={cityCenterCoords}
-                coworkingLocations={coworkingLocations}
-                zoom={12}
-                coworkings={coworkings}
-            />
-            <div className='flex max-h-[700px] w-full flex-wrap gap-8 overflow-y-auto bg-slate-500 p-4'>
-                {coworkings.map((coworking) => (
-                    <CoworkingCard
-                        city={city}
-                        coworking={coworking}
-                        key={coworking.id}
-                    />
-                ))}
+        <section className='mt-4 min-h-[800px] rounded-xl bg-gray-50 p-6 lg:mt-16 lg:p-10'>
+            <div className='flex flex-col gap-8 lg:gap-12'>
+                <h1 className='font-signatra text-3xl'>{citySelected}</h1>
+                <div className='relative flex w-full flex-col gap-[20px] lg:flex-row'>
+                    <div className='h-[400px] w-full bg-red-200 lg:h-[700px] lg:w-[25%] '></div>
+                    <div className='relative hidden h-[400px] w-full bg-blue-200 lg:block lg:h-[700px] lg:w-[75%]'>
+                        <Map
+                            height='700px'
+                            width='100%'
+                            centerOfMap={cityCenterCoords}
+                            coworkingLocations={coworkingLocations}
+                            zoom={12}
+                            coworkings={coworkings}
+                        />
+                    </div>
+                </div>
+                <div className='flex max-h-[700px] w-full flex-wrap gap-8 overflow-y-auto bg-slate-500 p-4'>
+                    {coworkings.map((coworking) => (
+                        <CoworkingCard
+                            city={city}
+                            coworking={coworking}
+                            key={coworking.id}
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     );
