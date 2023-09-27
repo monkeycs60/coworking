@@ -120,7 +120,7 @@ const Carousel = ({
             <ModalWindow
                 isOpen={isOpen}
                 onClose={handleClose}
-                containerClass='w-[1500px]'
+                containerClass='w-[320px] lg:w-[1500px]'
             >
                 <ModalGallery
                     allImages={allImages}
