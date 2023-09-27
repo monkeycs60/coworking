@@ -39,6 +39,7 @@ const GoogleMapElement = ({
                         // width: definitiveWidth !== "0" ? definitiveWidth : width,
                         width: width,
                         position: 'relative',
+                        borderRadius: '30px',
                     }}
                     center={centerMap}
                     zoom={zoom}
