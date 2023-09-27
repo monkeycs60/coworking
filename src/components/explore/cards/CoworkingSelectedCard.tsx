@@ -9,6 +9,8 @@ import { Star } from 'lucide-react';
 import CoffeeBox from './CoworkingSelectedCard/CoffeeBox';
 import Carousel from './CoworkingSelectedCard/Carousel/Carousel';
 
+const hello = []
+
 const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
     const defaultImage = '/cowork-placeholder.jpg';
     const coworkingCenter = {
