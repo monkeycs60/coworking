@@ -125,7 +125,7 @@ export interface UserImage {
     url: string;
     coworkingId: CUID;
     coworking?: Coworking;
-    userId: CUID;
+    userId: CUID | null;
     user?: User;
     createdAt: DateTime;
     updatedAt: DateTime;

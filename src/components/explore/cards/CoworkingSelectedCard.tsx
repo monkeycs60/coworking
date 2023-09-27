@@ -41,7 +41,6 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                     <div className='flex flex-col text-base'>
                         <p>{coworking?.address}</p>
                         <p>{coworking?.phoneNumber}</p>
-                        <p>hello mechant</p>
                     </div>
                 </div>
                 <div className='flex w-full items-center justify-between gap-4 lg:w-auto lg:flex-col lg:justify-center'>

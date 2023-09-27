@@ -13,6 +13,7 @@ const page = async ({
 
     const cityCenterCoords = await getCityCenter(city);
     const coworkings = await getAllCoworkingsByCity(city);
+    console.log(coworkings);
     const coworkingLocations = getCoworkingsCoords(coworkings);
 
     return (
