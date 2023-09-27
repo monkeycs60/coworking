@@ -33,7 +33,7 @@ const CoffeeBox = ({ expressoPrice }: { expressoPrice?: string | number }) => {
             </div>
         </div>
     ) : (
-        <div className='relative flex h-full w-[25%] flex-col items-center justify-center gap-1 rounded-xl border-[2px] p-2'>
+        <div className='relative flex h-full w-full items-center justify-between gap-1 rounded-xl border-[2px] p-4 lg:w-[25%] lg:flex-col lg:justify-center lg:p-2'>
             <p className='text-sm'>Prix d'un expresso</p>
             <div className='flex items-center gap-3'>
                 <Coffee />

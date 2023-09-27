@@ -90,9 +90,9 @@ const CreateReview = ({
             <ModalWindow
                 isOpen={isOpen}
                 onClose={handleClose}
-                containerClass='w-[500px]'
+                containerClass='w-[320px] lg:w-[500px] lg:text-base text-xs'
             >
-                <div className='flex w-full flex-col items-center justify-center gap-4 bg-white p-8'>
+                <div className='flex w-full flex-col items-center justify-center gap-4 bg-white p-2 lg:p-8'>
                     {success ? (
                         <div className='flex flex-col gap-3'>
                             <div className='flex justify-center gap-2'>
@@ -105,15 +105,19 @@ const CreateReview = ({
                             </h2>
                             <div className='flex gap-4'>
                                 <Rocket />
-                                <p>N'hésite pas à en donner d'autres </p>
+                                <p className='text-center lg:text-left'>
+                                    N'hésite pas à en donner d'autres{' '}
+                                </p>
                                 <Rocket />
                             </div>
                         </div>
                     ) : (
                         <>
-                            <div className='flex flex-col items-center justify-center'>
-                                <h2>Partage ton expérience !</h2>
-                                <p className='text-sm'>
+                            <div className='flex flex-col items-center justify-center gap-2 lg:gap-0'>
+                                <h2 className='font-semibold lg:font-normal'>
+                                    Partage ton expérience !
+                                </h2>
+                                <p className='text-center lg:text-ellipsis lg:text-sm '>
                                     Donne-nous des informations sur ta dernière
                                     visite.
                                 </p>

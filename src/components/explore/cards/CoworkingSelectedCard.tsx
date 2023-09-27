@@ -70,7 +70,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                 <CoffeeBox expressoPrice={expressoPrice} />
             </div>
             <Characteristics coworking={coworking} />
-            <div className='flex flex-col items-center justify-between lg:flex-row'>
+            <div className='flex flex-col items-center justify-between gap-6 lg:flex-row lg:gap-0'>
                 <OpeningSchedule coworking={coworking} />
                 <div className='flex flex-col gap-4 lg:w-[40%]'>
                     <Map

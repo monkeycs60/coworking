@@ -14,7 +14,6 @@ const StarRating = ({
 }: StarRatingProps & { onChange: (value: number) => void; value: number }) => {
     const dispatch = useAppDispatch();
     const ratings = useAppSelector((state) => state.placeDetails.ratings);
-    console.log('ratingssss', ratings);
 
     const [hoveredStar, setHoveredStar] = useState<number | null>(null);
 
@@ -33,7 +32,7 @@ const StarRating = ({
                     onMouseLeave={() => setHoveredStar(null)}
                 >
                     <Star
-                        className='cursor-pointer'
+                        className='h-6 w-6 cursor-pointer lg:h-8 lg:w-8'
                         size={32}
                         weight={
                             starNumber <= (ratings[type] ?? 0)
