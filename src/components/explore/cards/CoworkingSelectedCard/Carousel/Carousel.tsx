@@ -103,7 +103,7 @@ const Carousel = ({
                         }}
                     >
                         {allImages.length > 4 ? (
-                            <p>
+                            <p className='text-center text-sm lg:text-left lg:text-base'>
                                 <span className='font-bold'>
                                     {allImages.length - 4}+
                                 </span>{' '}

@@ -91,7 +91,7 @@ const PreviewCard = ({
                         </div>
                         {/* ... add other relevant details here ... */}
                         <X
-                            className='absolute right-1 top-1 h-8 w-8 cursor-pointer rounded-2xl border-2 bg-white/60 text-black'
+                            className='absolute -right-6 top-2 h-8 w-8 cursor-pointer rounded-2xl border-2 bg-white/60 text-black lg:right-1 lg:top-1'
                             onClick={onCloseClick}
                         />
                     </div>
