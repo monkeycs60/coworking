@@ -1,4 +1,4 @@
-import { Coworking, Review } from './coworking';
+import { Coworking, Review, imageSelected, UserImage } from './coworking';
 interface GoogleMapsProps {
     height: string;
     width: string;
@@ -15,14 +15,27 @@ export type Location = {
     name: string; // Add more properties if needed for InfoWindow
 };
 
-type OmittedCoworking = Omit<Coworking, 'imagesSelected' | 'userImages'>;
+export interface PartialCoworking {
+    id: string;
+    name: string;
+    city: string;
+    address: string;
+    longitude?: number | null;
+    latitude?: number | null;
+    description: string;
+    imagesSelected: imageSelected[];
+    userImages: UserImage[];
+    reviews?: Review[];
+    hasWiFi: boolean;
+    hasParking: boolean;
+}
 
 export interface GoogleMapsPropsWithLocations extends GoogleMapsProps {
     locations: Location[];
     onMarkerClick?: (location: Location) => void;
     onCloseClick?: () => void;
     selectedCowork?: Location | null;
-    coworkings?: Coworking[];
+    coworkings?: PartialCoworking[];
     coworkAdress?: string;
 }
 
@@ -31,7 +44,7 @@ export interface PreviewCardProps {
     onMarkerClick?: (location: Location) => void;
     onCloseClick?: () => void;
     selectedCowork?: Location | null;
-    coworking?: Coworking;
+    coworking?: PartialCoworking;
     coworkingReviews?: Review[];
 }
 

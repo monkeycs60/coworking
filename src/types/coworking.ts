@@ -14,10 +14,10 @@ export interface User {
     profileImageUrl?: string;
     username?: string;
     image?: string;
-    comments: Comment[];
-    posts: Post[];
-    reviews: Review[];
-    places: Coworking[];
+    comments?: Comment[];
+    posts?: Post[];
+    reviews?: Review[];
+    places?: Coworking[];
 }
 
 export interface VerificationToken {
@@ -44,7 +44,7 @@ export interface Coworking {
     userImages: UserImage[];
     comments?: Comment[];
     espressoPrice?: string | null;
-    facility:
+    facility?:
         | 'IS_CAFE'
         | 'IS_HOTEL'
         | 'IS_LIBRARY'
@@ -72,8 +72,8 @@ export interface Coworking {
     souperPossibility: boolean;
     drinksPossibility: boolean;
     alcoolPossibility: boolean;
-    wifiQuality: 'HIGH_WIFI' | 'MEDIUM_WIFI' | 'LOW_WIFI';
-    music: 'NO_MUSIC' | 'DISCRETE_MUSIC' | 'RANDOM_MUSIC' | 'LOUD_MUSIC';
+    wifiQuality?: 'HIGH_WIFI' | 'MEDIUM_WIFI' | 'LOW_WIFI';
+    music?: 'NO_MUSIC' | 'DISCRETE_MUSIC' | 'RANDOM_MUSIC' | 'LOUD_MUSIC';
     reviews?: Review[];
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -81,8 +81,8 @@ export interface Coworking {
 
 export interface OpeningHour {
     id: CUID;
-    coworkingId: string;
-    coworking: Coworking;
+    coworkingId?: string;
+    coworking?: Coworking;
     weekdayText: string[];
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -126,7 +126,7 @@ export interface UserImage {
     url: string;
     coworkingId: CUID;
     coworking?: Coworking;
-    userId: CUID | null;
+    userId?: CUID | null;
     user?: User;
     createdAt: DateTime;
     updatedAt: DateTime;

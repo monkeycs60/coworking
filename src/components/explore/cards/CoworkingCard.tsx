@@ -1,8 +1,8 @@
-import { Coworking } from '@/types/coworking';
+import { PartialCoworking } from '@/types/googleMaps';
 import Link from 'next/link';
 
 interface CoworkingCardProps {
-    coworking: Coworking;
+    coworking: PartialCoworking;
     city: string;
 }
 
@@ -13,7 +13,6 @@ const CoworkingCard = ({ coworking, city }: CoworkingCardProps) => {
         coworking.imagesSelected && coworking.imagesSelected.length > 0
             ? coworking.imagesSelected[0].url
             : defaultImage;
-
 
     return (
         <Link

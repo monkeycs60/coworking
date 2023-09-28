@@ -3,6 +3,7 @@ import Map from '@/components/explore/Map';
 import { getCityCenter } from '@/services/getCityCenter';
 import getCoworkingsCoords from '@/lib/functions/getCoworkingsCoords';
 import CoworkingCard from '@/components/explore/cards/CoworkingCard';
+import { PartialCoworking } from '@/types/googleMaps';
 
 const page = async ({
     params: { citySelected },

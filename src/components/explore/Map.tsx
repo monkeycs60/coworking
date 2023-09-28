@@ -1,14 +1,16 @@
 'use client';
 
 import GoogleMapElement from '../maps/GoogleMapElement';
-import { Coworking } from '@/types/coworking';
+import { PartialCoworking } from '@/types/googleMaps';
 import { useState } from 'react';
+
 
 interface CoworkingLocation {
     lat: number;
     lng: number;
     name: string;
 }
+
 
 interface MapProps {
     height: string;
@@ -19,7 +21,7 @@ interface MapProps {
     };
     coworkingLocations: CoworkingLocation[];
     zoom: number;
-    coworkings?: Coworking[];
+    coworkings?: PartialCoworking[];
     coworkAdress?: string;
 }
 

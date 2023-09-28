@@ -21,7 +21,6 @@ const GoogleMapElement = ({
     coworkAdress,
 }: GoogleMapsPropsWithLocations) => {
     const definitiveWidth = useResponsiveWidth();
-    console.log('definitiveWidth: ', definitiveWidth);
 
     const googleMapsApiKey: string | undefined =
         process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
