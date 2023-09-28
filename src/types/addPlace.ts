@@ -15,6 +15,15 @@ export const AddPlaceSchema = z.object({
     imagesSelected: z.array(z.string()).optional(),
     userImages: z.any().optional(),
     espressoPrice: z.string().optional(),
+    facility: z
+        .enum([
+            'IS_CAFE',
+            'IS_HOTEL',
+            'IS_LIBRARY',
+            'IS_THIRD_SPACE',
+            'IS_OTHER_TYPE',
+        ])
+        .optional(),
     hasPrivacy: z.boolean().optional(),
     hasParking: z.boolean().optional(),
     hasWiFi: z.boolean().optional(),
@@ -38,12 +47,10 @@ export const AddPlaceSchema = z.object({
     drinksPossibility: z.boolean().optional(),
     alcoolPossibility: z.boolean().optional(),
     noMusic: z.boolean().optional(),
-    discreteMusic: z.boolean().optional(),
-    randomMusic: z.boolean().optional(),
-    loudMusic: z.boolean().optional(),
-    highWifi: z.boolean().optional(),
-    mediumWifi: z.boolean().optional(),
-    lowWifi: z.boolean().optional(),
+    music: z
+        .enum(['NO_MUSIC', 'DISCRETE_MUSIC', 'RANDOM_MUSIC', 'LOUD_MUSIC'])
+        .optional(),
+    wifiQuality: z.enum(['HIGH_WIFI', 'MEDIUM_WIFI', 'LOW_WIFI']).optional(),
     reviewContent: z.string().nonempty(),
     calmRating: z.number().min(1).max(5),
     equipRating: z.number().min(1).max(5),

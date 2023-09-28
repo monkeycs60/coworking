@@ -1,3 +1,25 @@
+export const FACILITY_TYPE = [
+    {
+        id: 'IS_CAFE',
+        label: 'Café',
+    },
+    {
+        id: 'IS_HOTEL',
+        label: 'Hôtel',
+    },
+    {
+        id: 'IS_LIBRARY',
+        label: 'Bibliothèque',
+    },
+    {
+        id: 'IS_THIRD_SPACE',
+        label: 'Tiers-lieu',
+    },
+    {
+        id: 'IS_OTHER_TYPE',
+        label: 'Autre',
+    },
+];
 export const ACCESS_SPACES = [
     {
         id: 'hasParking',
@@ -30,15 +52,15 @@ export const ON_SITE_AMENITIES = [
 
 export const WIFI_QUALITY = [
     {
-        id: 'highWifi',
+        id: 'HIGH_WIFI',
         label: 'Elevée',
     },
     {
-        id: 'mediumWifi',
+        id: 'MEDIUM_WIFI',
         label: 'Moyenne',
     },
     {
-        id: 'lowWifi',
+        id: 'LOW_WIFI',
         label: 'Faible',
     },
 ];
@@ -117,19 +139,19 @@ export const BAR_RESTAURANT_OFFER = [
 
 export const MUSIC = [
     {
-        id: 'noMusic',
+        id: 'NO_MUSIC',
         label: 'Absente',
     },
     {
-        id: 'discreteMusic',
+        id: 'DISCRETE_MUSIC',
         label: 'Discrète',
     },
     {
-        id: 'randomMusic',
+        id: 'RANDOM_MUSIC',
         label: 'Ca dépend',
     },
     {
-        id: 'loudMusic',
+        id: 'LOUD_MUSIC',
         label: 'Bruyante',
     },
 ];

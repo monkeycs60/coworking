@@ -44,6 +44,12 @@ export interface Coworking {
     userImages: UserImage[];
     comments?: Comment[];
     espressoPrice?: string | null;
+    facility:
+        | 'IS_CAFE'
+        | 'IS_HOTEL'
+        | 'IS_LIBRARY'
+        | 'IS_THIRD_SPACE'
+        | 'IS_OTHER_TYPE';
     hasPrivacy: boolean;
     hasParking: boolean;
     hasWiFi: boolean;
@@ -66,13 +72,8 @@ export interface Coworking {
     souperPossibility: boolean;
     drinksPossibility: boolean;
     alcoolPossibility: boolean;
-    noMusic: boolean;
-    discreteMusic: boolean;
-    randomMusic: boolean;
-    loudMusic: boolean;
-    highWifi: boolean;
-    mediumWifi: boolean;
-    lowWifi: boolean;
+    wifiQuality: 'HIGH_WIFI' | 'MEDIUM_WIFI' | 'LOW_WIFI';
+    music: 'NO_MUSIC' | 'DISCRETE_MUSIC' | 'RANDOM_MUSIC' | 'LOUD_MUSIC';
     reviews?: Review[];
     createdAt: DateTime;
     updatedAt: DateTime;

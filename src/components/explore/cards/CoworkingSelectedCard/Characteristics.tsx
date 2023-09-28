@@ -40,6 +40,8 @@ const CharacteristicItem = ({ label }: { label: string }) => (
 );
 
 const Characteristics = ({ coworking }: { coworking: Coworking }) => {
+    console.log(coworking);
+
     return (
         <div className='rounded-xl border-[2px] p-6'>
             <div className='flex flex-col items-center gap-8 lg:items-start'>
@@ -68,13 +70,13 @@ const Characteristics = ({ coworking }: { coworking: Coworking }) => {
                         )}
                     </CharacteristicSection>
                     <CharacteristicSection title='Qualité du Wi-Fi'>
-                        {coworking?.hasExterior && (
+                        {coworking?.wifiQuality === 'HIGH_WIFI' && (
                             <CharacteristicItem label='Elévée' />
                         )}
-                        {coworking?.hasParking && (
+                        {coworking?.wifiQuality === 'MEDIUM_WIFI' && (
                             <CharacteristicItem label='Moyenne' />
                         )}
-                        {coworking?.hasHandicap && (
+                        {coworking?.wifiQuality === 'LOW_WIFI' && (
                             <CharacteristicItem label='Faible' />
                         )}
                     </CharacteristicSection>
@@ -132,16 +134,16 @@ const Characteristics = ({ coworking }: { coworking: Coworking }) => {
                         )}
                     </CharacteristicSection>
                     <CharacteristicSection title='Musique'>
-                        {coworking?.noMusic && (
+                        {coworking?.music === 'NO_MUSIC' && (
                             <CharacteristicItem label='Absente' />
                         )}
-                        {coworking?.discreteMusic && (
+                        {coworking?.music === 'DISCRETE_MUSIC' && (
                             <CharacteristicItem label='Discrète' />
                         )}
-                        {coworking?.randomMusic && (
+                        {coworking?.music === 'RANDOM_MUSIC' && (
                             <CharacteristicItem label='Ca dépend' />
                         )}
-                        {coworking?.loudMusic && (
+                        {coworking?.music === 'LOUD_MUSIC' && (
                             <CharacteristicItem label='Bruyante' />
                         )}
                     </CharacteristicSection>

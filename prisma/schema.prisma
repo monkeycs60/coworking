@@ -57,6 +57,7 @@ model Coworking {
   userImages   UserImage[] 
   comments      Comment[]
   espressoPrice   String? 
+  facility FacilityType?
   hasPrivacy      Boolean @default(false)
   hasParking      Boolean @default(false)
   hasWiFi      Boolean @default(false)
@@ -79,13 +80,8 @@ model Coworking {
   souperPossibility     Boolean @default(false)
   drinksPossibility     Boolean @default(false)
   alcoolPossibility     Boolean @default(false)
-  noMusic     Boolean @default(false)
-  discreteMusic     Boolean @default(false)
-  randomMusic     Boolean @default(false)
-  loudMusic     Boolean @default(false)
-  highWifi     Boolean @default(false)
-  mediumWifi     Boolean @default(false)
-  lowWifi     Boolean @default(false)
+  wifiQuality      WifiQualityType? 
+  music            MusicType? 
   reviews       Review[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
@@ -161,4 +157,25 @@ model Review {
   updatedAt   DateTime  @updatedAt
 
     @@unique([userId, coworkingId])
+}
+
+enum FacilityType {
+  IS_CAFE
+  IS_HOTEL
+  IS_LIBRARY
+  IS_THIRD_SPACE
+  IS_OTHER_TYPE
+}
+
+enum WifiQualityType {
+  HIGH_WIFI
+  MEDIUM_WIFI
+  LOW_WIFI
+}
+
+enum MusicType {
+  NO_MUSIC
+  DISCRETE_MUSIC
+  RANDOM_MUSIC
+  LOUD_MUSIC
 }

@@ -15,6 +15,7 @@ export const sendPlaceDetails = async (data: AddPlaceSchemaType) => {
 
     if (response.ok) {
         console.log('Place added successfully!');
+        console.log('responseData', responseData);
 
         return responseData;
     } else {

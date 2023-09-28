@@ -70,6 +70,8 @@ export const useAddPlaceForm = () => {
     };
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
+        console.log('onSubmit est déclenché avec les données :', data);
+
         setWaitingToSubmit(true);
         if (!placeDetails?.place_id) {
             alert('PlaceId is missing!');
@@ -103,24 +105,12 @@ export const useAddPlaceForm = () => {
                     },
                 );
             } else {
-                toast.success('Le coworking a bien été ajouté, patiente, tu vas bientôt être redirigé !', {
-                    position: 'top-center',
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-
-                setTimeout(() => {
-                    const city = finalData.city;
-                    const coworkingName = encodeURIComponent(finalData.name);
-                    const coworkingId = response.data.id;
-                    const coworkURL = `/explore/${city}/${coworkingName}?coworkingId=${coworkingId}`;
-                    router.push(coworkURL);
-                    dispatch(resetAllDetails());
-                }, 5000);
+                const city = finalData.city;
+                const coworkingName = encodeURIComponent(finalData.name);
+                const coworkingId = response.data.id;
+                const coworkURL = `/explore/${city}/${coworkingName}?coworkingId=${coworkingId}`;
+                router.push(coworkURL);
+                dispatch(resetAllDetails());
             }
         } catch (error) {
             console.error(error);

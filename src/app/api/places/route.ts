@@ -68,10 +68,9 @@ export async function POST(req: NextRequest) {
                 souperPossibility: placeData.souperPossibility,
                 drinksPossibility: placeData.drinksPossibility,
                 alcoolPossibility: placeData.alcoolPossibility,
-                noMusic: placeData.noMusic,
-                discreteMusic: placeData.discreteMusic,
-                randomMusic: placeData.randomMusic,
-                loudMusic: placeData.loudMusic,
+                wifiQuality: placeData.wifiQuality,
+                music: placeData.music,
+                facility: placeData.facility,
                 reviews: {
                     create: [
                         {

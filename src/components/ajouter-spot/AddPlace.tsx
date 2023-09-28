@@ -9,13 +9,15 @@ import OpeningHours from './form/OpeningHours';
 import ChooseGoogleImages from './form/ChooseGoogleImages';
 import { StarRatingCalmEquipFood } from './form/StarRatingCalmEquipFood';
 import { Button } from '../ui/button';
-import { Loader2, AlertTriangle } from 'lucide-react';
+import { Loader2, AlertTriangle, Radio } from 'lucide-react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TextAreaField from './form/TextAreaField';
 import { useAddPlaceForm } from '@/hooks/useAddPlaceForm';
 import CheckboxGroup from './form/CheckboxGroup';
+import RadioGroup from './form/RadioGroup';
 import {
+    FACILITY_TYPE,
     ACCESS_SPACES,
     BAR_RESTAURANT_OFFER,
     IDEAL_TIME,
@@ -54,6 +56,7 @@ const AddPlace = () => {
     } = useForm<AddPlaceSchemaType>({
         resolver: zodResolver(AddPlaceSchema),
     });
+    console.log(errors);
 
     return placeDetails ? (
         <form onSubmit={handleSubmit(onSubmit)} className='mt-10'>
@@ -132,6 +135,12 @@ const AddPlace = () => {
                     error={errors.espressoPrice}
                 />
                 <div className='flex flex-col gap-6'>
+                    <RadioGroup
+                        title="Type d'établissement"
+                        name='facility'
+                        items={FACILITY_TYPE}
+                        register={register}
+                    />
                     <CheckboxGroup
                         title='Accès et espace'
                         items={ACCESS_SPACES}
@@ -142,13 +151,14 @@ const AddPlace = () => {
                         items={ON_SITE_AMENITIES}
                         register={register}
                     />
-                    <CheckboxGroup
+                    <RadioGroup
                         title='Qualité du Wi-Fi'
+                        name='wifiQuality'
                         items={WIFI_QUALITY}
                         register={register}
                     />
                     <CheckboxGroup
-                        title='Zone de travail'
+                        title='Zone(s) de travail'
                         items={WORK_ZONE}
                         register={register}
                     />
@@ -167,8 +177,9 @@ const AddPlace = () => {
                         items={BAR_RESTAURANT_OFFER}
                         register={register}
                     />
-                    <CheckboxGroup
+                    <RadioGroup
                         title='Musique'
+                        name='music'
                         items={MUSIC}
                         register={register}
                     />
