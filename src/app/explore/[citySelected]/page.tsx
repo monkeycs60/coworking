@@ -3,7 +3,7 @@ import Map from '@/components/explore/Map';
 import { getCityCenter } from '@/services/getCityCenter';
 import getCoworkingsCoords from '@/lib/functions/getCoworkingsCoords';
 import CoworkingCard from '@/components/explore/cards/CoworkingCard';
-import { PartialCoworking } from '@/types/googleMaps';
+import SideBarFilter from '@/components/layout/SideBarFilter';
 
 const page = async ({
     params: { citySelected },
@@ -22,8 +22,8 @@ const page = async ({
             <div className='flex flex-col gap-8 lg:gap-12'>
                 <h1 className='font-signatra text-3xl'>{citySelected}</h1>
                 <div className='relative flex w-full flex-col gap-[20px] lg:flex-row'>
-                    <div className='h-[400px] w-full bg-red-200 lg:h-[700px] lg:w-[25%] '></div>
-                    <div className='relative hidden h-[400px] w-full bg-blue-200 lg:block lg:h-[700px] lg:w-[75%]'>
+                    <SideBarFilter />
+                    <div className='relative hidden h-[400px] w-full  lg:block lg:h-[700px] lg:w-[72%]'>
                         <Map
                             height='700px'
                             width='100%'
@@ -34,7 +34,7 @@ const page = async ({
                         />
                     </div>
                 </div>
-                <div className='flex max-h-[700px] w-full flex-wrap gap-8 overflow-y-auto bg-slate-500 p-4'>
+                <div className='flex w-full flex-wrap justify-between gap-8 p-4'>
                     {coworkings.map((coworking) => (
                         <CoworkingCard
                             city={city}

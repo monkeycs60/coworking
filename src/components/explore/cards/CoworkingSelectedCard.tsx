@@ -67,9 +67,11 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                 <div className='flex h-full w-full flex-col gap-2 lg:w-[75%] lg:gap-6'>
                     <div className='flex items-center justify-between gap-8 lg:w-[90%] lg:justify-normal'>
                         <h3 className='font-semibold'>Description</h3>
-                        <h3 className='rounded-xl border-[1px] bg-gray-200 px-4 py-2 font-semibold'>
-                            {convertFacilityName(coworking?.facility)}
-                        </h3>
+                        {coworking?.facility ? (
+                            <h3 className='rounded-xl border-[1px] bg-gray-200 px-4 py-2 font-semibold'>
+                                {convertFacilityName(coworking?.facility)}
+                            </h3>
+                        ) : null}
                     </div>
                     <p>{coworking?.description}</p>
                 </div>
