@@ -1,9 +1,7 @@
-import React from 'react'
+import { Skeleton } from '@/components/ui/skeleton';
 
 const loading = () => {
-  return (
-    <div className='h-96 w-96 bg-pink-600 text-9xl'>loading</div>
-  )
-}
+    return <Skeleton className='h-[900px] w-[1000px] rounded-full' />;
+};
 
-export default loading
+export default loading;

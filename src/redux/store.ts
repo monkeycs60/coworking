@@ -6,6 +6,7 @@ import placeDetailsReducer from './features/placeDetails-slice';
 import autoCompleteReducer from './features/autoComplete-slice';
 import carouselReducer from './features/carouselState-slice';
 import citySearchReducer from './features/citySearch-slice';
+import filterReducer from './features/filter-slice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
@@ -24,6 +25,7 @@ export const store = configureStore({
         autoComplete: autoCompleteReducer,
         carouselState: carouselReducer,
         citySearch: citySearchReducer,
+        filter: filterReducer,
     },
     middleware: [thunk],
 });
