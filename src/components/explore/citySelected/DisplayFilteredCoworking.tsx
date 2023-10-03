@@ -44,68 +44,74 @@ const DisplayFilteredCoworking = ({
 
     const filteredCoworkings = coworkings.filter((coworking) => {
         if (areAllFiltersUnchecked()) return true;
-        if (filteredState.Café && coworking.facility === 'IS_CAFE') {
-            return true;
+
+        let isValid = true;
+
+        if (filteredState.Café) {
+            isValid = isValid && coworking.facility === 'IS_CAFE';
         }
-        if (filteredState.Hôtel && coworking.facility === 'IS_HOTEL') {
-            return true;
+        if (filteredState.Hôtel) {
+            isValid = isValid && coworking.facility === 'IS_HOTEL';
         }
-        if (filteredState.Bibliothèque && coworking.facility === 'IS_LIBRARY') {
-            return true;
+        if (filteredState.Bibliothèque) {
+            isValid = isValid && coworking.facility === 'IS_LIBRARY';
         }
-        if (
-            filteredState.Tiers_lieu &&
-            coworking.facility === 'IS_THIRD_SPACE'
-        ) {
-            return true;
+        if (filteredState.Tiers_lieu) {
+            isValid = isValid && coworking.facility === 'IS_THIRD_SPACE';
         }
-        if (filteredState.Autre && coworking.facility === 'IS_OTHER_TYPE') {
-            return true;
+        if (filteredState.Autre) {
+            isValid = isValid && coworking.facility === 'IS_OTHER_TYPE';
         }
         if (filteredState.Calme) {
-            return coworking.reviews
-                ? calmAverage(coworking.reviews) >= 3.75
-                : null;
+            isValid =
+                isValid && coworking.reviews
+                    ? calmAverage(coworking.reviews) >= 3.75
+                    : false;
         }
         if (filteredState.Equipement) {
-            return coworking.reviews
-                ? equipAverage(coworking.reviews) >= 3.75
-                : null;
+            isValid =
+                isValid && coworking.reviews
+                    ? equipAverage(coworking.reviews) >= 3.75
+                    : false;
         }
         if (filteredState.Feeling) {
-            return coworking.reviews
-                ? feelingAverage(coworking.reviews) >= 3.75
-                : null;
+            isValid =
+                isValid && coworking.reviews
+                    ? feelingAverage(coworking.reviews) >= 3.75
+                    : false;
         }
         if (filteredState.Food) {
-            return coworking.reviews
-                ? foodAverage(coworking.reviews) >= 3.75
-                : null;
+            isValid =
+                isValid && coworking.reviews
+                    ? foodAverage(coworking.reviews) >= 3.75
+                    : false;
         }
 
-        if (filteredState.Accès_handicapé && coworking.hasHandicap) {
-            return true;
+        if (filteredState.Accès_handicapé) {
+            isValid = isValid && coworking.hasHandicap;
         }
-        if (filteredState.Parking && coworking.hasParking) {
-            return true;
+        if (filteredState.Parking) {
+            isValid = isValid && coworking.hasParking;
         }
-        if (filteredState.Wifi && coworking.hasWiFi) {
-            return true;
+        if (filteredState.Wifi) {
+            isValid = isValid && coworking.hasWiFi;
         }
-        if (filteredState.Call_friendly && coworking.hasPrivacy) {
-            return true;
+        if (filteredState.Call_friendly) {
+            isValid = isValid && coworking.hasPrivacy;
         }
-        if (filteredState.Extérieur && coworking.hasExterior) {
-            return true;
+        if (filteredState.Extérieur) {
+            isValid = isValid && coworking.hasExterior;
         }
-        if (filteredState.Prises_électriques && coworking.hasPlugs) {
-            return true;
+        if (filteredState.Prises_électriques) {
+            isValid = isValid && coworking.hasPlugs;
         }
-        if (filteredState.Restauration && coworking.lunchPossibility) {
-            return true;
+        if (filteredState.Restauration) {
+            isValid =
+                (isValid && coworking.lunchPossibility) ||
+                (isValid && coworking.snacksPossibility);
         }
         // Ajoutez d'autres conditions ici pour d'autres types de lieux
-        return false;
+        return isValid;
     });
 
     return (
