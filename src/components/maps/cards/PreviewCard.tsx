@@ -41,10 +41,7 @@ const PreviewCard = ({
                     }}
                     options={{}}
                 >
-                    <div
-                        className='flex h-[240px] w-[310px] flex-col gap-4 bg-gray-200 font-inter'
-                        style={{}}
-                    >
+                    <div className='relative flex h-[240px] w-[310px] flex-col gap-4 bg-gray-200 font-inter'>
                         <Link
                             href={{
                                 pathname: `/explore/${coworking?.city}/${coworking?.name}`,
@@ -52,7 +49,7 @@ const PreviewCard = ({
                             }}
                             className='h-[100px] w-[310px] bg-primary'
                         >
-                            <div className='relative h-full w-full'>
+                            <div className='relative h-full w-full rounded-xl'>
                                 <Image
                                     src={
                                         coworking?.userImages?.[0]?.url ||
@@ -70,7 +67,7 @@ const PreviewCard = ({
                                 pathname: `/explore/${coworking?.city}/${coworking?.name}`,
                                 query: { coworkingId: coworking?.id },
                             }}
-                            className='flex flex-col gap-1 px-2'
+                            className='flex flex-col gap-1 px-4'
                         >
                             <div className='flex w-full justify-between'>
                                 <h1 className='text-base font-semibold'>
@@ -84,13 +81,13 @@ const PreviewCard = ({
                             </div>
                             <p>{coworking?.city}</p>
                         </Link>
-                        <div className='flex flex-col gap-1 px-2'>
+                        <div className='flex flex-col gap-1 px-4'>
                             <p className='line-clamp-2'>
                                 {coworking?.description}
                             </p>
                         </div>
                         <X
-                            className='absolute -right-2 top-2 h-8 w-8 cursor-pointer rounded-2xl border-2 bg-white/60 text-black lg:right-1 lg:top-1'
+                            className='absolute right-2 top-2 h-8 w-8 cursor-pointer rounded-2xl border-2 bg-white/60 text-black lg:right-1 lg:top-1'
                             onClick={onCloseClick}
                         />
                     </div>
