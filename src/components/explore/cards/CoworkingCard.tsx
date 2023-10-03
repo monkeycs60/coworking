@@ -8,7 +8,6 @@ interface CoworkingCardProps {
 
 const CoworkingCard = ({ coworking, city }: CoworkingCardProps) => {
     const defaultImage = '/cowork-placeholder.jpg';
-    console.log(coworking);
 
     const imageUrl =
         coworking.imagesSelected && coworking.imagesSelected.length > 0

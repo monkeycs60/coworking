@@ -3,22 +3,15 @@
 import React, { CSSProperties, useState } from 'react';
 import MobileFilter from './SideBarFilter/MobileFilter';
 import DesktopFilter from './SideBarFilter/DesktopFilter';
+import {
+    FACILITY_TYPES,
+    FEATURES,
+    STRENGTH,
+} from '@/lib/const/filterCategories';
 
 interface SideBarFilterProps {
     containerClassName?: CSSProperties;
 }
-
-const FACILITY_TYPES = ['Café', 'Hôtel', 'Bibliothèque', 'Tiers-lieu', 'Autre'];
-const STRENGTH = ['Calme', 'Equipement', 'Food', 'Feeling'];
-const FEATURES = [
-    'Wifi',
-    'Parking',
-    'Call Friendly',
-    'Prises électriques',
-    'Accès handicapé',
-    'Extérieur',
-    'Restauration',
-];
 
 const SideBarFilter = ({ containerClassName }: SideBarFilterProps) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);

@@ -20,7 +20,7 @@ export const averageRatingFromReviews = (reviews: Review[]) => {
             0,
         ) / reviews.length;
 
-    return (overallAverage.toFixed(2));
+    return overallAverage.toFixed(2);
 };
 
 // Calcule la moyenne pour une catégorie spécifique

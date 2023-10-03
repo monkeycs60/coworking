@@ -1,3 +1,7 @@
+'use client';
+
+import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
+import { toggleValue, FilterState } from '@/redux/features/filter-slice';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface MobileFilterProps {
@@ -15,6 +19,13 @@ const MobileFilter = ({
     STRENGTH,
     FEATURES,
 }: MobileFilterProps) => {
+    const dispatch = useAppDispatch();
+
+    const filterState = useAppSelector((state) => state.filter); // Adjust this if your state structure is different
+
+    const handleClick = (type: keyof FilterState) => {
+        dispatch(toggleValue(type));
+    };
     return (
         <div className='flex flex-col gap-8 lg:hidden'>
             <div
@@ -36,10 +47,17 @@ const MobileFilter = ({
                         <div className='flex flex-wrap gap-6'>
                             {FACILITY_TYPES.map((type) => (
                                 <button
-                                    className='rounded-xl bg-white p-3'
+                                    className={`rounded-xl p-3 ${
+                                        filterState[type as keyof FilterState]
+                                            ? 'bg-blue-500 text-white'
+                                            : 'bg-white'
+                                    }`}
                                     key={type}
+                                    onClick={() =>
+                                        handleClick(type as keyof FilterState)
+                                    }
                                 >
-                                    {type}
+                                    {type.replace('_', '-')}
                                 </button>
                             ))}
                         </div>
@@ -49,8 +67,15 @@ const MobileFilter = ({
                         <div className='flex flex-wrap gap-6'>
                             {STRENGTH.map((type) => (
                                 <button
-                                    className='rounded-xl bg-white p-3'
+                                    className={`rounded-xl p-3 ${
+                                        filterState[type as keyof FilterState]
+                                            ? 'bg-blue-500 text-white'
+                                            : 'bg-white'
+                                    }`}
                                     key={type}
+                                    onClick={() =>
+                                        handleClick(type as keyof FilterState)
+                                    }
                                 >
                                     {type}
                                 </button>
@@ -65,8 +90,18 @@ const MobileFilter = ({
                                     key={feature}
                                     className='flex items-center justify-between gap-2'
                                 >
-                                    <input type='checkbox' id={feature} />
-                                    <label htmlFor={feature}>{feature}</label>
+                                    <input
+                                        type='checkbox'
+                                        id={feature}
+                                        onClick={() =>
+                                            handleClick(
+                                                feature as keyof FilterState,
+                                            )
+                                        }
+                                    />
+                                    <label htmlFor={feature}>
+                                        {feature.replace('_', ' ')}
+                                    </label>
                                 </div>
                             ))}
                         </div>
