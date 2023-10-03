@@ -1,8 +1,9 @@
-import { PartialCoworking } from '@/types/googleMaps';
+import { Coworking } from '@/types/coworking';
 import Link from 'next/link';
+import { convertFacilityName } from '@/lib/functions/convertFacilityName';
 
 interface CoworkingCardProps {
-    coworking: PartialCoworking;
+    coworking: Coworking;
     city: string;
 }
 
@@ -21,18 +22,24 @@ const CoworkingCard = ({ coworking, city }: CoworkingCardProps) => {
                 query: { coworkingId: coworking.id },
             }}
             key={coworking.id}
-            className='flex h-[300px] w-full  flex-col items-center gap-4 rounded-xl bg-cover bg-center text-center lg:w-[31%] '
+            className='relative flex h-[300px] w-full flex-col items-center gap-4 rounded-xl bg-cover bg-center text-center lg:w-[31%] '
             style={{
                 backgroundImage: `url(${imageUrl})`,
             }}
         >
-            <div className='z-50 h-[160px] w-full space-y-3 rounded-xl bg-slate-400/80 pt-2 text-white'>
-                <p className='font-semibold'>{coworking.name}</p>
-                <p className='text-sm'>{coworking.address}</p>
-                <p className='line-clamp-2 text-sm lg:line-clamp-4'>
-                    {coworking.description}
-                </p>
+            <div className='z-50 flex h-[160px] w-full flex-col justify-center space-y-3 rounded-xl bg-primary/80 p-2 text-white '>
+                <div className='flex flex-col gap-2'>
+                    <p className='line-clamp-1 font-semibold'>
+                        {coworking.name}
+                    </p>
+                </div>
+                <p className='line-clamp-3 text-sm'>{coworking.description}</p>
             </div>
+            {coworking.facility && (
+                <p className='absolute bottom-0 left-0 rounded-bl-xl rounded-tr-xl bg-secondary px-4 py-2 text-sm font-bold text-black'>
+                    {convertFacilityName(coworking.facility)}
+                </p>
+            )}
         </Link>
     );
 };
