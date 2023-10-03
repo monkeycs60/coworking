@@ -60,7 +60,7 @@ const Characteristics = ({ coworking }: { coworking: Coworking }) => {
                     </CharacteristicSection>
                     <CharacteristicSection title='Commodités sur place'>
                         {coworking?.hasPrivacy && (
-                            <CharacteristicItem label=' coin privé / isolé' />
+                            <CharacteristicItem label=' Coin privé / isolé' />
                         )}
                         {coworking?.hasWiFi && (
                             <CharacteristicItem label='Wifi' />
