@@ -4,13 +4,13 @@ const CoffeeBox = ({ expressoPrice }: { expressoPrice?: string | number }) => {
     const expressoPriceToNumber = Number(expressoPrice);
 
     return expressoPrice ? (
-        <div className='relative flex h-full w-full items-center gap-10 rounded-xl border-[2px] p-4 lg:w-[25%] lg:flex-col lg:justify-center lg:gap-1 lg:p-2'>
+        <div className='relative flex h-full w-full items-center justify-end gap-10 rounded-xl border-[2px] p-4 lg:w-[25%] lg:flex-col lg:justify-center lg:gap-1 lg:p-2'>
             <p className='text-sm'>Prix d'un expresso</p>
             <div className='flex items-center gap-1 lg:gap-3'>
                 <Coffee />
                 <p>{expressoPrice} €</p>
             </div>
-            <div className='absolute right-2 top-5 flex lg:top-2'>
+            <div className='absolute left-3 top-5 flex lg:right-2 lg:top-2'>
                 {expressoPriceToNumber <= 1.5 ? (
                     <>
                         <Euro className='h-4 w-4 text-secondary' />
