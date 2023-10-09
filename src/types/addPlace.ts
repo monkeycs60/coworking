@@ -46,7 +46,6 @@ export const AddPlaceSchema = z.object({
     souperPossibility: z.boolean().optional(),
     drinksPossibility: z.boolean().optional(),
     alcoolPossibility: z.boolean().optional(),
-    noMusic: z.boolean().optional(),
     music: z
         .enum(['NO_MUSIC', 'DISCRETE_MUSIC', 'RANDOM_MUSIC', 'LOUD_MUSIC'])
         .optional(),
