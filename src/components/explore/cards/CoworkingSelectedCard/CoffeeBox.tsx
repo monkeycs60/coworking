@@ -4,15 +4,28 @@ import { Button } from '@/components/ui/button';
 import ModalWindow from '@/components/ui/modalWindow';
 import { Coffee, Euro, Pencil } from 'lucide-react';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface CoffeeBoxProps {
     expressoPrice?: string | number;
     coworkingPlaceId?: string;
+    coworkingId?: string;
 }
 
-const CoffeeBox = ({ expressoPrice, coworkingPlaceId }: CoffeeBoxProps) => {
+const CoffeeBox = ({
+    expressoPrice,
+    coworkingPlaceId,
+    coworkingId,
+}: CoffeeBoxProps) => {
     const router = useRouter();
+    const pathname = usePathname();
+
+    console.log('pathname', pathname);
+
+    const handleRefresh = () => {
+        window.location.reload();
+    };
+
     const [newPrice, setNewPrice] = useState<string | number | null>(null);
 
     // Modal handler
@@ -79,8 +92,12 @@ const CoffeeBox = ({ expressoPrice, coworkingPlaceId }: CoffeeBoxProps) => {
                         <Button
                             onClick={() => {
                                 updateExpressoPrice();
+                                //set time out
+
+                                setTimeout(() => {
+                                    handleRefresh();
+                                }, 3000);
                                 handleClose();
-                                router.refresh();
                             }}
                         >
                             Valider

@@ -80,6 +80,7 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                 <CoffeeBox
                     expressoPrice={expressoPrice}
                     coworkingPlaceId={coworkingPlaceId}
+                    coworkingId={coworking?.id || ''}
                 />
             </div>
             <Characteristics coworking={coworking} />
