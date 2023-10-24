@@ -32,6 +32,8 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
     const imagesSelected = coworking?.imagesSelected || defaultImage;
     const userImages = coworking?.userImages || defaultImage;
 
+    const coworkingPlaceId = coworking?.placeId || '';
+
     return (
         <div className='mb-12 mt-2 flex flex-col gap-8 px-6 lg:my-16 lg:gap-16 lg:p-0'>
             <div className='font flex flex-col-reverse items-center justify-between gap-4 lg:flex-row lg:gap-0'>
@@ -75,7 +77,10 @@ const CoworkingSelectedCard = ({ coworking }: { coworking: Coworking }) => {
                     </div>
                     <p>{coworking?.description}</p>
                 </div>
-                <CoffeeBox expressoPrice={expressoPrice} />
+                <CoffeeBox
+                    expressoPrice={expressoPrice}
+                    coworkingPlaceId={coworkingPlaceId}
+                />
             </div>
             <Characteristics coworking={coworking} />
             <div className='flex flex-col items-center justify-between gap-6 lg:flex-row lg:gap-0'>
