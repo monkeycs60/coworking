@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import ModalWindow from '@/components/ui/modalWindow';
 import { Coffee, Euro, Pencil } from 'lucide-react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface CoffeeBoxProps {
     expressoPrice?: string | number;
@@ -11,6 +12,7 @@ interface CoffeeBoxProps {
 }
 
 const CoffeeBox = ({ expressoPrice, coworkingPlaceId }: CoffeeBoxProps) => {
+    const router = useRouter();
     const [newPrice, setNewPrice] = useState<string | number | null>(null);
 
     // Modal handler
@@ -26,9 +28,8 @@ const CoffeeBox = ({ expressoPrice, coworkingPlaceId }: CoffeeBoxProps) => {
         setIsOpen(false);
     };
 
-
     const expressoPriceToNumber = Number(expressoPrice);
-    
+
     // create a PUT request to update the expresso price
     const updateExpressoPrice = async () => {
         const res = await fetch('/api/expresso', {
@@ -79,6 +80,7 @@ const CoffeeBox = ({ expressoPrice, coworkingPlaceId }: CoffeeBoxProps) => {
                             onClick={() => {
                                 updateExpressoPrice();
                                 handleClose();
+                                router.refresh();
                             }}
                         >
                             Valider
