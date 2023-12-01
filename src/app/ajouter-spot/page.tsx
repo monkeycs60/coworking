@@ -1,5 +1,5 @@
 import PlacesAutocomplete from '@/components/maps/PlacesAutocomplete';
-import { Info, Home } from 'lucide-react';
+import { Info } from 'lucide-react';
 
 const page = () => {
     return (

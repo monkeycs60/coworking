@@ -6,8 +6,6 @@ import HighlightedCities from '@/components/home/sections/HighlightedCities';
 import Faq from '@/components/home/sections/Faq';
 import Contact from '@/components/home/sections/Contact';
 
-const cs = 'clément';
-
 export default function Home() {
     return (
         <>
