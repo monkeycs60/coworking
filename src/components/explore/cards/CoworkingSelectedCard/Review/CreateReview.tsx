@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ReviewSchema, CreateReviewType } from '@/types/createReview';
-import { StarRatingCalmEquipFood } from '@/components/ajouter-spot/form/StarRatingCalmEquipFood';
+import { StarRatingCalmEquipFood } from '@/components/ajouter-spot/form/inputs/StarRatingCalmEquipFood';
 import { useRouter } from 'next/navigation';
 import { Loader2, Rocket, PartyPopper } from 'lucide-react';
 

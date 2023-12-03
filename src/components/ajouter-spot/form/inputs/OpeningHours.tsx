@@ -1,22 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
 import { getTimeFromDay } from '@/lib/functions/getTimeFromDay';
 import { PlaceDetail } from '@/types/placeDetails';
 import { Button } from '@/components/ui/button';
 
 interface OpeningHoursProps {
-    register: any;
     placeDetails: PlaceDetail;
     errors: any;
 }
 
-const OpeningHours = ({
-    register,
-    placeDetails,
-    errors,
-}: OpeningHoursProps) => {
+const OpeningHours = ({ placeDetails, errors }: OpeningHoursProps) => {
+    const { register } = useFormContext(); 
+
     const [showDays, setShowDays] = useState(false);
 
     const OpeningHourInput = ({

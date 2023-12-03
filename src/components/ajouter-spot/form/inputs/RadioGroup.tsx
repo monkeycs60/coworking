@@ -1,32 +1,29 @@
+import { useFormContext } from 'react-hook-form';
+
 interface RadioButtonProps {
     label: string;
     id: string;
     value: string;
     name: string;
-    register: any;
 }
 
-const RadioButton = ({
-    label,
-    id,
-    value,
-    name,
-    register,
-}: RadioButtonProps) => (
-    <div className='flex items-center justify-between gap-2'>
-        <label htmlFor={id}>{label}</label>
-        <input type='radio' id={id} value={value} {...register(name)} />
-    </div>
-);
+const RadioButton = ({ label, id, value, name }: RadioButtonProps) => {
+    const { register } = useFormContext();
+    return (
+        <div className='flex items-center justify-between gap-2'>
+            <label htmlFor={id}>{label}</label>
+            <input type='radio' id={id} value={value} {...register(name)} />
+        </div>
+    );
+};
 
 interface RadioGroupProps {
     title: string;
     name: string;
     items: { label: string; id: string }[];
-    register: any;
 }
 
-const RadioGroup = ({ title, name, items, register }: RadioGroupProps) => {
+const RadioGroup = ({ title, name, items }: RadioGroupProps) => {
     return (
         <div className='flex flex-col gap-6'>
             <h3 className='font-bold'>{title}</h3>
@@ -38,7 +35,6 @@ const RadioGroup = ({ title, name, items, register }: RadioGroupProps) => {
                         id={item.id}
                         value={item.id}
                         name={name}
-                        register={register}
                     />
                 ))}
             </div>

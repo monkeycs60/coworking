@@ -9,7 +9,8 @@ import { authMiddleware } from '../middlewares/authMiddleware';
 export async function POST(req: NextRequest) {
     const authResponse = await authMiddleware(req);
     if (authResponse) return authResponse; // Return if there's any response from the middleware
-
+    console.log('req.body', req.body);
+    
     const { userId } = getAuth(req);
 
     const placeData = (await req.json()) as AddPlaceSchemaType;
