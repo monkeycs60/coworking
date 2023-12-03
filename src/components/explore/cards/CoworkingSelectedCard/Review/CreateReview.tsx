@@ -8,7 +8,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ReviewSchema, CreateReviewType } from '@/types/createReview';
 import { StarRatingCalmEquipFood } from '@/components/ajouter-spot/form/inputs/StarRatingCalmEquipFood';
 import { useRouter } from 'next/navigation';
-import { Loader2, Rocket, PartyPopper } from 'lucide-react';
+import {  Rocket, PartyPopper } from 'lucide-react';
+import LoaderButton from '@/components/ui/LoaderButton';
 
 const CreateReview = ({
     placeId,
@@ -171,16 +172,10 @@ const CreateReview = ({
                                         )}
                                     </div>
                                 </div>
-                                <Button
-                                    type='submit'
-                                    disabled={waitingToSubmit}
-                                >
-                                    {waitingToSubmit ? (
-                                        <Loader2 className='animate-spin' />
-                                    ) : (
-                                        <span>Envoyer</span>
-                                    )}{' '}
-                                </Button>
+                                <LoaderButton
+                                    waitingToSubmit={waitingToSubmit}
+                                    buttonMessage='Envoyer'
+                                />
                             </form>
                         </>
                     )}

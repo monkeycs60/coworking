@@ -54,6 +54,7 @@ const AddPlace = () => {
                     <LoaderButton
                         buttonClassName='my-10 w-full lg:h-12 lg:w-[320px] lg:px-4'
                         waitingToSubmit={waitingToSubmit}
+                        buttonMessage='Ajouter ce cowork'
                     />
                 </div>
 
