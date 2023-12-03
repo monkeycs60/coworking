@@ -1,5 +1,5 @@
 import { AlertTriangle } from 'lucide-react';
-import { useForm, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 interface InputFieldProps {
     defaultValue: string;
     label: string;
@@ -17,9 +17,7 @@ const InputField = ({
     error,
     isMandatory,
 }: InputFieldProps) => {
-    const { register, watch } = useFormContext();
-     const values = watch(); // Vous pouvez observer tous les champs
-     console.log('watcher', values); 
+    const { register } = useFormContext();
     return (
         <div className='relative flex w-full flex-col gap-2 rounded-xl'>
             <div className='flex flex-col'>

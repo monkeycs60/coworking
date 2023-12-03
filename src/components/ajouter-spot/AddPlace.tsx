@@ -3,16 +3,15 @@
 import { AddPlaceSchemaType, AddPlaceSchema } from '@/types/addPlace';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider } from 'react-hook-form';
-import { StarRatingCalmEquipFood } from './form/inputs/StarRatingCalmEquipFood';
 import { Button } from '../ui/button';
 import { Loader2 } from 'lucide-react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import TextAreaField from './form/inputs/TextAreaField';
 import { useAddPlaceForm } from '@/hooks/useAddPlaceForm';
 import PrecompletedForm from './form/wrapper/PrecompletedForm';
 import ThingsToCheck from './form/wrapper/ThingsToCheck';
 import ImagesForm from './form/wrapper/ImagesForm';
+import Review from './form/wrapper/Review';
 
 const AddPlace = () => {
     const {
@@ -24,14 +23,6 @@ const AddPlace = () => {
         photoSelected,
         placeDetails,
     } = useAddPlaceForm();
-
-    // const {
-    //     control,
-    //     handleSubmit,
-    //     formState: { errors },
-    // } = useForm<AddPlaceSchemaType>({
-    //     resolver: zodResolver(AddPlaceSchema),
-    // });
 
     const formMethods = useForm<AddPlaceSchemaType>({
         resolver: zodResolver(AddPlaceSchema),
@@ -57,15 +48,9 @@ const AddPlace = () => {
                         setPhotoSelected={setPhotoSelected}
                         photoSelected={photoSelected}
                     />
-                    <TextAreaField
-                        label='Ecris ton avis sur ce lieu de cowork'
-                        name='reviewContent'
-                        error={formMethods.formState.errors.reviewContent}
-                        isMandatory={true}
-                    />
-                    <StarRatingCalmEquipFood
-                        control={formMethods.control}
+                    <Review
                         errors={formMethods.formState.errors}
+                        control={formMethods.control}
                     />
                 </div>
                 <Button

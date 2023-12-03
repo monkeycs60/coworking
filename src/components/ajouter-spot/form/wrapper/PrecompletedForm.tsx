@@ -3,14 +3,15 @@ import OpeningHours from '../inputs/OpeningHours';
 import TextAreaField from '../inputs/TextAreaField';
 import { PlaceDetail } from '@/types/placeDetails';
 import { extractCityFromAdrAddress } from '@/lib/functions/extractCityFromAddress';
-import { useForm } from 'react-hook-form';
+import { FieldErrors } from 'react-hook-form';
+import { AddPlaceSchemaType } from '@/types/addPlace';
 
 const PrecompletedForm = ({
     placeDetails,
     errors,
 }: {
     placeDetails: PlaceDetail;
-    errors: any;
+    errors: FieldErrors<AddPlaceSchemaType>;
 }) => {
     const {
         vicinity,
