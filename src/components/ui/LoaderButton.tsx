@@ -1,9 +1,29 @@
-import React from 'react'
+import { Button } from './button';
+import { Loader2 } from 'lucide-react';
 
-const loaderButton = () => {
-  return (
-    <div>loaderButton</div>
-  )
+interface LoaderButtonProps {
+    buttonClassName: string;
+    waitingToSubmit: boolean;
 }
 
-export default loaderButton
+const LoaderButton = ({
+    buttonClassName,
+    waitingToSubmit,
+}: LoaderButtonProps) => {
+    return (
+        <Button
+            variant={'default'}
+            size={'sm'}
+            className={buttonClassName}
+            disabled={waitingToSubmit}
+        >
+            {waitingToSubmit ? (
+                <Loader2 className='animate-spin' />
+            ) : (
+                <span>Ajouter ce cowork</span>
+            )}
+        </Button>
+    );
+};
+
+export default LoaderButton;

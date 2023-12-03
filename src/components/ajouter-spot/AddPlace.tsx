@@ -3,8 +3,6 @@
 import { AddPlaceSchemaType, AddPlaceSchema } from '@/types/addPlace';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider } from 'react-hook-form';
-import { Button } from '../ui/button';
-import { Loader2 } from 'lucide-react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAddPlaceForm } from '@/hooks/useAddPlaceForm';
@@ -12,6 +10,7 @@ import PrecompletedForm from './form/wrapper/PrecompletedForm';
 import ThingsToCheck from './form/wrapper/ThingsToCheck';
 import ImagesForm from './form/wrapper/ImagesForm';
 import Review from './form/wrapper/Review';
+import LoaderButton from '../ui/LoaderButton';
 
 const AddPlace = () => {
     const {
@@ -52,19 +51,12 @@ const AddPlace = () => {
                         errors={formMethods.formState.errors}
                         control={formMethods.control}
                     />
+                    <LoaderButton
+                        buttonClassName='my-10 w-full lg:h-12 lg:w-[320px] lg:px-4'
+                        waitingToSubmit={waitingToSubmit}
+                    />
                 </div>
-                <Button
-                    variant={'default'}
-                    size={'sm'}
-                    className='my-10 w-full lg:h-12 lg:w-[320px] lg:px-4'
-                    disabled={waitingToSubmit}
-                >
-                    {waitingToSubmit ? (
-                        <Loader2 className='animate-spin' />
-                    ) : (
-                        <span>Ajouter ce cowork</span>
-                    )}
-                </Button>
+
                 <ToastContainer />
             </form>
         </FormProvider>
