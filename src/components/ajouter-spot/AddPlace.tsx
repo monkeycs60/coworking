@@ -29,8 +29,6 @@ const AddPlace = () => {
         resolver: zodResolver(AddPlaceSchema),
     });
 
-    console.log('Erreurs de validation :', formMethods.formState.errors);
-
     return placeDetails ? (
         <FormProvider {...formMethods}>
             <form

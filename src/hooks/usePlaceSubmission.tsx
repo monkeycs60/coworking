@@ -72,7 +72,6 @@ export const usePlaceSubmission = ({
             console.error(error);
         } finally {
             setWaitingToSubmit(false);
-            console.log(finalData.id);
         }
     };
 

@@ -1,6 +1,11 @@
 Next steps
 
-1. debug required music (load), make it optional, work on error message on the form
-2. enhance the form addplace (design, behaviors etc.)
-3. refactor Create review component (ajouter une critique)
-4. add a karma system for user adding spaces and reviews
+1. Opening Hours bugué onClick
+2. Images google pas obligatoires à fix (required)
+3. rebossser la review et les étoiles (non alignés)
+4. rendre obligatoire l'input radio facility type
+5. reset les étoiles et dans add spot : le nom reset
+6. effet hover image zoomé
+?. refactor Create review component (ajouter une critique)
+?. add a karma system for user adding spaces and reviews
+?. changer le carousel dans HomePage
