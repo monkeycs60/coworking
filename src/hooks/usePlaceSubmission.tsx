@@ -12,7 +12,7 @@ import { AddPlaceSchemaType } from '@/types/addPlace';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
-export const usePlacePhotos = () => {
+export const usePlaceSubmission = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
     const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;

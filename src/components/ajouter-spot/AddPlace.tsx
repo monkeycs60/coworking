@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider } from 'react-hook-form';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { usePlacePhotos } from '@/hooks/usePlacePhotos';
+import { usePlaceSubmission } from '@/hooks/usePlaceSubmission';
 import PrecompletedForm from './form/wrapper/PrecompletedForm';
 import ThingsToCheck from './form/wrapper/ThingsToCheck';
 import ImagesForm from './form/wrapper/ImagesForm';
@@ -21,7 +21,7 @@ const AddPlace = () => {
         imageUrls,
         photoSelected,
         placeDetails,
-    } = usePlacePhotos();
+    } = usePlaceSubmission();
 
     const formMethods = useForm<AddPlaceSchemaType>({
         resolver: zodResolver(AddPlaceSchema),
