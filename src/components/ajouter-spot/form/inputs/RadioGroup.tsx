@@ -1,4 +1,4 @@
-import { useFormContext } from 'react-hook-form';
+import { FieldError, useFormContext } from 'react-hook-form';
 
 interface RadioButtonProps {
     label: string;
@@ -12,12 +12,7 @@ const RadioButton = ({ label, id, value, name }: RadioButtonProps) => {
     return (
         <div className='flex items-center justify-between gap-2'>
             <label htmlFor={id}>{label}</label>
-            <input
-                type='radio'
-                id={id}
-                value={value}
-                {...register(name)}
-            />
+            <input type='radio' id={id} value={value} {...register(name)} />
         </div>
     );
 };
@@ -26,9 +21,10 @@ interface RadioGroupProps {
     title: string;
     name: string;
     items: { label: string; id: string }[];
+    error?: FieldError;
 }
 
-const RadioGroup = ({ title, name, items }: RadioGroupProps) => {
+const RadioGroup = ({ title, name, items, error }: RadioGroupProps) => {
     return (
         <div className='flex flex-col gap-6'>
             <h3 className='font-bold'>{title}</h3>
@@ -43,6 +39,9 @@ const RadioGroup = ({ title, name, items }: RadioGroupProps) => {
                     />
                 ))}
             </div>
+            {error && (
+                <p className='text-xs italic text-red-600'>{error.message}</p>
+            )}
         </div>
     );
 };

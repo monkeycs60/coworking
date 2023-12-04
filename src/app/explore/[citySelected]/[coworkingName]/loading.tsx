@@ -11,8 +11,8 @@ const loading = () => {
                     className='w-[200px] lg:w-[400px] 2xl:w-[600px] 3xl:w-[900px]'
                     alt='coworking logo'
                 />
-                <h2 className='animate-ping text-xl lg:text-3xl'>
-                    Ajout du coworking en cours
+                <h2 className='mt-10 animate-ping text-lg lg:text-xl'>
+                    Le coworking est en train de charger...
                 </h2>
             </div>
         </div>

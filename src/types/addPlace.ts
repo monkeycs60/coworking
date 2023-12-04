@@ -34,7 +34,10 @@ export const AddPlaceSchema = z.object({
     imagesSelected: z.array(z.string()).optional(),
     userImages: z.any().optional(),
     espressoPrice: z.string().optional(),
-    facility: z.union([z.enum(facility), z.null()]).optional(),
+    facility: z.enum(facility, {
+        invalid_type_error: 'Vous devez choisir au moins un type de lieu.',
+        required_error: 'Vous devez choisir au moins un type de lieu.',
+    }),
     hasPrivacy: z.boolean().optional(),
     hasParking: z.boolean().optional(),
     hasWiFi: z.boolean().optional(),

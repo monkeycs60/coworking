@@ -34,6 +34,7 @@ const ThingsToCheck = ({
                 title="Type d'établissement"
                 name='facility'
                 items={FACILITY_TYPE}
+                error={errors.facility}
             />
             <CheckboxGroup title='Accès et espace' items={ACCESS_SPACES} />
             <CheckboxGroup
