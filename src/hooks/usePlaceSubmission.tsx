@@ -1,73 +1,29 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import {
-    setImageUrls,
-    resetImageUrls,
-    resetAllDetails,
-} from '@/redux/features/placeDetails-slice';
+import { resetAllDetails } from '@/redux/features/placeDetails-slice';
 import { sendPlaceDetails } from '@/services/sendPlaceDetails';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import usePhotoUpload from './usePhotoUpload';
 
-export const usePlaceSubmission = () => {
+export const usePlaceSubmission = ({
+    setWaitingToSubmit,
+}: {
+    setWaitingToSubmit: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-    const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
     const placeDetails = useAppSelector((state) => state.placeDetails.details);
     const imageUrls = useAppSelector((state) => state.placeDetails.imageUrls);
 
-    const [photoSelected, setPhotoSelected] = useState<string[]>([]);
-    const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
-    const [waitingToSubmit, setWaitingToSubmit] = useState(false);
-
-    useEffect(() => {
-        if (placeDetails?.photos) {
-            dispatch(resetImageUrls());
-
-            const urls = placeDetails.photos
-                .slice(0, Math.ceil(placeDetails.photos.length / 2))
-                .map((photo) => {
-                    return `${baseUrlImage}maxwidth=400&photoreference=${photo.photo_reference}`;
-                });
-
-            dispatch(setImageUrls(urls));
-        }
-    }, [placeDetails, dispatch, baseUrlImage]);
-
-    const handleFileChange = async (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-        setWaitingToSubmit(true);
-        const formData = new FormData();
-
-        if (event.target.files) {
-            for (let i = 0; i < event.target.files.length; i++) {
-                formData.append('file', event.target.files[i]);
-            }
-
-            try {
-                const response = await fetch('/api/uploaded', {
-                    method: 'POST',
-                    body: formData,
-                });
-                const data = await response.json();
-
-                if (data.success) {
-                    setUploadedImageUrls(data);
-                } else {
-                    console.error(data.error);
-                }
-            } catch (error) {
-                console.error('Error uploading the file:', error);
-            } finally {
-                setWaitingToSubmit(false);
-            }
-        }
-    };
+    const {
+        handleFileChange,
+        setPhotoSelected,
+        photoSelected,
+        uploadedImageUrls,
+    } = usePhotoUpload({ setWaitingToSubmit });
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
         console.log('onSubmit est déclenché avec les données :', data);
@@ -121,13 +77,11 @@ export const usePlaceSubmission = () => {
     };
 
     return {
-        handleFileChange,
         onSubmit,
+        handleFileChange,
         setPhotoSelected,
-        waitingToSubmit,
-        imageUrls,
         photoSelected,
-        uploadedImageUrls,
+        imageUrls,
         placeDetails,
     };
 };

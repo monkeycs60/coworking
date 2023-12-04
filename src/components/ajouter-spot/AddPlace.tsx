@@ -11,17 +11,19 @@ import ThingsToCheck from './form/wrapper/ThingsToCheck';
 import ImagesForm from './form/wrapper/ImagesForm';
 import Review from './form/wrapper/Review';
 import LoaderButton from '../ui/LoaderButton';
+import { useState } from 'react';
 
 const AddPlace = () => {
+    const [waitingToSubmit, setWaitingToSubmit] = useState(false);
+
     const {
         handleFileChange,
         onSubmit,
         setPhotoSelected,
-        waitingToSubmit,
         imageUrls,
         photoSelected,
         placeDetails,
-    } = usePlaceSubmission();
+    } = usePlaceSubmission({ setWaitingToSubmit });
 
     const formMethods = useForm<AddPlaceSchemaType>({
         resolver: zodResolver(AddPlaceSchema),
