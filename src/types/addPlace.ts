@@ -1,29 +1,40 @@
 import { z } from 'zod';
 
+const facility = [
+    'IS_CAFE',
+    'IS_HOTEL',
+    'IS_LIBRARY',
+    'IS_THIRD_SPACE',
+    'IS_OTHER_TYPE',
+] as const;
+
+const wifiQuality = ['HIGH_WIFI', 'MEDIUM_WIFI', 'LOW_WIFI'] as const;
+
+const music = [
+    'NO_MUSIC',
+    'DISCRETE_MUSIC',
+    'RANDOM_MUSIC',
+    'LOUD_MUSIC',
+] as const;
+
 export const AddPlaceSchema = z.object({
     id: z.string().optional(),
     placeId: z.string().optional(),
     longitude: z.number().optional(),
     latitude: z.number().optional(),
-    name: z.string().min(1),
-    address: z.string().min(1),
-    city: z.string().min(1),
+    name: z.string().min(1, 'Vous devez entrer un nom de lieu.'),
+    address: z.string().min(6, 'Vous devez entrer une adresse.'),
+    city: z.string().min(1, 'Vous devez entrer une ville.'),
     phoneNumber: z.string().optional(),
     website: z.string().optional(),
-    description: z.string().min(10),
+    description: z
+        .string()
+        .min(10, "Vous devez entrer une description d'au moins 10 caractères."),
     openingHours: z.array(z.string()).optional(),
     imagesSelected: z.array(z.string()).optional(),
     userImages: z.any().optional(),
     espressoPrice: z.string().optional(),
-    facility: z
-        .enum([
-            'IS_CAFE',
-            'IS_HOTEL',
-            'IS_LIBRARY',
-            'IS_THIRD_SPACE',
-            'IS_OTHER_TYPE',
-        ])
-        .optional(),
+    facility: z.enum(facility).optional(),
     hasPrivacy: z.boolean().optional(),
     hasParking: z.boolean().optional(),
     hasWiFi: z.boolean().optional(),
@@ -46,11 +57,11 @@ export const AddPlaceSchema = z.object({
     souperPossibility: z.boolean().optional(),
     drinksPossibility: z.boolean().optional(),
     alcoolPossibility: z.boolean().optional(),
-    music: z
-        .enum(['NO_MUSIC', 'DISCRETE_MUSIC', 'RANDOM_MUSIC', 'LOUD_MUSIC'])
-        .optional(),
-    wifiQuality: z.enum(['HIGH_WIFI', 'MEDIUM_WIFI', 'LOW_WIFI']).optional(),
-    reviewContent: z.string().min(10),
+    music: z.enum(music).optional(),
+    wifiQuality: z.enum(wifiQuality).optional(),
+    reviewContent: z
+        .string()
+        .min(10, 'Votre avis doit contenir au moins 10 caractères.'),
     calmRating: z.number().min(1).max(5),
     equipRating: z.number().min(1).max(5),
     foodRating: z.number().min(1).max(5),
