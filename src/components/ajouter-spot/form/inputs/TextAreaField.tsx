@@ -1,12 +1,12 @@
 import { AlertTriangle } from 'lucide-react';
-import { useFormContext } from 'react-hook-form';
+import { FieldError, useFormContext } from 'react-hook-form';
 
 interface TextAreaFieldProps {
     defaultValue?: string;
     label: string;
     subLabel?: string;
     name: string;
-    error: any;
+    error?: FieldError;
     isMandatory?: boolean;
 }
 

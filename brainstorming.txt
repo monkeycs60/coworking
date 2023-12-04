@@ -3,7 +3,6 @@ Next steps
 1. Opening Hours bugué onClick
 2. Images google pas obligatoires à fix (required)
 3. rebossser la review et les étoiles (non alignés)
-4. rendre obligatoire l'input radio facility type
 5. reset les étoiles et dans add spot : le nom reset
 6. effet hover image zoomé
 ?. ajouter système de like sur les photos pour classer de la + likée à la -

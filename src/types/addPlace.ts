@@ -30,7 +30,16 @@ export const AddPlaceSchema = z.object({
     description: z
         .string()
         .min(10, "Vous devez entrer une description d'au moins 10 caractères."),
-    openingHours: z.array(z.string()).optional(),
+    openingHours: z
+        .array(
+            z
+                .string()
+                .regex(
+                    /^(\d{1,2}:\d{2})\s*-\s*(\d{1,2}:\d{2})$/,
+                    "Veuillez entrer un horaire valide. Format attendu: 'HH:MM - HH:MM' pour chaque jour.",
+                ),
+        )
+        .optional(),
     imagesSelected: z.array(z.string()).optional(),
     userImages: z.any().optional(),
     espressoPrice: z.string().optional(),

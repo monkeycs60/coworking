@@ -1,19 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { FieldErrors, useFormContext } from 'react-hook-form';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
 import { getTimeFromDay } from '@/lib/functions/getTimeFromDay';
 import { PlaceDetail } from '@/types/placeDetails';
 import { Button } from '@/components/ui/button';
+import { AddPlaceSchemaType } from '@/types/addPlace';
 
 interface OpeningHoursProps {
     placeDetails: PlaceDetail;
-    errors: any;
+    errors: FieldErrors<AddPlaceSchemaType>;
 }
 
 const OpeningHours = ({ placeDetails, errors }: OpeningHoursProps) => {
-    const { register } = useFormContext(); 
+    const { register } = useFormContext();
 
     const [showDays, setShowDays] = useState(false);
 
@@ -54,9 +55,10 @@ const OpeningHours = ({ placeDetails, errors }: OpeningHoursProps) => {
     return (
         <div className='flex w-full flex-col gap-2'>
             <label className='font-bold' htmlFor='placeHours'>
-                Horaires d&apos;ouverture
+                Horaires d'ouverture
             </label>
             <Button
+                type='button'
                 size={'specialButton'}
                 variant={showDays ? 'secondaryReverse' : 'secondary'}
                 onClick={() => setShowDays(!showDays)}
