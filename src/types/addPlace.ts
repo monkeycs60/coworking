@@ -34,7 +34,7 @@ export const AddPlaceSchema = z.object({
     imagesSelected: z.array(z.string()).optional(),
     userImages: z.any().optional(),
     espressoPrice: z.string().optional(),
-    facility: z.enum(facility).optional(),
+    facility: z.union([z.enum(facility), z.null()]).optional(),
     hasPrivacy: z.boolean().optional(),
     hasParking: z.boolean().optional(),
     hasWiFi: z.boolean().optional(),
@@ -57,8 +57,8 @@ export const AddPlaceSchema = z.object({
     souperPossibility: z.boolean().optional(),
     drinksPossibility: z.boolean().optional(),
     alcoolPossibility: z.boolean().optional(),
-    music: z.enum(music).optional(),
-    wifiQuality: z.enum(wifiQuality).optional(),
+    music: z.union([z.enum(music), z.null()]).optional(),
+    wifiQuality: z.union([z.enum(wifiQuality), z.null()]).optional(),
     reviewContent: z
         .string()
         .min(10, 'Votre avis doit contenir au moins 10 caractères.'),

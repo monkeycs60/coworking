@@ -12,7 +12,12 @@ const RadioButton = ({ label, id, value, name }: RadioButtonProps) => {
     return (
         <div className='flex items-center justify-between gap-2'>
             <label htmlFor={id}>{label}</label>
-            <input type='radio' id={id} value={value} {...register(name)} />
+            <input
+                type='radio'
+                id={id}
+                value={value}
+                {...register(name)}
+            />
         </div>
     );
 };
