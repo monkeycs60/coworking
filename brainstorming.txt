@@ -6,6 +6,7 @@ Next steps
 4. rendre obligatoire l'input radio facility type
 5. reset les étoiles et dans add spot : le nom reset
 6. effet hover image zoomé
+?. ajouter système de like sur les photos pour classer de la + likée à la -
 ?. refactor Create review component (ajouter une critique)
 ?. add a karma system for user adding spaces and reviews
 ?. changer le carousel dans HomePage
