@@ -1,3 +1,13 @@
+export interface OpeningDetail {
+    day: number;
+    time: string;
+}
+
+export interface Period {
+    open: OpeningDetail;
+    close: OpeningDetail;
+}
+
 export interface PlaceDetail {
     adr_address: string;
     geometry: {
@@ -14,7 +24,8 @@ export interface PlaceDetail {
     name: string;
     current_opening_hours: {
         open_now: boolean;
-        weekday_text: string[];
+        periods: Period[];
+        weekday_text?: string[];
     };
     photos: {
         height: number;

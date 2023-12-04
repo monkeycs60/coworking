@@ -79,10 +79,22 @@ export interface Coworking {
     updatedAt: DateTime;
 }
 
+export interface OpeningDetail {
+    day: number;
+    time: string;
+}
+
+export interface Period {
+    open: OpeningDetail;
+    close: OpeningDetail;
+}
+
 export interface OpeningHour {
     id: CUID;
     coworkingId?: string;
     coworking?: Coworking;
+    openNow: boolean;
+    periods: Period[];
     weekdayText: string[];
     createdAt: DateTime;
     updatedAt: DateTime;

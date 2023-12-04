@@ -90,13 +90,15 @@ model Coworking {
 }
 
 model OpeningHour {
-  id            String      @id @default(cuid())
-  coworkingId   String      @map("coworking_id")
-  coworking     Coworking   @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
-  weekdayText   String[]
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+    id          String    @id @default(cuid())
+    coworkingId String    @map("coworking_id")
+    coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
+    openTime    String?    // Heure d'ouverture (format HH:MM)
+    closeTime   String?    // Heure de fermeture (format HH:MM)
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
 }
+
 
 
 model Comment {

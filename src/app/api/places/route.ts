@@ -10,18 +10,18 @@ export async function POST(req: NextRequest) {
     const authResponse = await authMiddleware(req);
     if (authResponse) return authResponse; // Return if there's any response from the middleware
     console.log('req.body', req.body);
-    
+
     const { userId } = getAuth(req);
 
     const placeData = (await req.json()) as AddPlaceSchemaType;
 
     const formattedOpeningHours = placeData.openingHours
-        ? {
-              create: {
-                  weekdayText: placeData.openingHours,
-              },
-          }
-        : undefined;
+        ? placeData.openingHours.map((hour) => ({
+              openTime: hour.open,
+              closeTime: hour.close,
+          }))
+        : [];
+    console.log('placeData', formattedOpeningHours);
 
     const imageUrlsS3 = await Promise.all(
         (placeData.imagesSelected || []).map(async (url) => {
@@ -45,7 +45,9 @@ export async function POST(req: NextRequest) {
                 phoneNumber: placeData.phoneNumber,
                 website: placeData.website,
                 description: placeData.description,
-                openingHours: formattedOpeningHours,
+                openingHours: {
+                    create: formattedOpeningHours,
+                },
                 espressoPrice: placeData.espressoPrice,
                 hasParking: placeData.hasParking,
                 hasPrivacy: placeData.hasPrivacy,

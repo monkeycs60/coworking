@@ -17,6 +17,21 @@ const music = [
     'LOUD_MUSIC',
 ] as const;
 
+const openingHourFormat = z.object({
+    open: z
+        .string()
+        .regex(/^\d{2}:\d{2}$/, { message: "Format doit être 'HH:MM'" })
+        .or(z.literal(''))
+        .nullable()
+        .optional(),
+    close: z
+        .string()
+        .regex(/^\d{2}:\d{2}$/, { message: "Format doit être 'HH:MM'" })
+        .or(z.literal(''))
+        .nullable()
+        .optional(),
+});
+
 export const AddPlaceSchema = z.object({
     id: z.string().optional(),
     placeId: z.string().optional(),
@@ -30,16 +45,7 @@ export const AddPlaceSchema = z.object({
     description: z
         .string()
         .min(10, "Vous devez entrer une description d'au moins 10 caractères."),
-    openingHours: z
-        .array(
-            z
-                .string()
-                .regex(
-                    /^(\d{1,2}:\d{2})\s*-\s*(\d{1,2}:\d{2})$/,
-                    "Veuillez entrer un horaire valide. Format attendu: 'HH:MM - HH:MM' pour chaque jour.",
-                ),
-        )
-        .optional(),
+    openingHours: z.array(openingHourFormat).optional(),
     imagesSelected: z.array(z.string()).optional(),
     userImages: z.any().optional(),
     espressoPrice: z.string().optional(),
