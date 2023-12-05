@@ -9,14 +9,11 @@ import { Coworking } from '@/types/coworking';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
 
 const OpeningSchedule = ({ coworking }: { coworking: Coworking }) => {
-    console.log('coworking', coworking.openingHours);
-
     const hoursToDisplay =
         coworking.openingHours && coworking.openingHours.length > 0
             ? coworking.openingHours
             : new Array(7).fill({ openTime: "Pas d'info", closeTime: '' });
 
-    console.log('hoursToDisplay', hoursToDisplay);
     return (
         <div className='my-8 font-inter lg:w-[60%]'>
             <Table className='h-[260px] w-[320px] lg:h-[300px] lg:w-[400px]'>

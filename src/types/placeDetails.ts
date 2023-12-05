@@ -27,6 +27,11 @@ export interface PlaceDetail {
         periods: Period[];
         weekday_text?: string[];
     };
+    opening_hours: {
+        open_now: boolean;
+        periods: Period[];
+        weekday_text?: string[];
+    };
     photos: {
         height: number;
         html_attributions: string[];

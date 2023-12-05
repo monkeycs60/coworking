@@ -1,6 +1,6 @@
 Next steps
 
-1. Opening Hours bugué onClick
+1. Ajouter ouvert / fermé avec api google sur le coworking card name
 2. Images google pas obligatoires à fix (required)
 3. rebossser la review et les étoiles (non alignés)
 5. reset les étoiles et dans add spot : le nom reset
