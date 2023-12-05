@@ -8,12 +8,13 @@ import { daysOfWeek } from '@/lib/const/daysOfWeek';
 
 interface OpeningHoursProps {
     placeDetails: PlaceDetail;
-    errors: FieldErrors<any>;
+    errors: any;
 }
 
 const OpeningHours = ({ placeDetails, errors }: OpeningHoursProps) => {
     const [showDays, setShowDays] = useState(false);
     const openingTableForWeek = useOpeningHours(placeDetails);
+    console.log('openingTableForWeek', errors);
 
     return (
         <div className='flex w-full flex-col gap-2'>
@@ -31,10 +32,10 @@ const OpeningHours = ({ placeDetails, errors }: OpeningHoursProps) => {
                     : 'Afficher les jours de la semaine'}
             </Button>
             {showDays &&
-                openingTableForWeek.map(({ day, open, close }, index) => (
+                openingTableForWeek.map(({ open, close }, index) => (
                     <OpeningHoursInput
                         key={index}
-                        day={daysOfWeek[day]}
+                        day={daysOfWeek[index]}
                         index={index}
                         openTime={open}
                         closeTime={close}

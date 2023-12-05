@@ -7,14 +7,11 @@ function useOpeningHours(placeDetails: PlaceDetail) {
         return new Array(7).fill({ day: 0, open: '', close: '' });
     }
 
-    // Réorganiser pour commencer par lundi
-    return openingHours
-        .map((period, index) => ({
-            day: index,
-            open: period.open.time,
-            close: period.close.time,
-        }))
-        .sort((a, b) => (a.day === 0 ? 7 : a.day) - (b.day === 0 ? 7 : b.day));
+    const openingHoursSorted = openingHours
+        ?.slice(1, 7)
+        .concat(openingHours[0]);
+
+    return openingHoursSorted;
 }
 
 export default useOpeningHours;

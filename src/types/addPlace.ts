@@ -20,13 +20,13 @@ const music = [
 const openingHourFormat = z.object({
     open: z
         .string()
-        .regex(/^\d{2}:\d{2}$/, { message: "Format doit être 'HH:MM'" })
+        .regex(/^\d{2}:\d{2}$/, { message: "Le format doit être 'HH:MM'" })
         .or(z.literal(''))
         .nullable()
         .optional(),
     close: z
         .string()
-        .regex(/^\d{2}:\d{2}$/, { message: "Format doit être 'HH:MM'" })
+        .regex(/^\d{2}:\d{2}$/, { message: "Le format doit être 'HH:MM'" })
         .or(z.literal(''))
         .nullable()
         .optional(),

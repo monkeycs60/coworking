@@ -78,7 +78,12 @@ const PrecompletedForm = ({
                 isMandatory={true}
             />
 
-            <OpeningHours placeDetails={placeDetails} errors={errors} />
+            <OpeningHours
+                placeDetails={placeDetails}
+                errors={
+                    errors.openingHours ? errors.openingHours : { message: '' }
+                }
+            />
         </>
     );
 };
