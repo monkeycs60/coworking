@@ -9,10 +9,12 @@ import {
 } from '@/components/ui/table';
 import { Coworking } from '@/types/coworking';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
-import { useFetchPlaceDetails } from '@/hooks/useFetchPlaceDetails';
+import { useFetchPlaceDetailsSimple } from '@/hooks/useFetchPlaceDetailsSimple';
 
 const OpeningSchedule = ({ coworking }: { coworking: Coworking }) => {
-    const placeDetails = useFetchPlaceDetails(coworking);
+    console.log(coworking.placeId);
+
+    const placeDetails = useFetchPlaceDetailsSimple(coworking.placeId || '');
     console.log(placeDetails);
 
     const hoursToDisplay =
