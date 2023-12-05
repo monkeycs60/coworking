@@ -61,17 +61,16 @@ export const usePlaceSubmission = ({
                     },
                 );
             } else {
+                setWaitingToSubmit(false);
                 const city = finalData.city;
                 const coworkingName = encodeURIComponent(finalData.name);
                 const coworkingId = response.data.id;
                 const coworkURL = `/explore/${city}/${coworkingName}?coworkingId=${coworkingId}`;
-                router.push(coworkURL);
                 dispatch(resetAllDetails());
+                router.push(coworkURL);
             }
         } catch (error) {
             console.error(error);
-        } finally {
-            setWaitingToSubmit(false);
         }
     };
 

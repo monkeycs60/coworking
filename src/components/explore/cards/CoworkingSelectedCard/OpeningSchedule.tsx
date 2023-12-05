@@ -1,3 +1,5 @@
+'use client';
+
 import {
     Table,
     TableBody,
@@ -7,8 +9,12 @@ import {
 } from '@/components/ui/table';
 import { Coworking } from '@/types/coworking';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
+import { useFetchPlaceDetails } from '@/hooks/useFetchPlaceDetails';
 
 const OpeningSchedule = ({ coworking }: { coworking: Coworking }) => {
+    const placeDetails = useFetchPlaceDetails(coworking);
+    console.log(placeDetails);
+
     const hoursToDisplay =
         coworking.openingHours && coworking.openingHours.length > 0
             ? coworking.openingHours
