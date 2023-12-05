@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { PlaceDetail } from '@/types/placeDetails';
 import { useFetch } from 'usehooks-ts';
 
 export const useFetchPlaceDetailsSimple = (placeId: string | null) => {
-    const [placeDetails, setPlaceDetails] = useState(null);
+    const [placeDetails, setPlaceDetails] = useState<PlaceDetail | null>(null);
     useEffect(() => {
         const fetchPlaceDetails = async () => {
             if (!placeId) {
