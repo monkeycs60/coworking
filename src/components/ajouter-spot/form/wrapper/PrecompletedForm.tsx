@@ -21,7 +21,6 @@ const PrecompletedForm = ({
         website,
         editorial_summary,
     } = placeDetails || {};
-    console.log('erreurs', errors);
     return (
         <>
             <InputField
@@ -66,11 +65,7 @@ const PrecompletedForm = ({
                 isMandatory={false}
             />
             <TextAreaField
-                defaultValue={
-                    editorial_summary?.overview
-                        ? editorial_summary.overview
-                        : ''
-                }
+                defaultValue={editorial_summary?.overview ?? ''}
                 label='Description'
                 subLabel="Décris le lieu, le cadre et comment le coworking s'y insère"
                 name='description'
@@ -78,12 +73,7 @@ const PrecompletedForm = ({
                 isMandatory={true}
             />
 
-            <OpeningHours
-                placeDetails={placeDetails}
-                errors={
-                    errors.openingHours ? errors.openingHours : { message: '' }
-                }
-            />
+            <OpeningHours placeDetails={placeDetails} errors={errors} />
         </>
     );
 };

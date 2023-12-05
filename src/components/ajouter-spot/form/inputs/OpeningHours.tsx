@@ -8,7 +8,7 @@ import { daysOfWeek } from '@/lib/const/daysOfWeek';
 
 interface OpeningHoursProps {
     placeDetails: PlaceDetail;
-    errors: any;
+    errors: FieldErrors<any>;
 }
 
 const OpeningHours = ({ placeDetails, errors }: OpeningHoursProps) => {

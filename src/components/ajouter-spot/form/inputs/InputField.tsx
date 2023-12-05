@@ -18,6 +18,7 @@ const InputField = ({
     isMandatory,
 }: InputFieldProps) => {
     const { register } = useFormContext();
+
     return (
         <div className='relative flex w-full flex-col gap-2 rounded-xl'>
             <div className='flex flex-col'>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { formatTimeInput } from '@/lib/functions/formatTimeInput';
-import { FieldErrors } from 'react-hook-form';
 
 interface OpeningHourInputProps {
     day: string;
@@ -26,9 +25,6 @@ const OpeningHoursInput = ({
 }: OpeningHourInputProps) => {
     const { register } = useFormContext();
 
-    console.log(errors.openingHours[0].open);
-
-    if (errors && errors.open) console.log(errors);
 
     return (
         <div className='mt-2'>
@@ -59,6 +55,11 @@ const OpeningHoursInput = ({
                     placeholder='Heure de fermeture'
                 />
             </div>
+            {errors && errors.openingHours && errors.openingHours[index] && (
+                <p className='text-xs italic text-red-600'>
+                    {errors.openingHours[index].open?.message}
+                </p>
+            )}
         </div>
     );
 };
