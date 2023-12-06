@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { MapPin } from 'lucide-react';
 import { useAppSelector } from '@/hooks/useRedux';
 import { Star } from 'lucide-react';
-import { Tooltip } from 'react-tooltip';
 import { CoworkingCardProps } from '@/types/highlightedCoworking';
 import {
     averageRatingFromReviews,
@@ -15,6 +14,8 @@ import {
     foodAverage,
 } from '@/lib/functions/averageRatingFromReviews';
 import Link from 'next/link';
+import Tooltip from '@mui/material/Tooltip';
+import CustomWidthTooltip from '@/components/ui/CustomWidthTooltip';
 
 interface CoworkingCardPropsExtended {
     carouselId: string;
@@ -81,15 +82,16 @@ const CoworkingCard = ({
                                 height={30}
                             />
                         </div>
-                        <Progress value={averageRatingCalm * 20} />
+                        <CustomWidthTooltip
+                            title='Le lieu est-il calme ? Y a-t-il de la musique ?...'
+                            placement='top'
+                            sx={{ '.MuiTooltip-tooltip': { padding: 1 } }}
+                        >
+                            <Progress value={averageRatingCalm * 20} />
+                        </CustomWidthTooltip>
                     </div>
                     <div>
-                        <span
-                            className='flex w-[60%] cursor-pointer pl-16 text-xs'
-                            data-tooltip-id='calm-tooltip'
-                            data-tooltip-content='Le lieu est-il calme ? Y a-t-il de la musique ?...'
-                            data-tooltip-place='top'
-                        >
+                        <span className='flex w-[60%] cursor-pointer pl-16 text-xs'>
                             Calme
                         </span>
                     </div>
@@ -104,15 +106,16 @@ const CoworkingCard = ({
                                 height={10}
                             />
                         </div>
-                        <Progress value={averageRatingEquip * 20} />
+                        <CustomWidthTooltip
+                            title='Prises électriques ? Tables spacieuses ?...'
+                            placement='top'
+                            sx={{ '.MuiTooltip-tooltip': { padding: 1 } }}
+                        >
+                            <Progress value={averageRatingEquip * 20} />
+                        </CustomWidthTooltip>
                     </div>
                     <div>
-                        <span
-                            className='flex w-[60%] cursor-pointer pl-16 text-xs'
-                            data-tooltip-id='equipement-tooltip'
-                            data-tooltip-content='Prises électriques ? Tables spacieuses ?...'
-                            data-tooltip-place='top'
-                        >
+                        <span className='flex w-[60%] cursor-pointer pl-16 text-xs'>
                             Equipement
                         </span>
                     </div>
@@ -127,23 +130,21 @@ const CoworkingCard = ({
                                 height={30}
                             />
                         </div>
-                        <Progress value={averageRatingFood * 20} />
+                        <CustomWidthTooltip
+                            title='Qualité des consos ? rapport qualité/prix ?...'
+                            placement='top'
+                            sx={{ '.MuiTooltip-tooltip': { padding: 1 } }}
+                        >
+                            <Progress value={averageRatingFood * 20} />
+                        </CustomWidthTooltip>
                     </div>
                     <div>
-                        <span
-                            className='flex w-[60%] cursor-pointer pl-16 text-xs'
-                            data-tooltip-id='food-tooltip'
-                            data-tooltip-content='Qualité des consos ? rapport qualité/prix ?...'
-                            data-tooltip-place='top'
-                        >
+                        <span className='flex w-[60%] cursor-pointer pl-16 text-xs'>
                             Food & drinks
                         </span>
                     </div>
                 </div>
             </div>
-            <Tooltip id='calm-tooltip' />
-            <Tooltip id='equipement-tooltip' />
-            <Tooltip id='food-tooltip' />
         </Link>
     );
 };
