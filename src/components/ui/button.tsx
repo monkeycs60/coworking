@@ -21,7 +21,7 @@ const buttonVariants = cva(
                     'hover:bg-gray/100 rounded-xl bg-gray-300 text-secondary-foreground',
                 ghost: 'buttonGhost transition-border rounded-xl border-2 border-transparent font-semibold',
                 link: 'text-primary underline-offset-4 hover:underline',
-                round: 'rounded-[28px]',
+                round: 'rounded-full',
             },
             size: {
                 default: 'h-10 px-4 py-2',

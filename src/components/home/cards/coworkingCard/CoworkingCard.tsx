@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
-import { useAppSelector } from '@/hooks/useRedux';
 import { CoworkingCardProps } from '@/types/highlightedCoworking';
 import {
     averageRatingFromReviews,
@@ -16,25 +15,13 @@ import CoworkingFeature from './CoworkingFeature';
 import RatingDisplay from './RatingDisplay';
 
 interface CoworkingCardPropsExtended {
-    carouselId: string;
     coworking: CoworkingCardProps;
-    currentIndex: number;
 }
 
 const CoworkingCard = ({
-    carouselId,
     coworking,
-    currentIndex,
 }: CoworkingCardPropsExtended) => {
-    const activeIndex = useAppSelector(
-        (state) => state.carouselState.activeIndices[carouselId],
-    );
     const averageRating = averageRatingFromReviews(coworking.reviews);
-
-    const borderClass =
-        activeIndex === currentIndex
-            ? 'border-yellow-500 border-2'
-            : 'border-gray-300 border-2';
 
     return (
         <Link
@@ -42,7 +29,7 @@ const CoworkingCard = ({
                 coworking.name,
             )}?coworkingId=${coworking.id}`}
             key={coworking.id}
-            className={`relative flex h-[500px] w-[300px] cursor-pointer flex-col justify-between rounded-xl transition-transform duration-500 ease-in-out ${borderClass}`}
+            className={`relative flex h-[500px] w-[300px] cursor-pointer flex-col justify-between rounded-xl border-2 transition-transform duration-300 ease-in-out hover:scale-105 hover:border-yellow-500 focus:scale-105`}
         >
             <RatingDisplay averageRating={averageRating} />
             <div className='relative h-[200px] w-full overflow-hidden rounded-xl object-cover'>

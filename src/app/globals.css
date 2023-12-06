@@ -4,12 +4,13 @@
 @import '../styles/animations.css';
 
 @font-face {
-  font-family: 'Signatra';
-  src: url('/fonts/Signatra.otf') format('opentype'),
-       url('/fonts/Signatra.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Signatra';
+    src:
+        url('/fonts/Signatra.otf') format('opentype'),
+        url('/fonts/Signatra.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @tailwind base;
@@ -17,32 +18,48 @@
 @tailwind utilities;
 
 hmtl {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .overall-bg {
-	background: linear-gradient(
-			rgba(255, 255, 255, 0) 80%,
-			rgba(255, 255, 255, 1)
-		),
-		linear-gradient(0deg, rgba(255, 255, 255, 0) 90%, rgba(255, 255, 255, 1)),
-		linear-gradient(90deg, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1)),
-		linear-gradient(
-			180deg,
-			rgba(255, 255, 255, 0) 100%,
-			rgba(255, 255, 255, 1)
-		),
-		linear-gradient(
-			270deg,
-			rgba(255, 255, 255, 0) 80%,
-			rgba(255, 255, 255, 1)
-		),
-		url('/circle.svg');
-	background-blend-mode: screen;
-	background-repeat: repeat;
-	z-index: 20;
+    background: linear-gradient(
+            rgba(255, 255, 255, 0) 80%,
+            rgba(255, 255, 255, 1)
+        ),
+        linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0) 90%,
+            rgba(255, 255, 255, 1)
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 60%,
+            rgba(255, 255, 255, 1)
+        ),
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0) 100%,
+            rgba(255, 255, 255, 1)
+        ),
+        linear-gradient(
+            270deg,
+            rgba(255, 255, 255, 0) 80%,
+            rgba(255, 255, 255, 1)
+        ),
+        url('/circle.svg');
+    background-blend-mode: screen;
+    background-repeat: repeat;
+    z-index: 20;
 }
 
+.carouselItem {
+    flex: 0 0 15%; /* Chaque élément occupe 25% de l'espace */
+    /* max-width: 25%; Fixe une largeur maximale */
+}
 
+.carouselItemFaded {
+    opacity: 0.5; 
+    transition: opacity 0.5s ease-in-out;
+}

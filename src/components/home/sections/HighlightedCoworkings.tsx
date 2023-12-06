@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 const HighlightedCoworkings = async () => {
     const latestCoworkings = await getLatestCoworkings();
+
     return (
         <section className='my-[12vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:mb-32 lg:mt-4 '>
             <div className='flex flex-col gap-8 lg:flex-row lg:justify-between '>

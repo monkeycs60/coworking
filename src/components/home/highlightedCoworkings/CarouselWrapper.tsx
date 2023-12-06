@@ -7,6 +7,7 @@ import { CoworkingListProps } from '@/types/highlightedCoworking';
 
 const CarouselWrapper = ({ coworkings }: CoworkingListProps) => {
     const { nextSlide, prevSlide, currentIndex } = useCarousel(10);
+    const numberOfCoworkingsDisplayed = 4;
 
     return (
         <div className='flex gap-4'>
@@ -15,15 +16,11 @@ const CarouselWrapper = ({ coworkings }: CoworkingListProps) => {
                 nextSlide={nextSlide}
                 prevSlide={prevSlide}
                 currentIndex={currentIndex}
-                translateRate={9.8}
+                isAtStart={currentIndex === 0}
+                isAtEnd={currentIndex === coworkings.length - numberOfCoworkingsDisplayed}
             >
-                {coworkings.map((coworking, index) => (
-                    <CoworkingCard
-                        carouselId={'highlightedCoworkings'}
-                        key={coworking.id}
-                        coworking={coworking}
-                        currentIndex={index}
-                    />
+                {coworkings.map((coworking) => (
+                    <CoworkingCard key={coworking.id} coworking={coworking} />
                 ))}
             </Carousel>
         </div>

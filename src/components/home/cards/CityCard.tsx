@@ -10,22 +10,18 @@ interface CityCardProps {
     carouselId: string;
     highlightedCity: CityCount;
     currentIndex: number;
+    isAtStart?: boolean;
+    isAtEnd?: boolean;
 }
 
 const CityCard = ({
     carouselId,
     highlightedCity,
     currentIndex,
+    isAtStart,
+    isAtEnd,
+
 }: CityCardProps) => {
-    const activeIndex = useAppSelector(
-        (state) => state.carouselState.activeIndices[carouselId],
-    );
-
-    const borderClass =
-        activeIndex === currentIndex
-            ? 'border-yellow-500 border-2'
-            : 'border-gray-300 border-2';
-
     let imageUrl = defaultCityImage; // valeur par défaut
 
     if (highlightedCity.city in cityImageMap) {
@@ -41,8 +37,7 @@ const CityCard = ({
                 backgroundImage: `url(${imageUrl})`,
                 backgroundPosition: 'center',
             }}
-            className={`flex h-[420px] w-[300px] cursor-pointer flex-col justify-end rounded-xl transition-transform duration-500 ease-in-out  
-			${borderClass}
+            className={`flex h-[420px] w-[300px] cursor-pointer flex-col justify-end rounded-xl transition-transform duration-300 ease-in-out hover:scale-105 hover:border-yellow-500 focus:scale-105
 			`}
         >
             <div className='m-6 flex flex-col items-center justify-center gap-2 border-[1px] px-6 py-4 text-white  backdrop-blur-md'>

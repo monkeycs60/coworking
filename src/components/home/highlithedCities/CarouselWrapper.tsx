@@ -11,7 +11,6 @@ interface CarouselWrapperProps {
 
 const CarouselWrapper = ({ coworksByCities }: CarouselWrapperProps) => {
     const { nextSlide, prevSlide, currentIndex } = useCarousel(10);
-    console.log(coworksByCities);
 
     return (
         <div className='flex gap-4'>
@@ -20,7 +19,8 @@ const CarouselWrapper = ({ coworksByCities }: CarouselWrapperProps) => {
                 nextSlide={nextSlide}
                 prevSlide={prevSlide}
                 currentIndex={currentIndex}
-                translateRate={12.3}
+                isAtStart={currentIndex === 0}
+                isAtEnd={currentIndex === coworksByCities.length - 4}
             >
                 {coworksByCities.map((city, index) => (
                     <CityCard
