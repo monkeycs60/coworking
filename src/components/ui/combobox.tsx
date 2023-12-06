@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useFetchAutocomplete } from '@/hooks/useFetchAutocomplete';
-import { useFetchPlaceDetails } from '@/hooks/useFetchPlaceDetails';
+import { useFetchReduxPlaceDetails } from '@/hooks/useFetchReduxPlaceDetails';
 import { Place } from '@/types/placePredictions';
 import { X } from 'lucide-react';
 import { resetPredictions } from '@/redux/features/autoComplete-slice';
@@ -20,7 +20,7 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
     const inputRef = useRef<HTMLDivElement>(null);
 
     const { inputField, predictions, setInput } = useFetchAutocomplete();
-    const placeDetails = useFetchPlaceDetails(selectedPlace);
+    const placeDetails = useFetchReduxPlaceDetails(selectedPlace);
 
     const handleSelect = (place: Place) => {
         setIsOpen(false);

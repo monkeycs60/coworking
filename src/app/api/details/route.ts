@@ -11,7 +11,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 	const data = await response.json();
 
 	return NextResponse.json({
-		message: 'ok ça marche le fetch détaillé',
+		message: 'ok ça marche le fetch place details from SERVER',
 		data: data,
 	});
 }

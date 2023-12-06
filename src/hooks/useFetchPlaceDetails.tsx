@@ -1,31 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from './useRedux';
-import {
-    setPlaceDetails,
-    resetPlaceDetails,
-} from '@/redux/features/placeDetails-slice';
+import { PlaceDetailResponse } from '@/types/placeDetails';
+import { useFetch } from 'usehooks-ts';
 
 export const useFetchPlaceDetails = (placeId: string | null) => {
-    const dispatch = useAppDispatch();
-    const details = useAppSelector((state) => state);
-    console.log(details);
+    const { data, error } = useFetch<PlaceDetailResponse>(
+        `/api/details?placeId=${placeId}`,
+    );
+    if (error) return <p>Il y a une erreur dans le chargement des données</p>;
+    if (!data) return <p>Chargement en cours...</p>;
 
-    useEffect(() => {
-        const fetchPlaceDetails = async () => {
-            if (!placeId) {
-                dispatch(resetPlaceDetails());
-                return;
-            }
-            dispatch(resetPlaceDetails());
-
-            const res = await fetch(`/api/details?placeId=${placeId}`);
-            const data = await res.json();
-
-            dispatch(setPlaceDetails(data.data.result));
-        };
-
-        fetchPlaceDetails();
-    }, [placeId, dispatch]);
+    return data.data.result;
 };
