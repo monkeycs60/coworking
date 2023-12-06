@@ -28,11 +28,11 @@ const CityInput = ({ cities }: CityInputProps) => {
     } = useSearchCity();
 
     return (
-        <div className='w-full lg:w-auto 2xl:w-[100%]'>
+        <div className='w-full lg:w-auto '>
             <input
                 type='text'
                 placeholder='Entrez une ville'
-                className='w-full rounded-xl border-2 border-gray-500 px-4 py-2 indent-8 sm:py-4 sm:indent-12 sm:text-xl lg:w-auto lg:px-20 lg:py-2 lg:indent-0 lg:text-lg 2xl:px-28 2xl:py-3'
+                className='w-full rounded-xl border-2 border-gray-500 px-4 py-2 indent-8 sm:py-4 sm:indent-12 sm:text-xl lg:w-[430px] lg:px-12 lg:py-2 lg:indent-0 lg:text-lg  2xl:py-3'
                 onClick={() => setShowDropdown(!showDropdown)}
                 onChange={(e) => dispatch(setInputSearch(e.target.value))}
                 ref={inputRef}
@@ -40,7 +40,7 @@ const CityInput = ({ cities }: CityInputProps) => {
             />
             {showDropdown && (
                 <div
-                    className='absolute z-40 mt-[1px] max-h-[22vh] w-full overflow-y-auto rounded-xl border bg-gray-300 pl-2 lg:top-auto lg:h-80 lg:w-[83%]'
+                    className='absolute z-40 mt-[1px] max-h-[22vh] w-full overflow-y-auto rounded-xl border bg-gray-300 pl-2 lg:top-auto lg:h-80 lg:w-[430px] 3xl:max-h-[16vh]'
                     ref={dropdownRef}
                 >
                     {sortedCities({ cities }).map((cityObj) => (
