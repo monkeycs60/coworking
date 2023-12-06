@@ -1,7 +1,7 @@
 'use client';
 
 import Carousel from '@/components/ui/Carousel';
-import CoworkingCard from '@/components/home/cards/CoworkingCard';
+import CoworkingCard from '@/components/home/cards/coworkingCard/CoworkingCard';
 import useCarousel from '@/hooks/useCarousel';
 import { CoworkingListProps } from '@/types/highlightedCoworking';
 
