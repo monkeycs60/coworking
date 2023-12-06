@@ -10,7 +10,7 @@ const Hero = async () => {
 
     return (
         <section className='overall-bg mb-[10vh] flex w-full flex-col justify-center lg:mb-0 lg:h-screen'>
-            <div className='mt-3 flex  flex-col gap-4 sm:mt-20  sm:gap-10  lg:-mt-4 lg:flex-row 2xl:-mt-28 3xl:-mt-20 '>
+            <div className='mt-3 flex  flex-col gap-4 sm:mt-20  sm:gap-10 lg:-mt-4 lg:flex-row  lg:gap-0 2xl:-mt-28 2xl:gap-10 3xl:-mt-20 '>
                 <div className='flex flex-col px-4 lg:w-[55%] lg:px-0 3xl:w-[50%]'>
                     <div className='flex flex-col gap-4'>
                         <h2 className='text-2xl font-bold leading-normal sm:text-4xl lg:text-4xl 2xl:text-5xl 3xl:leading-relaxed'>
