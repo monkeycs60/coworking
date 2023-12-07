@@ -69,7 +69,6 @@ const Hero = async () => {
                             src='/Hand-drawn-arrow.svg'
                             alt='fleche jaune'
                             className='absolute -left-64 bottom-4 z-20 hidden lg:bottom-[-120px] lg:left-[-170px] lg:block lg:w-[260px] 2xl:bottom-[-80px] 2xl:left-[-150px] 2xl:w-[300px] 3xl:pointer-events-none 3xl:bottom-[-90px] 3xl:left-[-170px] 3xl:h-[300px] 3xl:w-[300px]'
-                            priority
                         />
                         <Image
                             width={160}
@@ -77,7 +76,6 @@ const Hero = async () => {
                             src='/Ellipse-yellow.svg'
                             alt='cercle jaune'
                             className='absolute -right-4 -top-8 lg:-bottom-16 lg:right-0'
-                            priority
                         />
                         <Image
                             width={160}
