@@ -25,6 +25,7 @@ const AddPlace = () => {
         setPhotoSelected,
         imageUrls,
         photoSelected,
+        photoUploaded,
         placeDetails,
     } = usePlaceSubmission({ setWaitingToSubmit });
 
@@ -54,6 +55,7 @@ const AddPlace = () => {
                             imageUrls={imageUrls}
                             setPhotoSelected={setPhotoSelected}
                             photoSelected={photoSelected}
+                            photoUploaded={photoUploaded}
                         />
                     )}
                     {currentStep === 4 && (

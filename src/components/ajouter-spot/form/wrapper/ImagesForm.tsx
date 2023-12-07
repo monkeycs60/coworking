@@ -9,11 +9,13 @@ const ImagesForm = ({
     imageUrls,
     setPhotoSelected,
     photoSelected,
+    photoUploaded,
 }: {
     handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     imageUrls: string[];
     setPhotoSelected: React.Dispatch<SetStateAction<string[]>>;
     photoSelected: string[];
+    photoUploaded: string[];
 }) => {
     return (
         <>
@@ -22,7 +24,10 @@ const ImagesForm = ({
                 setPhotoSelected={setPhotoSelected}
                 photoSelected={photoSelected}
             />
-            <DownloadOwnPhotos handleFileChange={handleFileChange} />
+            <DownloadOwnPhotos
+                handleFileChange={handleFileChange}
+                photoUploaded={photoUploaded}
+            />
         </>
     );
 };

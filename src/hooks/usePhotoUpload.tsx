@@ -16,6 +16,7 @@ const usePhotoUpload = ({
     const placeDetails = useAppSelector((state) => state.placeDetails.details);
     const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
     const [photoSelected, setPhotoSelected] = useState<string[]>([]);
+    const [photoUploaded, setPhotoUploaded] = useState<string[]>([]);
     const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
 
     useEffect(() => {
@@ -38,10 +39,17 @@ const usePhotoUpload = ({
         setWaitingToSubmit(true);
         const formData = new FormData();
 
+        const localPreviewUrls: string[] = [];
+
         if (event.target.files) {
             for (let i = 0; i < event.target.files.length; i++) {
                 formData.append('file', event.target.files[i]);
+                localPreviewUrls.push(
+                    URL.createObjectURL(event.target.files[i]),
+                );
             }
+
+            setPhotoUploaded(localPreviewUrls);
 
             try {
                 const response = await fetch('/api/uploaded', {
@@ -67,6 +75,7 @@ const usePhotoUpload = ({
         setPhotoSelected,
         photoSelected,
         uploadedImageUrls,
+        photoUploaded,
     };
 };
 

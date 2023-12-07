@@ -22,6 +22,7 @@ export const usePlaceSubmission = ({
         handleFileChange,
         setPhotoSelected,
         photoSelected,
+        photoUploaded,
         uploadedImageUrls,
     } = usePhotoUpload({ setWaitingToSubmit });
 
@@ -79,6 +80,7 @@ export const usePlaceSubmission = ({
         handleFileChange,
         setPhotoSelected,
         photoSelected,
+        photoUploaded,
         imageUrls,
         placeDetails,
     };
