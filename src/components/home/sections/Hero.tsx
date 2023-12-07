@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
 import clsx from 'clsx';
@@ -57,8 +59,9 @@ const Hero = async () => {
                                 '2xl:h-[430px] 2xl:w-[470px]',
                                 '3xl:h-[500px] 3xl:w-[560px]',
                             )}
-                            width={1154}
-                            height={1026}
+                            width={600}
+                            height={534}
+                            priority
                         />
                         <Image
                             width={304}

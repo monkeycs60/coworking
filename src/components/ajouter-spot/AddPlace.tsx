@@ -12,9 +12,12 @@ import ImagesForm from './form/wrapper/ImagesForm';
 import Review from './form/wrapper/Review';
 import LoaderButton from '../ui/LoaderButton';
 import { useState } from 'react';
+import { useStep } from 'usehooks-ts';
 
 const AddPlace = () => {
     const [waitingToSubmit, setWaitingToSubmit] = useState(false);
+
+    const [currentStep, { goToNextStep, goToPrevStep, setStep }] = useStep(4);
 
     const {
         handleFileChange,
