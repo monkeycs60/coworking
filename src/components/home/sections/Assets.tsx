@@ -128,7 +128,7 @@ const Assets = () => {
                         </div>
                     </div>
                 </div>
-                <div className='relative h-[250px] w-1/2 sm:h-[380px] lg:h-[370px] 2xl:h-[350px] '>
+                <div className='relative h-[250px] w-[90%] sm:h-[380px] lg:h-[370px] lg:w-1/2 2xl:h-[350px] '>
                     <Image
                         src={asset.imgSource}
                         alt={asset.imgAlt}
