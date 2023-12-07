@@ -39,26 +39,50 @@ const AddPlace = () => {
                 className='mt-10'
             >
                 <div className='flex flex-col items-center justify-center gap-8'>
-                    <PrecompletedForm
-                        placeDetails={placeDetails}
-                        errors={formMethods.formState.errors}
-                    />
-                    <ThingsToCheck errors={formMethods.formState.errors} />
-                    <ImagesForm
-                        handleFileChange={handleFileChange}
-                        imageUrls={imageUrls}
-                        setPhotoSelected={setPhotoSelected}
-                        photoSelected={photoSelected}
-                    />
-                    <Review
-                        errors={formMethods.formState.errors}
-                        control={formMethods.control}
-                    />
-                    <LoaderButton
-                        buttonClassName='my-10 w-full lg:h-12 lg:w-[320px] lg:px-4'
-                        waitingToSubmit={waitingToSubmit}
-                        buttonMessage='Ajouter ce cowork'
-                    />
+                    {currentStep === 1 && (
+                        <PrecompletedForm
+                            placeDetails={placeDetails}
+                            errors={formMethods.formState.errors}
+                        />
+                    )}
+                    {currentStep === 2 && (
+                        <ThingsToCheck errors={formMethods.formState.errors} />
+                    )}
+                    {currentStep === 3 && (
+                        <ImagesForm
+                            handleFileChange={handleFileChange}
+                            imageUrls={imageUrls}
+                            setPhotoSelected={setPhotoSelected}
+                            photoSelected={photoSelected}
+                        />
+                    )}
+                    {currentStep === 4 && (
+                        <>
+                            <Review
+                                errors={formMethods.formState.errors}
+                                control={formMethods.control}
+                            />
+                            <LoaderButton
+                                buttonClassName='my-10 w-full lg:h-12 lg:w-[320px] lg:px-4'
+                                waitingToSubmit={waitingToSubmit}
+                                buttonMessage='Ajouter ce cowork'
+                            />
+                        </>
+                    )}
+                    <button
+                        type='button'
+                        onClick={goToPrevStep}
+                        disabled={currentStep === 1}
+                    >
+                        Précédent
+                    </button>
+                    <button
+                        type='button'
+                        onClick={goToNextStep}
+                        disabled={currentStep === 4}
+                    >
+                        Suivant
+                    </button>
                 </div>
 
                 <ToastContainer />
