@@ -18,9 +18,7 @@ interface CoworkingCardPropsExtended {
     coworking: CoworkingCardProps;
 }
 
-const CoworkingCard = ({
-    coworking,
-}: CoworkingCardPropsExtended) => {
+const CoworkingCard = ({ coworking }: CoworkingCardPropsExtended) => {
     const averageRating = averageRatingFromReviews(coworking.reviews);
 
     return (
@@ -29,7 +27,7 @@ const CoworkingCard = ({
                 coworking.name,
             )}?coworkingId=${coworking.id}`}
             key={coworking.id}
-            className={`relative flex h-[500px] w-[300px] cursor-pointer flex-col justify-between rounded-xl border-2 transition-transform duration-300 ease-in-out hover:scale-105 hover:border-yellow-500 focus:scale-105`}
+            className={`relative flex h-[400px] w-[250px] cursor-pointer flex-col justify-between rounded-xl border-2 transition-transform duration-300 ease-in-out hover:scale-105 hover:border-yellow-500 focus:scale-105 lg:h-[500px] lg:w-[300px]`}
         >
             <RatingDisplay averageRating={averageRating} />
             <div className='relative h-[200px] w-full overflow-hidden rounded-xl object-cover'>

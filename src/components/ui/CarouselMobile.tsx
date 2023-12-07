@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch } from '@/hooks/useRedux';
 import { setActiveIndex } from '@/redux/features/carouselState-slice';
 
-interface CarouselProps {
+interface CarouselMobileProps {
     id: string;
     children?: React.ReactNode;
     nextSlide: () => void;
@@ -16,7 +16,7 @@ interface CarouselProps {
     isAtEnd: boolean;
 }
 
-const Carousel = ({
+const CarouselMobile = ({
     id,
     children,
     nextSlide,
@@ -24,7 +24,7 @@ const Carousel = ({
     currentIndex,
     isAtStart,
     isAtEnd,
-}: CarouselProps) => {
+}: CarouselMobileProps) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -33,18 +33,18 @@ const Carousel = ({
 
     const visibleChildren = React.Children.toArray(children).slice(
         currentIndex,
-        currentIndex + 4,
+        currentIndex + 1,
     );
 
     return (
-        <div className='m-auto flex flex-col gap-4'>
-            <div className='relative flex w-full overflow-visible'>
+        <div className='m-auto flex flex-col lg:gap-4'>
+            <div className='relative flex w-full overflow-visible lg:pl-8'>
                 <div className='flex w-full gap-4 transition-all duration-500 ease-in-out'>
                     {children &&
                         visibleChildren.map((child, index: number) => (
                             <div
                                 key={index}
-                                className={`carouselItem  py-6 transition-all duration-500
+                                className={`carouselMobileItem py-6 transition-all duration-500
                                 ease-in-out`}
                             >
                                 {child}
@@ -55,7 +55,7 @@ const Carousel = ({
                     <Button
                         variant='round'
                         size='sm'
-                        className='group absolute left-[-70px] top-1/2 -translate-y-1/2 rounded-full border-[2px] border-transparent bg-primary p-3 text-primary  hover:border-primary hover:bg-defaultWhite'
+                        className='group absolute left-[-50px] top-1/2 -translate-y-1/2 rounded-full border-[2px] border-transparent bg-primary p-1 text-primary hover:border-primary hover:bg-defaultWhite  lg:left-[-70px] lg:p-3'
                         onClick={prevSlide}
                     >
                         <ChevronLeft className='text-white group-hover:text-primary' />
@@ -65,7 +65,7 @@ const Carousel = ({
                     <Button
                         variant='round'
                         size='sm'
-                        className='group absolute right-[-70px] top-1/2 -translate-y-1/2 rounded-full border-[2px] border-transparent bg-primary p-3 text-defaultWhite hover:border-primary hover:bg-transparent'
+                        className='group absolute right-[-50px] top-1/2 -translate-y-1/2 rounded-full border-[2px] border-transparent bg-primary p-1 text-defaultWhite hover:border-primary hover:bg-transparent lg:right-[-70px] lg:p-3'
                         onClick={nextSlide}
                     >
                         <ChevronRight className='text-white group-hover:text-primary' />
@@ -74,7 +74,7 @@ const Carousel = ({
                     <Button
                         variant='round'
                         size='sm'
-                        className='group absolute right-[-70px] top-1/2 -translate-y-1/2 rounded-full border-[2px] border-transparent bg-gray-600 p-3 text-defaultWhite hover:border-gray-700 hover:bg-gray-700'
+                        className='group absolute right-[-50px] top-1/2 -translate-y-1/2 rounded-full border-[2px] border-transparent bg-gray-600 p-1 text-defaultWhite hover:border-gray-700 hover:bg-gray-700 lg:right-[-70px] lg:p-3'
                     >
                         <ChevronRight className='text-white group-hover:text-gray-200' />
                     </Button>
@@ -84,4 +84,4 @@ const Carousel = ({
     );
 };
 
-export default Carousel;
+export default CarouselMobile;

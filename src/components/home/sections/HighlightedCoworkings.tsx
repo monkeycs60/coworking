@@ -7,7 +7,7 @@ const HighlightedCoworkings = async () => {
     const latestCoworkings = await getLatestCoworkings();
 
     return (
-        <section className='my-[12vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:mb-32 lg:mt-4 '>
+        <section className='mb-2 mt-[12vh] flex flex-col gap-8 overflow-x-hidden px-4 lg:mb-32 lg:mt-4 '>
             <div className='flex flex-col gap-8 lg:flex-row lg:justify-between '>
                 <div className='flex flex-col gap-2'>
                     <h2 className='text-2xl font-bold'>

@@ -20,7 +20,6 @@ const CityCard = ({
     currentIndex,
     isAtStart,
     isAtEnd,
-
 }: CityCardProps) => {
     let imageUrl = defaultCityImage; // valeur par défaut
 
@@ -37,11 +36,11 @@ const CityCard = ({
                 backgroundImage: `url(${imageUrl})`,
                 backgroundPosition: 'center',
             }}
-            className={`flex h-[420px] w-[300px] cursor-pointer flex-col justify-end rounded-xl transition-transform duration-300 ease-in-out hover:scale-105 hover:border-yellow-500 focus:scale-105
+            className={`flex h-[400px] w-[250px] cursor-pointer flex-col justify-end rounded-xl transition-transform duration-300 ease-in-out hover:scale-105 hover:border-yellow-500 focus:scale-105 lg:h-[420px] lg:w-[300px]
 			`}
         >
             <div className='m-6 flex flex-col items-center justify-center gap-2 border-[1px] px-6 py-4 text-white  backdrop-blur-md'>
-                <h3 className='text-2xl font-semibold'>
+                <h3 className='text-center text-2xl font-semibold'>
                     {highlightedCity.city}
                 </h3>
                 <div className='flex justify-between gap-6'>
