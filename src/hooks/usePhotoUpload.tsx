@@ -11,10 +11,10 @@ const usePhotoUpload = ({
     setWaitingToSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-
     const dispatch = useAppDispatch();
     const placeDetails = useAppSelector((state) => state.placeDetails.details);
     const baseUrlImage = `https://maps.googleapis.com/maps/api/place/photo?key=${googleMapsApiKey}&`;
+
     const [photoSelected, setPhotoSelected] = useState<string[]>([]);
     const [photoUploaded, setPhotoUploaded] = useState<string[]>([]);
     const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
@@ -37,19 +37,17 @@ const usePhotoUpload = ({
         event: React.ChangeEvent<HTMLInputElement>,
     ) => {
         setWaitingToSubmit(true);
-        const formData = new FormData();
-
-        const localPreviewUrls: string[] = [];
 
         if (event.target.files) {
-            for (let i = 0; i < event.target.files.length; i++) {
-                formData.append('file', event.target.files[i]);
-                localPreviewUrls.push(
-                    URL.createObjectURL(event.target.files[i]),
-                );
-            }
+            const newFiles = Array.from(event.target.files);
+            const newPreviewUrls = newFiles.map((file) =>
+                URL.createObjectURL(file),
+            );
 
-            setPhotoUploaded(localPreviewUrls);
+            setPhotoUploaded((prev) => [...prev, ...newPreviewUrls]);
+
+            const formData = new FormData();
+            newFiles.forEach((file) => formData.append('file', file));
 
             try {
                 const response = await fetch('/api/uploaded', {
@@ -59,7 +57,7 @@ const usePhotoUpload = ({
                 const data = await response.json();
 
                 if (data.success) {
-                    setUploadedImageUrls(data);
+                    setUploadedImageUrls((prev) => [...prev, ...data.urls]);
                 } else {
                     console.error(data.error);
                 }
@@ -70,12 +68,18 @@ const usePhotoUpload = ({
             }
         }
     };
+
+    const removePhoto = (index: number) => {
+        setPhotoUploaded((prev) => prev.filter((_, i) => i !== index));
+        setUploadedImageUrls((prev) => prev.filter((_, i) => i !== index));
+    };
     return {
         handleFileChange,
-        setPhotoSelected,
-        photoSelected,
         uploadedImageUrls,
         photoUploaded,
+        photoSelected,
+        setPhotoSelected,
+        removePhoto,
     };
 };
 

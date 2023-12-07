@@ -23,10 +23,12 @@ const AddPlace = () => {
         handleFileChange,
         onSubmit,
         setPhotoSelected,
+        removePhoto,
         imageUrls,
         photoSelected,
         photoUploaded,
         placeDetails,
+        uploadedImageUrls,
     } = usePlaceSubmission({ setWaitingToSubmit });
 
     const formMethods = useForm<AddPlaceSchemaType>({
@@ -56,6 +58,8 @@ const AddPlace = () => {
                             setPhotoSelected={setPhotoSelected}
                             photoSelected={photoSelected}
                             photoUploaded={photoUploaded}
+                            removePhoto={removePhoto}
+                            uploadedImageUrls={uploadedImageUrls}
                         />
                     )}
                     {currentStep === 4 && (

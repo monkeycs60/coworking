@@ -20,10 +20,11 @@ export const usePlaceSubmission = ({
 
     const {
         handleFileChange,
-        setPhotoSelected,
-        photoSelected,
         photoUploaded,
         uploadedImageUrls,
+        removePhoto,
+        photoSelected,
+        setPhotoSelected,
     } = usePhotoUpload({ setWaitingToSubmit });
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
@@ -79,7 +80,9 @@ export const usePlaceSubmission = ({
         onSubmit,
         handleFileChange,
         setPhotoSelected,
+        removePhoto,
         photoSelected,
+        uploadedImageUrls,
         photoUploaded,
         imageUrls,
         placeDetails,
