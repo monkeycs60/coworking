@@ -17,6 +17,14 @@ const music = [
     'LOUD_MUSIC',
 ] as const;
 
+const equipmentOptions = [
+    'ACCESSIBLE', // accès handicapé
+    'PARKING', // parking
+    'TERRACE', // terrasse
+    'OUTLETS', // prises
+    'VOTING_BOOTH', // isoloir
+] as const;
+
 const openingHourFormat = z.object({
     open: z
         .string()
@@ -84,6 +92,11 @@ export const AddPlaceSchema = z.object({
     equipRating: z.number().min(1).max(5),
     foodRating: z.number().min(1).max(5),
     feelingRating: z.number().min(1).max(5),
+    // equipment: z.array(z.enum(equipmentOptions)).optional(),
+    // imagesSent: z
+    //     .array(z.string())
+    //     .min(1, 'Vous devez sélectionner au moins une image.')
+    //     .max(8, "Vous pouvez sélectionner jusqu'à 8 images."),
 });
 
 export type AddPlaceSchemaType = z.infer<typeof AddPlaceSchema>;

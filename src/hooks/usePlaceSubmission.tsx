@@ -44,6 +44,7 @@ export const usePlaceSubmission = ({
             latitude: placeDetails.geometry?.location.lat,
             imagesSelected: photoSelected,
             userImages: uploadedImageUrls,
+            // imagesSent: draggedImages,
         };
 
         try {
