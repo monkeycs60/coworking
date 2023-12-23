@@ -11,8 +11,6 @@
 	},
 	"dependencies": {
 		"@aws-sdk/client-ses": "^3.382.0",
-		"@clerk/localizations": "^1.22.0",
-		"@clerk/nextjs": "^4.27.2",
 		"@emotion/react": "^11.11.1",
 		"@emotion/styled": "^11.11.0",
 		"@hookform/resolvers": "^3.1.1",
@@ -36,6 +34,7 @@
 		"autoprefixer": "10.4.14",
 		"aws-sdk": "^2.1440.0",
 		"axios": "^1.4.0",
+		"bcrypt": "^5.1.1",
 		"class-variance-authority": "^0.6.1",
 		"clsx": "^1.2.1",
 		"cmdk": "^0.2.0",

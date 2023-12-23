@@ -1,4 +1,3 @@
-import { currentUser } from '@clerk/nextjs';
 
 export default async function UtilisateurConnected() {
 	const user = await currentUser();

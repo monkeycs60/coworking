@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 
 export const getCoworkingRatings = async (coworkingId: string) => {
     const coworkingRatings = await prisma.coworking.findUnique({

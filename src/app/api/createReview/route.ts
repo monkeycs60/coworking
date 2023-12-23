@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { getAuth } from '@clerk/nextjs/server';
-import { ReviewSchema, CreateReviewType } from '@/types/createReview';
-import { currentUser } from '@clerk/nextjs';
-import type { User } from '@clerk/nextjs/api';
-import { authMiddleware } from '../middlewares/authMiddleware';
+import  prisma  from '@/lib/prisma';
+import { CreateReviewType } from '@/types/createReview';
 
 export async function POST(req: NextRequest) {
-   const authResponse = await authMiddleware(req);
-   if (authResponse) return authResponse; // Return if there's any response from the middleware
+    // implémenter le middleware d'authentification avec NextAuth
 
-   const { userId } = getAuth(req);
+    //    const authResponse = await authMiddleware(req);
+    //    if (authResponse) return authResponse; // Return if there's any response from the middleware
+    //    const { userId } = getAuth(req);
 
     // Step 1: Directly get the data from the request
     const requestData: CreateReviewType = await req.json();

@@ -14,17 +14,13 @@ datasource db {
 // change the Model for Next Auth implementation
 model User {
   id            String    @id @default(cuid())
-  birthday                   String?       // Optional since it's empty in the example
-  email                      String?        @unique
-  externalId                 String?
-  firstName                  String?
-  lastName                   String?
-  name                       String?
-  createdAt     DateTime?
-  lastSignInAt  DateTime?
+  city                       String
+  email                      String        @unique
+  username                   String        @unique   
+  password                   String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   profileImageUrl            String?
-  username                   String?   
-  image         String?
   comments      Comment[]
   posts        Post[] 
   reviews       Review[]

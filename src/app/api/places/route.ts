@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { v4 as uuidv4 } from 'uuid';
-import { getAuth } from '@clerk/nextjs/server';
 import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
-import { authMiddleware } from '../middlewares/authMiddleware';
 
 export async function POST(req: NextRequest) {
-    const authResponse = await authMiddleware(req);
-    if (authResponse) return authResponse; // Return if there's any response from the middleware
-    console.log('req.body', req.body);
+    // implémenter le middleware d'authentification avec NextAuth
 
-    const { userId } = getAuth(req);
+    // const authResponse = await authMiddleware(req);
+    // if (authResponse) return authResponse; // Return if there's any response from the middleware
+    // console.log('req.body', req.body);
+    // const { userId } = getAuth(req);
 
     const placeData = (await req.json()) as AddPlaceSchemaType;
 

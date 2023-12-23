@@ -1,7 +1,6 @@
 import { Providers } from '@/redux/provider';
 import './globals.css';
-import { ClerkProvider } from '@clerk/nextjs';
-import { frFR } from '@clerk/localizations';
+
 import NavBar from '../components/layout/NavBar';
 import Footer from '@/components/layout/Footer';
 
@@ -16,7 +15,6 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <ClerkProvider localization={frFR}>
             <html lang='fr'>
                 <body className='m-auto flex max-w-[1200px] justify-center overflow-x-hidden font-inter 2xl:max-w-[1400px]'>
                     <Providers>
@@ -28,6 +26,5 @@ export default function RootLayout({
                     </Providers>
                 </body>
             </html>
-        </ClerkProvider>
     );
 }

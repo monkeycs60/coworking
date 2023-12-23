@@ -1,11 +1,10 @@
 'use client';
 
-import SignInButtonLogic from '../auth/SignInButtonLogic';
-import { SignOutButton, UserButton, useAuth } from '@clerk/nextjs';
+import SignInButtonLogic from '../auth/SignInComponent';
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import SignUpButtonLogic from '../auth/SignUpButtonLogic';
+import SignUpButtonLogic from '../auth/SignUpComponent';
 import { Menu } from 'lucide-react';
 import useScrollPosition from '@/hooks/useScrollPosition';
 import useHamburgerMenu from '@/hooks/useHamburgerMenu';
@@ -15,7 +14,7 @@ import useLogoSize from '@/hooks/useLogoSize';
 
 function NavBar() {
     const { isHamburgerOpen, toggleHamburgerMenu } = useHamburgerMenu();
-    const { userId } = useAuth();
+    // const { userId } = useAuth();
     const scrollPosition = useScrollPosition();
     const { logoClass } = useLogoSize(scrollPosition);
 
@@ -69,19 +68,19 @@ function NavBar() {
                     </div>
                 </div>
                 <div className='hidden items-center justify-center gap-4 lg:flex 2xl:gap-8'>
-                    {userId ? (
+                    {/* {userId ? (
                         <>
-                            <SignOutButton>
+                            <div>
                                 <Button variant='outline'>Sign out</Button>
-                            </SignOutButton>
-                            <UserButton />
+                      
+                            <div />
                         </>
                     ) : (
                         <>
                             <SignInButtonLogic />
                             <SignUpButtonLogic />
                         </>
-                    )}
+                    )} */}
                 </div>
             </div>
         </>

@@ -32,12 +32,6 @@ const nextConfig = {
                 port: '',
                 pathname: '/**',
             },
-            {
-                protocol: 'https',
-                hostname: 'img.clerk.com', // Ajout du nouveau modèle distant ici
-                port: '',
-                pathname: '/**',
-            },
         ],
     },
 };
