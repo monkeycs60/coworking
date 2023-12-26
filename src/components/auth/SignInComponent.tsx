@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 import { SignInSchema, SignInData } from '@/schemas/userSchema';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
@@ -76,11 +76,7 @@ const SignInComponent = () => {
             >
                 Sign In with Google
             </button>
-            <LoaderButton
-                buttonClassName='my-10 w-full lg:h-12 lg:w-[320px] lg:px-4'
-                waitingToSubmit={waitingToSubmit}
-                buttonMessage='Ajouter ce cowork'
-            />
+            <button onClick={() => signOut()}>Se déconnecter</button>
         </form>
     );
 };
