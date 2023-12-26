@@ -1,4 +1,6 @@
 import { Providers } from '@/redux/provider';
+import AuthProvider from '@/components/auth/AuthProvider';
+import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 
 import NavBar from '../components/layout/NavBar';
@@ -15,16 +17,19 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-            <html lang='fr'>
-                <body className='m-auto flex max-w-[1200px] justify-center overflow-x-hidden font-inter 2xl:max-w-[1400px]'>
+        <html lang='fr'>
+            <body className='m-auto flex max-w-[1200px] justify-center overflow-x-hidden font-inter 2xl:max-w-[1400px]'>
+                <AuthProvider>
                     <Providers>
                         <div className='w-full'>
                             <NavBar />
                             {children}
                             <Footer />
                         </div>
+                        <Toaster />
                     </Providers>
-                </body>
-            </html>
+                </AuthProvider>
+            </body>
+        </html>
     );
 }

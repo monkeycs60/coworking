@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { UserFormData } from '../schemas/userSchema';
+import { SignUpData } from '../schemas/userSchema';
 
 export const useRegisterUser = () => {
     const [error, setError] = useState<string>('');
 
-    const registerUser = async (data: UserFormData) => {
+    const registerUser = async (data: SignUpData) => {
         // Normalisez la valeur de la ville
         const normalizedCity = data.city.trim().toLowerCase();
         const capitalizedCity =

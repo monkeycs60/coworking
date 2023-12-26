@@ -1,29 +1,37 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { UserFormData, UserFormSchema } from '@/schemas/userSchema';
+import { SignUpData, SignUpSchema } from '@/schemas/userSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRegisterUser } from '@/hooks/useRegisterUser';
 import { useRouter } from 'next/navigation';
+import { useToast } from '../ui/use-toast';
 
 const SignUpComponent = () => {
     const router = useRouter();
+    const { toast } = useToast();
+
     const { registerUser, error } = useRegisterUser();
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<UserFormData>({
-        resolver: zodResolver(UserFormSchema),
+    } = useForm<SignUpData>({
+        resolver: zodResolver(SignUpSchema),
     });
 
-    const onSubmit = async (data: UserFormData) => {
+    const onSubmit = async (data: SignUpData) => {
         try {
             const responseData = await registerUser(data);
             console.log(responseData);
-            router.push('/profile');
+            // router.push('/profile');
         } catch (error) {
             console.error(error);
+            toast({
+                title: 'Erreur',
+                description: 'Problème lors de la création du compte',
+                variant: 'destructive',
+            });
         }
     };
 

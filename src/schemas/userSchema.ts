@@ -1,6 +1,16 @@
 import * as z from 'zod';
 
-export const UserFormSchema = z
+export const SignInSchema = z.object({
+    email: z.string().email(),
+    password: z
+        .string()
+        .min(6, 'Le mot de passe doit faire minimum 6 caractères')
+        .max(24, 'Le mot de passe doit faire maximum 24 caractères'),
+});
+
+export type SignInData = z.infer<typeof SignInSchema>;
+
+export const SignUpSchema = z
     .object({
         city: z.string().min(1, 'La ville est requise'),
         username: z
@@ -25,12 +35,12 @@ export const UserFormSchema = z
             .max(24, 'Le mot de passe doit faire maximum 24 caractères'),
     })
     .refine((data) => data.password === data.confirmPassword, {
-        message: "Les mots de passe ne correspondent pas",
+        message: 'Les mots de passe ne correspondent pas',
         path: ['confirmPassword'],
     });
 
-export type UserFormData = z.infer<typeof UserFormSchema>;
+export type SignUpData = z.infer<typeof SignUpSchema>;
 
 export type UserFormErrors = {
-    [K in keyof UserFormData]?: string;
+    [K in keyof SignUpData]?: string;
 };
