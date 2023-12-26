@@ -3,6 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import prisma from './prisma';
 import { compare } from 'bcrypt';
+import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
@@ -18,6 +19,10 @@ export const authOptions: NextAuthOptions = {
         newUser: undefined, // If set, new users will be directed here on first sign in
     },
     providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+        }),
         CredentialsProvider({
             // The name to display on the sign in form (e.g. "Sign in with...")
             name: 'Credentials',
@@ -42,13 +47,14 @@ export const authOptions: NextAuthOptions = {
                     return null;
                 }
 
-                const passwordValid = await compare(
-                    credentials.password,
-                    existingUser.password,
-                );
-
-                if (!passwordValid) {
-                    return null;
+                if (existingUser.password) {
+                    const passwordValid = await compare(
+                        credentials.password,
+                        existingUser.password,
+                    );
+                    if (!passwordValid) {
+                        return null;
+                    }
                 }
 
                 return {
@@ -63,7 +69,13 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token, user, account, profile, isNewUser }) {
             if (user) {
-              return { ...token, username: user.username, id: user.id, email: user.email, city: user.city };
+                return {
+                    ...token,
+                    username: user.username,
+                    id: user.id,
+                    email: user.email,
+                    city: user.city,
+                };
             }
             return token;
         },
@@ -76,7 +88,7 @@ export const authOptions: NextAuthOptions = {
                     username: token.username,
                     city: token.city,
                 },
-            }
+            };
         },
     },
 };
