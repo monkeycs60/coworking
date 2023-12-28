@@ -9,6 +9,7 @@ export async function POST(req: Request) {
         console.log(body);
 
         const { city, username, email, password } = userApiSchema.parse(body);
+        const role = 'USER';
 
         const existingUserByEmail = await prisma.user.findUnique({
             where: {
@@ -45,8 +46,11 @@ export async function POST(req: Request) {
                 username,
                 email,
                 password: hashedPassword,
+                role,
             },
         });
+
+        console.log(newUser);
 
         const { password: _, ...user } = newUser;
 

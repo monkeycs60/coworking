@@ -37,7 +37,7 @@ const SignInComponent = () => {
             });
         } else {
             console.log(signInData);
-            router.push('/admin');
+            router.push('/profile');
         }
     };
 

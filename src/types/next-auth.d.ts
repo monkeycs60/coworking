@@ -8,6 +8,7 @@ declare module 'next-auth' {
         username: string | null; 
         email: string | null;
         city: string | null;
+        role: USER | MODERATOR | ADMIN;
     }
 
     interface Session {
@@ -16,12 +17,14 @@ declare module 'next-auth' {
                 email: string;
                 username: string;
                 city: string;
+                role: USER | MODERATOR | ADMIN;
             };
             token: {
                 id: string;
                 email: string;
                 username: string;
                 city: string;
+                role: USER | MODERATOR | ADMIN;
             };
     }
 }

@@ -24,13 +24,13 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
             profile(profile) {
                 return {
-                    id: profile.id,
+                    id: profile.sub,
                     name: profile.name,
                     email: profile.email,
                     image: profile.picture,
                     username: profile.email, // Use email as username if Google profile does not include a username
                     city: null,
-                
+                    role: profile.role ?? 'user', // Default role when signing in with Google
                 };
             },
         }),
@@ -73,6 +73,7 @@ export const authOptions: NextAuthOptions = {
                     email: existingUser.email,
                     username: existingUser.username,
                     city: existingUser.city,
+                    role: existingUser.role,
                 };
             },
         }),
@@ -86,6 +87,7 @@ export const authOptions: NextAuthOptions = {
                     id: user.id,
                     email: user.email,
                     city: user.city,
+                    role: user.role,
                 };
             }
             return token;
@@ -98,6 +100,7 @@ export const authOptions: NextAuthOptions = {
                     email: token.email,
                     username: token.username,
                     city: token.city,
+                    role: token.role,
                 },
             };
         },
