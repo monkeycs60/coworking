@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn, signOut } from 'next-auth/react';
 import { SignInSchema, SignInData } from '@/schemas/userSchema';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import LoaderButton from '../ui/LoaderButton';
 import { useState } from 'react';
@@ -44,7 +44,9 @@ const SignInComponent = () => {
     const googleSignIn = async () => {
         try {
             setWaitingToSubmit(true);
-            await signIn('google', { callbackUrl: '/admin' });
+            await signIn('google', {
+                callbackUrl: '/profile/firstLoginInfos',
+            });
         } catch (error) {
             console.error(error);
             setWaitingToSubmit(false);

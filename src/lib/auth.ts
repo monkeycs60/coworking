@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
                     image: profile.picture,
                     username: profile.email, // Use email as username if Google profile does not include a username
                     city: null,
-                    role: profile.role ?? 'user', // Default role when signing in with Google
+                    role: (profile.role ?? 'USER').toUpperCase(), // Default role when signing in with Google
                 };
             },
         }),
