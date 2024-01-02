@@ -100,7 +100,7 @@ model Coworking {
   imagesSelected imageSelected[]
   userImages   UserImage[] 
   comments      Comment[]
-  espressoPrice   String? 
+  espressoPrice   Float? 
   facility FacilityType?
   hasPrivacy      Boolean @default(false)
   hasParking      Boolean @default(false)

@@ -45,7 +45,6 @@ const UserInfosMissing = () => {
                 throw new Error("Erreur lors de l'envoi des données");
             } else {
                 const { user } = await responseData.json();
-                console.log(user);
                 await update({
                     ...session,
                     user: {

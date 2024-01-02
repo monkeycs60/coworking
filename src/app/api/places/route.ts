@@ -2,15 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { v4 as uuidv4 } from 'uuid';
+import { authOptions } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
 import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
 
 export async function POST(req: NextRequest) {
-    // implémenter le middleware d'authentification avec NextAuth
+    
+    const session = await getServerSession(authOptions);
+    const userId = session?.user?.id;
 
-    // const authResponse = await authMiddleware(req);
-    // if (authResponse) return authResponse; // Return if there's any response from the middleware
-    // console.log('req.body', req.body);
-    // const { userId } = getAuth(req);
+    if (!userId) {
+        return NextResponse.json({ status: 401 });
+    }
 
     const placeData = (await req.json()) as AddPlaceSchemaType;
 
@@ -47,7 +50,7 @@ export async function POST(req: NextRequest) {
                 openingHours: {
                     create: formattedOpeningHours,
                 },
-                espressoPrice: placeData.espressoPrice,
+                espressoPrice: parseFloat(placeData.espressoPrice),
                 hasParking: placeData.hasParking,
                 hasPrivacy: placeData.hasPrivacy,
                 hasWiFi: placeData.hasWiFi,

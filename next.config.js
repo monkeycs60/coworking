@@ -32,6 +32,12 @@ const nextConfig = {
                 port: '',
                 pathname: '/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'coworking-malin-bucket.s3.eu-west-3.amazonaws.com', // Ajout du nouveau modèle distant ici
+                port: '',
+                pathname: '/**',
+            },
         ],
     },
 };

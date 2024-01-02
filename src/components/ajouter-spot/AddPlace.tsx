@@ -13,8 +13,12 @@ import Review from './form/wrapper/Review';
 import LoaderButton from '../ui/LoaderButton';
 import { useState } from 'react';
 import { useStep } from 'usehooks-ts';
+import { useAppDispatch } from '@/hooks/useRedux';
+import { resetPlaceDetails } from '@/redux/features/placeDetails-slice';
+import OtherCharacteristics from '../ajouter-lieu/formSteps/OtherCharacteristics';
 
 const AddPlace = () => {
+    const dispatch = useAppDispatch();
     const [waitingToSubmit, setWaitingToSubmit] = useState(false);
 
     const [currentStep, { goToNextStep, goToPrevStep, setStep }] = useStep(4);
@@ -35,6 +39,52 @@ const AddPlace = () => {
         resolver: zodResolver(AddPlaceSchema),
     });
 
+
+    const steps = [
+        {
+            id: 1,
+            name: 'Confirmez les informations sur le lieu',
+            subtitle: 'Nous avons pris soin de préremplir tous les champs... ou presque. Merci de bien vérifier que les informations sont exactes et de les corriger si nécessaire.',
+            fields: ['name', 'address', 'city', 'description']
+        },
+        {
+            id: 2,
+            name: 'Caractéristiques du lieu',
+            subtitle: 'Aidez-nous à mieux connaître le lieu et ses équipements'
+        },
+        {
+            id: 3,
+            name: 'Photos du lieu',
+            subtitle: 'Partagez des photos du lieu et des espaces propices au coworking'
+        },
+        {
+            id: 4,
+            name: "C'est l'heure de partager ton expérience sur ce lieu",
+            subtitle: 'Donne-nous des informations suite à ta première visite'
+        },
+        {
+            id: 5,
+            name: 'Une dernière chose : ton avis',
+            subtitle: 'Comme tu es le premier à ajouter ce lieu, partage ton avis sur celui-ci à la communauté !'
+        }
+    ];
+
+    const validateCurrentStep = async () => {
+        let isValid = false;
+
+        switch (currentStep) {
+            case 1:
+                // Valider les champs de la première étape
+                isValid = await formMethods.trigger(['name', 'address', 'city', 'description']);
+                break;
+            // Ajouter des cas pour les autres étapes si nécessaire
+            case 2:
+                isValid = await formMethods.trigger(['establishmentType', 'espressoPrice']);
+                break;
+        }
+        return isValid;
+    };
+
     return placeDetails ? (
         <FormProvider {...formMethods}>
             <form
@@ -49,18 +99,10 @@ const AddPlace = () => {
                         />
                     )}
                     {currentStep === 2 && (
-                        <ThingsToCheck errors={formMethods.formState.errors} />
+                        <OtherCharacteristics errors={formMethods.formState.errors} />
                     )}
                     {currentStep === 3 && (
-                        <ImagesForm
-                            handleFileChange={handleFileChange}
-                            imageUrls={imageUrls}
-                            setPhotoSelected={setPhotoSelected}
-                            photoSelected={photoSelected}
-                            photoUploaded={photoUploaded}
-                            removePhoto={removePhoto}
-                            uploadedImageUrls={uploadedImageUrls}
-                        />
+                        <ImagesForm />
                     )}
                     {currentStep === 4 && (
                         <>
@@ -75,16 +117,42 @@ const AddPlace = () => {
                             />
                         </>
                     )}
+
+                    {currentStep === 1 ? (
+                        <button onClick={() => {
+                            dispatch(resetPlaceDetails());
+                        }
+                        }>
+                            Retourner
+                        </button>
+                    ) : (
+                        <button onClick={
+                            goToPrevStep
+                        }>
+                            Précédent
+                        </button>
+
+                    )}
+
+
                     <button
                         type='button'
-                        onClick={goToPrevStep}
-                        disabled={currentStep === 1}
-                    >
-                        Précédent
-                    </button>
-                    <button
-                        type='button'
-                        onClick={goToNextStep}
+                        onClick={
+                            currentStep === 4
+                                ? () => {
+                                    const isValid = formMethods.formState.isValid;
+                                    if (isValid) {
+                                        setWaitingToSubmit(true);
+                                        formMethods.handleSubmit(onSubmit)();
+                                    }
+                                }
+                                : async () => {
+                                    const isValid = await validateCurrentStep();
+                                    if (isValid) {
+                                        goToNextStep();
+                                    }
+                                }
+                        }
                         disabled={currentStep === 4}
                     >
                         Suivant

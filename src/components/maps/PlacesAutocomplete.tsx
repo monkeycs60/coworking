@@ -9,8 +9,11 @@ const PlacesAutocomplete = () => {
 
     return (
         <div className='m-auto w-full'>
-            <ComboBox onSelect={(place) => console.log(place)} />
-            {placeDetails && <AddPlace />}
+            {placeDetails ? (
+                <AddPlace />
+            ) : (
+                <ComboBox onSelect={(place) => console.log(place)} />
+            )}
         </div>
     );
 };

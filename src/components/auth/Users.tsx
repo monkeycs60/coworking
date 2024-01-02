@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 
 async function Users() {
-    const { data: session, status, update } = useSession();
+    const { data: session } = useSession();
     console.log(session);
 
     return (

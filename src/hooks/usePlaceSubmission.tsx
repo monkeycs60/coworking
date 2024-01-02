@@ -37,6 +37,11 @@ export const usePlaceSubmission = ({
             return;
         }
 
+        // changer le champ de la bdd pour que seul le chiffre espresso soit envoyé à la bdd
+        if (data.espressoPrice) {
+            const expresso = parseFloat(data.espressoPrice);
+        }
+
         const finalData = {
             ...data,
             placeId: placeDetails.place_id,
@@ -46,6 +51,8 @@ export const usePlaceSubmission = ({
             userImages: uploadedImageUrls,
             // imagesSent: draggedImages,
         };
+
+
 
         try {
             const response = await sendPlaceDetails(finalData);

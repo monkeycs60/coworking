@@ -2,6 +2,7 @@ import { Providers } from '@/redux/provider';
 import AuthProvider from '@/components/auth/AuthProvider';
 import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
+import { EdgeStoreProvider } from '@/lib/edgestore';
 
 import NavBar from '../components/layout/NavBar';
 import Footer from '@/components/layout/Footer';
@@ -21,12 +22,14 @@ export default function RootLayout({
             <body className='m-auto flex max-w-[1200px] justify-center overflow-x-hidden font-inter 2xl:max-w-[1400px]'>
                 <AuthProvider>
                     <Providers>
-                        <div className='w-full'>
-                            <NavBar />
-                            {children}
-                            <Footer />
-                        </div>
-                        <Toaster />
+                        <EdgeStoreProvider>
+                            <div className='w-full'>
+                                <NavBar />
+                                {children}
+                                <Footer />
+                            </div>
+                            <Toaster />
+                        </EdgeStoreProvider>
                     </Providers>
                 </AuthProvider>
             </body>

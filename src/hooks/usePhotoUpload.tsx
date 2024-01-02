@@ -1,8 +1,16 @@
+"use client";
+
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import {
     setImageUrls,
     resetImageUrls,
+    setImageSelectedUrls,
+    addImageSelectedUrls,
+    removeImageSelectedUrls,
+    addImageSelectedUrlsBulk,
+    removeImageSelectedUrlsBulk
 } from '@/redux/features/placeDetails-slice';
 
 const usePhotoUpload = ({
@@ -29,7 +37,20 @@ const usePhotoUpload = ({
                     return `${baseUrlImage}maxwidth=400&photoreference=${photo.photo_reference}`;
                 });
 
+
+
+            //for each urls, assign an id, so that it create an object with an id and an url for each of the urls
+
+            const allUrls = urls.map((url, index) => {
+                return {
+                    id: Math.floor(Date.now() * (index + 1)),
+                    url: url,
+                };
+            });
+            console.log('allUrls :', allUrls);
+
             dispatch(setImageUrls(urls));
+            dispatch(addImageSelectedUrlsBulk(allUrls));
         }
     }, [placeDetails, dispatch, baseUrlImage]);
 
