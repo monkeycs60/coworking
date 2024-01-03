@@ -7,11 +7,21 @@ import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortabl
 import useGetGoogleImages from '@/hooks/useGetGoogleImages';
 import SortablePhoto from '../inputs/SortablePhoto';
 import useOnDragEnd from '@/hooks/useOnDragEnd';
+import { useFormContext } from 'react-hook-form';
+import { useEffect } from 'react';
 
 const ImagesForm = () => {
     const imagesSelected = useAppSelector((state) => state.placeDetails.imageSelectedUrls);
     const onDragEnd = useOnDragEnd();
     useGetGoogleImages();
+    const { setValue, trigger, watch } = useFormContext();
+
+    console.log(imagesSelected);
+    useEffect(() => {
+        setValue('imageSelectedUrls', imagesSelected);
+        trigger('imageSelectedUrls');
+    }, [imagesSelected, setValue, trigger]);
+
 
     return (
         <>

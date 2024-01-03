@@ -66,12 +66,13 @@ const AddPlace = () => {
 
         switch (currentStep) {
             case 1:
-                // Valider les champs de la première étape
                 isValid = await formMethods.trigger(['name', 'address', 'city', 'description']);
                 break;
-            // Ajouter des cas pour les autres étapes si nécessaire
             case 2:
                 isValid = await formMethods.trigger(['establishmentType', 'espressoPrice']);
+                break;
+            case 3:
+                isValid = await formMethods.trigger(['imageSelectedUrls']);
                 break;
         }
         return isValid;
@@ -100,7 +101,6 @@ const AddPlace = () => {
                         <>
                             <Review
                                 errors={formMethods.formState.errors}
-                                control={formMethods.control}
                             />
                             <LoaderButton
                                 buttonClassName='my-10 w-full lg:h-12 lg:w-[320px] lg:px-4'
@@ -130,33 +130,33 @@ const AddPlace = () => {
                     <button
                         type='button'
                         onClick={
-                            currentStep === 4
+                    currentStep === 4
                                 ? () => {
                                     const isValid = formMethods.formState.isValid;
-                                    if (isValid) {
-                                        setWaitingToSubmit(true);
-                                        formMethods.handleSubmit(onSubmit)();
+                    if (isValid) {
+                        setWaitingToSubmit(true);
+                    formMethods.handleSubmit(onSubmit)();
                                     }
                                 }
                                 : async () => {
                                     const isValid = await validateCurrentStep();
-                                    if (isValid) {
-                                        goToNextStep();
+                    if (isValid) {
+                        goToNextStep();
                                     }
                                 }
                         }
-                        disabled={currentStep === 4}
+                    disabled={currentStep === 4}
                     >
-                        Suivant
-                    </button>
-                </div>
+                    Suivant
+                </button>
+            </div>
 
-                <ToastContainer />
-            </form>
-        </FormProvider>
+            <ToastContainer />
+        </form>
+        </FormProvider >
     ) : (
-        <p>Loading...</p>
-    );
+    <p>Loading...</p>
+);
 };
 
 export default AddPlace;

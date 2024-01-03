@@ -1,7 +1,7 @@
 import RatingSystem from '@/components/ui/RatingSystem';
 import { RatingConfig } from '@/components/ui/RatingSystem';
 
-export const StarRatingCalmEquipFood = ({ control, errors }: any) => {
+export const StarRatingCalmEquipFood = ({ errors }: any) => {
     const ratingsConfig = [
         {
             label: 'Calme',
@@ -27,7 +27,6 @@ export const StarRatingCalmEquipFood = ({ control, errors }: any) => {
 
     return (
         <RatingSystem
-            control={control}
             errors={errors}
             ratingsConfig={ratingsConfig}
         />
