@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { useStep } from 'usehooks-ts';
 import { useAppDispatch } from '@/hooks/useRedux';
 import { resetPlaceDetails } from '@/redux/features/placeDetails-slice';
-import OtherCharacteristics from '../ajouter-lieu/formSteps/OtherCharacteristics';
+import OtherCharacteristics from './form/wrapper/OtherCharacteristics';
 
 const AddPlace = () => {
     const dispatch = useAppDispatch();

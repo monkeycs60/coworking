@@ -8,9 +8,7 @@ const OtherCharacteristics = ({ errors }: {
   errors: FieldErrors<AddPlaceSchemaType>;
 }) => {
   const { control, getValues, setValue, register, watch } = useFormContext<AddPlaceSchemaType>();
-  console.log('getValues :', getValues());
   console.log('watch :', watch());
-
 
   type EquipmentEnum = 'ACCESSIBLE' | 'PARKING' | 'TERRACE' | 'OUTLETS' | 'BOOTH';
   const equipmentOptions: { value: EquipmentEnum; label: string; }[] = [
@@ -20,7 +18,6 @@ const OtherCharacteristics = ({ errors }: {
     { value: 'OUTLETS', label: 'Prises' },
     { value: 'BOOTH', label: 'Isoloir' }, // Changed from 'VOTING_BOOTH' to 'BOOTH' to match the schema
   ];
-
 
   const handleEspressoPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -39,7 +36,6 @@ const OtherCharacteristics = ({ errors }: {
     }
   };
 
-
   const handleEquipmentClick = (equipment
     : EquipmentEnum
   ) => {
@@ -49,7 +45,6 @@ const OtherCharacteristics = ({ errors }: {
       : [...currentFacilities, equipment]
     );
   };
-
 
   return (
     <div className="space-y-4">
@@ -70,7 +65,6 @@ const OtherCharacteristics = ({ errors }: {
           )}
         />
         {errors.establishmentType && <span className="text-red-500">Ce champ est requis</span>}
-
 
         <input
           type="text"
