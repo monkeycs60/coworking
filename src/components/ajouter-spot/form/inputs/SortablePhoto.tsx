@@ -12,7 +12,6 @@ interface SortablePhotoProps {
     id: number;
 }
 
-
 const SortablePhoto = (props: SortablePhotoProps) => {
 
     const imagesSelected = useAppSelector((state) => state.placeDetails.imageSelectedUrls);

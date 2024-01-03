@@ -60,10 +60,11 @@ const StepTwoSchema = z.object({
 });
 
 const StepThreeSchema = z.object({
-    imagesSelected: z.array(z.string()).optional(),
-    userImages: z.any().optional(),
-    });
-
+    imageSelectedUrls: z.array(z.object({
+        url: z.string(),
+        coverImage: z.boolean(),
+    })),
+});
 
 export const AddPlaceSchema = StepOneSchema.merge(StepTwoSchema).merge(StepThreeSchema).merge(z.object({
     placeId: z.string().optional(),
