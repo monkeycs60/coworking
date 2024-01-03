@@ -62,9 +62,9 @@ export const placeDetailsSlice = createSlice({
             const newUrls = action.payload.filter((image) => !existingUrls.includes(image.url));
             state.imageSelectedUrls = [...state.imageSelectedUrls, ...newUrls];
         },
-        removeImageSelectedUrls: (state, action: PayloadAction<string>) => {
+        removeImageSelectedUrls: (state, action: PayloadAction<number>) => {
             state.imageSelectedUrls = state.imageSelectedUrls.filter(
-                (image) => image.url !== action.payload,
+                (image) => image.id !== action.payload,
             );
         },
         removeImageSelectedUrlsBulk: (state, action: PayloadAction<string[]>) => {

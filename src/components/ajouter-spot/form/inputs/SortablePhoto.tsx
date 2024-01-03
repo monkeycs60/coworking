@@ -31,24 +31,28 @@ const SortablePhoto = (props: SortablePhotoProps) => {
     };
 
     return (
-        <div ref={
-            setNodeRef
-        } style={style} {...attributes} {...listeners} className='bg-red-200'>
-            <div className='relative'>
-                <button
-                    className='absolute right-0 top-0 z-50 h-4 w-4 hover:scale-125'
-                    onClick={() => {
-                        console.log('clicked', props.imageUrl);
+        <div className='relative'>
+            <div ref={
+                setNodeRef
+            } style={style} {...attributes} {...listeners} className='bg-red-200'>
+                    <img src={props.imageUrl} alt="image" width={200} height={200} />
+            </div >
+            <button
+                className='absolute right-0 top-0 z-[5000] h-4 w-4 cursor-pointer hover:scale-125'
+                onClick={(e:
+                    React.MouseEvent<HTMLButtonElement, MouseEvent>
+                ) => {
+                    e.stopPropagation(); // This stops the click event from propagating to drag-and-drop listeners
+                    console.log('clicked', props.imageUrl);
 
-                        dispatch(removeImageSelectedUrls(props.imageUrl));
-                    }
-                    }
-                >
-                    <X />
-                </button>
-                <img src={props.imageUrl} alt="image" width={200} height={200} />
-            </div>
-        </div >
+                    dispatch(removeImageSelectedUrls(props.id));
+                }
+                }
+            >
+
+                <X />
+            </button>
+        </div>
     )
 }
 
