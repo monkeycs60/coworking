@@ -14,9 +14,8 @@ const ImagesForm = () => {
     const imagesSelected = useAppSelector((state) => state.placeDetails.imageSelectedUrls);
     const onDragEnd = useOnDragEnd();
     useGetGoogleImages();
-    const { setValue, trigger, watch } = useFormContext();
+    const { setValue, trigger } = useFormContext();
 
-    console.log(imagesSelected);
     useEffect(() => {
         setValue('imageSelectedUrls', imagesSelected);
         trigger('imageSelectedUrls');

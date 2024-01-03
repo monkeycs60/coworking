@@ -74,6 +74,9 @@ const AddPlace = () => {
             case 3:
                 isValid = await formMethods.trigger(['imageSelectedUrls']);
                 break;
+            case 4:
+                isValid = await formMethods.trigger(['reviewContent', 'calmRating', 'feelingRating', 'equipRating', 'foodRating']);
+                break;
         }
         return isValid;
     };
