@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { usePlaceSubmission } from '@/hooks/usePlaceSubmission';
 import PrecompletedForm from './form/wrapper/PrecompletedForm';
-import ThingsToCheck from './form/wrapper/ThingsToCheck';
 import ImagesForm from './form/wrapper/ImagesForm';
 import Review from './form/wrapper/Review';
 import LoaderButton from '../ui/LoaderButton';
@@ -24,15 +23,8 @@ const AddPlace = () => {
     const [currentStep, { goToNextStep, goToPrevStep, setStep }] = useStep(4);
 
     const {
-        handleFileChange,
         onSubmit,
-        setPhotoSelected,
-        removePhoto,
-        imageUrls,
-        photoSelected,
-        photoUploaded,
         placeDetails,
-        uploadedImageUrls,
     } = usePlaceSubmission({ setWaitingToSubmit });
 
     const formMethods = useForm<AddPlaceSchemaType>({

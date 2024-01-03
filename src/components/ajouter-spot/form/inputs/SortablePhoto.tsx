@@ -30,7 +30,6 @@ const SortablePhoto = (props: SortablePhotoProps) => {
         transition,
     };
 
-    // if indexof image selected is 0, create a special border around it
     if (props.imageUrl === imagesSelected[0].url) {
         return (
             <div className='relative'>
@@ -43,8 +42,6 @@ const SortablePhoto = (props: SortablePhotoProps) => {
                         React.MouseEvent<HTMLButtonElement, MouseEvent>
                     ) => {
                         e.stopPropagation(); // This stops the click event from propagating to drag-and-drop listeners
-                        console.log('clicked', props.imageUrl);
-
                         dispatch(removeImageSelectedUrls(props.id));
                     }
                     }
@@ -73,7 +70,6 @@ const SortablePhoto = (props: SortablePhotoProps) => {
                 }
                 }
             >
-
                 <X />
             </button>
         </div>

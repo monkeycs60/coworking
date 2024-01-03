@@ -6,7 +6,6 @@ import { sendPlaceDetails } from '@/services/sendPlaceDetails';
 import { AddPlaceSchemaType } from '@/types/addPlace';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
-import usePhotoUpload from './usePhotoUpload';
 
 export const usePlaceSubmission = ({
     setWaitingToSubmit,
@@ -16,16 +15,7 @@ export const usePlaceSubmission = ({
     const dispatch = useAppDispatch();
     const router = useRouter();
     const placeDetails = useAppSelector((state) => state.placeDetails.details);
-    const imageUrls = useAppSelector((state) => state.placeDetails.imageUrls);
-
-    const {
-        handleFileChange,
-        photoUploaded,
-        uploadedImageUrls,
-        removePhoto,
-        photoSelected,
-        setPhotoSelected,
-    } = usePhotoUpload({ setWaitingToSubmit });
+    const imagesSelectedUrls = useAppSelector((state) => state.placeDetails.imageSelectedUrls);
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
         console.log('onSubmit est déclenché avec les données :', data);
@@ -42,17 +32,28 @@ export const usePlaceSubmission = ({
             const expresso = parseFloat(data.espressoPrice);
         }
 
+        // remove the id of every image selected urls and add a coverImage property to the first image
+        const uploadedImageUrls = imagesSelectedUrls.map((image, index) => {
+            if (index === 0) {
+                return {
+                    url: image.url,
+                    coverImage: true,
+                };
+            } else {
+                return {
+                    url: image.url,
+                    coverImage: false,
+                };
+            }
+        });
+
         const finalData = {
             ...data,
+            uploadedImageUrls: uploadedImageUrls,
             placeId: placeDetails.place_id,
             longitude: placeDetails.geometry?.location.lng,
             latitude: placeDetails.geometry?.location.lat,
-            imagesSelected: photoSelected,
-            userImages: uploadedImageUrls,
-            // imagesSent: draggedImages,
         };
-
-
 
         try {
             const response = await sendPlaceDetails(finalData);
@@ -86,13 +87,6 @@ export const usePlaceSubmission = ({
 
     return {
         onSubmit,
-        handleFileChange,
-        setPhotoSelected,
-        removePhoto,
-        photoSelected,
-        uploadedImageUrls,
-        photoUploaded,
-        imageUrls,
         placeDetails,
     };
 };

@@ -45,15 +45,6 @@ export const placeDetailsSlice = createSlice({
         resetPlaceDetails: (state) => {
             state.details = null;
         },
-        setImageUrls: (state, action: PayloadAction<string[]>) => {
-            state.imageUrls = action.payload;
-        },
-        resetImageUrls: (state) => {
-            state.imageUrls = [];
-        },
-        setImageSelectedUrls: (state, action: PayloadAction<ImageSelectedUrl[]>) => {
-            state.imageSelectedUrls = action.payload;
-        },
         addImageSelectedUrls: (state, action: PayloadAction<ImageSelectedUrl>) => {
             state.imageSelectedUrls.push(action.payload);
         },
@@ -65,12 +56,6 @@ export const placeDetailsSlice = createSlice({
         removeImageSelectedUrls: (state, action: PayloadAction<number>) => {
             state.imageSelectedUrls = state.imageSelectedUrls.filter(
                 (image) => image.id !== action.payload,
-            );
-        },
-        removeImageSelectedUrlsBulk: (state, action: PayloadAction<string[]>) => {
-            const idsToRemove = new Set(action.payload);
-            state.imageSelectedUrls = state.imageSelectedUrls.filter(
-                (image) => !idsToRemove.has(image.url),
             );
         },
         moveImageSelectedUrls: (state, action: PayloadAction<{ from: number; to: number }>) => {
@@ -109,13 +94,9 @@ export const placeDetailsSlice = createSlice({
 export const {
     setPlaceDetails,
     resetPlaceDetails,
-    setImageUrls,
-    resetImageUrls,
-    setImageSelectedUrls,
     addImageSelectedUrls,
     removeImageSelectedUrls,
     addImageSelectedUrlsBulk,
-    removeImageSelectedUrlsBulk,
     moveImageSelectedUrls,
     resetAllDetails,
     setReviewContent,

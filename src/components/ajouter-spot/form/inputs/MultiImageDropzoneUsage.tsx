@@ -6,15 +6,12 @@ import {
 } from '@/components/ui/MultiImageDropzone';
 import { useEdgeStore } from '@/lib/edgestore';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import { setImageUrls, addImageSelectedUrls } from '@/redux/features/placeDetails-slice';
-import { v4 as uuidv4 } from 'uuid';
+import { useAppDispatch } from '@/hooks/useRedux';
+import { addImageSelectedUrls } from '@/redux/features/placeDetails-slice';
 
 
 export function MultiImageDropzoneUsage() {
     const dispatch = useAppDispatch();
-    const imageSelectedUrls = useAppSelector((state) => state.placeDetails.imageSelectedUrls);
-    console.log(imageSelectedUrls);
 
     const [fileStates, setFileStates] = useState<FileState[]>([]);
     const { edgestore } = useEdgeStore();
