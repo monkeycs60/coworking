@@ -15,12 +15,13 @@ import { useStep } from 'usehooks-ts';
 import { useAppDispatch } from '@/hooks/useRedux';
 import { resetPlaceDetails } from '@/redux/features/placeDetails-slice';
 import OtherCharacteristics from './form/wrapper/OtherCharacteristics';
+import CoworkExperience from './form/wrapper/CoworkExperience';
 
 const AddPlace = () => {
     const dispatch = useAppDispatch();
     const [waitingToSubmit, setWaitingToSubmit] = useState(false);
 
-    const [currentStep, { goToNextStep, goToPrevStep, setStep }] = useStep(4);
+    const [currentStep, { goToNextStep, goToPrevStep, setStep }] = useStep(5);
 
     const {
         onSubmit,
@@ -75,6 +76,9 @@ const AddPlace = () => {
                 isValid = await formMethods.trigger(['imageSelectedUrls']);
                 break;
             case 4:
+                isValid = await formMethods.trigger(['musicLevel', 'workComfort', 'internetQuality', 'workspaceComposition', 'hasToCall', 'drinksAndFood']);
+                break;
+            case 5:
                 isValid = await formMethods.trigger(['reviewContent', 'calmRating', 'feelingRating', 'equipRating', 'foodRating']);
                 break;
         }
@@ -101,6 +105,10 @@ const AddPlace = () => {
                         <ImagesForm />
                     )}
                     {currentStep === 4 && (
+                        <CoworkExperience errors={formMethods.formState.errors} />
+                    )
+                    }
+                    {currentStep === 5 && (
                         <>
                             <Review
                                 errors={formMethods.formState.errors}
@@ -133,33 +141,33 @@ const AddPlace = () => {
                     <button
                         type='button'
                         onClick={
-                    currentStep === 4
+                            currentStep === 5
                                 ? () => {
                                     const isValid = formMethods.formState.isValid;
-                    if (isValid) {
-                        setWaitingToSubmit(true);
-                    formMethods.handleSubmit(onSubmit)();
+                                    if (isValid) {
+                                        setWaitingToSubmit(true);
+                                        formMethods.handleSubmit(onSubmit)();
                                     }
                                 }
                                 : async () => {
                                     const isValid = await validateCurrentStep();
-                    if (isValid) {
-                        goToNextStep();
+                                    if (isValid) {
+                                        goToNextStep();
                                     }
                                 }
                         }
-                    disabled={currentStep === 4}
+                        disabled={currentStep === 5}
                     >
-                    Suivant
-                </button>
-            </div>
+                        Suivant
+                    </button>
+                </div>
 
-            <ToastContainer />
-        </form>
+                <ToastContainer />
+            </form>
         </FormProvider >
     ) : (
-    <p>Loading...</p>
-);
+        <p>Loading...</p>
+    );
 };
 
 export default AddPlace;

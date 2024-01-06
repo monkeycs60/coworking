@@ -37,15 +37,11 @@ const SortablePhoto = (props: SortablePhotoProps) => {
                 </div >
                 <button
                     className='absolute right-0 top-0 z-[5000] h-4 w-4 cursor-pointer hover:scale-125'
-                    onClick={(e:
-                        React.MouseEvent<HTMLButtonElement, MouseEvent>
-                    ) => {
-                        e.stopPropagation(); // This stops the click event from propagating to drag-and-drop listeners
+                    onClick={() => {
                         dispatch(removeImageSelectedUrls(props.id));
                     }
                     }
                 >
-
                     <X />
                 </button>
             </div>
@@ -59,12 +55,7 @@ const SortablePhoto = (props: SortablePhotoProps) => {
             </div >
             <button
                 className='absolute right-0 top-0 z-[5000] h-4 w-4 cursor-pointer hover:scale-125'
-                onClick={(e:
-                    React.MouseEvent<HTMLButtonElement, MouseEvent>
-                ) => {
-                    e.stopPropagation(); // This stops the click event from propagating to drag-and-drop listeners
-                    console.log('clicked', props.imageUrl);
-
+                onClick={() => {
                     dispatch(removeImageSelectedUrls(props.id));
                 }
                 }

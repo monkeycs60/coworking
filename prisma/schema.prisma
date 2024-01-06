@@ -83,6 +83,12 @@ model Coworking {
   openingHours     OpeningHour[]
   imageSelectedUrls   imageSelectedUrls[]
   userImages       UserImage[] 
+  musicLevel       MusicLevel[]
+  internetQuality  InternetQuality[]
+  workComforts          WorkComfort[]
+  workspaceCompositions WorkspaceComposition[]
+  hasToCalls            HasToCall[]
+  drinksAndFoods        DrinksAndFood[]
   comments         Comment[]
   espressoPrice    Float? 
   establishmentType EstablishmentType?
@@ -129,6 +135,43 @@ enum FacilityType {
   TERRACE
   OUTLETS
   BOOTH
+}
+
+enum MusicLevel {
+  NoMusic
+  DiscreteMusic
+  RandomMusic
+  LoudMusic
+}
+
+enum InternetQuality {
+  HighWifi
+  MediumWifi
+  LowWifi
+  NoWifi
+}
+
+enum WorkComfort {
+  SoloDesk
+  SmallGroupDesk
+  LargeGroupDesk
+}
+
+enum WorkspaceComposition {
+  PrivateBooths
+  LargeTables
+}
+
+enum HasToCall {
+  CallFriendly
+  CallImpossible
+}
+
+enum DrinksAndFood {
+  Snacks
+  Meals
+  SoftDrinks
+  AlcoholicDrinks
 }
 
 model Comment {
@@ -189,15 +232,3 @@ enum Role {
 }
 
 
-enum WifiQualityType {
-  HIGH_WIFI
-  MEDIUM_WIFI
-  LOW_WIFI
-}
-
-enum MusicType {
-  NO_MUSIC
-  DISCRETE_MUSIC
-  RANDOM_MUSIC
-  LOUD_MUSIC
-}

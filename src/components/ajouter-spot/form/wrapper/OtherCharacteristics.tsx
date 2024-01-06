@@ -41,7 +41,7 @@ const OtherCharacteristics = ({ errors }: {
   ) => {
     const currentFacilities = getValues('facilities') || [];
     setValue('facilities', currentFacilities.includes(equipment)
-      ? currentFacilities.filter((e) => e !== equipment)
+      ? currentFacilities.filter((e: string) => e !== equipment)
       : [...currentFacilities, equipment]
     );
   };
