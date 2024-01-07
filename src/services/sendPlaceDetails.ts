@@ -1,6 +1,6 @@
-import { AddPlaceSchemaType } from '@/types/addPlace';
+import { ExtendedAddPlaceSchemaType } from '@/types/addPlace';
 
-export const sendPlaceDetails = async (data: AddPlaceSchemaType) => {
+export const sendPlaceDetails = async (data: ExtendedAddPlaceSchemaType) => {
     // Posting data to our API route
     const response = await fetch('/api/places', {
         method: 'POST',

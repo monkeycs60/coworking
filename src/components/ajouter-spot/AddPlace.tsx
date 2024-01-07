@@ -23,63 +23,90 @@ const AddPlace = () => {
 
     const [currentStep, { goToNextStep, goToPrevStep, setStep }] = useStep(5);
 
-    const {
-        onSubmit,
-        placeDetails,
-    } = usePlaceSubmission({ setWaitingToSubmit });
+    const { onSubmit, placeDetails } = usePlaceSubmission({
+        setWaitingToSubmit,
+    });
 
     const formMethods = useForm<AddPlaceSchemaType>({
         resolver: zodResolver(AddPlaceSchema),
     });
 
 
+
     const steps = [
         {
             id: 1,
             name: 'Confirmez les informations sur le lieu',
-            subtitle: 'Nous avons pris soin de préremplir tous les champs... ou presque. Merci de bien vérifier que les informations sont exactes et de les corriger si nécessaire.',
-            fields: ['name', 'address', 'city', 'description']
+            subtitle:
+                'Nous avons pris soin de préremplir tous les champs... ou presque. Merci de bien vérifier que les informations sont exactes et de les corriger si nécessaire.',
+            fields: ['name', 'address', 'city', 'description'],
         },
         {
             id: 2,
             name: 'Caractéristiques du lieu',
-            subtitle: 'Aidez-nous à mieux connaître le lieu et ses équipements'
+            subtitle: 'Aidez-nous à mieux connaître le lieu et ses équipements',
         },
         {
             id: 3,
             name: 'Photos du lieu',
-            subtitle: 'Partagez des photos du lieu et des espaces propices au coworking'
+            subtitle:
+                'Partagez des photos du lieu et des espaces propices au coworking',
         },
         {
             id: 4,
             name: "C'est l'heure de partager ton expérience sur ce lieu",
-            subtitle: 'Donne-nous des informations suite à ta première visite'
+            subtitle: 'Donne-nous des informations suite à ta première visite',
         },
         {
             id: 5,
             name: 'Une dernière chose : ton avis',
-            subtitle: 'Comme tu es le premier à ajouter ce lieu, partage ton avis sur celui-ci à la communauté !'
-        }
+            subtitle:
+                'Comme tu es le premier à ajouter ce lieu, partage ton avis sur celui-ci à la communauté !',
+        },
     ];
 
     const validateCurrentStep = async () => {
         let isValid = false;
 
+        console.log(currentStep);
+        
+
         switch (currentStep) {
             case 1:
-                isValid = await formMethods.trigger(['name', 'address', 'city', 'description']);
+                isValid = await formMethods.trigger([
+                    'name',
+                    'address',
+                    'city',
+                    'description',
+                ]);
                 break;
             case 2:
-                isValid = await formMethods.trigger(['establishmentType', 'espressoPrice']);
+                isValid = await formMethods.trigger([
+                    'establishmentType',
+                    'espressoPrice',
+                ]);
                 break;
             case 3:
                 isValid = await formMethods.trigger(['imageSelectedUrls']);
                 break;
             case 4:
-                isValid = await formMethods.trigger(['musicLevel', 'workComfort', 'internetQuality', 'workspaceComposition', 'hasToCall', 'drinksAndFood']);
+                isValid = await formMethods.trigger([
+                    'musicLevel',
+                    'workComfort',
+                    'internetQuality',
+                    'workspaceComposition',
+                    'hasToCall',
+                    'drinksAndFood',
+                ]);
                 break;
             case 5:
-                isValid = await formMethods.trigger(['reviewContent', 'calmRating', 'feelingRating', 'equipRating', 'foodRating']);
+                isValid = await formMethods.trigger([
+                    'reviewContent',
+                    'calmRating',
+                    'feelingRating',
+                    'equipRating',
+                    'foodRating',
+                ]);
                 break;
         }
         return isValid;
@@ -99,62 +126,93 @@ const AddPlace = () => {
                         />
                     )}
                     {currentStep === 2 && (
-                        <OtherCharacteristics errors={formMethods.formState.errors} />
+                        <OtherCharacteristics
+                            errors={formMethods.formState.errors}
+                        />
                     )}
-                    {currentStep === 3 && (
-                        <ImagesForm />
-                    )}
+                    {currentStep === 3 && <ImagesForm />}
                     {currentStep === 4 && (
-                        <CoworkExperience errors={formMethods.formState.errors} />
-                    )
-                    }
+                        <CoworkExperience
+                            errors={formMethods.formState.errors}
+                        />
+                    )}
                     {currentStep === 5 && (
                         <>
-                            <Review
-                                errors={formMethods.formState.errors}
-                            />
-                            <LoaderButton
+                            <Review errors={formMethods.formState.errors} />
+                            <button
+                                type='submit'
+                                className='my-10 w-full lg:h-12 lg:w-[320px] lg:px-4'
+                                onClick={
+                                    currentStep === 5
+                                        ? async () => {
+                                              console.log("c'est done");
+                                              const isValid =
+                                                  await validateCurrentStep();
+                                              console.log(isValid);
+                                              const isAllValid =
+                                                  formMethods.formState.isValid;
+                                              console.log(isAllValid);
+                                              console.log(
+                                                  formMethods.formState,
+                                              );
+                                              if (isValid) {
+                                                  setWaitingToSubmit(true);
+                                                  formMethods.handleSubmit(
+                                                      onSubmit,
+                                                  );
+                                              }
+                                          }
+                                        : async () => {
+                                              const isValid =
+                                                  await validateCurrentStep();
+                                              if (isValid) {
+                                                  goToNextStep();
+                                              }
+                                          }
+                                }
+                            >
+                                Ajouter ce cowork
+                            </button>
+                            {/* <LoaderButton
                                 buttonClassName='my-10 w-full lg:h-12 lg:w-[320px] lg:px-4'
                                 waitingToSubmit={waitingToSubmit}
                                 buttonMessage='Ajouter ce cowork'
-                            />
+                            /> */}
                         </>
                     )}
 
                     {currentStep === 1 ? (
-                        <button onClick={() => {
-                            dispatch(resetPlaceDetails());
-                        }
-                        }>
+                        <button
+                            onClick={() => {
+                                dispatch(resetPlaceDetails());
+                            }}
+                        >
                             Retourner
                         </button>
                     ) : (
-                        <button onClick={
-                            goToPrevStep
-                        }>
-                            Précédent
-                        </button>
-
+                        <button onClick={goToPrevStep}>Précédent</button>
                     )}
-
 
                     <button
                         type='button'
                         onClick={
                             currentStep === 5
                                 ? () => {
-                                    const isValid = formMethods.formState.isValid;
-                                    if (isValid) {
-                                        setWaitingToSubmit(true);
-                                        formMethods.handleSubmit(onSubmit)();
-                                    }
-                                }
+                                      console.log("c'est done");
+                                      const isValid =
+                                          formMethods.formState.isValid;
+                                      if (isValid) {
+                                          setWaitingToSubmit(true);
+                                          formMethods.handleSubmit(onSubmit)();
+                                      }
+                                  }
                                 : async () => {
-                                    const isValid = await validateCurrentStep();
-                                    if (isValid) {
-                                        goToNextStep();
-                                    }
-                                }
+                                      const isValid =
+                                          await validateCurrentStep();
+                                      if (isValid) {
+                                          goToNextStep();
+                                      }
+                                  }
                         }
                         disabled={currentStep === 5}
                     >
@@ -164,7 +222,7 @@ const AddPlace = () => {
 
                 <ToastContainer />
             </form>
-        </FormProvider >
+        </FormProvider>
     ) : (
         <p>Loading...</p>
     );

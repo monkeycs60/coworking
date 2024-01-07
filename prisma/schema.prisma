@@ -85,12 +85,12 @@ model Coworking {
   userImages       UserImage[] 
   musicLevel       MusicLevel[]
   internetQuality  InternetQuality[]
-  workComforts          WorkComfort[]
-  workspaceCompositions WorkspaceComposition[]
-  hasToCalls            HasToCall[]
-  drinksAndFoods        DrinksAndFood[]
+  workComfort          WorkComfort[]
+  workspaceComposition WorkspaceComposition[]
+  hasToCall            HasToCall[]
+  drinksAndFood        DrinksAndFood[]
   comments         Comment[]
-  espressoPrice    Float? 
+  espressoPrice    String? 
   establishmentType EstablishmentType?
   facilities       FacilityType[] // Assuming many-to-many relation
   reviews          Review[]

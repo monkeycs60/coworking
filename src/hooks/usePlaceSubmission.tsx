@@ -15,21 +15,28 @@ export const usePlaceSubmission = ({
     const dispatch = useAppDispatch();
     const router = useRouter();
     const placeDetails = useAppSelector((state) => state.placeDetails.details);
-    const imagesSelectedUrls = useAppSelector((state) => state.placeDetails.imageSelectedUrls);
+    const imagesSelectedUrls = useAppSelector(
+        (state) => state.placeDetails.imageSelectedUrls,
+    );
 
     const onSubmit = async (data: AddPlaceSchemaType) => {
         console.log('onSubmit est déclenché avec les données :', data);
+
+        if (
+            !placeDetails?.place_id ||
+            !placeDetails?.geometry?.location.lng ||
+            !placeDetails?.geometry?.location.lat
+        ) {
+            alert('PlaceId is missing!');
+            setWaitingToSubmit(false);
+            return;
+        }
 
         setWaitingToSubmit(true);
         if (!placeDetails?.place_id) {
             alert('PlaceId is missing!');
             setWaitingToSubmit(false);
             return;
-        }
-
-        // changer le champ de la bdd pour que seul le chiffre espresso soit envoyé à la bdd
-        if (data.espressoPrice) {
-            const expresso = parseFloat(data.espressoPrice);
         }
 
         // remove the id of every image selected urls and add a coverImage property to the first image
@@ -73,12 +80,12 @@ export const usePlaceSubmission = ({
                 );
             } else {
                 setWaitingToSubmit(false);
-                const city = finalData.city;
-                const coworkingName = encodeURIComponent(finalData.name);
-                const coworkingId = response.data.id;
-                const coworkURL = `/explore/${city}/${coworkingName}?coworkingId=${coworkingId}`;
+                // const city = finalData.city;
+                // const coworkingName = encodeURIComponent(finalData.name);
+                // const coworkingId = response.data.id;
+                // const coworkURL = `/explore/${city}/${coworkingName}?coworkingId=${coworkingId}`;
                 dispatch(resetAllDetails());
-                router.push(coworkURL);
+                router.push('/');
             }
         } catch (error) {
             console.error(error);

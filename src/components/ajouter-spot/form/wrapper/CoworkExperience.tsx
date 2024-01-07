@@ -2,14 +2,11 @@ import { AddPlaceSchemaType } from '@/types/addPlace';
 import { Phone } from 'lucide-react';
 import { FieldErrors, useFormContext, Controller } from 'react-hook-form';
 import MultipleChoice from '../inputs/MultipleChoice';
-import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import { setMusicLevel, setInternetQuality, setDrinksAndFood, setHasToCall, setWorkspaceComposition, setWorkComfort } from '@/redux/features/placeDetails-slice';
-import { Experience } from '@/redux/features/placeDetails-slice';
 
 const CoworkExperience = ({ errors }: {
     errors: FieldErrors<AddPlaceSchemaType>;
 }) => {
-    const { control, getValues, setValue, register, watch } = useFormContext<AddPlaceSchemaType>();
+    const { control, watch } = useFormContext<AddPlaceSchemaType>();
     console.log('errors', watch());
     const musicOptions = [
         { label: 'Pas de musique', value: 'NoMusic', svg: <Phone /> },

@@ -86,10 +86,12 @@ const StepFiveSchema = z.object({
   feelingRating: z.number().min(1).max(5),
 });
 
-export const AddPlaceSchema = StepOneSchema.merge(StepTwoSchema).merge(StepThreeSchema).merge(StepFourSchema).merge(StepFiveSchema).merge(z.object({
-  placeId: z.string().optional(),
-  longitude: z.number().optional(),
-  latitude: z.number().optional(),
-}));
+export const AddPlaceSchema = StepOneSchema.merge(StepTwoSchema).merge(StepThreeSchema).merge(StepFourSchema).merge(StepFiveSchema);
 
 export type AddPlaceSchemaType = z.infer<typeof AddPlaceSchema>;
+
+export type ExtendedAddPlaceSchemaType = AddPlaceSchemaType & {
+    placeId: string;
+    longitude: number;
+    latitude: number;
+};

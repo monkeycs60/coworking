@@ -21,7 +21,6 @@ interface MultipleChoiceButtonProps {
 const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceButtonProps) => {
     const dispatch = useAppDispatch();
     const experience = useAppSelector(state => state.placeDetails.experience);
-    console.log('experience', experience);
 
     const { control, setValue } = useFormContext<AddPlaceSchemaType>();
 
