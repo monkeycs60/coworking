@@ -10,12 +10,12 @@ export default function Home() {
     return (
         <>
             <Hero />
-            <HighlightedCoworkings />
+            {/* <HighlightedCoworkings />
             <Assets />
             <HowTo />
             <HighlightedCities />
             <Faq />
-            <Contact />
+            <Contact /> */}
         </>
     );
 }

@@ -7,13 +7,15 @@ import { getServerSession } from 'next-auth';
 
 export async function POST(req: NextRequest) {
     const session = await getServerSession(authOptions);
+    console.log('session', session)
     const userId = session?.user?.id;
 
-    if (!userId) {
-        return NextResponse.json({ status: 401 });
-    }
+    // if (!userId) {
+    //     return NextResponse.json({ status: 401 });
+    // }
 
     const placeData = (await req.json()) as ExtendedAddPlaceSchemaType;
+    console.log('placeData', placeData);
 
     const formattedOpeningHours = placeData.openingHours
         ? placeData.openingHours.map((hour) => ({
