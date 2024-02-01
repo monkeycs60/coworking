@@ -7,7 +7,7 @@ interface SuccessProps {
 
 const Success = ({ children }: SuccessProps) => {
     return (
-        <div className='mx-auto my-[100px] flex h-[500px] w-1/2 flex-col items-center justify-center gap-16 rounded-xl bg-gray-200 font-inter'>
+        <div className='mx-auto my-[100px] flex h-[500px] w-1/2 flex-col items-center justify-center gap-16 rounded-xl bg-gray-200'>
             <h1 className='text-2xl font-semibold'>FELICITATIONS !</h1>
             <div className='flex gap-1'>
                 {children}

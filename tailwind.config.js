@@ -13,12 +13,11 @@ module.exports = {
             padding: '2rem',
             screens: {
                 '2xl': '1400px',
+                '3xl': '1920px',
             },
         },
         fontFamily: {
-            inter: ['Inter', 'sans-serif'],
-            telma: ['Telma', 'cursive'],
-            signatra: ['Signatra', 'cursive'],
+            general: ['GeneralSansVariable', 'sans-serif'],
         },
         extend: {
             colors: {
@@ -28,10 +27,7 @@ module.exports = {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 primary: '#7000FF',
-                secondary: {
-                    DEFAULT: '#FFC107',
-                    foreground: 'hsl(var(--secondary-foreground))',
-                },
+                secondary: '#FFFFFF',
                 defaultWhite: {
                     DEFAULT: '#F0EFF4',
                 },

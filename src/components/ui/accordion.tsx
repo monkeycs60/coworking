@@ -75,7 +75,7 @@ const AccordionTrigger: FunctionComponent<AccordionTriggerProps> = ({
 	isActive,
 }) => {
 	return (
-		<div className='flex cursor-pointer items-center justify-between gap-8 font-inter'>
+		<div className='flex cursor-pointer items-center justify-between gap-8'>
 			<p className='text-lg font-semibold'>{children}</p>
 			{isActive ? (
 				<Image src='/minus.svg' alt='minus' width={24} height={24} />

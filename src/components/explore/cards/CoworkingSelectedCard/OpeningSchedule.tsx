@@ -26,7 +26,7 @@ const OpeningSchedule = ({ coworking }: { coworking: Coworking }) => {
             : new Array(7).fill({ openTime: "Pas d'info", closeTime: '' });
 
     return (
-        <div className='my-8 flex w-[320px] flex-col justify-center gap-4 font-inter lg:w-[400px]'>
+        <div className='my-8 flex w-[320px] flex-col justify-center gap-4  lg:w-[400px]'>
             <div className='flex w-full justify-between bg-slate-100 p-4'>
                 <p>Statut</p>
                 <div className='flex gap-2'>
