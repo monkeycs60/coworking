@@ -50,17 +50,17 @@ function NavBar() {
                     </Link>
                     <ul className='hidden items-center justify-center gap-12 font-semibold lg:flex 2xl:pl-4 2xl:text-base 3xl:pl-4'>
                         <li className='linkHoverEffect'>
-                            <Link href={'/ajouter-lieu'} className='3xl:text-lg'>Ajouter un nouveau lieu</Link>
+                            <Link href={'/ajouter-lieu'} className='text-sm 3xl:text-base'>Ajouter un nouveau lieu</Link>
                         </li>
                         <li className=''>
                             {status === 'authenticated' ? (
-                                <Button variant={scrollPosition > 50 ? 'secondary' : 'default'} className='px-8 py-5 3xl:px-12 3xl:py-6 3xl:text-lg'>
+                                <Button variant={scrollPosition > 50 ? 'secondary' : 'default'} className='px-6 py-3 text-sm 3xl:px-8 3xl:py-5 3xl:text-base'>
                                     <Link href='/profile'>
                                         Profil
                                     </Link>
                                 </Button>
                             ) : (
-                                <Button variant={scrollPosition > 50 ? 'secondary' : 'default'} className='px-8 py-5 3xl:px-12 3xl:py-6 3xl:text-lg'>
+                                <Button variant={scrollPosition > 50 ? 'secondary' : 'default'} className='px-6 py-3 text-sm 3xl:px-8 3xl:py-5 3xl:text-base'>
                                     <Link href='/sign-in'>
                                         Connexion
                                     </Link>

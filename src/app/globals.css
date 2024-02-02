@@ -21,9 +21,22 @@ hmtl {
     background-size: cover;
 }
 
+
 @media (max-width: 768px) {
     .hero-bg {
         background-image: url('/images/hero-background-mobile.png');
+    }
+}
+
+.feature-bg {
+    background-image: url('/images/feature-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media  (max-width: 768px) {
+    .feature-bg {
+        background-image: url('/images/feature-background-mobile.png');
     }
 }
 

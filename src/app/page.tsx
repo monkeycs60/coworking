@@ -6,12 +6,14 @@ import HighlightedCities from '@/components/home/sections/HighlightedCities';
 import Faq from '@/components/home/sections/Faq';
 import Contact from '@/components/home/sections/Contact';
 import LastCoworkings from '@/components/home/sections/LastCoworkings';
+import Features from '@/components/home/sections/Features';
 
 export default function Home() {
     return (
         <>
             <Hero />
             <LastCoworkings />
+            <Features />
             <div className='h-[200vh] '>
                 <h1>hello les gens</h1>
             </div>
