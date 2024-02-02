@@ -14,11 +14,11 @@ const LastCoworkingCard = (
         <div className="rounded-2xl bg-secondary">
             <Image src={coworking.imageSelectedUrls[0].url} alt={coworking.name} width={400} height={300} className="h-[300px] w-full rounded-t-2xl object-cover" />
             <div className="flex justify-between gap-2 p-4">
-                <div className="flex w-2/3 flex-col justify-between">
+                <div className="flex w-2/3 flex-col justify-between 3xl:w-3/4">
                     <h3 className="line-clamp-1 font-bold">{coworking.name}</h3>
                     <p> {coworking.city} </p>
                 </div>
-                <div className="flex w-1/3 flex-col justify-between">
+                <div className="flex w-1/3 flex-col justify-between 3xl:w-1/4">
                     <div className="flex items-center gap-2">
                         <Image src="/images/plain-star.svg" alt="euro" width={20} height={20} />
                         <p className="font-bold">
