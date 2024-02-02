@@ -8,15 +8,18 @@ import { Swiper as SwiperType } from 'swiper/types';
 const cards = [
     {
         title: 'Flexibilité',
-        content: 'Vous voulez découvrir le coworking, tester de nouvelles adresses ou travailler un endroit au calme ou dans une ville inconnue, alors vous êtes au bon endroit. Venez profiter sans prise de tête et sans engagement de nos établissements répertoriés. Travaillez où vous voulez, quand vous voulez et avec qui vous voulez.'
+        firstParagraph: "Vous voulez découvrir le coworking, tester de nouvelles adresses ou trouver un endroit au calme où travailler dans une ville inconnue, alors vous êtes au bon endroit.",
+        secondParagraph: "Venez profiter sans prise de tête et sans engagement de nos établissements répertoriés. Travaillez où vous voulez, quand vous voulez et avec qui vous voulez.",
     },
     {
         title: 'Partage',
-        content: 'Ici, vous pourrez découvrir tous les lieux que notre communauté a jugé coworking friendly. Cafés, lobbies d\'hôtel, bibliothèques, tiers-lieux, vous trouverez les endroits les plus propices au coworking.'
+        firstParagraph: "Ici, vous pourrez découvrir tous les lieux que notre communauté a jugé coworking friendly. Cafés, lobbies d’hôtel, bibliothèques, tiers-lieux, vous trouverez les endroits les plus propices au coworking.",
+        secondParagraph: "Mais la communauté, c’est aussi  vous ! Alors n’hésitez pas à laisser des reviews et à ajouter de nouveaux lieux."
     },
     {
         title: 'Gratuité',
-        content: 'La philosophie qui nous anime, c’est la gratuité. Pas de frais d’abonnement, pas de coûts de mise en relation. Votre seul investissement, c’est votre café latte.'
+        firstParagraph: "La philosophie qui nous anime, c’est la gratuité. Pas de frais d’abonnement, pas de coûts de mise en relation. Votre seul investissement, c’est votre café latte.",
+        secondParagraph: "Nous visons à référencer tous les lieux qui accueillent avec bienveillance les coworkers, sans aucune contrepartie financière. Si ce n’est une consommation."
     },
 ];
 
@@ -43,7 +46,8 @@ export default Features
 
 interface CardProps {
     title: string;
-    content: string;
+    firstParagraph: string;
+    secondParagraph: string;
 }
 
 interface DesktopViewProps {
@@ -58,7 +62,10 @@ export const DesktopView: React.FC<DesktopViewProps> = ({ cards }) => {
             {cards.map((card, index) => (
                 <div key={index} className="max-w-md rounded-lg border border-gray-300 p-4 shadow-lg">
                     <h2 className="mb-3 text-xl font-semibold">{card.title}</h2>
-                    <p>{card.content}</p>
+                    <div>
+                        <p>{card.firstParagraph}</p>
+                        <p>{card.secondParagraph}</p>
+                    </div>
                 </div>
             ))}
         </div>
@@ -106,7 +113,10 @@ export const MobileView: React.FC<MobileViewProps> = ({ cards }) => {
                     <SwiperSlide key={index}>
                         <div className="rounded-lg border border-gray-300 p-4 shadow-lg">
                             <h2 className="mb-3 text-xl font-semibold">{card.title}</h2>
-                            <p>{card.content}</p>
+                            <div>
+                                <p>{card.firstParagraph}</p>
+                                <p>{card.secondParagraph}</p>
+                            </div>
                         </div>
                     </SwiperSlide>
                 ))}
