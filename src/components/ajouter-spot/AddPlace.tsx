@@ -69,7 +69,7 @@ const AddPlace = () => {
         let isValid = false;
 
         console.log(currentStep);
-        
+
 
         switch (currentStep) {
             case 1:
@@ -145,30 +145,30 @@ const AddPlace = () => {
                                 onClick={
                                     currentStep === 5
                                         ? async () => {
-                                              console.log("c'est done");
-                                              const isValid =
-                                                  await validateCurrentStep();
-                                              console.log(isValid);
-                                              const isAllValid =
-                                                  formMethods.formState.isValid;
-                                              console.log(isAllValid);
-                                              console.log(
-                                                  formMethods.formState,
-                                              );
-                                              if (isValid) {
-                                                  setWaitingToSubmit(true);
-                                                  formMethods.handleSubmit(
-                                                      onSubmit,
-                                                  );
-                                              }
-                                          }
+                                            console.log("c'est done");
+                                            const isValid =
+                                                await validateCurrentStep();
+                                            console.log(isValid);
+                                            const isAllValid =
+                                                formMethods.formState.isValid;
+                                            console.log(isAllValid);
+                                            console.log(
+                                                formMethods.formState,
+                                            );
+                                            if (isValid) {
+                                                setWaitingToSubmit(true);
+                                                formMethods.handleSubmit(
+                                                    onSubmit,
+                                                );
+                                            }
+                                        }
                                         : async () => {
-                                              const isValid =
-                                                  await validateCurrentStep();
-                                              if (isValid) {
-                                                  goToNextStep();
-                                              }
-                                          }
+                                            const isValid =
+                                                await validateCurrentStep();
+                                            if (isValid) {
+                                                goToNextStep();
+                                            }
+                                        }
                                 }
                             >
                                 Ajouter ce cowork
@@ -198,21 +198,21 @@ const AddPlace = () => {
                         onClick={
                             currentStep === 5
                                 ? () => {
-                                      console.log("c'est done");
-                                      const isValid =
-                                          formMethods.formState.isValid;
-                                      if (isValid) {
-                                          setWaitingToSubmit(true);
-                                          formMethods.handleSubmit(onSubmit)();
-                                      }
-                                  }
+                                    console.log("c'est done");
+                                    const isValid =
+                                        formMethods.formState.isValid;
+                                    if (isValid) {
+                                        setWaitingToSubmit(true);
+                                        formMethods.handleSubmit(onSubmit)();
+                                    }
+                                }
                                 : async () => {
-                                      const isValid =
-                                          await validateCurrentStep();
-                                      if (isValid) {
-                                          goToNextStep();
-                                      }
-                                  }
+                                    const isValid =
+                                        await validateCurrentStep();
+                                    if (isValid) {
+                                        goToNextStep();
+                                    }
+                                }
                         }
                         disabled={currentStep === 5}
                     >

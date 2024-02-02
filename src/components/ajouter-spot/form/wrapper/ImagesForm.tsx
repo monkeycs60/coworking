@@ -17,10 +17,13 @@ const ImagesForm = () => {
     const { setValue, trigger } = useFormContext();
 
     useEffect(() => {
-        setValue('imageSelectedUrls', imagesSelected);
-        trigger('imageSelectedUrls');
+        // Only trigger 'setValue' and 'trigger' if imagesSelected is not empty
+        if (imagesSelected.length > 0) {
+            setValue('imageSelectedUrls', imagesSelected);
+            // This will ensure validation is only run when imagesSelected changes
+            trigger('imageSelectedUrls');
+        }
     }, [imagesSelected, setValue, trigger]);
-
 
     return (
         <>

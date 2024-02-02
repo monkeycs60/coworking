@@ -8,7 +8,7 @@ const Hero = async () => {
     const cities = await cityList();
     const { totalUsers, totalCoworkings, totalCities } = await getAppStatistics();
     return (
-        <section className='hero-bg h-screen pt-[100px] '>
+        <section className='hero-bg h-screen pt-[80px] 3xl:pt-[100px] '>
             <div>
                 <div className='flex flex-col items-center justify-center tracking-wider lg:pt-28 3xl:pt-64'>
                     <h1 className='text-6xl font-bold 3xl:text-8xl'>Coworker sans se ruiner</h1>

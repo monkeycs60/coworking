@@ -10,9 +10,9 @@ export async function POST(req: NextRequest) {
     console.log('session', session)
     const userId = session?.user?.id;
 
-    // if (!userId) {
-    //     return NextResponse.json({ status: 401 });
-    // }
+    if (!userId) {
+        return NextResponse.json({ status: 401 });
+    }
 
     const placeData = (await req.json()) as ExtendedAddPlaceSchemaType;
     console.log('placeData', placeData);
@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
               closeTime: hour.close,
           }))
         : [];
-    console.log('placeData', formattedOpeningHours);
 
     try {
         const savedPlace = await prisma.coworking.create({

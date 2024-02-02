@@ -32,7 +32,7 @@ function NavBar() {
             </AnimatePresence>
 
             <div
-                className={`fixed top-0 z-[80] flex h-[100px] w-full items-center justify-between gap-10 bg-primary/70 px-4 xl:px-20 3xl:lg:px-32 
+                className={`fixed top-0 z-[80] flex h-[80px] w-full items-center justify-between gap-10 bg-primary/70 px-4 xl:px-20 3xl:lg:px-32 3xl:h-[100px] 
 			${scrollPosition > 50 ? 'lg:bg-primary/70' : 'lg:bg-transparent'}`}
             >
                 <div className='flex w-full items-center justify-between px-4 lg:gap-14 lg:px-0'>
@@ -60,7 +60,7 @@ function NavBar() {
                                     </Link>
                                 </Button>
                             ) : (
-                                    <Button variant={scrollPosition > 50 ? 'secondary' : 'default'} className='px-8 py-5 3xl:px-12 3xl:py-6 3xl:text-lg'>
+                                <Button variant={scrollPosition > 50 ? 'secondary' : 'default'} className='px-8 py-5 3xl:px-12 3xl:py-6 3xl:text-lg'>
                                     <Link href='/sign-in'>
                                         Connexion
                                     </Link>
