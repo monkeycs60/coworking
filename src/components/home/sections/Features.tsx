@@ -9,17 +9,27 @@ const cards = [
     {
         title: 'Flexibilité',
         firstParagraph: "Vous voulez découvrir le coworking, tester de nouvelles adresses ou trouver un endroit au calme où travailler dans une ville inconnue, alors vous êtes au bon endroit.",
-        secondParagraph: "Venez profiter sans prise de tête et sans engagement de nos établissements répertoriés. Travaillez où vous voulez, quand vous voulez et avec qui vous voulez.",
+        content:
+            <>
+                <p>Vous voulez découvrir le coworking, tester de nouvelles adresses ou trouver un endroit au calme où travailler dans une ville inconnue, alors vous êtes au bon endroit.</p>
+                <p>Venez profiter sans prise de tête et <strong>sans engagement</strong>  de nos établissements répertoriés. Travaillez où vous voulez, quand vous voulez et avec qui vous voulez.</p>
+            </>
     },
     {
         title: 'Partage',
-        firstParagraph: "Ici, vous pourrez découvrir tous les lieux que notre communauté a jugé coworking friendly. Cafés, lobbies d’hôtel, bibliothèques, tiers-lieux, vous trouverez les endroits les plus propices au coworking.",
-        secondParagraph: "Mais la communauté, c’est aussi  vous ! Alors n’hésitez pas à laisser des reviews et à ajouter de nouveaux lieux."
+        content:
+            <>
+                <p>Ici, vous pourrez découvrir tous les lieux que notre communauté a jugé <strong>coworking friendly</strong>. Cafés, lobbies d’hôtel, bibliothèques, tiers-lieux, vous trouverez les endroits les plus propices au coworking.</p>
+                <p>Mais la communauté, c’est aussi  <strong>vous</strong> ! Alors n’hésitez pas à laisser des reviews et à ajouter de nouveaux lieux.</p>
+            </>
     },
     {
         title: 'Gratuité',
-        firstParagraph: "La philosophie qui nous anime, c’est la gratuité. Pas de frais d’abonnement, pas de coûts de mise en relation. Votre seul investissement, c’est votre café latte.",
-        secondParagraph: "Nous visons à référencer tous les lieux qui accueillent avec bienveillance les coworkers, sans aucune contrepartie financière. Si ce n’est une consommation."
+        content:
+            <>
+                <p>La philosophie qui nous anime, c’est la gratuité. <strong>Pas de frais</strong> d’abonnement, pas de coûts de mise en relation. Votre seul investissement, c’est votre café latte.</p>
+                <p>Nous visons à référencer tous les lieux qui accueillent avec bienveillance les coworkers, sans <strong>aucune contrepartie financière</strong>. Si ce n’est une consommation.</p>
+            </>
     },
 ];
 
@@ -27,7 +37,7 @@ const Features = () => {
     const [activeCard, setActiveCard] = useState(0);
 
     return (
-        <div className="feature-bg container mx-auto mt-16 px-4 py-16">
+        <div className="feature-bg relative mt-16 h-[58vh] w-screen py-12">
             <div className="hidden md:block">
                 {/* Desktop View */}
                 <DesktopView cards={cards} activeCard={activeCard} setActiveCard={setActiveCard} />
@@ -46,8 +56,7 @@ export default Features
 
 interface CardProps {
     title: string;
-    firstParagraph: string;
-    secondParagraph: string;
+    content: JSX.Element;
 }
 
 interface DesktopViewProps {
@@ -59,17 +68,16 @@ interface DesktopViewProps {
 export const DesktopView: React.FC<DesktopViewProps> = ({ cards }) => {
     return (
         <div className="flex flex-col justify-center space-x-4">
-            <div>
-                <h2>Le concept Coworker Malin</h2>
-                <h3>Le coworking n’a jamais été aussi accessible !</h3>
+            <div className='text-center'>
+                <h2 className='text-xl font-semibold'>Le concept <span className='font-bold italic'>Coworker Malin</span></h2>
+                <h3 className=''>Le coworking n’a jamais été aussi accessible !</h3>
             </div>
-            <div className='flex justify-center space-x-4'>
+            <div className='absolute bottom-[-100px] flex justify-around space-x-4'>
                 {cards.map((card, index) => (
-                    <div key={index} className="max-w-md rounded-lg border border-gray-300 p-4 shadow-lg">
-                        <h2 className="mb-3 text-xl font-semibold">{card.title}</h2>
-                        <div>
-                            <p>{card.firstParagraph}</p>
-                            <p>{card.secondParagraph}</p>
+                    <div key={index} className="w-1/4 max-w-md rounded-2xl border border-gray-300 bg-white p-4 text-black shadow-lg">
+                        <h2 className="mb-3 text-center text-xl font-semibold text-primary">{card.title}</h2>
+                        <div className='mt-4 flex flex-col gap-2 px-6 text-center text-sm'>
+                            {card.content}
                         </div>
                     </div>
                 ))}
@@ -120,8 +128,7 @@ export const MobileView: React.FC<MobileViewProps> = ({ cards }) => {
                         <div className="rounded-lg border border-gray-300 p-4 shadow-lg">
                             <h2 className="mb-3 text-xl font-semibold">{card.title}</h2>
                             <div>
-                                <p>{card.firstParagraph}</p>
-                                <p>{card.secondParagraph}</p>
+                                {card.content}
                             </div>
                         </div>
                     </SwiperSlide>
