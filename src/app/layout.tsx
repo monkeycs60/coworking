@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang='fr'>
-            <body className='m-auto flex w-screen justify-center overflow-x-hidden bg-[#ebebeb] font-general text-white'>
+            <body className='m-auto flex w-screen max-w-[100vw] justify-center overflow-x-hidden bg-[#ebebeb] font-general text-white'>
                 <AuthProvider>
                     <Providers>
                         <EdgeStoreProvider>
