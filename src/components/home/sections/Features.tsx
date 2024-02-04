@@ -37,7 +37,7 @@ const Features = () => {
     const [activeCard, setActiveCard] = useState(0);
 
     return (
-        <div className="feature-bg relative mt-16 h-[58vh] w-screen py-12">
+        <div className="feature-bg relative mt-16 w-screen py-12 lg:h-[58vh]">
             <div className="hidden md:block">
                 {/* Desktop View */}
                 <DesktopView cards={cards} activeCard={activeCard} setActiveCard={setActiveCard} />
@@ -117,6 +117,9 @@ export const MobileView: React.FC<MobileViewProps> = ({ cards }) => {
 
     return (
         <>
+            <div className='mb-10 text-center'>
+                <h2 className='text-2xl font-semibold'>Le concept <span className='mt-1 block font-bold italic'>Coworker Malin</span></h2>
+            </div>
             <Swiper
                 onSwiper={setSwiperRef}
                 spaceBetween={50}
@@ -125,9 +128,9 @@ export const MobileView: React.FC<MobileViewProps> = ({ cards }) => {
             >
                 {cards.map((card, index) => (
                     <SwiperSlide key={index}>
-                        <div className="rounded-lg border border-gray-300 p-4 shadow-lg">
-                            <h2 className="mb-3 text-xl font-semibold">{card.title}</h2>
-                            <div>
+                        <div className="m-auto w-[90%] rounded-2xl border border-gray-300 bg-white p-8 text-black shadow-lg">
+                            <h2 className="mb-3 text-center text-xl font-semibold text-primary">{card.title}</h2>
+                            <div className='mt-2 flex flex-col gap-2 text-center'>
                                 {card.content}
                             </div>
                         </div>
@@ -138,7 +141,7 @@ export const MobileView: React.FC<MobileViewProps> = ({ cards }) => {
                 {cards.map((_, index) => (
                     <button
                         key={index}
-                        className={`mx-2 h-4 w-4 rounded-full ${swiperRef?.activeIndex === index ? 'bg-blue-500' : 'bg-gray-300'}`}
+                        className={`mx-2 h-4 w-4 rounded-full ${swiperRef?.activeIndex === index ? 'bg-primary' : 'bg-gray-300'}`}
                         onClick={() => navigateToSlide(index)}
                         aria-label={`Go to slide ${index + 1}`}
                     />
