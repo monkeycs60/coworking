@@ -27,7 +27,7 @@ const Features = () => {
     const [activeCard, setActiveCard] = useState(0);
 
     return (
-        <div className="feature-bg container mx-auto p-4">
+        <div className="feature-bg container mx-auto mt-16 px-4 py-16">
             <div className="hidden md:block">
                 {/* Desktop View */}
                 <DesktopView cards={cards} activeCard={activeCard} setActiveCard={setActiveCard} />
@@ -58,16 +58,22 @@ interface DesktopViewProps {
 
 export const DesktopView: React.FC<DesktopViewProps> = ({ cards }) => {
     return (
-        <div className="flex justify-center space-x-4">
-            {cards.map((card, index) => (
-                <div key={index} className="max-w-md rounded-lg border border-gray-300 p-4 shadow-lg">
-                    <h2 className="mb-3 text-xl font-semibold">{card.title}</h2>
-                    <div>
-                        <p>{card.firstParagraph}</p>
-                        <p>{card.secondParagraph}</p>
+        <div className="flex flex-col justify-center space-x-4">
+            <div>
+                <h2>Le concept Coworker Malin</h2>
+                <h3>Le coworking n’a jamais été aussi accessible !</h3>
+            </div>
+            <div className='flex justify-center space-x-4'>
+                {cards.map((card, index) => (
+                    <div key={index} className="max-w-md rounded-lg border border-gray-300 p-4 shadow-lg">
+                        <h2 className="mb-3 text-xl font-semibold">{card.title}</h2>
+                        <div>
+                            <p>{card.firstParagraph}</p>
+                            <p>{card.secondParagraph}</p>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 };

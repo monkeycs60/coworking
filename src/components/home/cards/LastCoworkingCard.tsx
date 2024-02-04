@@ -11,8 +11,8 @@ const LastCoworkingCard = (
     const coworkingAverageRating = averageRatingFromReviews(coworking.reviews);
 
     return (
-        <div className="rounded-2xl bg-secondary">
-            <Image src={coworking.imageSelectedUrls[0].url} alt={coworking.name} width={400} height={300} className="h-[300px] w-full rounded-t-2xl object-cover" />
+        <div className="rounded-2xl bg-secondary text-sm">
+            <Image src={coworking.imageSelectedUrls[0].url} alt={coworking.name} width={400} height={300} className="h-[200px] w-full rounded-t-2xl object-cover" />
             <div className="flex justify-between gap-2 p-4">
                 <div className="flex w-2/3 flex-col justify-between 3xl:w-3/4">
                     <h3 className="line-clamp-1 font-bold">{coworking.name}</h3>
