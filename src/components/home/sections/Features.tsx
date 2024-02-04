@@ -37,7 +37,7 @@ const Features = () => {
     const [activeCard, setActiveCard] = useState(0);
 
     return (
-        <div className="feature-bg relative mt-16 w-screen py-12 lg:h-[58vh]">
+        <div className="feature-bg relative mt-16 w-screen py-12 lg:mb-[100px] lg:h-[58vh]">
             <div className="hidden md:block">
                 {/* Desktop View */}
                 <DesktopView cards={cards} activeCard={activeCard} setActiveCard={setActiveCard} />

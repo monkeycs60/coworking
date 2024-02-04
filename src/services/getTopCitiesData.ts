@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma';
 
-export const getCoworkingsAmountByCity = async () => {
+export const getTopCitiesData = async () => {
     const cityCounts = await prisma.coworking.groupBy({
         by: ['city'],
         _count: {

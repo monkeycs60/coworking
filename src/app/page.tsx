@@ -7,6 +7,7 @@ import Faq from '@/components/home/sections/Faq';
 import Contact from '@/components/home/sections/Contact';
 import LastCoworkings from '@/components/home/sections/LastCoworkings';
 import Features from '@/components/home/sections/Features';
+import HighlightCities from '@/components/home/sections/HighlightCities';
 
 export default function Home() {
     return (
@@ -14,15 +15,13 @@ export default function Home() {
             <Hero />
             <LastCoworkings />
             <Features />
+            <HighlightCities />
             <div className='h-[200vh] '>
                 <h1>hello les gens</h1>
             </div>
-            {/* <HighlightedCoworkings />
-            <Assets />
-            <HowTo />
-            <HighlightedCities />
-            <Faq />
-            <Contact /> */}
+
+            {/* <HighlightedCities /> */}
+    
         </>
     );
 }
