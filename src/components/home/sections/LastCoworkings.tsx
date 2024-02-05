@@ -15,7 +15,7 @@ const LastCoworkings = async () => {
 
     return (
         <div className="m-auto w-3/4 text-black">
-            <h2 className="py-16 text-center text-xl font-bold 3xl:text-2xl">Découvrir les derniers lieux ajoutés par la communauté</h2>
+            <h2 className="py-16 text-center text-2xl font-bold">Découvrir les derniers lieux ajoutés par la communauté</h2>
             <Carousel
                 opts={{
                     align: "start",

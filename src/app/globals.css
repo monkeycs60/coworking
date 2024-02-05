@@ -79,3 +79,7 @@ hmtl {
 .carouselMobileItem {
     flex: 0 0 25%;
 }
+
+.custom-height-best-cities {
+    height: calc(60vh + 16px);
+}

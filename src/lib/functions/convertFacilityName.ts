@@ -9,7 +9,7 @@ export const convertFacilityName = (facilityName: string) => {
 
 export const convertFacilityNameSimple = (facilityName: string) => {
     if (facilityName === 'CAFE') return 'Café';
-    if (facilityName === 'RESTAURANT_BAR') return 'Restaurant / Bar';
+    if (facilityName === 'RESTAURANT_BAR') return 'Resto / Bar';
     if (facilityName === 'HOTEL_LOBBY') return 'Hôtel';
     if (facilityName === 'LIBRARY') return 'Bibliothèque';
     if (facilityName === 'THIRD_PLACE') return 'Tiers-lieu';
