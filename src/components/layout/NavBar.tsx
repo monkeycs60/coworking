@@ -1,11 +1,8 @@
 'use client';
 
-import SignInButtonLogic from '../auth/SignInComponent';
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import SignUpButtonLogic from '../auth/SignUpComponent';
-import { Menu } from 'lucide-react';
 import useScrollPosition from '@/hooks/useScrollPosition';
 import useHamburgerMenu from '@/hooks/useHamburgerMenu';
 import Hamburger from './Hamburger';

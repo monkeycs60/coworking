@@ -3,43 +3,30 @@ import Link from 'next/link';
 
 const Footer = () => {
 	return (
-		<div className='flex justify-between border-t-[1px] p-6'>
-			<div className='flex w-[40%] flex-col gap-1'>
+		<div className='mt-16 flex items-center justify-between border-t-[1px] bg-primary px-12 py-3'>
+			<Link
+				href={'/'}
+				className='flex items-center justify-center gap-4 sm:gap-10'
+			>
 				<Image
-					src='/logo-cowork-v1-nobg.png'
+					src={'/images/navbar-logo.svg'}
 					alt='logo'
-					width={22}
-					height={22}
+					width={328}
+					height={65}
+					className={`w-[140px] transition-transform duration-500 ease-in-out lg:w-[165px] 2xl:w-[200px] 3xl:w-[250px]`}
 				/>
-				<p className='text-[10px] text-gray-600 lg:mt-2 lg:text-[14px] '>
-					Votre partenaire pour coworker malin
-				</p>
-			</div>
-			<div className='flex flex-col gap-2 '>
-				<div className='flex gap-2 text-xs font-semibold lg:text-sm'>
-					<p>Coworking</p>
-				</div>
-				<div className='flex flex-col text-[10px] lg:text-[14px] '>
-					<Link href='/ajouter-spot' className='hover:underline'>
-						Explorer
-					</Link>
-					<Link href='/ajouter-spot' className='hover:underline'>
-						Ajouter
-					</Link>
-				</div>
-			</div>
-			<div className='flex flex-col gap-2 '>
-				<div className='flex gap-2 text-xs font-semibold lg:text-sm'>
-					<p>Concept</p>
-				</div>
-				<div className='flex flex-col text-[10px] lg:text-[14px]'>
-					<Link href='/about' className='hover:underline'>
-						Philosophie
-					</Link>
-					<Link href='/about' className='hover:underline'>
-						Fonctionnement
-					</Link>
-				</div>
+			</Link>
+			<p className='text-xs'>©Copyright 2024 -  Créé et designé par Clément Serizay & Solenn Toupin</p>
+			<div className='flex items-center gap-2'>
+				<Link href='https://www.instagram.com/' target='_blank' className='hover:scale-110'>
+					<Image src={'/images/insta.svg'} alt='twitter' width={20} height={20} />
+				</Link>
+				<Link href='https://www.linkedin.com/company/coworkez-malin/about/' target='_blank' className='hover:scale-110'>
+					<Image src={'/images/linkedin.svg'} alt='instagram' width={28} height={28} />
+				</Link>
+				<Link href='https://github.com/monkeycs60' target='_blank' className='hover:scale-110'>
+					<Image src={'/images/github.svg'} alt='facebook' width={20} height={20} />
+				</Link>
 			</div>
 		</div>
 	);
