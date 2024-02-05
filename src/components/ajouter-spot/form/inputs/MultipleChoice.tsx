@@ -44,9 +44,10 @@ const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceB
         }
 
         // Now TypeScript knows that `experienceArray` is an array, and we can call `filter`.
-        const updatedValues = isSelected
-            ? experienceArray.filter((item: any) => item !== value) // Use `any` or the correct type.
-            : [...experienceArray, value];
+        const updatedValues: ExperienceValue[] = isSelected
+            ? (experience[name] as ExperienceValue[]).filter(item => item !== value)
+            : [...(experience[name] as ExperienceValue[]), value] as ExperienceValue[];
+
 
         console.log('updatedValues', updatedValues);
 
