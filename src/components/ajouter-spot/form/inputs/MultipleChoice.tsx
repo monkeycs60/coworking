@@ -34,9 +34,19 @@ const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceB
     const isSelected = experience[name]?.includes(value as never) || false;
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        // Assuming `name` corresponds to one of the keys in the Experience type.
+        const experienceArray = experience[name];
+
+        // First, ensure that `experienceArray` is indeed an array.
+        if (!Array.isArray(experienceArray)) {
+            console.error(`Expected an array for experience['${name}'], but got:`, experienceArray);
+            return;
+        }
+
+        // Now TypeScript knows that `experienceArray` is an array, and we can call `filter`.
         const updatedValues = isSelected
-            ? experience[name].filter((item: any) => item !== value)
-            : [...experience[name], value];
+            ? experienceArray.filter((item: any) => item !== value) // Use `any` or the correct type.
+            : [...experienceArray, value];
 
         console.log('updatedValues', updatedValues);
 
