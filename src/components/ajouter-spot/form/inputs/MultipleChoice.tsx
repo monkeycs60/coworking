@@ -35,7 +35,7 @@ const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceB
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const updatedValues = isSelected
-            ? experience[name].filter((item: ExperienceValue) => item !== value)
+            ? experience[name].filter((item: any) => item !== value)
             : [...experience[name], value];
 
         console.log('updatedValues', updatedValues);
@@ -47,6 +47,7 @@ const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceB
             updatedValues.shift();
 
             // and add the new value
+            // updatedValues.push(value);
 
         }
 
