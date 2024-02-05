@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import  prisma  from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { CreateReviewType } from '@/types/createReview';
+import { authOptions } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
+
 
 export async function POST(req: NextRequest) {
     // implémenter le middleware d'authentification avec NextAuth
@@ -8,6 +11,13 @@ export async function POST(req: NextRequest) {
     //    const authResponse = await authMiddleware(req);
     //    if (authResponse) return authResponse; // Return if there's any response from the middleware
     //    const { userId } = getAuth(req);
+    const session = await getServerSession(authOptions);
+    const userId = session?.user?.id;
+
+    if (!userId) {
+        return NextResponse.json({ status: 401 });
+    }
+
 
     // Step 1: Directly get the data from the request
     const requestData: CreateReviewType = await req.json();
