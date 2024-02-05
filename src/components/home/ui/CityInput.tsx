@@ -40,12 +40,12 @@ const CityInput = ({ cities }: CityInputProps) => {
 
 
     return (
-        <div className='relative m-auto flex w-[55%] flex-col items-center justify-center text-black lg:mt-16 lg:h-[60px] 3xl:mt-32 3xl:h-[70px]'>
-            <Search className='absolute left-4 z-[50] text-black ' />
+        <div className='relative m-auto mt-16 flex h-[60px] w-[95%] flex-col items-center justify-center text-black lg:h-[60px] lg:w-[55%] 3xl:mt-32 3xl:h-[70px]'>
+            <Search className='lg:bloch absolute left-3 z-[50] hidden text-black lg:left-4 ' />
             <input
                 type='text'
                 placeholder='Chercher une ville où coworker gratuitement'
-                className='absolute h-full w-full rounded-full pl-16 lg:py-2 lg:indent-0 lg:text-lg lg:placeholder:text-base 2xl:py-3  3xl:placeholder:text-lg'
+                className='absolute h-full w-full rounded-full pl-5 placeholder:text-sm lg:py-2 lg:pl-16 lg:indent-0 lg:text-lg lg:placeholder:text-base 2xl:py-3  3xl:placeholder:text-lg'
                 onClick={() => setShowDropdown(!showDropdown)}
                 onChange={(e) => dispatch(setInputSearch(e.target.value))}
                 ref={inputRef}
@@ -72,7 +72,7 @@ const CityInput = ({ cities }: CityInputProps) => {
                     ))}
                 </div>
             )}
-            <Button variant="default" className='absolute right-2 px-12 py-6 font-normal 3xl:px-16 3xl:py-7 3xl:text-lg' onClick={(
+            <Button variant="default" className='absolute right-2 hidden px-12 py-6 font-normal lg:flex 3xl:px-16 3xl:py-7 3xl:text-lg' onClick={(
                 e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
             ) => {
                 e.preventDefault();
@@ -80,6 +80,16 @@ const CityInput = ({ cities }: CityInputProps) => {
             }} >
                 <Link href='/city'>
                     Rechercher
+                </Link>
+            </Button>
+            <Button variant="default" className='absolute right-2 flex px-4 py-6 font-normal lg:hidden 3xl:px-16 3xl:py-7 3xl:text-lg' onClick={(
+                e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+            ) => {
+                e.preventDefault();
+                router.push(`/explore/${citySelected}`);
+            }} >
+                <Link href='/city'>
+                    <Search className=' ' />
                 </Link>
             </Button>
         </div>
