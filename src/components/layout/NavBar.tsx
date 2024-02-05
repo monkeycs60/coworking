@@ -9,6 +9,8 @@ import Hamburger from './Hamburger';
 import { AnimatePresence } from 'framer-motion';
 import useLogoSize from '@/hooks/useLogoSize';
 import { useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation'
+
 
 function NavBar() {
     const { isHamburgerOpen, toggleHamburgerMenu } = useHamburgerMenu();
@@ -16,6 +18,8 @@ function NavBar() {
     const { logoClass } = useLogoSize(scrollPosition);
 
     const { status } = useSession();
+    const pathname = usePathname();
+    console.log('pathname', pathname);
 
     return (
         <>
@@ -30,7 +34,7 @@ function NavBar() {
 
             <div
                 className={`fixed top-0 z-[80] flex h-[80px] w-full items-center justify-between gap-10 bg-primary/70 px-4 xl:px-20 3xl:lg:px-32 3xl:h-[100px] 
-			${scrollPosition > 50 ? 'lg:bg-primary/70' : 'lg:bg-transparent'}`}
+			${scrollPosition > 50 || pathname !== "/" ? 'lg:bg-primary/70' : 'lg:bg-transparent'}`}
             >
                 <div className='flex w-full items-center justify-between px-4 lg:gap-14 lg:px-0'>
                     <Link

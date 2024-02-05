@@ -19,11 +19,11 @@ export default function RootLayout({
 }) {
     return (
         <html lang='fr'>
-            <body className='m-auto flex w-screen max-w-[100vw] justify-center overflow-x-hidden bg-[#ebebeb] font-general text-white'>
+            <body className='m-auto flex min-h-screen w-screen max-w-[100vw] flex-col  justify-between overflow-x-hidden bg-[#ebebeb] font-general text-white'>
                 <AuthProvider>
                     <Providers>
                         <EdgeStoreProvider>
-                            <div className='w-full'>
+                            <div className='flex min-h-screen w-full flex-col justify-between'>
                                 <NavBar />
                                 {children}
                                 <Footer />
