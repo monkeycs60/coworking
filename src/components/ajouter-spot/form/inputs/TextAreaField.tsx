@@ -1,3 +1,5 @@
+"use client";
+
 import { AlertTriangle } from 'lucide-react';
 import { FieldError, useFormContext } from 'react-hook-form';
 
@@ -18,7 +20,8 @@ const TextAreaField = ({
     error,
     isMandatory,
 }: TextAreaFieldProps) => {
-    const { register } = useFormContext();
+    const { register, watch } = useFormContext();
+    console.log('errors', watch());
 
     return (
         <div className='relative flex w-full flex-col gap-2 rounded-xl'>

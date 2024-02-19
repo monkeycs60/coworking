@@ -1,16 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-/* @import '../styles/telma.css'; */
-@import url('https://api.fontshare.com/v2/css?f[]=telma@900,300,1,700,500,400&display=swap');
 @import '../styles/animations.css';
 
 @font-face {
-    font-family: 'Signatra';
-    src:
-        url('/fonts/Signatra.otf') format('opentype'),
-        url('/fonts/Signatra.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+    font-family: 'GeneralSansVariable';
+    src: url('/fonts/GeneralSansVariable.ttf');
 }
 
 @tailwind base;
@@ -21,6 +13,31 @@ hmtl {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.hero-bg {
+    background-image: url('/images/hero-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+@media (max-width: 768px) {
+    .hero-bg {
+        background-image: url('/images/hero-background-mobile.png');
+    }
+}
+
+.feature-bg {
+    background-image: url('/images/feature-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media  (max-width: 768px) {
+    .feature-bg {
+        background-image: url('/images/feature-background-mobile.png');
+    }
 }
 
 .overall-bg {
@@ -61,4 +78,8 @@ hmtl {
 
 .carouselMobileItem {
     flex: 0 0 25%;
+}
+
+.custom-height-best-cities {
+    height: calc(60vh + 16px);
 }

@@ -41,7 +41,7 @@ const PreviewCard = ({
                     }}
                     options={{}}
                 >
-                    <div className='relative flex h-[240px] w-[310px] flex-col gap-4 bg-gray-200 font-inter'>
+                    <div className='relative flex h-[240px] w-[310px] flex-col gap-4 bg-gray-200'>
                         <Link
                             href={{
                                 pathname: `/explore/${coworking?.city}/${coworking?.name}`,

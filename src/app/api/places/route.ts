@@ -1,19 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { AddPlaceSchemaType } from '@/types/addPlace';
+import prisma from '@/lib/prisma';
+import { ExtendedAddPlaceSchemaType } from '@/types/addPlace';
 import { v4 as uuidv4 } from 'uuid';
-import { getAuth } from '@clerk/nextjs/server';
-import { downloadImageAndUploadToS3 } from '@/lib/functions/uploadToS3';
-import { authMiddleware } from '../middlewares/authMiddleware';
+import { authOptions } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
 
 export async function POST(req: NextRequest) {
-    const authResponse = await authMiddleware(req);
-    if (authResponse) return authResponse; // Return if there's any response from the middleware
-    console.log('req.body', req.body);
+    const session = await getServerSession(authOptions);
+    console.log('session', session)
+    const userId = session?.user?.id;
 
-    const { userId } = getAuth(req);
+    if (!userId) {
+        return NextResponse.json({ status: 401 });
+    }
 
-    const placeData = (await req.json()) as AddPlaceSchemaType;
+    const placeData = (await req.json()) as ExtendedAddPlaceSchemaType;
+    console.log('placeData', placeData);
 
     const formattedOpeningHours = placeData.openingHours
         ? placeData.openingHours.map((hour) => ({
@@ -21,16 +23,6 @@ export async function POST(req: NextRequest) {
               closeTime: hour.close,
           }))
         : [];
-    console.log('placeData', formattedOpeningHours);
-
-    const imageUrlsS3 = await Promise.all(
-        (placeData.imagesSelected || []).map(async (url) => {
-            return await downloadImageAndUploadToS3(
-                url,
-                `photocoworking-${uuidv4()}.jpg`,
-            );
-        }),
-    );
 
     try {
         const savedPlace = await prisma.coworking.create({
@@ -48,32 +40,22 @@ export async function POST(req: NextRequest) {
                 openingHours: {
                     create: formattedOpeningHours,
                 },
+                establishmentType: placeData.establishmentType,
                 espressoPrice: placeData.espressoPrice,
-                hasParking: placeData.hasParking,
-                hasPrivacy: placeData.hasPrivacy,
-                hasWiFi: placeData.hasWiFi,
-                hasExterior: placeData.hasExterior,
-                hasPlugs: placeData.hasPlugs,
-                hasHandicap: placeData.hasHandicap,
-                smallTables: placeData.smallTables,
-                largeWorktables: placeData.largeWorktables,
-                counterSeats: placeData.counterSeats,
-                standingTables: placeData.standingTables,
-                outdoorSeating: placeData.outdoorSeating,
-                soloCoworker: placeData.soloCoworker,
-                smallGroup: placeData.smallGroup,
-                bigGroup: placeData.bigGroup,
-                morningDuration: placeData.morningDuration,
-                afternoonDuration: placeData.afternoonDuration,
-                fullDuration: placeData.fullDuration,
-                snacksPossibility: placeData.snacksPossibility,
-                lunchPossibility: placeData.lunchPossibility,
-                souperPossibility: placeData.souperPossibility,
-                drinksPossibility: placeData.drinksPossibility,
-                alcoolPossibility: placeData.alcoolPossibility,
-                wifiQuality: placeData.wifiQuality,
-                music: placeData.music,
-                facility: placeData.facility,
+                facilities: placeData.facilities,
+                imageSelectedUrls: {
+                    create: placeData.imageSelectedUrls.map((image) => ({
+                        url: image.url,
+                        coverImage: image.coverImage,
+                    })),
+                },
+                musicLevel: placeData.musicLevel,
+                workComfort: placeData.workComfort,
+                internetQuality: placeData.internetQuality,
+                workspaceComposition: placeData.workspaceComposition,
+                hasToCall: placeData.hasToCall,
+                drinksAndFood: placeData.drinksAndFood,
+
                 reviews: {
                     create: [
                         {
@@ -86,22 +68,6 @@ export async function POST(req: NextRequest) {
                         },
                     ],
                 },
-                imagesSelected: {
-                    create: imageUrlsS3.map((url) => ({
-                        url: url,
-                    })),
-                },
-                userImages:
-                    placeData.userImages && placeData.userImages.urls
-                        ? {
-                              create: placeData.userImages.urls.map(
-                                  (imgUrl: string) => ({
-                                      url: imgUrl,
-                                      userId: userId,
-                                  }),
-                              ),
-                          }
-                        : undefined,
             },
             include: {
                 reviews: {

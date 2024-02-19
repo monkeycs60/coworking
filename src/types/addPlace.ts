@@ -1,102 +1,97 @@
 import { z } from 'zod';
 
-const facility = [
-    'IS_CAFE',
-    'IS_HOTEL',
-    'IS_LIBRARY',
-    'IS_THIRD_SPACE',
-    'IS_OTHER_TYPE',
-] as const;
-
-const wifiQuality = ['HIGH_WIFI', 'MEDIUM_WIFI', 'LOW_WIFI'] as const;
-
-const music = [
-    'NO_MUSIC',
-    'DISCRETE_MUSIC',
-    'RANDOM_MUSIC',
-    'LOUD_MUSIC',
-] as const;
-
-const equipmentOptions = [
-    'ACCESSIBLE', // accès handicapé
-    'PARKING', // parking
-    'TERRACE', // terrasse
-    'OUTLETS', // prises
-    'VOTING_BOOTH', // isoloir
-] as const;
-
 const openingHourFormat = z.object({
-    open: z
-        .string()
-        .regex(/^\d{2}:\d{2}$/, { message: "Le format doit être 'HH:MM'" })
-        .or(z.literal(''))
-        .nullable()
-        .optional(),
-    close: z
-        .string()
-        .regex(/^\d{2}:\d{2}$/, { message: "Le format doit être 'HH:MM'" })
-        .or(z.literal(''))
-        .nullable()
-        .optional(),
+  open: z
+    .string()
+    .regex(/^\d{2}:\d{2}$/, { message: "Le format doit être 'HH:MM'" })
+    .or(z.literal(''))
+    .nullable()
+    .optional(),
+  close: z
+    .string()
+    .regex(/^\d{2}:\d{2}$/, { message: "Le format doit être 'HH:MM'" })
+    .or(z.literal(''))
+    .nullable()
+    .optional(),
 });
 
-export const AddPlaceSchema = z.object({
-    id: z.string().optional(),
-    placeId: z.string().optional(),
-    longitude: z.number().optional(),
-    latitude: z.number().optional(),
-    name: z.string().min(1, 'Vous devez entrer un nom de lieu.'),
-    address: z.string().min(6, 'Vous devez entrer une adresse.'),
-    city: z.string().min(1, 'Vous devez entrer une ville.'),
-    phoneNumber: z.string().optional(),
-    website: z.string().optional(),
-    description: z
-        .string()
-        .min(10, "Vous devez entrer une description d'au moins 10 caractères."),
-    openingHours: z.array(openingHourFormat).optional(),
-    imagesSelected: z.array(z.string()).optional(),
-    userImages: z.any().optional(),
-    espressoPrice: z.string().optional(),
-    facility: z.enum(facility, {
-        invalid_type_error: 'Vous devez choisir au moins un type de lieu.',
-        required_error: 'Vous devez choisir au moins un type de lieu.',
-    }),
-    hasPrivacy: z.boolean().optional(),
-    hasParking: z.boolean().optional(),
-    hasWiFi: z.boolean().optional(),
-    hasExterior: z.boolean().optional(),
-    hasPlugs: z.boolean().optional(),
-    hasHandicap: z.boolean().optional(),
-    smallTables: z.boolean().optional(),
-    largeWorktables: z.boolean().optional(),
-    counterSeats: z.boolean().optional(),
-    standingTables: z.boolean().optional(),
-    outdoorSeating: z.boolean().optional(),
-    soloCoworker: z.boolean().optional(),
-    smallGroup: z.boolean().optional(),
-    bigGroup: z.boolean().optional(),
-    morningDuration: z.boolean().optional(),
-    afternoonDuration: z.boolean().optional(),
-    fullDuration: z.boolean().optional(),
-    snacksPossibility: z.boolean().optional(),
-    lunchPossibility: z.boolean().optional(),
-    souperPossibility: z.boolean().optional(),
-    drinksPossibility: z.boolean().optional(),
-    alcoolPossibility: z.boolean().optional(),
-    music: z.union([z.enum(music), z.null()]).optional(),
-    wifiQuality: z.union([z.enum(wifiQuality), z.null()]).optional(),
-    reviewContent: z
-        .string()
-        .min(10, 'Votre avis doit contenir au moins 10 caractères.'),
-    calmRating: z.number().min(1).max(5),
-    equipRating: z.number().min(1).max(5),
-    foodRating: z.number().min(1).max(5),
-    feelingRating: z.number().min(1).max(5),
-    // equipment: z.array(z.enum(equipmentOptions)).optional(),
-    // imagesSent: z
-    //     .array(z.string())
-    //     .min(1, 'Vous devez sélectionner au moins une image.')
-    //     .max(8, "Vous pouvez sélectionner jusqu'à 8 images."),
+const EstablishmentTypeEnum = z.enum([
+  'HOTEL_LOBBY', // Lobby d'hôtel
+  'CAFE',        // Café
+  'RESTAURANT_BAR', // Restaurant-Bar
+  'THIRD_PLACE', // Tiers-lieu
+  'LIBRARY',     // Bibliothèque
+  'OTHER',       // Autre
+]);
+
+const EquipmentEnum = z.enum([
+  'ACCESSIBLE',
+  'PARKING',
+  'TERRACE',
+  'OUTLETS',
+  'BOOTH',
+]);
+
+const StepOneSchema = z.object({
+  name: z.string().min(1, 'Vous devez entrer un nom de lieu.'),
+  address: z.string().min(3, 'Vous devez entrer une adresse.'),
+  city: z.string().min(1, 'Vous devez entrer une ville.'),
+  phoneNumber: z.string().optional(),
+  website: z.string().optional(),
+  description: z
+    .string()
+    .min(10, "Vous devez entrer une description d'au moins 10 caractères."),
+  openingHours: z.array(openingHourFormat).optional(),
 });
+
+const StepTwoSchema = z.object({
+  establishmentType: EstablishmentTypeEnum,
+  espressoPrice: z
+    .string()
+    .optional()
+    .refine((data) => {
+      if (data === undefined || data === "") return true; // Laisser passer si vide ou undefined
+      const parsed = parseFloat(data);
+      return !isNaN(parsed) && parsed >= 0 && parsed <= 10; // Vérifier si c'est un nombre entre 0 et 10
+    }, {
+      message: "Le prix doit être un nombre valide entre 0 et 10.",
+    }),
+  facilities: z.array(EquipmentEnum).optional(), // Ici, on rend la sélection d'équipement optionnelle
+});
+
+const StepThreeSchema = z.object({
+  imageSelectedUrls: z.array(z.object({
+    id: z.number().optional(),
+    coverImage: z.boolean().optional(),
+    url: z.string(),
+  })),
+});
+
+const StepFourSchema = z.object({
+  musicLevel: z.array(z.enum(['NoMusic', 'DiscreteMusic', 'RandomMusic', 'LoudMusic'])).min(1, "Vous devez au moins sélectionner un choix").max(1, "Vous ne pouvez pas sélectionner plus d'un choix"),
+  workComfort: z.array(z.enum(['SoloDesk', 'SmallGroupDesk', 'LargeGroupDesk'])).min(1, "Vous devez au moins sélectionner un choix").max(3),
+  internetQuality: z.array(z.enum(['HighWifi', 'MediumWifi', 'LowWifi', 'NoWifi'])).min(1, "Vous devez au moins sélectionner un choix").max(1, "Vous ne pouvez pas sélectionner plus d'un choix"),
+  workspaceComposition: z.array(z.enum(['PrivateBooths', 'LargeTables'])).min(1, "Vous devez au moins sélectionner un choix").max(2),
+  hasToCall: z.array(z.enum(['CallFriendly', 'CallImpossible'])).min(1, "Vous devez au moins sélectionner un choix").max(1, "Vous ne pouvez pas sélectionner plus d'un choix"),
+  drinksAndFood: z.array(z.enum(['Snacks', 'Meals', 'SoftDrinks', 'AlcoholicDrinks'])).min(1, "Vous devez au moins sélectionner un choix").max(4),
+});
+
+const StepFiveSchema = z.object({
+  reviewContent: z
+    .string()
+    .min(10, 'Votre avis doit contenir au moins 10 caractères.'),
+  calmRating: z.number().min(1).max(5),
+  equipRating: z.number().min(1).max(5),
+  foodRating: z.number().min(1).max(5),
+  feelingRating: z.number().min(1).max(5),
+});
+
+export const AddPlaceSchema = StepOneSchema.merge(StepTwoSchema).merge(StepThreeSchema).merge(StepFourSchema).merge(StepFiveSchema);
 
 export type AddPlaceSchemaType = z.infer<typeof AddPlaceSchema>;
+
+export type ExtendedAddPlaceSchemaType = AddPlaceSchemaType & {
+    placeId: string;
+    longitude: number;
+    latitude: number;
+};

@@ -1,19 +1,16 @@
-import { authMiddleware } from '@clerk/nextjs';
+import { withAuth } from 'next-auth/middleware';
 
-export default authMiddleware({
-    publicRoutes: [
-        '/',
-        '/ajouter-spot',
-        '/api/contact',
-        '/about',
-        '/cities/',
-        '/explore',
-        '/explore/(.*)',
-        '/api/clerkWebhook',
-    ],
-    ignoredRoutes: ['/api/clerkWebhook'],
+export default withAuth({
+    callbacks: {
+        authorized: ({ req, token }) => {
+            if (req.nextUrl.pathname.startsWith('/admin')) {
+                return token?.role === 'admin';
+            }
+            return !!token;
+        },
+    },
 });
 
 export const config = {
-    matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+    matcher: ['/admin', '/profile', '/protected/:path*'],
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import { AlertTriangle } from 'lucide-react';
 import { FieldError, useFormContext } from 'react-hook-form';
 interface InputFieldProps {

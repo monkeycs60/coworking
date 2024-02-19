@@ -34,7 +34,7 @@ const DisplayFilteredCoworking = ({
 
     return (
         <div className='flex flex-col gap-8 lg:gap-12'>
-            <h1 className='font-signatra text-3xl'>{citySelected}</h1>
+            <h1 className='text-3xl'>{citySelected}</h1>
             <div className='relative flex w-full flex-col gap-[20px] lg:flex-row'>
                 <SideBarFilter />
                 <div className='relative hidden h-[400px] w-full  lg:block lg:h-[700px] lg:w-[72%]'>

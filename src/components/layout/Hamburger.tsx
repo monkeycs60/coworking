@@ -2,13 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
-import {
-    SignOutButton,
-    useAuth,
-    SignInButton,
-    SignUpButton,
-    UserButton,
-} from '@clerk/nextjs';
+import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 interface HamburgerProps {
@@ -19,7 +13,7 @@ const Hamburger = ({
     isHamburgerOpen,
     toggleHamburgerMenu,
 }: HamburgerProps) => {
-    const { userId } = useAuth();
+    const { status } = useSession();
 
     const variants = {
         open: { opacity: 1, y: 0 },
@@ -33,80 +27,68 @@ const Hamburger = ({
             exit='exit'
             variants={variants}
             transition={{ duration: 0.5 }}
-            className='fixed left-0 top-0 z-[100] h-screen w-screen overflow-hidden bg-white font-inter'
+            className='fixed left-0 top-0 z-[100] h-screen w-screen overflow-hidden bg-primary/95'
         >
             <div className=' flex h-full flex-col  justify-center p-12 text-center text-lg font-semibold sm:text-xl '>
                 <div className='flex flex-col gap-6'>
-                    <Link
-                        href={'/about'}
-                        className='linkHoverEffect'
-                        onClick={toggleHamburgerMenu}
-                    >
-                        A propos
-                    </Link>
                     <Link
                         href={'/'}
                         className='linkHoverEffect'
                         onClick={toggleHamburgerMenu}
                     >
-                        FAQ
+                        Accueil
                     </Link>
                     <Link
-                        href={'/explore'}
+                        href={'/ajouter-lieu'}
                         className='linkHoverEffect'
                         onClick={toggleHamburgerMenu}
                     >
-                        Explorer
-                    </Link>
-                    <Link
-                        href={'/ajouter-spot'}
-                        className='linkHoverEffect'
-                        onClick={toggleHamburgerMenu}
-                    >
-                        Ajouter un spot
+                        Ajouter un lieu
                     </Link>
                 </div>
 
-                {userId ? (
+                {(status === 'authenticated') ? (
                     <div className='hamburger-connect-shadow bg mt-24 flex flex-col items-center gap-4 p-6 shadow-xl drop-shadow-xl'>
-                        <div className='flex gap-2'>
-                            <p>Profil :</p>
-                            <UserButton />
+                        <Link
+                            href={'/profile'}
+                            className='linkHoverEffect'
+                            onClick={toggleHamburgerMenu}
+                        >
+                            Profil
+                        </Link>
+                        <div className='linkHoverEffect' onClick={
+                            () => signOut()
+                        }>
+                            <span>Se déconnecter</span>
                         </div>
-                        <SignOutButton>
-                            <div className='linkHoverEffect'>
-                                <span>Se déconnecter</span>
-                            </div>
-                        </SignOutButton>
                     </div>
                 ) : (
                     <div className='hamburger-connect-shadow bg mt-24 flex flex-col gap-4 p-6 shadow-xl drop-shadow-xl'>
-                        <SignInButton>
-                            <div
-                                className='linkHoverEffect'
-                                onClick={toggleHamburgerMenu}
-                            >
-                                <span>Se connecter</span>
-                            </div>
-                        </SignInButton>
+                        <Link
+                            href={'/sign-in'}
+                            className='linkHoverEffect'
+                            onClick={toggleHamburgerMenu}
+                        >
+                            <span>Se connecter</span>
+                        </Link>
 
-                        <SignUpButton>
-                            <div
-                                className='linkHoverEffect'
-                                onClick={toggleHamburgerMenu}
-                            >
-                                <span>S&apos;inscrire</span>
-                            </div>
-                        </SignUpButton>
+                        <Link
+                            href={'/sign-up'}
+                            className='linkHoverEffect'
+                            onClick={toggleHamburgerMenu}
+                        >
+                            <span>S'inscrire</span>
+                        </Link>
+
                     </div>
                 )}
             </div>
             <X
                 size={40}
-                className='absolute right-3 top-4'
+                className='absolute right-6 top-7'
                 onClick={toggleHamburgerMenu}
             />
-        </motion.section>
+        </motion.section >
     );
 };
 

@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { authMiddleware } from '../middlewares/authMiddleware';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 
 export async function PUT(req: NextRequest, res: NextResponse) {
-    const authResponse = await authMiddleware(req);
-    if (authResponse) return authResponse; // Return if there's any response from the middleware
+    // const authResponse = await authMiddleware(req);
+    // if (authResponse) return authResponse; // Return if there's any response from the middleware
     try {
         if (req.body) {
             const { expressoPrice, placeId } = await req.json();

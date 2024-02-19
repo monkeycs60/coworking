@@ -1,4 +1,10 @@
-import { Review } from '@/types/coworking';
+type Review = {
+    id: string;
+    calmRating: number;
+    equipRating: number;
+    foodRating: number;
+    feelingRating: number;
+};
 
 // Calcule la moyenne des notes pour un avis donné
 export const averageRatingFromReviews = (reviews: Review[]) => {

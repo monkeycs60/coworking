@@ -9,8 +9,6 @@ import {
 
 export const useFetchReduxPlaceDetails = (placeId: string | null) => {
     const dispatch = useAppDispatch();
-    const details = useAppSelector((state) => state);
-    console.log(details);
 
     useEffect(() => {
         const fetchPlaceDetails = async () => {

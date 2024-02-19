@@ -1,10 +1,15 @@
 'use client';
 
 import useSearchCity from '@/hooks/useSearchCity';
+import { Search } from 'lucide-react';
 import {
     setSelectedCity,
     setInputSearch,
 } from '@/redux/features/citySearch-slice';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { useAppSelector } from '@/hooks/useRedux';
+import { useRouter } from 'next/navigation';
 
 interface City {
     city: string;
@@ -27,12 +32,20 @@ const CityInput = ({ cities }: CityInputProps) => {
         setSelectedCity,
     } = useSearchCity();
 
+    const citySelected = useAppSelector(
+        (state) => state.citySearch.selectedCity,
+    );
+
+    const router = useRouter();
+
+
     return (
-        <div className='w-full lg:w-auto '>
+        <div className='relative m-auto mt-16 flex h-[60px] w-[95%] flex-col items-center justify-center text-black lg:h-[60px] lg:w-[55%] 3xl:mt-32 3xl:h-[70px]'>
+            <Search className='lg:bloch absolute left-3 z-[50] hidden text-black lg:left-4 ' />
             <input
                 type='text'
-                placeholder='Entrez une ville'
-                className='w-full rounded-xl border-2 border-gray-500 px-4 py-2 indent-8 sm:py-4 sm:indent-12 sm:text-xl lg:w-[430px] lg:px-12 lg:py-2 lg:indent-0 lg:text-lg  2xl:py-3'
+                placeholder='Chercher une ville où coworker gratuitement'
+                className='absolute h-full w-full rounded-full pl-5 placeholder:text-sm lg:py-2 lg:pl-16 lg:indent-0 lg:text-lg lg:placeholder:text-base 2xl:py-3  3xl:placeholder:text-lg'
                 onClick={() => setShowDropdown(!showDropdown)}
                 onChange={(e) => dispatch(setInputSearch(e.target.value))}
                 ref={inputRef}
@@ -40,13 +53,13 @@ const CityInput = ({ cities }: CityInputProps) => {
             />
             {showDropdown && (
                 <div
-                    className='absolute z-40 mt-[1px] max-h-[22vh] w-full overflow-y-auto rounded-xl border bg-gray-300 pl-2 lg:top-auto lg:h-80 lg:w-[430px] 3xl:max-h-[16vh]'
+                    className='absolute top-[61px] z-40 max-h-80 w-[97%]  overflow-y-auto rounded-xl border bg-gray-300 pl-2 3xl:top-[72px]  '
                     ref={dropdownRef}
                 >
                     {sortedCities({ cities }).map((cityObj) => (
                         <div
                             key={cityObj.city}
-                            className='p-2 hover:bg-gray-200'
+                            className='cursor-pointer p-2 hover:bg-gray-200'
                             onClick={() => {
                                 dispatch(setSelectedCity(cityObj.city));
                                 dispatch(setInputSearch(cityObj.city));
@@ -54,11 +67,31 @@ const CityInput = ({ cities }: CityInputProps) => {
                                 setShowDropdown(false);
                             }}
                         >
-                            {cityObj.city} ({cityObj.count})
+                            {cityObj.city} -  {cityObj.count} lieu{cityObj.count > 1 ? "x" : ""} où coworker gratuitement
                         </div>
                     ))}
                 </div>
             )}
+            <Button variant="default" className='absolute right-2 hidden px-12 py-6 font-normal lg:flex 3xl:px-16 3xl:py-7 3xl:text-lg' onClick={(
+                e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+            ) => {
+                e.preventDefault();
+                router.push(`/explore/${citySelected}`);
+            }} >
+                <Link href='/city'>
+                    Rechercher
+                </Link>
+            </Button>
+            <Button variant="default" className='absolute right-2 flex px-4 py-6 font-normal lg:hidden 3xl:px-16 3xl:py-7 3xl:text-lg' onClick={(
+                e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+            ) => {
+                e.preventDefault();
+                router.push(`/explore/${citySelected}`);
+            }} >
+                <Link href='/city'>
+                    <Search className=' ' />
+                </Link>
+            </Button>
         </div>
     );
 };

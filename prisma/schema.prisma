@@ -11,19 +11,47 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model User {
   id            String    @id @default(cuid())
-  birthday                   String?       // Optional since it's empty in the example
-  email                      String?        @unique
-  externalId                 String?
-  firstName                  String?
-  lastName                   String?
-  name                       String?
-  createdAt     DateTime?
-  lastSignInAt  DateTime?
-  profileImageUrl            String?
-  username                   String?   
+  city                       String?
+  username                   String?        @unique   
+  password                   String?
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
   image         String?
+  accounts      Account[]
+  sessions      Session[]
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   comments      Comment[]
   posts        Post[] 
   reviews       Review[]
@@ -40,51 +68,34 @@ model VerificationToken {
 }
 
 model Coworking {
-  id            String    @id @default(cuid())
-  userId       String?
-  user         User?      @relation(fields: [userId], references: [id])
-  placeId       String?  @unique    
-  longitude     Float?
-  latitude      Float?
-  name          String
-  address       String
-  city          String
-  phoneNumber   String?
-  website       String?
-  description   String
-  openingHours  OpeningHour[]
-  imagesSelected imageSelected[]
-  userImages   UserImage[] 
-  comments      Comment[]
-  espressoPrice   String? 
-  facility FacilityType?
-  hasPrivacy      Boolean @default(false)
-  hasParking      Boolean @default(false)
-  hasWiFi      Boolean @default(false)
-  hasExterior     Boolean @default(false)
-  hasPlugs        Boolean @default(false)
-  hasHandicap     Boolean @default(false)
-  smallTables     Boolean @default(false)
-  largeWorktables     Boolean @default(false)
-  counterSeats     Boolean @default(false)
-  standingTables     Boolean @default(false)
-  outdoorSeating     Boolean @default(false)
-  soloCoworker     Boolean @default(false)
-  smallGroup     Boolean @default(false)
-  bigGroup     Boolean @default(false)
-  morningDuration     Boolean @default(false)
-  afternoonDuration     Boolean @default(false)
-  fullDuration     Boolean @default(false)
-  snacksPossibility     Boolean @default(false)
-  lunchPossibility     Boolean @default(false)
-  souperPossibility     Boolean @default(false)
-  drinksPossibility     Boolean @default(false)
-  alcoolPossibility     Boolean @default(false)
-  wifiQuality      WifiQualityType? 
-  music            MusicType? 
-  reviews       Review[]
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  id               String          @id @default(cuid())
+  userId           String         // This is the ID of the user who created the place.
+  user             User           @relation(fields: [userId], references: [id])
+  placeId          String         @unique    
+  longitude        Float
+  latitude         Float
+  name             String
+  address          String
+  city             String
+  phoneNumber      String?
+  website          String?
+  description      String
+  openingHours     OpeningHour[]
+  imageSelectedUrls   imageSelectedUrls[]
+  userImages       UserImage[] 
+  musicLevel       MusicLevel[]
+  internetQuality  InternetQuality[]
+  workComfort          WorkComfort[]
+  workspaceComposition WorkspaceComposition[]
+  hasToCall            HasToCall[]
+  drinksAndFood        DrinksAndFood[]
+  comments         Comment[]
+  espressoPrice    String? 
+  establishmentType EstablishmentType?
+  facilities       FacilityType[] // Assuming many-to-many relation
+  reviews          Review[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 
   @@index([createdAt])
 }
@@ -99,7 +110,69 @@ model OpeningHour {
     updatedAt   DateTime  @updatedAt
 }
 
+model imageSelectedUrls {
+  id          String    @id @default(cuid())
+  url         String
+  coverImage  Boolean   @default(false)
+  coworkingId String
+  coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
 
+enum EstablishmentType {
+  HOTEL_LOBBY
+  CAFE
+  RESTAURANT_BAR
+  THIRD_PLACE
+  LIBRARY
+  OTHER
+}
+
+enum FacilityType {
+  ACCESSIBLE
+  PARKING
+  TERRACE
+  OUTLETS
+  BOOTH
+}
+
+enum MusicLevel {
+  NoMusic
+  DiscreteMusic
+  RandomMusic
+  LoudMusic
+}
+
+enum InternetQuality {
+  HighWifi
+  MediumWifi
+  LowWifi
+  NoWifi
+}
+
+enum WorkComfort {
+  SoloDesk
+  SmallGroupDesk
+  LargeGroupDesk
+}
+
+enum WorkspaceComposition {
+  PrivateBooths
+  LargeTables
+}
+
+enum HasToCall {
+  CallFriendly
+  CallImpossible
+}
+
+enum DrinksAndFood {
+  Snacks
+  Meals
+  SoftDrinks
+  AlcoholicDrinks
+}
 
 model Comment {
   id       String @id @default(cuid())
@@ -121,15 +194,6 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model imageSelected {
-  id          String    @id @default(cuid())
-  url         String
-  coworkingId String
-  coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
 }
 
 model UserImage {
@@ -161,23 +225,10 @@ model Review {
     @@unique([userId, coworkingId])
 }
 
-enum FacilityType {
-  IS_CAFE
-  IS_HOTEL
-  IS_LIBRARY
-  IS_THIRD_SPACE
-  IS_OTHER_TYPE
+enum Role {
+  USER
+  MODERATOR
+  ADMIN
 }
 
-enum WifiQualityType {
-  HIGH_WIFI
-  MEDIUM_WIFI
-  LOW_WIFI
-}
 
-enum MusicType {
-  NO_MUSIC
-  DISCRETE_MUSIC
-  RANDOM_MUSIC
-  LOUD_MUSIC
-}

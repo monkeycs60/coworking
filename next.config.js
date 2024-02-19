@@ -34,7 +34,7 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'img.clerk.com', // Ajout du nouveau modèle distant ici
+                hostname: 'coworking-malin-bucket.s3.eu-west-3.amazonaws.com', // Ajout du nouveau modèle distant ici
                 port: '',
                 pathname: '/**',
             },

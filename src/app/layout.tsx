@@ -1,7 +1,9 @@
 import { Providers } from '@/redux/provider';
+import AuthProvider from '@/components/auth/AuthProvider';
+import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
-import { ClerkProvider } from '@clerk/nextjs';
-import { frFR } from '@clerk/localizations';
+import { EdgeStoreProvider } from '@/lib/edgestore';
+
 import NavBar from '../components/layout/NavBar';
 import Footer from '@/components/layout/Footer';
 
@@ -16,18 +18,21 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <ClerkProvider localization={frFR}>
-            <html lang='fr'>
-                <body className='m-auto flex max-w-[1200px] justify-center overflow-x-hidden font-inter 2xl:max-w-[1400px]'>
+        <html lang='fr'>
+            <body className='m-auto flex min-h-screen w-screen max-w-[100vw] flex-col  justify-between overflow-x-hidden bg-[#ebebeb] font-general text-white'>
+                <AuthProvider>
                     <Providers>
-                        <div className='w-full'>
-                            <NavBar />
-                            {children}
-                            <Footer />
-                        </div>
+                        <EdgeStoreProvider>
+                            <div className='flex min-h-screen w-full flex-col justify-between'>
+                                <NavBar />
+                                {children}
+                                <Footer />
+                            </div>
+                            <Toaster />
+                        </EdgeStoreProvider>
                     </Providers>
-                </body>
-            </html>
-        </ClerkProvider>
+                </AuthProvider>
+            </body>
+        </html>
     );
 }
