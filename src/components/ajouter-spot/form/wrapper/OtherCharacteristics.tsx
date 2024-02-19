@@ -16,7 +16,7 @@ const OtherCharacteristics = ({ errors }: {
     { value: 'PARKING', label: 'Parking' },
     { value: 'TERRACE', label: 'Terrasse' },
     { value: 'OUTLETS', label: 'Prises' },
-    { value: 'BOOTH', label: 'Isoloir' }, // Changed from 'VOTING_BOOTH' to 'BOOTH' to match the schema
+    { value: 'BOOTH', label: 'Isoloir' }, 
   ];
 
   const handleEspressoPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
