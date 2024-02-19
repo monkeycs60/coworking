@@ -3,23 +3,15 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { Prediction, Place } from '@/types/placePredictions';
-import { useAppDispatch, useAppSelector } from './useRedux';
-import {
-    setInput,
-    setPredictions,
-    resetAutocomplete,
-} from '@/redux/features/autoComplete-slice';
+import { useAutocompleteStore } from '@/zustand/stores/autoCompleteStore';
 
 export const useFetchAutocomplete = () => {
-    const dispatch = useAppDispatch();
-    const reduxStore = useAppSelector((state) => state);
+    const { input, predictions, setInput, setPredictions, resetAutocomplete } =
+        useAutocompleteStore();
 
-    const inputField = useAppSelector((state) => state.autoComplete.input);
-    const predictions = useAppSelector(
-        (state) => state.autoComplete.predictions,
-    );
+    console.log(input, predictions, setInput, setPredictions);
 
-    const [debouncedInput] = useDebounce(inputField, 250);
+    const [debouncedInput] = useDebounce(input, 250);
 
     useEffect(() => {
         const fetchAutocomplete = async () => {
@@ -35,15 +27,17 @@ export const useFetchAutocomplete = () => {
                 label: pred.description,
             }));
 
-            dispatch(setPredictions(places));
+            setPredictions(places);
         };
 
         fetchAutocomplete();
-    }, [debouncedInput, dispatch]);
+    }, [debouncedInput, setPredictions]);
 
     return {
-        inputField,
+        input,
         predictions,
-        setInput: (input: string) => dispatch(setInput(input)).payload,
+        setInput,
+        setPredictions,
+        resetAutocomplete,
     };
 };

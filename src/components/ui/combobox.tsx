@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useFetchAutocomplete } from '@/hooks/useFetchAutocomplete';
-import { useFetchReduxPlaceDetails } from '@/hooks/useFetchReduxPlaceDetails';
+import { useFetchStorePlaceDetails } from '@/hooks/useFetchStorePlaceDetails';
 import { Place } from '@/types/placePredictions';
 import { X } from 'lucide-react';
 import { resetPredictions } from '@/redux/features/autoComplete-slice';
@@ -13,14 +13,14 @@ interface ComboBoxProps {
 }
 
 export function ComboBox({ onSelect }: ComboBoxProps) {
-    const dispatch = useAppDispatch();
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
     const inputRef = useRef<HTMLDivElement>(null);
 
-    const { inputField, predictions, setInput } = useFetchAutocomplete();
-    const placeDetails = useFetchReduxPlaceDetails(selectedPlace);
+    const { input, predictions, setInput, resetAutocomplete } =
+        useFetchAutocomplete();
+    const placeDetails = useFetchStorePlaceDetails(selectedPlace);
 
     const handleSelect = (place: Place) => {
         setIsOpen(false);
@@ -54,20 +54,20 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
             <div className='relative'>
                 <input
                     type='text'
-                    value={inputField}
+                    value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onFocus={() => setIsOpen(true)}
                     placeholder='Rechercher un lieu...'
                     className='z-[60] h-14 w-full rounded-xl border border-gray-300 bg-white pl-3 pr-10 shadow-sm placeholder:indent-6 placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-indigo-500 '
                 />
-                {inputField && (
+                {input && (
                     <X
                         className='absolute right-4 top-1/2 h-6 w-6 -translate-y-1/2 cursor-pointer text-black/50'
                         onClick={() => {
                             setIsOpen(false);
                             setSelectedPlace(null);
                             setInput('');
-                            dispatch(resetPredictions());
+                            resetAutocomplete();
                         }}
                     />
                 )}
@@ -98,9 +98,7 @@ export function ComboBox({ onSelect }: ComboBoxProps) {
                                 padding: '10px',
                                 cursor: 'pointer',
                                 backgroundColor:
-                                    inputField === place.label
-                                        ? '#f0f0f0'
-                                        : 'white',
+                                    input === place.label ? '#f0f0f0' : 'white',
                             }}
                         >
                             {place.label}
