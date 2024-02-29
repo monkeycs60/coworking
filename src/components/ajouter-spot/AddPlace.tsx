@@ -44,8 +44,6 @@ const AddPlace = () => {
         decrementStep,
     } = useAddCoworkingStore();
 
-    console.log(characteristics);
-
     const [currentStep, { goToNextStep, goToPrevStep, setStep }] = useStep(5);
 
     const placeDetails = usePlaceDetailsStore((state) => state.details);
@@ -84,16 +82,41 @@ const AddPlace = () => {
         },
     ];
 
+    const adjustedStep = stepNumber === 3 ? 2 : 4 ? 3 : stepNumber;
+    console.log('adjustedStep', adjustedStep);
+
+    let realStep;
+
+    switch (stepNumber) {
+        case 1:
+            realStep = 0;
+            break;
+        case 2:
+            realStep = 1;
+            break;
+        case 3:
+            realStep = 1;
+            break;
+        case 4:
+            realStep = 2;
+            break;
+        case 5:
+            realStep = 3;
+            break;
+        case 6:
+            realStep = 4;
+            break;
+        default:
+            realStep = 0;
+    }
+
     return (
         <>
             <div className='flex flex-col items-center justify-center gap-8 w-[60rem] bg-slate-200'>
-                <Stepper activeStep={currentStep} alternativeLabel >
+                <Stepper activeStep={realStep} alternativeLabel>
                     {steps.map((step) => (
                         <Step key={step.id}>
                             <StepLabel>{step.name}</StepLabel>
-                            <StepContent>
-                                <Typography>{step.subtitle}</Typography>
-                            </StepContent>
                         </Step>
                     ))}
                 </Stepper>

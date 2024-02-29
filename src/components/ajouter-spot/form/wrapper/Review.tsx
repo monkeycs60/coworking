@@ -7,9 +7,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider } from 'react-hook-form';
 import { ReviewSchema, ReviewType } from '@/types/place/review';
 import { useAddCoworkingStore } from '@/zustand/stores/coworkingStore';
+import { set } from 'zod';
 
 const Review = () => {
-    const { updateStep, incrementStep } = useAddCoworkingStore();
+    const { updateStep, incrementStep, stepNumber } = useAddCoworkingStore();
     const methods = useForm<ReviewType>({
         resolver: zodResolver(ReviewSchema),
     });
@@ -28,6 +29,7 @@ const Review = () => {
                     console.log('Success:', data);
                     updateStep(4, data);
                     incrementStep();
+                    stepNumber === 1;
                 })
                 .catch((error) => {
                     console.error('Error:', error);
