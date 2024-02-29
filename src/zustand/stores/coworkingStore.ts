@@ -87,7 +87,12 @@ export const useAddCoworkingStore = create<FormState>((set) => ({
                 case 2:
                     return { uploadedImages: data as UploadedImagesType };
                 case 3:
-                    return { experience: data as ExperienceType };
+                    return {
+                        experience: {
+                            ...state.experience,
+                            ...data,
+                        } as ExperienceType,
+                    };
                 case 4:
                     return { review: data as ReviewType };
                 default:

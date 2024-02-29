@@ -1,14 +1,35 @@
-"use client"
+'use client';
 
 import React, { useEffect } from 'react';
 import { TreeDeciduous } from 'lucide-react';
-import { Experience, MusicLevel, WorkComfort, InternetQuality, WorkspaceComposition, HasToCall, DrinksAndFood } from '@/redux/features/placeDetails-slice';
+import {
+    Experience,
+    MusicLevel,
+    WorkComfort,
+    InternetQuality,
+    WorkspaceComposition,
+    HasToCall,
+    DrinksAndFood,
+} from '@/redux/features/placeDetails-slice';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import { setMusicLevel, setInternetQuality, setDrinksAndFood, setHasToCall, setWorkspaceComposition, setWorkComfort } from '@/redux/features/placeDetails-slice';
+import {
+    setMusicLevel,
+    setInternetQuality,
+    setDrinksAndFood,
+    setHasToCall,
+    setWorkspaceComposition,
+    setWorkComfort,
+} from '@/redux/features/placeDetails-slice';
 import { useFormContext } from 'react-hook-form';
+import { useAddCoworkingStore } from '@/zustand/stores/coworkingStore';
 
-
-type ExperienceValue = MusicLevel | WorkComfort | InternetQuality | WorkspaceComposition | HasToCall | DrinksAndFood;
+type ExperienceValue =
+    | MusicLevel
+    | WorkComfort
+    | InternetQuality
+    | WorkspaceComposition
+    | HasToCall
+    | DrinksAndFood;
 
 interface MultipleChoiceButtonProps {
     name: keyof Experience;
@@ -18,18 +39,23 @@ interface MultipleChoiceButtonProps {
     maxChoices: number;
 }
 
-const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceButtonProps) => {
-    const dispatch = useAppDispatch();
-    const experience = useAppSelector(state => state.placeDetails.experience);
+const MultipleChoice = ({
+    name,
+    value,
+    label,
+    maxChoices,
+    svg,
+}: MultipleChoiceButtonProps) => {
+    const { experience, updateStep } = useAddCoworkingStore();
+    console.log('experience', experience);
 
     const { control, setValue } = useFormContext();
 
     useEffect(() => {
-        (Object.keys(experience) as Array<keyof Experience>).forEach(key => {
+        (Object.keys(experience) as Array<keyof Experience>).forEach((key) => {
             setValue(key, experience[key]);
         });
     }, [experience, setValue]);
-
 
     const isSelected = experience[name]?.includes(value as never) || false;
 
@@ -39,15 +65,22 @@ const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceB
 
         // First, ensure that `experienceArray` is indeed an array.
         if (!Array.isArray(experienceArray)) {
-            console.error(`Expected an array for experience['${name}'], but got:`, experienceArray);
+            console.error(
+                `Expected an array for experience['${name}'], but got:`,
+                experienceArray,
+            );
             return;
         }
 
         // Now TypeScript knows that `experienceArray` is an array, and we can call `filter`.
         const updatedValues: ExperienceValue[] = isSelected
-            ? (experience[name] as ExperienceValue[]).filter(item => item !== value)
-            : [...(experience[name] as ExperienceValue[]), value] as ExperienceValue[];
-
+            ? (experience[name] as ExperienceValue[]).filter(
+                  (item) => item !== value,
+              )
+            : ([
+                  ...(experience[name] as ExperienceValue[]),
+                  value,
+              ] as ExperienceValue[]);
 
         console.log('updatedValues', updatedValues);
 
@@ -59,27 +92,30 @@ const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceB
 
             // and add the new value
             // updatedValues.push(value);
-
         }
 
         switch (name) {
             case 'musicLevel':
-                dispatch(setMusicLevel(updatedValues as MusicLevel[]));
+                updateStep(3, {
+                    musicLevel: updatedValues,
+                } as Experience);
                 break;
             case 'workComfort':
-                dispatch(setWorkComfort(updatedValues as WorkComfort[]));
+                updateStep(3, { workComfort: updatedValues } as Experience);
                 break;
             case 'internetQuality':
-                dispatch(setInternetQuality(updatedValues as InternetQuality[]));
+                updateStep(3, { internetQuality: updatedValues } as Experience);
                 break;
             case 'workspaceComposition':
-                dispatch(setWorkspaceComposition(updatedValues as WorkspaceComposition[]));
+                updateStep(3, {
+                    workspaceComposition: updatedValues,
+                } as Experience);
                 break;
             case 'hasToCall':
-                dispatch(setHasToCall(updatedValues as HasToCall[]));
+                updateStep(3, { hasToCall: updatedValues } as Experience);
                 break;
             case 'drinksAndFood':
-                dispatch(setDrinksAndFood(updatedValues as DrinksAndFood[]));
+                updateStep(3, { drinksAndFood: updatedValues } as Experience);
                 break;
         }
     };
@@ -89,7 +125,7 @@ const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceB
     return (
         <label style={buttonStyle}>
             <input
-                type="checkbox"
+                type='checkbox'
                 value={value}
                 checked={isSelected}
                 onChange={handleChange}
