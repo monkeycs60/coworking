@@ -1,8 +1,7 @@
-"use client"
+'use client';
 
-import StarRating from "./StarRating";
-import { useFormContext, Controller, FieldErrors } from 'react-hook-form';
-import { AddPlaceSchemaType } from '@/types/addPlace';
+import StarRating from './StarRating';
+import { useFormContext, Controller } from 'react-hook-form';
 
 export interface RatingConfig {
     label: string;
@@ -11,16 +10,14 @@ export interface RatingConfig {
 }
 
 interface RatingSystemProps {
-    errors: Partial<FieldErrors<AddPlaceSchemaType>>;
     ratingsConfig: RatingConfig[];
-
 }
 
-const RatingSystem = ({ errors,
-    ratingsConfig,
-}: RatingSystemProps) => {
-
-    const { control } = useFormContext<AddPlaceSchemaType>();
+const RatingSystem = ({ ratingsConfig }: RatingSystemProps) => {
+    const {
+        control,
+        formState: { errors },
+    } = useFormContext();
     return (
         <div>
             {ratingsConfig.map((rating) => (

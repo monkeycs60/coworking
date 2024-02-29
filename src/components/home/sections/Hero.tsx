@@ -10,7 +10,7 @@ const Hero = async () => {
     return (
         <section className='hero-bg h-screen pt-[80px] 3xl:pt-[100px] '>
             <div>
-                <div className='flex flex-col items-center justify-center pt-28 tracking-wider 3xl:pt-64'>
+                <div className='flex flex-col items-center justify-center pt-28 tracking-wider xl:pt-52 3xl:pt-64'>
                     <h1 className='text-center text-5xl font-bold lg:text-start lg:text-6xl 3xl:text-8xl'>Coworker sans se ruiner</h1>
                     <h2 className='hidden text-xl lg:block 3xl:text-3xl'>Rencontrer de nouvelles personnes, découvrir de nouveaux lieux </h2>
                 </div>

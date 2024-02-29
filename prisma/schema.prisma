@@ -71,7 +71,7 @@ model Coworking {
   id               String          @id @default(cuid())
   userId           String         // This is the ID of the user who created the place.
   user             User           @relation(fields: [userId], references: [id])
-  placeId          String         @unique    
+  placeId          String         @unique
   longitude        Float
   latitude         Float
   name             String
@@ -79,7 +79,10 @@ model Coworking {
   city             String
   phoneNumber      String?
   website          String?
-  description      String
+  description      String?
+  establishmentType EstablishmentType
+  espressoPrice    String?
+  facilities       FacilityType[]
   openingHours     OpeningHour[]
   imageSelectedUrls   imageSelectedUrls[]
   userImages       UserImage[] 
@@ -90,9 +93,6 @@ model Coworking {
   hasToCall            HasToCall[]
   drinksAndFood        DrinksAndFood[]
   comments         Comment[]
-  espressoPrice    String? 
-  establishmentType EstablishmentType?
-  facilities       FacilityType[] // Assuming many-to-many relation
   reviews          Review[]
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
@@ -100,12 +100,13 @@ model Coworking {
   @@index([createdAt])
 }
 
+
 model OpeningHour {
     id          String    @id @default(cuid())
-    coworkingId String    @map("coworking_id")
+    coworkingId String
     coworking   Coworking @relation(fields: [coworkingId], references: [id], onDelete: Cascade)
-    openTime    String?    // Heure d'ouverture (format HH:MM)
-    closeTime   String?    // Heure de fermeture (format HH:MM)
+    openTime    String?   
+    closeTime   String? 
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
 }

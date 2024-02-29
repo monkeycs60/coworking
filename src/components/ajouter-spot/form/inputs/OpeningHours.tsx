@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import OpeningHoursInput from './OpeningHoursInput';
@@ -5,16 +7,16 @@ import useOpeningHours from '@/hooks/useOpeningHours';
 import { PlaceDetail } from '@/types/placeDetails';
 import { FieldErrors } from 'react-hook-form';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
+import { useFormContext } from 'react-hook-form';
 
-interface OpeningHoursProps {
-    placeDetails: PlaceDetail;
-    errors: FieldErrors<any>;
-}
 
-const OpeningHours = ({ placeDetails, errors }: OpeningHoursProps) => {
+const OpeningHours = () => {
     const [showDays, setShowDays] = useState(false);
-    const openingTableForWeek = useOpeningHours(placeDetails);
-    console.log('openingTableForWeek', errors);
+    const openingTableForWeek = useOpeningHours();
+
+    const {
+        formState: { errors },
+    } = useFormContext<PlaceDetail>();
 
     return (
         <div className='flex w-full flex-col gap-2'>

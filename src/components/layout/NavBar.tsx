@@ -9,8 +9,9 @@ import Hamburger from './Hamburger';
 import { AnimatePresence } from 'framer-motion';
 import useLogoSize from '@/hooks/useLogoSize';
 import { useSession } from 'next-auth/react';
-import { usePathname } from 'next/navigation'
-
+import { usePathname } from 'next/navigation';
+import { useAddCoworkingStore } from '@/zustand/stores/coworkingStore';
+import { useForm } from 'react-hook-form';
 
 function NavBar() {
     const { isHamburgerOpen, toggleHamburgerMenu } = useHamburgerMenu();
@@ -19,7 +20,8 @@ function NavBar() {
 
     const { status } = useSession();
     const pathname = usePathname();
-    console.log('pathname', pathname);
+    const { resetForm } = useAddCoworkingStore();
+    const { reset } = useForm();
 
     return (
         <>
@@ -34,10 +36,19 @@ function NavBar() {
 
             <div
                 className={`fixed top-0 z-[80] flex h-[80px] w-full items-center justify-between gap-10 bg-primary/70 px-4 xl:px-20 3xl:lg:px-32 3xl:h-[100px] 
-			${scrollPosition > 50 || pathname !== "/" ? 'lg:bg-primary/70' : 'lg:bg-transparent'}`}
+			${
+                scrollPosition > 50 || pathname !== '/'
+                    ? 'lg:bg-primary/70'
+                    : 'lg:bg-transparent'
+            }`}
             >
                 <div className='flex w-full items-center justify-between px-4 lg:gap-14 lg:px-0'>
                     <Link
+                        onClick={() => {
+                            console.log('resetForm', resetForm);
+                            resetForm();
+                            reset();
+                        }}
                         href={'/'}
                         className='flex items-center justify-center gap-4 sm:gap-10'
                     >
@@ -51,33 +62,51 @@ function NavBar() {
                     </Link>
                     <ul className='hidden items-center justify-center gap-12 font-semibold lg:flex 2xl:pl-4 2xl:text-base 3xl:pl-4'>
                         <li className='linkHoverEffect'>
-                            <Link href={'/ajouter-lieu'} className='text-sm 3xl:text-base'>Ajouter un nouveau lieu</Link>
+                            <Link
+                                href={'/ajouter-lieu'}
+                                className='text-sm 3xl:text-base'
+                            >
+                                Ajouter un nouveau lieu
+                            </Link>
                         </li>
                         <li className=''>
                             {status === 'authenticated' ? (
-                                <Button variant={scrollPosition > 50 ? 'secondary' : 'default'} className='px-6 py-3 text-sm 3xl:px-8 3xl:py-5 3xl:text-base'>
-                                    <Link href='/profile'>
-                                        Profil
-                                    </Link>
+                                <Button
+                                    variant={
+                                        scrollPosition > 50
+                                            ? 'secondary'
+                                            : 'default'
+                                    }
+                                    className='px-6 py-3 text-sm 3xl:px-8 3xl:py-5 3xl:text-base'
+                                >
+                                    <Link href='/profile'>Profil</Link>
                                 </Button>
                             ) : (
-                                <Button variant={scrollPosition > 50 ? 'secondary' : 'default'} className='px-6 py-3 text-sm 3xl:px-8 3xl:py-5 3xl:text-base'>
-                                    <Link href='/sign-in'>
-                                        Connexion
-                                    </Link>
+                                <Button
+                                    variant={
+                                        scrollPosition > 50
+                                            ? 'secondary'
+                                            : 'default'
+                                    }
+                                    className='px-6 py-3 text-sm 3xl:px-8 3xl:py-5 3xl:text-base'
+                                >
+                                    <Link href='/sign-in'>Connexion</Link>
                                 </Button>
                             )}
                         </li>
-                    </ul >
+                    </ul>
                     <div className='block lg:hidden'>
-                        <Image src={'/images/hamburger.svg'} className='h-6 w-6' alt='hamburger menu' width={56} height={48}
+                        <Image
+                            src={'/images/hamburger.svg'}
+                            className='h-6 w-6'
+                            alt='hamburger menu'
+                            width={56}
+                            height={48}
                             onClick={toggleHamburgerMenu}
-
                         />
                     </div>
-                </div >
-
-            </div >
+                </div>
+            </div>
         </>
     );
 }

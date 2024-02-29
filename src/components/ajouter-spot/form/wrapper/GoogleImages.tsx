@@ -19,7 +19,7 @@ import {
     UploadedImagesType,
 } from '@/types/place/uploadedImages';
 
-const ImagesForm = () => {
+const GoogleImages = () => {
     const {
         uploadedImages,
         updateStep,
@@ -31,7 +31,8 @@ const ImagesForm = () => {
     const imagesSelected = uploadedImages?.imageSelectedUrls ?? [];
 
     const onDragEnd = useOnDragEnd();
-    // useGetGoogleImages();
+    const { reloadImages } = useGetGoogleImages();
+    useGetGoogleImages();
 
     const methods = useForm<UploadedImagesType>({
         mode: 'all',
@@ -40,7 +41,7 @@ const ImagesForm = () => {
 
     useEffect(() => {
         // Only trigger 'setValue' and 'trigger' if imagesSelected is not empty
-        if (imagesSelected.length > 0) {
+        if (imagesSelected.length >= 0) {
             const imageObjects = imagesSelected.map((image) => ({
                 url: image.url, // Conserver l'URL de chaque image
                 id: image.id, // Ajouter 'id' s'il est disponible, sinon cela reste 'undefined'
@@ -84,7 +85,7 @@ const ImagesForm = () => {
                     }
                 })}
             >
-                <MultiImageDropzoneUsage />
+                <h2>Nous avons des images google pour vous</h2>
                 <DndContext
                     collisionDetection={closestCenter}
                     onDragEnd={onDragEnd}
@@ -109,6 +110,16 @@ const ImagesForm = () => {
                         </SortableContext>
                     </div>
                 </DndContext>
+                {methods.formState.errors.imageSelectedUrls && (
+                    <p>{methods.formState.errors.imageSelectedUrls.message}</p>
+                )}
+                <button
+                    disabled={imagesSelected.length > 0}
+                    onClick={reloadImages}
+                >
+                    Recharger les images Google
+                </button>
+
                 <button
                     className='bg-red-100 p-3 border-2'
                     disabled={
@@ -116,22 +127,11 @@ const ImagesForm = () => {
                         imagesSelected.length === 0
                     }
                 >
-                    Envoyer les images
+                    Envoyer les images Googles
                 </button>
             </form>
-            {methods.formState.errors.imageSelectedUrls && (
-                <p>{methods.formState.errors.imageSelectedUrls.message}</p>
-            )}
-            <button
-                onClick={() => {
-                    updateStep(2, { imageSelectedUrls: [] });
-                    setStep(3);
-                }}
-            >
-                Je ne dispose d'aucune image
-            </button>
         </FormProvider>
     );
 };
 
-export default ImagesForm;
+export default GoogleImages;

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { AlertTriangle } from 'lucide-react';
 import { FieldError, useFormContext } from 'react-hook-form';
@@ -8,7 +8,6 @@ interface TextAreaFieldProps {
     label: string;
     subLabel?: string;
     name: string;
-    error?: FieldError;
     isMandatory?: boolean;
 }
 
@@ -17,11 +16,13 @@ const TextAreaField = ({
     label,
     subLabel,
     name,
-    error,
     isMandatory,
 }: TextAreaFieldProps) => {
-    const { register, watch } = useFormContext();
-    console.log('errors', watch());
+    const {
+        register,
+        formState: { errors },
+    } = useFormContext();
+    const error = errors[name];
 
     return (
         <div className='relative flex w-full flex-col gap-2 rounded-xl'>
@@ -42,7 +43,9 @@ const TextAreaField = ({
                 <AlertTriangle className='absolute right-4 top-1 h-4 w-4 text-red-600' />
             )}
             {error && (
-                <p className='text-xs italic text-red-600'>{error.message}</p>
+                <p className='text-xs italic text-red-600'>
+                    {error.message?.toString()}
+                </p>
             )}
         </div>
     );

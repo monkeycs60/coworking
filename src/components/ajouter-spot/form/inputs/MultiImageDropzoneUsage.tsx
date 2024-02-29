@@ -8,10 +8,11 @@ import { useEdgeStore } from '@/lib/edgestore';
 import { useState } from 'react';
 import { useAppDispatch } from '@/hooks/useRedux';
 import { addImageSelectedUrls } from '@/redux/features/placeDetails-slice';
-
+import { useAddCoworkingStore } from '@/zustand/stores/coworkingStore';
 
 export function MultiImageDropzoneUsage() {
-    const dispatch = useAppDispatch();
+    const { uploadedImages, updateStep, addImage } = useAddCoworkingStore();
+    const imagesSelected = uploadedImages.imageSelectedUrls;
 
     const [fileStates, setFileStates] = useState<FileState[]>([]);
     const { edgestore } = useEdgeStore();
@@ -41,33 +42,41 @@ export function MultiImageDropzoneUsage() {
                 }}
                 onFilesAdded={async (addedFiles) => {
                     setFileStates([...fileStates, ...addedFiles]);
-                    await Promise.all(
+                    const newImages = await Promise.all(
                         addedFiles.map(async (addedFileState) => {
                             try {
-                                const res = await edgestore.publicImages.upload({
-                                    file: addedFileState.file,
-                                    onProgressChange: async (progress) => {
-                                        updateFileProgress(addedFileState.key, progress);
-                                        if (progress === 100) {
-                                            // wait 1 second to set it to complete
-                                            // so that the user can see the progress bar at 100%
-                                            await new Promise((resolve) => setTimeout(resolve, 1000));
-                                            updateFileProgress(addedFileState.key, 'COMPLETE');
-                                        }
+                                const res = await edgestore.publicImages.upload(
+                                    {
+                                        file: addedFileState.file,
+                                        onProgressChange: async (progress) => {
+                                            updateFileProgress(
+                                                addedFileState.key,
+                                                progress,
+                                            );
+                                            if (progress === 100) {
+                                                // wait 1 second to set it to complete
+                                                // so that the user can see the progress bar at 100%
+                                                await new Promise((resolve) =>
+                                                    setTimeout(resolve, 1000),
+                                                );
+                                                updateFileProgress(
+                                                    addedFileState.key,
+                                                    'COMPLETE',
+                                                );
+                                            }
+                                        },
                                     },
-                                });
+                                );
                                 console.log(res);
 
                                 const ImageDate = {
-                                    id: Math.floor(Date.now() + Math.random() * 1000),
+                                    id: Math.floor(
+                                        Date.now() + Math.random() * 1000,
+                                    ),
                                     url: res.url,
-                                }
+                                };
 
-                                dispatch(
-                                    addImageSelectedUrls(
-                                        ImageDate
-                                    )
-                                );
+                                addImage(ImageDate);
                             } catch (err) {
                                 updateFileProgress(addedFileState.key, 'ERROR');
                             }

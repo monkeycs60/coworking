@@ -1,11 +1,11 @@
 'use client';
 
+import { usePlaceDetailsStore } from '@/zustand/stores/placeDetailsStore';
 import AddPlace from '../ajouter-spot/AddPlace';
 import { ComboBox } from '../ui/combobox';
-import { useAppSelector } from '@/hooks/useRedux';
 
 const PlacesAutocomplete = () => {
-    const placeDetails = useAppSelector((state) => state.placeDetails.details);
+    const placeDetails = usePlaceDetailsStore((state) => state.details);
 
     return (
         <div className='m-auto w-full'>

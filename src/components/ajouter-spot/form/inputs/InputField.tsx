@@ -7,7 +7,6 @@ interface InputFieldProps {
     label: string;
     subLabel?: string;
     name: string;
-    error?: FieldError;
     isMandatory?: boolean;
 }
 
@@ -16,10 +15,10 @@ const InputField = ({
     label,
     subLabel,
     name,
-    error,
     isMandatory,
 }: InputFieldProps) => {
-    const { register } = useFormContext();
+    const { register, formState: {errors} } = useFormContext();
+    const error = errors[name];
 
     return (
         <div className='relative flex w-full flex-col gap-2 rounded-xl'>
@@ -41,7 +40,7 @@ const InputField = ({
                 <AlertTriangle className='absolute right-4 top-1 h-4 w-4 text-red-600' />
             )}
             {error && (
-                <p className='text-xs italic text-red-600'>{error.message}</p>
+                <p className='text-xs italic text-red-600'>{error.message?.toString()}</p>
             )}
         </div>
     );

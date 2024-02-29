@@ -4,10 +4,8 @@ import { useEffect } from 'react';
 import { usePlaceDetailsStore } from '@/zustand/stores/placeDetailsStore';
 
 export const useFetchStorePlaceDetails = (placeId: string | null) => {
-    const { details, setPlaceDetails, resetPlaceDetails } =
+    const { setPlaceDetails, resetPlaceDetails } =
         usePlaceDetailsStore();
-
-    console.log('details', details);
 
     useEffect(() => {
         const fetchPlaceDetails = async () => {

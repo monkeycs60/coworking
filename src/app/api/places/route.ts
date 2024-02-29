@@ -43,31 +43,31 @@ export async function POST(req: NextRequest) {
                 establishmentType: placeData.establishmentType,
                 espressoPrice: placeData.espressoPrice,
                 facilities: placeData.facilities,
-                imageSelectedUrls: {
-                    create: placeData.imageSelectedUrls.map((image) => ({
-                        url: image.url,
-                        coverImage: image.coverImage,
-                    })),
-                },
-                musicLevel: placeData.musicLevel,
-                workComfort: placeData.workComfort,
-                internetQuality: placeData.internetQuality,
-                workspaceComposition: placeData.workspaceComposition,
-                hasToCall: placeData.hasToCall,
-                drinksAndFood: placeData.drinksAndFood,
+                // imageSelectedUrls: {
+                //     create: placeData.imageSelectedUrls.map((image) => ({
+                //         url: image.url,
+                //         coverImage: image.coverImage,
+                //     })),
+                // },
+                // musicLevel: placeData.musicLevel,
+                // workComfort: placeData.workComfort,
+                // internetQuality: placeData.internetQuality,
+                // workspaceComposition: placeData.workspaceComposition,
+                // hasToCall: placeData.hasToCall,
+                // drinksAndFood: placeData.drinksAndFood,
 
-                reviews: {
-                    create: [
-                        {
-                            content: placeData.reviewContent,
-                            calmRating: placeData.calmRating,
-                            equipRating: placeData.equipRating,
-                            foodRating: placeData.foodRating,
-                            feelingRating: placeData.feelingRating,
-                            userId: userId,
-                        },
-                    ],
-                },
+                // reviews: {
+                //     create: [
+                //         {
+                //             content: placeData.reviewContent,
+                //             calmRating: placeData.calmRating,
+                //             equipRating: placeData.equipRating,
+                //             foodRating: placeData.foodRating,
+                //             feelingRating: placeData.feelingRating,
+                //             userId: userId,
+                //         },
+                //     ],
+                // },
             },
             include: {
                 reviews: {

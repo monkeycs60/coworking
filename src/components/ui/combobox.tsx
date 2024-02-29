@@ -5,8 +5,6 @@ import { useFetchAutocomplete } from '@/hooks/useFetchAutocomplete';
 import { useFetchStorePlaceDetails } from '@/hooks/useFetchStorePlaceDetails';
 import { Place } from '@/types/placePredictions';
 import { X } from 'lucide-react';
-import { resetPredictions } from '@/redux/features/autoComplete-slice';
-import { useAppDispatch } from '@/hooks/useRedux';
 
 interface ComboBoxProps {
     onSelect: (place: Place) => void;

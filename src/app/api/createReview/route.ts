@@ -6,11 +6,7 @@ import { getServerSession } from 'next-auth';
 
 
 export async function POST(req: NextRequest) {
-    // implémenter le middleware d'authentification avec NextAuth
-
-    //    const authResponse = await authMiddleware(req);
-    //    if (authResponse) return authResponse; // Return if there's any response from the middleware
-    //    const { userId } = getAuth(req);
+  
     const session = await getServerSession(authOptions);
     const userId = session?.user?.id;
 

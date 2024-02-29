@@ -6,7 +6,7 @@ import { Experience, MusicLevel, WorkComfort, InternetQuality, WorkspaceComposit
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { setMusicLevel, setInternetQuality, setDrinksAndFood, setHasToCall, setWorkspaceComposition, setWorkComfort } from '@/redux/features/placeDetails-slice';
 import { useFormContext } from 'react-hook-form';
-import { AddPlaceSchemaType } from '@/types/addPlace';
+
 
 type ExperienceValue = MusicLevel | WorkComfort | InternetQuality | WorkspaceComposition | HasToCall | DrinksAndFood;
 
@@ -22,7 +22,7 @@ const MultipleChoice = ({ name, value, label, maxChoices, svg }: MultipleChoiceB
     const dispatch = useAppDispatch();
     const experience = useAppSelector(state => state.placeDetails.experience);
 
-    const { control, setValue } = useFormContext<AddPlaceSchemaType>();
+    const { control, setValue } = useFormContext();
 
     useEffect(() => {
         (Object.keys(experience) as Array<keyof Experience>).forEach(key => {

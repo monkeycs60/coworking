@@ -9,8 +9,6 @@ export const useFetchAutocomplete = () => {
     const { input, predictions, setInput, setPredictions, resetAutocomplete } =
         useAutocompleteStore();
 
-    console.log(input, predictions, setInput, setPredictions);
-
     const [debouncedInput] = useDebounce(input, 250);
 
     useEffect(() => {
