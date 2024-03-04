@@ -18,6 +18,26 @@ import {
 } from '@/types/place/characteristics';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DevTool } from '@hookform/devtools';
+import { Button } from '@/components/ui/button';
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
 const PlaceCharacteristics = () => {
     const placeDetails = usePlaceDetailsStore((state) => state.details);
@@ -31,7 +51,7 @@ const PlaceCharacteristics = () => {
         editorial_summary,
     } = placeDetails as PlaceDetail;
 
-    const methods = useForm<ExtendedCharacteristicsType>({
+    const form = useForm<ExtendedCharacteristicsType>({
         mode: 'all',
         resolver: zodResolver(CharacteristicsSchema),
     });
@@ -45,19 +65,13 @@ const PlaceCharacteristics = () => {
 
     console.log({ stepNumber });
 
-    type EquipmentEnum =
-        | 'ACCESSIBLE'
-        | 'PARKING'
-        | 'TERRACE'
-        | 'OUTLETS'
-        | 'BOOTH';
-    const equipmentOptions: { value: EquipmentEnum; label: string }[] = [
-        { value: 'ACCESSIBLE', label: 'Accès handicapé' },
-        { value: 'PARKING', label: 'Parking' },
-        { value: 'TERRACE', label: 'Terrasse' },
-        { value: 'OUTLETS', label: 'Prises' },
-        { value: 'BOOTH', label: 'Isoloir' },
-    ];
+    const equipmentOptions: { id: string; label: string }[] = [
+        { id: 'ACCESSIBLE', label: 'Accès handicapé' },
+        { id: 'PARKING', label: 'Parking' },
+        { id: 'TERRACE', label: 'Terrasse' },
+        { id: 'OUTLETS', label: 'Prises' },
+        { id: 'BOOTH', label: 'Isoloir' },
+    ] as const;
 
     const handleEspressoPriceChange = (
         event: React.ChangeEvent<HTMLInputElement>,
@@ -65,7 +79,7 @@ const PlaceCharacteristics = () => {
         const value = event.target.value;
 
         if (!value) {
-            methods.setValue('espressoPrice', '');
+            form.setValue('espressoPrice', '');
             return;
         }
 
@@ -74,25 +88,15 @@ const PlaceCharacteristics = () => {
 
         // Vérifier que match n'est pas null avant d'accéder à ses éléments
         if (match && match[0]) {
-            methods.setValue('espressoPrice', match[0]);
+            form.setValue('espressoPrice', match[0]);
         }
-    };
-
-    const handleEquipmentClick = (equipment: EquipmentEnum) => {
-        const currentFacilities = methods.getValues('facilities') || [];
-        methods.setValue(
-            'facilities',
-            currentFacilities.includes(equipment)
-                ? currentFacilities.filter((e: string) => e !== equipment)
-                : [...currentFacilities, equipment],
-        );
     };
 
     return (
         <>
-            <FormProvider {...methods}>
+            <Form {...form}>
                 <form
-                    onSubmit={methods.handleSubmit((data) => {
+                    onSubmit={form.handleSubmit((data) => {
                         const completeData: ExtendedCharacteristicsType = {
                             ...data,
                             longitude: placeDetails?.geometry.location.lng || 0,
@@ -127,132 +131,255 @@ const PlaceCharacteristics = () => {
                         }
                     })}
                 >
-                    <InputField
-                        defaultValue={name ? name : ''}
-                        label="Nom de l'établissement"
+                    <FormField
                         name='name'
-                        isMandatory={true}
-                    />
-                    <InputField
-                        defaultValue={vicinity ? vicinity : ''}
-                        label='Adresse'
+                        control={form.control}
+                        defaultValue={name ? name : ''}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Nom de l'établissement</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder='Novotel Bordeaux Centre'
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    Renseignez le nom de l'établissement
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    ></FormField>
+                    <FormField
                         name='address'
-                        isMandatory={true}
-                    />
-                    <InputField
+                        control={form.control}
+                        defaultValue={vicinity ? vicinity : ''}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>
+                                    Adresse de l'établissement
+                                </FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder='30 rue du Général Leclerc'
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    Renseignez l'adresse de l'établissement
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    ></FormField>
+                    <FormField
+                        name='city'
+                        control={form.control}
                         defaultValue={
                             adr_address
                                 ? extractCityFromAdrAddress(adr_address) || ''
                                 : ''
                         }
-                        label='Ville'
-                        name='city'
-                        isMandatory={true}
-                    />
-                    <InputField
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Ville</FormLabel>
+                                <FormControl>
+                                    <Input placeholder='Bordeaux' {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    Dans quelle ville se situe l'établissement
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    ></FormField>
+                    <FormField
+                        name='phoneNumber'
+                        control={form.control}
                         defaultValue={
                             formatted_phone_number ? formatted_phone_number : ''
                         }
-                        label='Numéro de téléphone'
-                        name='phoneNumber'
-                        isMandatory={false}
-                    />
-                    <InputField
-                        defaultValue={website ? website : ''}
-                        label='Site web'
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Numéro de téléphone</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder='05 56 00 00 00'
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    Renseignez le numéro de téléphone
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    ></FormField>
+                    <FormField
                         name='website'
-                        isMandatory={false}
-                    />
-                    <TextAreaField
-                        defaultValue={editorial_summary?.overview ?? ''}
-                        label='Description'
-                        subLabel="Décris le lieu, le cadre et comment le coworking s'y insère"
+                        control={form.control}
+                        defaultValue={website ? website : ''}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Site web</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder='www.novotel.com'
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    Renseignez le site web
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    ></FormField>
+                    <FormField
                         name='description'
-                        isMandatory={true}
-                    />
+                        control={form.control}
+                        defaultValue={editorial_summary?.overview ?? ''}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Description</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Décris le cadre et comment le coworking s'y insère"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    Décris le lieu, le cadre et comment le
+                                    coworking s'y insère
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    ></FormField>
 
                     <OpeningHours />
 
-                    <Controller
+                    <FormField
                         name='establishmentType'
-                        control={methods.control}
+                        control={form.control}
                         defaultValue={characteristics.establishmentType || ''}
                         render={({ field }) => (
-                            <select {...field} className='w-[180px]'>
-                                <option value=''>Type d'établissement</option>
-                                <option value='HOTEL_LOBBY'>
-                                    Lobby d'hôtel
-                                </option>
-                                <option value='CAFE'>Café</option>
-                                <option value='RESTAURANT_BAR'>
-                                    Restaurant-Bar
-                                </option>
-                                <option value='THIRD_PLACE'>Tiers-lieu</option>
-                                <option value='LIBRARY'>Bibliothèque</option>
-                                <option value='OTHER'>Autre</option>
-                            </select>
+                            <FormItem>
+                                <FormLabel>Type d'établissement</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue
+                                                placeholder="
+                                            Sélectionnez un type d'établissement
+                                            "
+                                            />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value='HOTEL_LOBBY'>
+                                            Hall d'hôtel
+                                        </SelectItem>
+                                        <SelectItem value='CAFE'>
+                                            Café
+                                        </SelectItem>
+                                        <SelectItem value='RESTAURANT_BAR'>
+                                            Restaurant / Bar
+                                        </SelectItem>
+                                        <SelectItem value='THIRD_PLACE'>
+                                            Tiers-lieu
+                                        </SelectItem>
+                                        <SelectItem value='LIBRARY'>
+                                            Bibliothèque
+                                        </SelectItem>
+                                        <SelectItem value='OTHER'>
+                                            Autre
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <FormDescription>
+                                    Renseignez le type d'établissement
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
                         )}
-                    />
-                    {methods.formState.errors.establishmentType && (
-                        <span className='text-red-500'>
-                            Ce champ est requis
-                        </span>
-                    )}
-                    <Controller
-                        control={methods.control}
-                        defaultValue={characteristics.espressoPrice || ''}
+                    ></FormField>
+
+                    <FormField
                         name='espressoPrice'
+                        control={form.control}
+                        defaultValue={characteristics.espressoPrice || ''}
                         render={({ field }) => (
-                            <input
-                                {...field}
-                                type='text'
-                                placeholder="Prix de l'espresso"
-                                className='w-[180px]'
-                                onChange={handleEspressoPriceChange}
-                            />
+                            <FormItem>
+                                <FormLabel>Prix de l'espresso</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Prix de l'espresso"
+                                        {...field}
+                                        onChange={handleEspressoPriceChange}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    Renseignez le prix de l'espresso
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
                         )}
-                    />
-                    {methods.formState.errors.espressoPrice && (
-                        <span className='text-red-500'>
-                            Ce champ est requis
-                        </span>
-                    )}
+                    ></FormField>
 
                     {equipmentOptions.map((option) => (
-                        <Controller
-                            key={option.value}
-                            control={methods.control}
-                            defaultValue={characteristics.facilities || []}
+                        <FormField
+                            key={option.id}
                             name='facilities'
+                            control={form.control}
+                            defaultValue={characteristics.facilities || []}
                             render={({ field }) => (
-                                <button
-                                    type='button'
-                                    onClick={() =>
-                                        handleEquipmentClick(option.value)
-                                    }
-                                    className={`rounded-md border-2 p-2 ${
-                                        methods
-                                            .getValues('facilities')
-                                            ?.includes(option.value)
-                                            ? 'bg-blue-500 text-white'
-                                            : 'bg-white text-black'
-                                    }`}
-                                >
-                                    {option.label}
-                                </button>
+                                <FormItem key={option.id}>
+                                    <FormLabel>{option.label}</FormLabel>
+                                    <FormControl>
+                                        <Checkbox
+                                            checked={field.value?.includes(
+                                                option.id as
+                                                    | 'ACCESSIBLE'
+                                                    | 'PARKING'
+                                                    | 'TERRACE'
+                                                    | 'OUTLETS'
+                                                    | 'BOOTH',
+                                            )}
+                                            onCheckedChange={(checked) => {
+                                                return checked
+                                                    ? field.onChange([
+                                                          ...(field.value ||
+                                                              []),
+                                                          option.id,
+                                                      ])
+                                                    : field.onChange(
+                                                          field.value?.filter(
+                                                              (value) =>
+                                                                  value !==
+                                                                  option.id,
+                                                          ),
+                                                      );
+                                            }}
+                                        />
+                                    </FormControl>
+                                    <FormDescription>
+                                        {option.label}
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
                             )}
-                        />
+                        ></FormField>
                     ))}
-                    {methods.formState.errors.facilities && (
-                        <span className='text-red-500'>
-                            Ce champ est requis
-                        </span>
-                    )}
 
                     <button>Valider le form</button>
                 </form>
-            </FormProvider>
-            <DevTool control={methods.control} />
+            </Form>
+            <DevTool control={form.control} />
         </>
     );
 };
