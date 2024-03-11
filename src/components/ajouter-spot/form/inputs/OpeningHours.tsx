@@ -9,7 +9,6 @@ import { FieldErrors } from 'react-hook-form';
 import { daysOfWeek } from '@/lib/const/daysOfWeek';
 import { useFormContext } from 'react-hook-form';
 
-
 const OpeningHours = () => {
     const [showDays, setShowDays] = useState(false);
     const openingTableForWeek = useOpeningHours();
@@ -19,31 +18,21 @@ const OpeningHours = () => {
     } = useFormContext<PlaceDetail>();
 
     return (
-        <div className='flex w-full flex-col gap-2'>
+        <div className='flex w-full flex-col justify-center gap-2'>
             <label className='font-bold' htmlFor='placeHours'>
                 Horaires d'ouverture
             </label>
-            <Button
-                type='button'
-                size={'specialButton'}
-                variant={showDays ? 'secondaryReverse' : 'secondary'}
-                onClick={() => setShowDays(!showDays)}
-            >
-                {showDays
-                    ? 'Cacher les jours de la semaine'
-                    : 'Afficher les jours de la semaine'}
-            </Button>
-            {showDays &&
-                openingTableForWeek.map(({ open, close }, index) => (
-                    <OpeningHoursInput
-                        key={index}
-                        day={daysOfWeek[index]}
-                        index={index}
-                        openTime={open}
-                        closeTime={close}
-                        errors={errors}
-                    />
-                ))}
+
+            {openingTableForWeek.map(({ open, close }, index) => (
+                <OpeningHoursInput
+                    key={index}
+                    day={daysOfWeek[index]}
+                    index={index}
+                    openTime={open}
+                    closeTime={close}
+                    errors={errors}
+                />
+            ))}
         </div>
     );
 };

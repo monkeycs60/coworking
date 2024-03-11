@@ -35,7 +35,7 @@ function NavBar() {
             </AnimatePresence>
 
             <div
-                className={`fixed top-0 z-[80] flex h-[80px] w-full items-center justify-between gap-10 bg-primary/70 px-4 xl:px-20 3xl:lg:px-32 3xl:h-[100px] 
+                className={`fixed top-0 z-[30] flex h-[80px] w-full items-center justify-between gap-10 bg-primary/70 px-4 xl:px-20 3xl:lg:px-32 3xl:h-[100px] 
 			${
                 scrollPosition > 50 || pathname !== '/'
                     ? 'lg:bg-primary/70'

@@ -8,8 +8,7 @@ import { twMerge } from 'tailwind-merge';
 
 const variants = {
     base: 'relative rounded-md aspect-square flex justify-center items-center flex-col cursor-pointer min-h-[150px] min-w-[200px] border border-dashed border-gray-400 dark:border-gray-300 transition-colors duration-200 ease-in-out',
-    image:
-        'border-0 p-0 w-full h-full relative shadow-md bg-slate-200 dark:bg-slate-900 rounded-md',
+    image: 'border-0 p-0 w-full h-full relative shadow-md bg-slate-200 dark:bg-slate-900 rounded-md',
     active: 'border-2',
     disabled:
         'bg-gray-200 border-gray-300 cursor-default pointer-events-none bg-opacity-30 dark:bg-gray-700',
@@ -66,9 +65,8 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
                     }
                 });
             }
-            
+
             return [];
-            
         }, [value]);
 
         // dropzone configuration
@@ -87,9 +85,12 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
                 setCustomError(undefined);
                 if (
                     dropzoneOptions?.maxFiles &&
-                    (value?.length ?? 0) + files.length > dropzoneOptions.maxFiles
+                    (value?.length ?? 0) + files.length >
+                        dropzoneOptions.maxFiles
                 ) {
-                    setCustomError(ERROR_MESSAGES.tooManyFiles(dropzoneOptions.maxFiles));
+                    setCustomError(
+                        ERROR_MESSAGES.tooManyFiles(dropzoneOptions.maxFiles),
+                    );
                     return;
                 }
                 if (files) {
@@ -131,11 +132,15 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
             if (fileRejections[0]) {
                 const { errors } = fileRejections[0];
                 if (errors[0]?.code === 'file-too-large') {
-                    return ERROR_MESSAGES.fileTooLarge(dropzoneOptions?.maxSize ?? 0);
+                    return ERROR_MESSAGES.fileTooLarge(
+                        dropzoneOptions?.maxSize ?? 0,
+                    );
                 } else if (errors[0]?.code === 'file-invalid-type') {
                     return ERROR_MESSAGES.fileInvalidType();
                 } else if (errors[0]?.code === 'too-many-files') {
-                    return ERROR_MESSAGES.tooManyFiles(dropzoneOptions?.maxFiles ?? 0);
+                    return ERROR_MESSAGES.tooManyFiles(
+                        dropzoneOptions?.maxFiles ?? 0,
+                    );
                 } else {
                     return ERROR_MESSAGES.fileNotSupported();
                 }
@@ -145,47 +150,59 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
 
         return (
             <div>
-                <div className="grid grid-cols-[repeat(1,1fr)] gap-2 sm:grid-cols-[repeat(2,1fr)] lg:grid-cols-[repeat(3,1fr)] xl:grid-cols-[repeat(4,1fr)]">
+                <div className='grid grid-cols-[repeat(1,1fr)] gap-2 sm:grid-cols-[repeat(2,1fr)] lg:grid-cols-[repeat(3,1fr)] xl:grid-cols-[repeat(4,1fr)]'>
                     {/* Images */}
                     {value?.map(({ file, progress }, index) => (
                         <div
                             key={index}
-                            className={variants.image + ' aspect-square h-full'}
+                            className={
+                                variants.image + ' aspect-square h-full hidden'
+                            }
                         >
                             <img
-                                className="h-full w-full rounded-md object-cover"
+                                className='h-full w-full rounded-md object-cover'
                                 src={imageUrls[index]}
-                                alt={typeof file === 'string' ? file : file.name}
+                                alt={
+                                    typeof file === 'string' ? file : file.name
+                                }
                             />
                             {/* Progress Bar */}
                             {typeof progress === 'number' && (
-                                <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-md bg-black bg-opacity-70">
+                                <div className='absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-md bg-black bg-opacity-70'>
                                     <CircleProgress progress={progress} />
                                 </div>
                             )}
                             {/* Remove Image Icon */}
-                            {imageUrls[index] && !disabled && (progress === 'COMPLETE' || progress === 'PENDING') && (
-                                <div
-                                    className="group absolute right-0 top-0 -translate-y-1/4 translate-x-1/4"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        void onChange?.(value.filter((_, i) => i !== index) ?? []);
-                                    }}
-                                >
-                                    <div className="flex h-5 w-5 cursor-pointer items-center justify-center rounded-md border border-solid border-gray-500 bg-white transition-all duration-300 hover:h-6 hover:w-6 dark:border-gray-400 dark:bg-black">
-                                        <X
-                                            className="text-gray-500 dark:text-gray-400"
-                                            width={16}
-                                            height={16}
-                                        />
+                            {imageUrls[index] &&
+                                !disabled &&
+                                (progress === 'COMPLETE' ||
+                                    progress === 'PENDING') && (
+                                    <div
+                                        className='group absolute right-0 top-0 -translate-y-1/4 translate-x-1/4'
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            void onChange?.(
+                                                value.filter(
+                                                    (_, i) => i !== index,
+                                                ) ?? [],
+                                            );
+                                        }}
+                                    >
+                                        <div className='flex h-5 w-5 cursor-pointer items-center justify-center rounded-md border border-solid border-gray-500 bg-white transition-all duration-300 hover:h-6 hover:w-6 dark:border-gray-400 dark:bg-black'>
+                                            <X
+                                                className='text-gray-500 dark:text-gray-400'
+                                                width={16}
+                                                height={16}
+                                            />
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
                         </div>
                     ))}
 
                     {/* Dropzone */}
-                    {(!value || value.length < (dropzoneOptions?.maxFiles ?? 0)) && (
+                    {(!value ||
+                        value.length < (dropzoneOptions?.maxFiles ?? 0)) && (
                         <div
                             {...getRootProps({
                                 className: dropZoneClassName,
@@ -193,18 +210,22 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
                         >
                             {/* Main File Input */}
                             <input ref={ref} {...getInputProps()} />
-                            <div className="flex flex-col items-center justify-center text-xs text-gray-400">
-                                <UploadCloudIcon className="mb-2 h-7 w-7" />
-                                <div className="text-gray-400">Glisser & Déposer ou</div>
-                                <div className="mt-3">
-                                    <Button disabled={disabled}>Sélectionner</Button>
+                            <div className='flex flex-col items-center justify-center text-xs text-gray-400'>
+                                <UploadCloudIcon className='mb-2 h-7 w-7' />
+                                <div className='text-gray-400'>
+                                    Glisser & Déposer ou
+                                </div>
+                                <div className='mt-3'>
+                                    <Button type='button' disabled={disabled}>
+                                        Sélectionner
+                                    </Button>
                                 </div>
                             </div>
                         </div>
                     )}
                 </div>
                 {/* Error Text */}
-                <div className="mt-1 text-xs text-red-500">
+                <div className='mt-1 text-xs text-red-500'>
                     {customError ?? errorMessage}
                 </div>
             </div>
@@ -243,38 +264,39 @@ function CircleProgress({ progress }: { progress: number }) {
     const circumference = 2 * Math.PI * radius;
 
     return (
-        <div className="relative h-16 w-16">
+        <div className='relative h-16 w-16'>
             <svg
-                className="absolute left-0 top-0 -rotate-90"
-                width="100%"
-                height="100%"
-                viewBox={`0 0 ${(radius + strokeWidth) * 2} ${(radius + strokeWidth) * 2
-                    }`}
-                xmlns="http://www.w3.org/2000/svg"
+                className='absolute left-0 top-0 -rotate-90'
+                width='100%'
+                height='100%'
+                viewBox={`0 0 ${(radius + strokeWidth) * 2} ${
+                    (radius + strokeWidth) * 2
+                }`}
+                xmlns='http://www.w3.org/2000/svg'
             >
                 <circle
-                    className="text-gray-400"
-                    stroke="currentColor"
+                    className='text-gray-400'
+                    stroke='currentColor'
                     strokeWidth={strokeWidth}
-                    fill="none"
+                    fill='none'
                     cx={radius + strokeWidth}
                     cy={radius + strokeWidth}
                     r={radius}
                 />
                 <circle
-                    className="text-white transition-all duration-300 ease-in-out"
-                    stroke="currentColor"
+                    className='text-white transition-all duration-300 ease-in-out'
+                    stroke='currentColor'
                     strokeWidth={strokeWidth}
                     strokeDasharray={circumference}
                     strokeDashoffset={((100 - progress) / 100) * circumference}
-                    strokeLinecap="round"
-                    fill="none"
+                    strokeLinecap='round'
+                    fill='none'
                     cx={radius + strokeWidth}
                     cy={radius + strokeWidth}
                     r={radius}
                 />
             </svg>
-            <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center text-xs text-white">
+            <div className='absolute left-0 top-0 flex h-full w-full items-center justify-center text-xs text-white'>
                 {Math.round(progress)}%
             </div>
         </div>

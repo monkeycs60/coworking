@@ -36,9 +36,9 @@ export async function POST(req: NextRequest) {
             },
             data: {
                 imageSelectedUrls: {
-                    create: placePhotos.imageSelectedUrls.map((img) => ({
-                        url: img.url,
-                        coverImage: img.coverImage ?? false,
+                    create: placePhotos.imageSelectedUrls.map((img, index) => ({
+                        url: img,
+                        coverImage: index === 0 ? true : false,
                     })),
                 },
             },

@@ -1,17 +1,12 @@
 'use client';
 
 import { MultiImageDropzoneUsage } from '../inputs/MultiImageDropzoneUsage';
-import { useAppSelector } from '@/hooks/useRedux';
-import { DndContext, closestCenter } from '@dnd-kit/core';
-import {
-    SortableContext,
-    horizontalListSortingStrategy,
-} from '@dnd-kit/sortable';
+import { motion, Reorder } from 'framer-motion';
 import useGetGoogleImages from '@/hooks/useGetGoogleImages';
 import SortablePhoto from '../inputs/SortablePhoto';
 import useOnDragEnd from '@/hooks/useOnDragEnd';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAddCoworkingStore } from '@/zustand/stores/coworkingStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -20,17 +15,16 @@ import {
 } from '@/types/place/uploadedImages';
 
 const GoogleImages = () => {
-    const {
-        uploadedImages,
-        updateStep,
-        incrementStep,
-        decrementStep,
-        setStep,
-    } = useAddCoworkingStore();
+    const { uploadedImages, updateStep, setStep } = useAddCoworkingStore();
 
-    const imagesSelected = uploadedImages?.imageSelectedUrls ?? [];
+    console.log('uploadedImages :', uploadedImages);
 
-    const onDragEnd = useOnDragEnd();
+    const [initialImageUrls, setInitialImageUrls] = useState<
+        UploadedImagesType['imageSelectedUrls']
+    >(uploadedImages?.imageSelectedUrls ?? []);
+
+    console.log('initialImageUrls :', initialImageUrls);
+
     const { reloadImages } = useGetGoogleImages();
     useGetGoogleImages();
 
@@ -40,19 +34,25 @@ const GoogleImages = () => {
     });
 
     useEffect(() => {
-        // Only trigger 'setValue' and 'trigger' if imagesSelected is not empty
-        if (imagesSelected.length >= 0) {
-            const imageObjects = imagesSelected.map((image) => ({
-                url: image.url, // Conserver l'URL de chaque image
-                id: image.id, // Ajouter 'id' s'il est disponible, sinon cela reste 'undefined'
-                coverImage: image.coverImage, // Ajouter 'coverImage' s'il est disponible
-            }));
+        setInitialImageUrls(uploadedImages?.imageSelectedUrls ?? []);
+    }, [uploadedImages?.imageSelectedUrls]);
 
-            methods.setValue('imageSelectedUrls', imageObjects);
-            // This will ensure validation is only run when imagesSelected changes
-            methods.trigger('imageSelectedUrls');
-        }
-    }, [imagesSelected, methods.setValue, methods.trigger, onDragEnd]);
+    const handleRemoveImage = (indexToRemove: number) => {
+        const updatedImages = initialImageUrls.filter(
+            (_, index) => index !== indexToRemove,
+        );
+
+        setInitialImageUrls(updatedImages);
+
+        methods.setValue('imageSelectedUrls', updatedImages);
+        methods.trigger('imageSelectedUrls');
+    };
+
+    const onReorder = (reorderedItems: string[]) => {
+        setInitialImageUrls(reorderedItems);
+        methods.setValue('imageSelectedUrls', reorderedItems);
+        methods.trigger('imageSelectedUrls');
+    };
 
     return (
         <FormProvider {...methods}>
@@ -86,45 +86,46 @@ const GoogleImages = () => {
                 })}
             >
                 <h2>Nous avons des images google pour vous</h2>
-                <DndContext
-                    collisionDetection={closestCenter}
-                    onDragEnd={onDragEnd}
+                <Reorder.Group
+                    axis='x'
+                    values={initialImageUrls}
+                    onReorder={onReorder}
+                    className='m-auto flex w-[1000px] gap-2 rounded-md bg-slate-300 p-2'
                 >
-                    <div className='m-auto flex flex-wrap gap-2 bg-red-200'>
-                        <SortableContext
-                            items={imagesSelected.map((item) => item.url)}
-                            strategy={horizontalListSortingStrategy}
-                        >
-                            {/* // itérer sur images selected pour afficher des images */}
-                            {imagesSelected.map((image) => {
-                                return (
-                                    image.id && (
-                                        <SortablePhoto
-                                            key={image.id}
-                                            imageUrl={image.url}
-                                            id={image.id}
-                                        />
-                                    )
-                                );
-                            })}
-                        </SortableContext>
-                    </div>
-                </DndContext>
+                    {initialImageUrls.map((item, index) => (
+                        <Reorder.Item key={item} value={item}>
+                            <div className='relative flex cursor-grab'>
+                                <motion.img
+                                    src={item}
+                                    alt='Selected'
+                                    className='pointer-events-none h-32  w-32 object-cover'
+                                    onDragStart={(e) => e.preventDefault()}
+                                />
+                                <span
+                                    className='absolute right-0 top-0 cursor-pointer rounded-full bg-red-400 p-1 text-white'
+                                    onClick={() => handleRemoveImage(index)}
+                                >
+                                    x
+                                </span>
+                            </div>
+                        </Reorder.Item>
+                    ))}
+                </Reorder.Group>
                 {methods.formState.errors.imageSelectedUrls && (
                     <p>{methods.formState.errors.imageSelectedUrls.message}</p>
                 )}
                 <button
-                    disabled={imagesSelected.length > 0}
+                    disabled={initialImageUrls.length > 0}
                     onClick={reloadImages}
                 >
                     Recharger les images Google
                 </button>
 
                 <button
-                    className='bg-red-100 p-3 border-2'
+                    className='border-2 bg-red-100 p-3'
                     disabled={
                         methods.formState.isSubmitting ||
-                        imagesSelected.length === 0
+                        initialImageUrls.length === 0
                     }
                 >
                     Envoyer les images Googles

@@ -6,8 +6,7 @@ import {
 } from '@/components/ui/MultiImageDropzone';
 import { useEdgeStore } from '@/lib/edgestore';
 import { useState } from 'react';
-import { useAppDispatch } from '@/hooks/useRedux';
-import { addImageSelectedUrls } from '@/redux/features/placeDetails-slice';
+
 import { useAddCoworkingStore } from '@/zustand/stores/coworkingStore';
 
 export function MultiImageDropzoneUsage() {
@@ -69,12 +68,7 @@ export function MultiImageDropzoneUsage() {
                                 );
                                 console.log(res);
 
-                                const ImageDate = {
-                                    id: Math.floor(
-                                        Date.now() + Math.random() * 1000,
-                                    ),
-                                    url: res.url,
-                                };
+                                const ImageDate = res.url;
 
                                 addImage(ImageDate);
                             } catch (err) {

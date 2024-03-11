@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create, State } from 'zustand';
 import {
     CharacteristicsType,
     ExtendedCharacteristicsType,

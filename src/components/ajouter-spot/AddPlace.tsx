@@ -112,7 +112,7 @@ const AddPlace = () => {
 
     return (
         <>
-            <div className='flex flex-col items-center justify-center gap-8 w-[60rem] bg-slate-200'>
+            <div className='flex w-[60rem] flex-col items-center justify-center gap-8 bg-slate-200'>
                 <Stepper activeStep={realStep} alternativeLabel>
                     {steps.map((step) => (
                         <Step key={step.id}>

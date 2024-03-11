@@ -25,10 +25,7 @@ const useGetGoogleImages = () => {
 
             //for each urls, assign an id, so that it create an object with an id and an url for each of the urls
             const allUrls = urls.map((url, index) => {
-                return {
-                    id: Math.floor(Date.now() * (index + 1)),
-                    url: url,
-                };
+                return url;
             });
 
             console.log('allUrls :', allUrls);
@@ -50,10 +47,7 @@ const useGetGoogleImages = () => {
 
             //for each urls, assign an id, so that it create an object with an id and an url for each of the urls
             const allUrls = urls.map((url, index) => {
-                return {
-                    id: Math.floor(Date.now() * (index + 1)),
-                    url: url,
-                };
+                return url;
             });
 
             console.log('allUrls :', allUrls);
@@ -62,7 +56,13 @@ const useGetGoogleImages = () => {
 
             console.log('uploadedImages :', uploadedImages);
         }
-    }, [placeDetails, dispatch, baseUrlImage]);
+    }, [
+        placeDetails?.photos,
+        uploadedImages.imageSelectedUrls.length,
+        updateStep,
+        uploadedImages,
+        baseUrlImage,
+    ]);
 
     return {
         reloadImages,

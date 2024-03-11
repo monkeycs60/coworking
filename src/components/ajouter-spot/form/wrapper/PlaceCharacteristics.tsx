@@ -38,6 +38,16 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 
 const PlaceCharacteristics = () => {
     const placeDetails = usePlaceDetailsStore((state) => state.details);
@@ -258,7 +268,30 @@ const PlaceCharacteristics = () => {
                         )}
                     ></FormField>
 
-                    <OpeningHours />
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button variant='outline'>
+                                Renseigner les horaires
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className='max-w-[500px] max-h-[80vh] overflow-y-auto'>
+                            <DialogHeader>
+                                <DialogTitle>
+                                    Renseigner les horaires
+                                </DialogTitle>
+                                <DialogDescription>
+                                    Renseignez les horaires d'ouverture de
+                                    l'établissement
+                                </DialogDescription>
+                            </DialogHeader>
+                            <OpeningHours />
+                            <DialogFooter>
+                                <DialogClose asChild>
+                                    <Button type='button'>Valider</Button>
+                                </DialogClose>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
 
                     <FormField
                         name='establishmentType'
